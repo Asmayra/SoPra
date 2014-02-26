@@ -60,7 +60,6 @@
         <mapping class="org.model.Song"/>
         <mapping class="org.model.StandartUser"/>
         <mapping class="org.model.Tickets"/>
-        <mapping class="org.model.User"/>
         <mapping class="org.model.UserDecorator"/>
 
     </session-factory>
