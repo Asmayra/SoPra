@@ -15,7 +15,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 /**
- * Erstellt die Gui des Registrierungsfensters
+ * Erstellt das Registrierungsfensters
  * @author Michael Pfennings, Mattias Schoenke 
  *
  */
