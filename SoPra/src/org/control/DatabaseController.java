@@ -11,9 +11,24 @@ import org.hibernate.service.ServiceRegistry;
 
 public class DatabaseController {
 
-	static StandardServiceRegistryBuilder serviceRegistryBuilder;
-	static SessionFactory sessionFactory;
-	static Session session;
+	private static StandardServiceRegistryBuilder serviceRegistryBuilder;
+	private static SessionFactory sessionFactory;
+	private static Session session;
+	private static DatabaseController instance;
+	
+	private DatabaseController(){
+		initDatabaseConnection();
+	}
+	/**
+	 * Singelton Method to access DataBase Methods 
+	 * @return the Database
+	 */
+	public static DatabaseController getInstance(){
+		if (instance == null){
+			instance = new DatabaseController();
+		}
+		return instance;
+	}
 	
 	/**
 	 * initializes the Database Connection, creates
