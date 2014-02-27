@@ -1,5 +1,7 @@
 package org.control;
 
+import Object;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -38,5 +40,17 @@ public class DatabaseController {
  		System.out.println(session.isConnected());
  		//this.session.buildLockRequest(LockOptions.NONE);
  		//this.createDatabaseIfEmpty();
+	}
+	
+	/**
+	 * Saves the Object o in the DataBase
+	 * @param o 
+	 */
+	private void save(Object o){
+		session = this.sessionFactory.openSession();
+		session.beginTransaction();
+		session.persist(o);
+		session.getTransaction().commit();
+		session.close();
 	}
 }
