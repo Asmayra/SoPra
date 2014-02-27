@@ -1,11 +1,17 @@
 package org.control;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.service.ServiceRegistry;
 
 
 public class DatabaseController {
 
 	static StandardServiceRegistryBuilder serviceRegistryBuilder;
+	static SessionFactory sessionFactory;
+	static Session session;
 	/**
 	 * initializes the Database Connection, creates
 	 */
@@ -22,12 +28,12 @@ public class DatabaseController {
 	     
 		System.out.println("config loaded");
 	     //serviceRegistry = new StandardServiceRegistryBuilder().applySettings(cfg.getProperties()).build();
-	    sf = cfg.buildSessionFactory(serviceRegistry);
+	    sessionFactory = cfg.buildSessionFactory(serviceRegistry);
 	    //sf = cfg.buildSessionFactory();
 	    System.out.println("build session");
 	    
 	    System.out.println("opening...");
- 		session = sf.openSession();
+ 		session = sessionFactory.openSession();
  		System.out.println("opended");
  		System.out.println(session.isConnected());
  		//this.session.buildLockRequest(LockOptions.NONE);
