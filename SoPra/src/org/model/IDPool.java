@@ -11,6 +11,6 @@ import javax.persistence.Id;
 @Entity
 public class IDPool {
 	@Id
-	private static final int IDPOOL_ID=1;
+	private int IDPOOL_ID=1; //sollte static final sein,aber Hibernate...
 
 }

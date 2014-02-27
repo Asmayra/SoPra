@@ -4,11 +4,13 @@ import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 
 
 @Entity
 public class UserDecorator implements User {
+	@OneToOne
 	private User user;
 	
 	public UserDecorator(User u){
