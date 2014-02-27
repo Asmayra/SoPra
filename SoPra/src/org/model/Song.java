@@ -12,16 +12,16 @@ public class Song {
 	@GeneratedValue(strategy = GenerationType.AUTO)	
 	private int songId;
 
-	private Artist interpret;
+	private User interpret;
 
 	private String name;
 	private int playtime;
 	
 	
-	public Artist getInterpret() {
+	public User getInterpret() {
 		return interpret;
 	}
-	public void setInterpret(Artist interpret) {
+	public void setInterpret(User interpret) {
 		this.interpret = interpret;
 	}
 	public String getName() {

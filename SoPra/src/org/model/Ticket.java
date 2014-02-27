@@ -14,7 +14,7 @@ public class Ticket {
 	@GeneratedValue(strategy = GenerationType.AUTO)	
 	private int ticketId;		//Needs to be saved in tickedpool
 	@ManyToOne
-	private Admin inWorkBy;	
+	private User inWorkBy;	
 	private String name;
 	@ManyToOne
 	private User requester;
@@ -25,10 +25,10 @@ public class Ticket {
 	public void setTicketId(int ticketId) {
 		this.ticketId = ticketId;
 	}
-	public Admin getInWorkBy() {
+	public User getInWorkBy() {
 		return inWorkBy;
 	}
-	public void setInWorkBy(Admin inWorkBy) {
+	public void setInWorkBy(User inWorkBy) {
 		this.inWorkBy = inWorkBy;
 	}
 	public User getRequester() {
