@@ -11,7 +11,7 @@ public class Song {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)	
 	private int songId;
-	private User interpret;
+	//private User interpret;
 	private String name;
 	private int playtime;
 

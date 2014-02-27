@@ -75,7 +75,7 @@ public class DatabaseController {
 			session.getTransaction().commit();
 			session.close();
 		}catch(org.hibernate.exception.ConstraintViolationException e){
-			System.out.println("Username taken!");
+			System.out.println("Primarykey taken!");
 		}
 	
 		
@@ -91,9 +91,9 @@ public class DatabaseController {
 	public Object load(Class c,Serializable id){
 		session = sessionFactory.openSession();
 		session.beginTransaction();
-		Object o = session.get(c, id);
+		Object obj = session.get(c, id);
 		session.getTransaction().commit();
 		session.close();
-		return o;
+		return obj;
 	}
 }

@@ -13,7 +13,7 @@ public class Genre {
 	@GeneratedValue(strategy = GenerationType.AUTO)	
 	private int genreId;
 	private String name;
-	private List<Genre> subGenres;
+	//private List<Genre> subGenres;
 
 	public Genre() {
 		// TODO Auto-generated constructor stub

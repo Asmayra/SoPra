@@ -61,17 +61,15 @@
          <property name="hibernate.transaction.factory_class">org.hibernate.transaction.JDBCTransactionFactory</property>
 
         <!-- Names the annotated entity class -->
-        <mapping class="org.model.Admin"/>
-        <mapping class="org.model.Artist"/>
-        <mapping class="org.model.LabelManager"/>
         <mapping class="org.model.Messages"/>
         <mapping class="org.model.Playlist"/>
         <mapping class="org.model.Song"/>
         <mapping class="org.model.StandartUser"/>
         <mapping class="org.model.Ticket"/>
-        <mapping class="org.model.UserDecorator"/>
         <mapping class="org.model.Genre"/>
         <mapping class="org.model.Label"/>
+        <mapping class="org.model.Admin"/>
+        <mapping class="org.model.User"/>
 
     </session-factory>
 

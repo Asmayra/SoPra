@@ -9,8 +9,8 @@ public class Messages {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)	
 	private int messageId;
-	private User sender;
-	private User[] recipient;
+//	private User sender;
+	//private User[] recipient;
 	private String content;
 
 }
