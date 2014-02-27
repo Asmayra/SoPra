@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Song {
@@ -11,7 +13,8 @@ public class Song {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)	
 	private int songId;
-
+	
+	@ManyToOne
 	private User interpret;
 
 	private String name;
