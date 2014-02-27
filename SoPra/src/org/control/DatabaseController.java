@@ -48,12 +48,12 @@ public class DatabaseController {
 	     //serviceRegistry = new StandardServiceRegistryBuilder().applySettings(cfg.getProperties()).build();
 	    sessionFactory = cfg.buildSessionFactory(serviceRegistry);
 	    //sf = cfg.buildSessionFactory();
-	    System.out.println("build session");
+	    //System.out.println("build session");
 	    
-	    System.out.println("opening...");
- 		session = sessionFactory.openSession();
- 		System.out.println("opended");
- 		System.out.println(session.isConnected());
+	   // System.out.println("opening...");
+ 		//session = sessionFactory.openSession();
+ 		//System.out.println("opended");
+ 		//System.out.println(session.isConnected());
  		//this.session.buildLockRequest(LockOptions.NONE);
  		//this.createDatabaseIfEmpty();
 	}
@@ -62,7 +62,7 @@ public class DatabaseController {
 	 * Saves the Object o in the DataBase
 	 * @param o 
 	 */
-	private void save(Object o){
+	public void save(Object o){
 		session = sessionFactory.openSession();
 		session.beginTransaction();
 		session.persist(o);
@@ -75,7 +75,7 @@ public class DatabaseController {
 	 * @param id Id of the Object
 	 * @return Object (needs to be casted)
 	 */
-	private Object load(Class c,Serializable id){
+	public Object load(Class c,Serializable id){
 		session = sessionFactory.openSession();
 		session.beginTransaction();
 		Object o = session.get(c, id);
