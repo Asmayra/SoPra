@@ -68,8 +68,10 @@
         <mapping class="org.model.Playlist"/>
         <mapping class="org.model.Song"/>
         <mapping class="org.model.StandartUser"/>
-        <mapping class="org.model.Tickets"/>
+        <mapping class="org.model.Ticket"/>
         <mapping class="org.model.UserDecorator"/>
+        <mapping class="org.model.Genre"/>
+        <mapping class="org.model.Label"/>
 
     </session-factory>
 
