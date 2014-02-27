@@ -9,6 +9,8 @@ import java.awt.Image;
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicOptionPaneUI.ButtonActionListener;
 
+import org.control.SoPra;
+
 public class Menu extends JPanel{
 	
 	private JLabel userName;
@@ -19,7 +21,7 @@ public class Menu extends JPanel{
 	private JButton mail = new JButton(dummyIcon);
 	private JButton logOut = new JButton(dummyIcon);
 	private JButton setting = new JButton(dummyIcon);
-	private JButton avatar = new JButton(new ImageIcon("C:/Users/Tym/git/SoPraMusic/SoPra/Avatar.jpg"));//benutzerbild
+	private JButton avatar = new JButton(new ImageIcon("C:/Users/Tym/git/SoPraMusic/SoPra/Avatar.jpg"));//benutzerbild x
 
 	public Menu() {
 		
@@ -40,7 +42,7 @@ public class Menu extends JPanel{
 		c.gridheight =1;
 		c.gridx = 2;
 		c.gridwidth = 3;
-		userName = new JLabel("  TestUser  ");//Kontrollklasse.getUser().getUsername)
+		userName = new JLabel("  ");//"+ SoPra.getCurrentUser().getUsername()+ "  ");
 		add(userName,c);
 		
 		c.gridx =5;
