@@ -1,5 +1,7 @@
 package org.control;
 
+import java.io.Serializable;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -45,10 +47,24 @@ public class DatabaseController {
 	 * @param o 
 	 */
 	private void save(Object o){
-		session = this.sessionFactory.openSession();
+		session = sessionFactory.openSession();
 		session.beginTransaction();
 		session.persist(o);
 		session.getTransaction().commit();
 		session.close();
+	}
+	/**
+	 * loads an Object from the Database. 
+	 * @param c Class of the Object
+	 * @param id Id of the Object
+	 * @return Object (needs to be casted)
+	 */
+	private Object load(Class c,Serializable id){
+		session = sessionFactory.openSession();
+		session.beginTransaction();
+		Object o = session.get(c, id);
+		session.getTransaction().commit();
+		session.close();
+		return o;
 	}
 }
