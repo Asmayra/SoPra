@@ -1,5 +1,6 @@
 package org.model;
 
+import java.awt.image.BufferedImage;
 import java.util.Date;
 import java.util.List;
 
@@ -73,6 +74,10 @@ public class User {
 	}
 	public void setSalt(String salt) {
 		this.salt = salt;
+	}
+	public BufferedImage getPicture() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 
