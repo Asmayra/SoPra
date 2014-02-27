@@ -18,6 +18,22 @@ public class Genre {
 	public Genre() {
 		// TODO Auto-generated constructor stub
 	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public List<Genre> getSubGenres() {
+		return subGenres;
+	}
+
+	public void setSubGenres(List<Genre> subGenres) {
+		this.subGenres = subGenres;
+	}
 	
 	
 

@@ -6,7 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
-public class StandartUser implements User {
+public class StandardUser implements User {
 	@Id
 	private String username;
 	private String password;
@@ -15,6 +15,7 @@ public class StandartUser implements User {
 	private Date dob;
 	private String city;
 	private String country;
+	private String salt;
 	
 	public String getUsername() {
 		return username;
@@ -58,7 +59,12 @@ public class StandartUser implements User {
 	public void setCountry(String country) {
 		this.country = country;
 	}
-	
+	public String getSalt() {
+		return salt;
+	}
+	public void setSalt(String salt) {
+		this.salt = salt;
+	}
 	
 
 }

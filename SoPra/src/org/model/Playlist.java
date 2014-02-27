@@ -1,6 +1,6 @@
 package org.model;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,8 +13,26 @@ public class Playlist {
 	@GeneratedValue(strategy = GenerationType.AUTO)	
 	private int playlistId;
 	private User owner;
-	private ArrayList<Song> songs;
+	private List<Song> songs;
 	private String name;
+	public User getOwner() {
+		return owner;
+	}
+	public void setOwner(User owner) {
+		this.owner = owner;
+	}
+	public List<Song> getSongs() {
+		return songs;
+	}
+	public void setSongs(List<Song> songs) {
+		this.songs = songs;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
 	
 
 

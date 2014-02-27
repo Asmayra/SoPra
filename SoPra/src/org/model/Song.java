@@ -11,8 +11,28 @@ public class Song {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)	
 	private int songId;
-	private User interpret;
+	private Artist interpret;
 	private String name;
 	private int playtime;
+	
+	
+	public Artist getInterpret() {
+		return interpret;
+	}
+	public void setInterpret(Artist interpret) {
+		this.interpret = interpret;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public int getPlaytime() {
+		return playtime;
+	}
+	public void setPlaytime(int playtime) {
+		this.playtime = playtime;
+	}
 
 }

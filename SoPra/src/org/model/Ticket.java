@@ -13,5 +13,25 @@ public class Ticket {
 	private int ticketId;
 	private Admin inWorkBy;
 	private User requester;
+	
+	public int getTicketId() {
+		return ticketId;
+	}
+	public void setTicketId(int ticketId) {
+		this.ticketId = ticketId;
+	}
+	public Admin getInWorkBy() {
+		return inWorkBy;
+	}
+	public void setInWorkBy(Admin inWorkBy) {
+		this.inWorkBy = inWorkBy;
+	}
+	public User getRequester() {
+		return requester;
+	}
+	public void setRequester(User requester) {
+		this.requester = requester;
+	}
+	
 
 }
