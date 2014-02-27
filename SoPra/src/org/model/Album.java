@@ -1,5 +1,8 @@
 package org.model;
 
+import javax.persistence.Entity;
+
+@Entity
 public class Album extends Playlist {
 	
 	private String coverart;
