@@ -9,6 +9,6 @@ public class Admin extends UserDecorator {
 		super(u);
 	}
 
-	private Tickets tickets;
+	
 
 }
