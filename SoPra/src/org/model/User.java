@@ -3,9 +3,11 @@ package org.model;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 
-
+@Entity
 public interface User {
+	@Id
 	public String getUsername();
 	public void setUsername(String username);
 	public String getPassword();

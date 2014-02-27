@@ -1,9 +1,12 @@
 package org.model;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class StandardUser implements User {
@@ -15,7 +18,12 @@ public class StandardUser implements User {
 	private Date dob;
 	private String city;
 	private String country;
+<<<<<<< HEAD:SoPra/src/org/model/StandartUser.java
+	@OneToMany
+	private List<Playlist> playlists;
+=======
 	private String salt;
+>>>>>>> 0c2af9917cfb9b1ca2f4125451c64d2e8ce27ad3:SoPra/src/org/model/StandardUser.java
 	
 	public String getUsername() {
 		return username;
