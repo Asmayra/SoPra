@@ -1,8 +1,9 @@
 package org.control;
 
+import java.util.Date;
+
 import org.control.listener.RegCancelButtonListener;
 import org.control.listener.RegConfirmButtonListener;
-import org.model.StandardUser;
 import org.model.User;
 import org.view.RegScreen;
 
@@ -70,13 +71,23 @@ public class RegControl {
 	 */
 	public void completeRegistration()
 	{
-		User newUser = new StandardUser();
+		User newUser = new User();
+		
+		newUser.setUsername(screen.getUsername());
+		newUser.setFirstname(screen.getFirstname());
+		newUser.setLastname(screen.getLastname());
+		newUser.setCity(screen.getCity());
+		newUser.setCountry(screen.getCountry());
+		
+		newUser.setSalt(PasswordControl.generateSalt());
+		newUser.setPassword(PasswordControl.encodePassword(screen.getPassword(), newUser.getSalt()));
 		
 		DatabaseController.getInstance().save(newUser);
 		
 		this.destroy();
 		
 	}
+	
 	
 	/**
 	 * zeigt die Registrations maske

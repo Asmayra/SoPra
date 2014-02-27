@@ -5,11 +5,11 @@ import java.util.Random;
 public class PasswordControl {
 	
 	
-	public static int encodePassword(String pass, String salt)
+	public static String encodePassword(String pass, String salt)
 	{
 		String password = pass + salt;
 		
-		return password.hashCode();
+		return "" + password.hashCode();
 	}
 	
 	public static boolean comparePasswords(int pass1, int pass2)
