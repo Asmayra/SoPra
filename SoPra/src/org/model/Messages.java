@@ -12,5 +12,23 @@ public class Messages {
 	private User sender;
 	private User[] recipient;
 	private String content;
+	public User getSender() {
+		return sender;
+	}
+	public void setSender(User sender) {
+		this.sender = sender;
+	}
+	public User[] getRecipient() {
+		return recipient;
+	}
+	public void setRecipient(User[] recipient) {
+		this.recipient = recipient;
+	}
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
+	}
 
 }
