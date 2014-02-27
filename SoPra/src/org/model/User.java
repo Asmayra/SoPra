@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
 public class User {
@@ -23,13 +24,16 @@ public class User {
 	private String city;
 	private String country;
 	private String salt;
-	private String rights ="StandartUser";
-	
-	@OneToMany
-	private List<Playlist> playlists;
+	private String rights ="StandardUser";	
 
 
-	
+
+	public String getRights() {
+		return rights;
+	}
+	public void setRights(String rights) {
+		this.rights = rights;
+	}
 	public String getUsername() {
 		return username;
 	}
@@ -78,10 +82,7 @@ public class User {
 	public void setSalt(String salt) {
 		this.salt = salt;
 	}
-	public BufferedImage getPicture() throws IOException {
-		//Test-Rumpf
-		return ImageIO.read(new File("C:/Dropbox/SoPra/SoPraMusic/Dummy-Resources/dummy-avatar.png"));
-	}
+
 	
 
 }
