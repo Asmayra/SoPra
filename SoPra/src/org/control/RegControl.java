@@ -1,5 +1,6 @@
 package org.control;
 
+import java.io.IOException;
 import java.util.Date;
 
 import org.control.listener.RegCancelButtonListener;
@@ -72,6 +73,7 @@ public class RegControl {
 	public void completeRegistration()
 	{
 		User newUser = new User();
+		boolean accurate = true;
 		
 		newUser.setUsername(screen.getUsername());
 		newUser.setFirstname(screen.getFirstname());
@@ -81,10 +83,14 @@ public class RegControl {
 		
 		newUser.setSalt(PasswordControl.generateSalt());
 		newUser.setPassword(PasswordControl.encodePassword(screen.getPassword(), newUser.getSalt()));
+		try{
+			DatabaseController.getInstance().save(newUser);
+		}catch(IOException e){
+			System.out.println("USername already taken!");
+			accurate = false;
+		}
 		
-		DatabaseController.getInstance().save(newUser);
-		
-		this.destroy();
+		if (accurate) this.destroy();	
 		
 	}
 	

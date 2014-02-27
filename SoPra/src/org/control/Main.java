@@ -1,5 +1,6 @@
 package org.control;
 
+import org.model.User;
 import org.view.MainScreen;
 /**
  * MainControll Class
@@ -9,6 +10,7 @@ import org.view.MainScreen;
 public class Main {
 	public static void main(String[] args){
 			Main main = new Main();
+			RegControl.getInstance().showRegistration();
 			main.setUp();
 	}
 	/**

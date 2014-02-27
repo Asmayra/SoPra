@@ -11,7 +11,7 @@ public class UserControl {
 		return null;
 	}
 	
-	public void setCurrentUser(User user)
+	public void setCurrentUser(User cUser)
 	{
 		
 	}

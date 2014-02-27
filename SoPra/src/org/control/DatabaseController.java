@@ -1,5 +1,6 @@
 package org.control;
 
+import java.io.IOException;
 import java.io.Serializable;
 
 import org.hibernate.Session;
@@ -65,8 +66,9 @@ public class DatabaseController {
 	 * Example:
 	 * 			DatabaseController.getInstance().save(user1);
 	 * @param o 
+	 * @throws IOException if riamray Key is already Taken
 	 */
-	public void save(Object o){
+	public void save(Object o) throws IOException{
 		try{
 			session = sessionFactory.openSession();
 			session.beginTransaction();
@@ -75,6 +77,7 @@ public class DatabaseController {
 			session.close();
 		}catch(org.hibernate.exception.ConstraintViolationException e){
 			System.out.println("Primarykey taken!");
+			throw new IOException();
 		}
 	
 		

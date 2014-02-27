@@ -13,8 +13,8 @@ public class SoPra {
 	}
 	
 	
-	public static void setCurrentUser(User user)
+	public static void setCurrentUser(User currentUser)
 	{
-		currentUser = user;
+		currentUser = currentUser;
 	}
 }
