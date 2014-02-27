@@ -7,7 +7,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 @Entity
+@Table(name="MESSAGE_TABLE")
 public class Messages {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)	

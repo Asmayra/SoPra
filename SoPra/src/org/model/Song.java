@@ -6,17 +6,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="SONG_TABLE")
 public class Song {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)	
-	private int songId;
-	
+	private int songId;	
 	@ManyToOne
 	private User interpret;
-
 	private String name;
 	private int playtime;
 	

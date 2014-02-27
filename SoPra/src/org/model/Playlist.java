@@ -2,6 +2,7 @@ package org.model;
 
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -12,7 +13,9 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 @Entity
+@Table(name="PLAYLIST_TABLE")
 public class Playlist {
 
 	@Id
@@ -21,7 +24,7 @@ public class Playlist {
 	@ManyToOne
 	private User owner;
 	@ManyToMany
-	private List<Song> songs;
+	private Collection<Song> songs;
 	private String name;
 	
 	public User getOwner(){

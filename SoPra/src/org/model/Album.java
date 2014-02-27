@@ -1,6 +1,7 @@
 package org.model;
 
 import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @Entity
 public class Album extends Playlist {

@@ -1,17 +1,24 @@
 package org.model;
 
+import java.util.Collection;
 import java.util.List;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+@Entity
+@Table(name="LABEL_TABLE")
 public class Label {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)	
 	private int LabelId;
 	private String name;
-	private List<User> manager;
+	@OneToMany
+	private Collection<User> manager;
 
 	public Label() {
 		// TODO Auto-generated constructor stub
