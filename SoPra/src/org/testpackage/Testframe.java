@@ -12,6 +12,7 @@ public class Testframe extends JFrame {
 	/**
 	 * 
 	 */
+	
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 
@@ -60,6 +61,10 @@ public class Testframe extends JFrame {
 		TextArea_output.append(Data_Location);
 		
 	}
+	/**
+	 * 
+	 * @return
+	 */
 	public static String CurrentDir(){
 		String path=System.getProperty("java.class.path");
 		String FileSeparator=(String)System.getProperty("file.separator");
