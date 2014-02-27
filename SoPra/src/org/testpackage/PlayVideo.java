@@ -33,11 +33,11 @@ public class PlayVideo extends JFrame {
 		button.addActionListener(listener);
 		getContentPane().add(button, BorderLayout.NORTH);
 		pack();
-		show();
+		setVisible(true);
 	}
 
 	public void load(final File file) throws Exception {
-		URL url = file.toURL();
+		URL url = file.toURI().toURL();
 		final Container contentPane = getContentPane();
 		if (player != null) {
 			player.stop();

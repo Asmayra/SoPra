@@ -9,7 +9,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
-public class StandartUser implements User {
+public class StandardUser implements User {
 	@Id
 	private String username;
 	private String password;
@@ -18,8 +18,12 @@ public class StandartUser implements User {
 	private Date dob;
 	private String city;
 	private String country;
+<<<<<<< HEAD:SoPra/src/org/model/StandartUser.java
 	@OneToMany
 	private List<Playlist> playlists;
+=======
+	private String salt;
+>>>>>>> 0c2af9917cfb9b1ca2f4125451c64d2e8ce27ad3:SoPra/src/org/model/StandardUser.java
 	
 	public String getUsername() {
 		return username;
@@ -63,7 +67,12 @@ public class StandartUser implements User {
 	public void setCountry(String country) {
 		this.country = country;
 	}
-	
+	public String getSalt() {
+		return salt;
+	}
+	public void setSalt(String salt) {
+		this.salt = salt;
+	}
 	
 
 }
