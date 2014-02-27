@@ -14,6 +14,7 @@ public class DatabaseController {
 	static StandardServiceRegistryBuilder serviceRegistryBuilder;
 	static SessionFactory sessionFactory;
 	static Session session;
+	
 	/**
 	 * initializes the Database Connection, creates
 	 */
