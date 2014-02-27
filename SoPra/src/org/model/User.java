@@ -1,9 +1,12 @@
 package org.model;
 
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
+import javax.imageio.ImageIO;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -75,9 +78,9 @@ public class User {
 	public void setSalt(String salt) {
 		this.salt = salt;
 	}
-	public BufferedImage getPicture() {
-		// TODO Auto-generated method stub
-		return null;
+	public BufferedImage getPicture() throws IOException {
+		//Test-Rumpf
+		return ImageIO.read(new File("C:/Dropbox/SoPra/SoPraMusic/Dummy-Resources/dummy-avatar.png"));
 	}
 	
 
