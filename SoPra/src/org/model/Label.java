@@ -11,7 +11,7 @@ public class Label {
 	@GeneratedValue(strategy = GenerationType.AUTO)	
 	private int LabelId;
 	private String name;
-	private List<LabelManager> manager;
+	private List<User> manager;
 
 	public Label() {
 		// TODO Auto-generated constructor stub
@@ -25,11 +25,11 @@ public class Label {
 		this.name = name;
 	}
 
-	public List<LabelManager> getManager() {
+	public List<User> getManager() {
 		return manager;
 	}
 
-	public void setManager(List<LabelManager> manager) {
+	public void setManager(List<User> manager) {
 		this.manager = manager;
 	}
 
