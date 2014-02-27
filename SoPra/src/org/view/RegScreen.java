@@ -32,12 +32,18 @@ public class RegScreen extends JFrame{
 	private final int MIN_HEIGHT = 300;
 	
 	
-	
+	/**
+	 * Konstruktor zu RegScreen
+	 */
 	public RegScreen() {
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		initGui();
 	}
 	
+	
+	/**
+	 * Initialisiert die Gui
+	 */
 	private void initGui(){
 		this.setMaximumSize(new Dimension(MIN_WIDTH, MIN_HEIGHT));
 		this.setMinimumSize(new Dimension(MIN_WIDTH, MIN_HEIGHT));
@@ -157,8 +163,8 @@ public class RegScreen extends JFrame{
 	}
 	
 	/**
-	 * 
-	 * @param error 
+	 * Gibt Fehlertext aus, wenn ein Fehler aufgetreten ist
+	 * @param error Fehlertext der ausgegeben wird
 	 */
 	
 	public void displayError(String error){
@@ -176,7 +182,7 @@ public class RegScreen extends JFrame{
 		errorLabel.setVisible(false);
 	}
 	
-	
+	// Getter um Textfeld auzulesen
 	public String getUsername()
 	{
 		return usernameText.getText();
