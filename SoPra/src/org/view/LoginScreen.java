@@ -15,6 +15,12 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 
+/**
+ * Erzeugt das Loginfenster
+ * @author Michael Pfennings, Mattias Schoenke
+ *
+ */
+
 public class LoginScreen extends JFrame {
 
 	private JPanel contentPane;
@@ -32,6 +38,9 @@ public class LoginScreen extends JFrame {
 		initGui();
 	}
 	
+	/**
+	 * Initialisiert das Gui
+	 */
 	private void initGui()
 	{
 		this.setMaximumSize(new Dimension(MIN_WIDTH, MIN_HEIGHT));
@@ -47,7 +56,10 @@ public class LoginScreen extends JFrame {
 		this.add(contentPane);
 	}
 	
-	
+	/**
+	 * Erzeugt das "Eingabe"-Panel mit der Eingabemaske
+	 * @return
+	 */
 	private JComponent initEingabe()
 	{
 		JPanel eingabe = new JPanel();
@@ -83,7 +95,10 @@ public class LoginScreen extends JFrame {
 		return eingabe;
 		
 	}
-	
+	/**
+	 * Erzeugt das "buttons"-Panel und platziert die Buttons
+	 * @return das "buttons"-Panel
+	 */
 	private JComponent initButtons()
 	{
 		JPanel buttons = new JPanel();

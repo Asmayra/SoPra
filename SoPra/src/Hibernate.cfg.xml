@@ -68,6 +68,7 @@
         <mapping class="org.model.Genre"/>
         <mapping class="org.model.Label"/>
         <mapping class="org.model.User"/>
+        <mapping class="org.model.Album"/>
 
     </session-factory>
 

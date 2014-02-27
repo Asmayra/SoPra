@@ -1,7 +1,20 @@
 package org.control;
+/**
+ * Steuert den Login eines Nutzers
+ * @author Michael Pfennings, Mattias Schoenke
+ *
+ */
 
 public class LoginControl {
 	
+	
+	
+	/**
+	 * Überprüft ob das Passwort zum mit dem des angegebenen Benutzers übereinstimmt
+	 * @param nutzer Username der beim einloggen angegeben wurde
+	 * @param passwort Passwort das beim einloggen angegeben wurde
+	 * @return
+	 */
 	public boolean checkLogin(String nutzer, String passwort)
 	{
 		//getUser(nutzer)
