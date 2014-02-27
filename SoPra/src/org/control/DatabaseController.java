@@ -48,12 +48,12 @@ public class DatabaseController {
 	     //serviceRegistry = new StandardServiceRegistryBuilder().applySettings(cfg.getProperties()).build();
 	    sessionFactory = cfg.buildSessionFactory(serviceRegistry);
 	    //sf = cfg.buildSessionFactory();
-	    System.out.println("build session");
+	    //System.out.println("build session");
 	    
-	    System.out.println("opening...");
- 		session = sessionFactory.openSession();
- 		System.out.println("opended");
- 		System.out.println(session.isConnected());
+	   // System.out.println("opening...");
+ 		//session = sessionFactory.openSession();
+ 		//System.out.println("opended");
+ 		//System.out.println(session.isConnected());
  		//this.session.buildLockRequest(LockOptions.NONE);
  		//this.createDatabaseIfEmpty();
 	}
