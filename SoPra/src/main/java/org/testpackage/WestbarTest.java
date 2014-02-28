@@ -26,7 +26,8 @@ public class WestbarTest {
         CoverArt cover = west.getCoverart();
         cover.setCoverArt(image);
         
-        f.setPreferredSize(new Dimension(300,1000));
+        f.setPreferredSize(new Dimension(270,800));
+        f.setMinimumSize(new Dimension(270,800));
         f.pack();
         f.setLocationRelativeTo(null);
         f.setVisible(true);

@@ -1,5 +1,6 @@
 package org.view.screens.WestBar;
 
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
@@ -23,15 +24,17 @@ public class WestBar extends JPanel {
 		//c.gridheight=2;
 		c.anchor= GridBagConstraints.FIRST_LINE_START;
 		add(menu,c);
-		c.gridy=2;
+		c.gridy=1;
 		//c.gridheight=20;
 		add(miniscreen,c);
-		c.gridy=22;
+		c.gridy=2;
 		//c.gridheight=10;
 		add(coverart,c);
-		c.gridy=32;
+		c.gridy=3;
 		//c.gridheight=5;
 		add(songticker,c);
+		
+		this.setMinimumSize(new Dimension(290,800));
 		
 	}
 	
