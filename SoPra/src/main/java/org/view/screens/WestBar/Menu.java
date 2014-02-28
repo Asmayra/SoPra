@@ -42,7 +42,7 @@ public class Menu extends JPanel{
 		c.gridheight =1;
 		c.gridx = 2;
 		c.gridwidth = 3;
-		userName = new JLabel("  ");//"+ SoPra.getCurrentUser().getUsername()+ "  ");
+		userName = new JLabel("  UserName  ");//"  "+ SoPra.getCurrentUser().getUsername()+ "  ");
 		add(userName,c);
 		
 		c.gridx =5;
