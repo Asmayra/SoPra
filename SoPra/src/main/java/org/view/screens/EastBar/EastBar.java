@@ -9,10 +9,8 @@ import javax.swing.JPanel;
  */
 public class EastBar extends JPanel{
 
-	private static DiscoverMiniScreen miniScreen;
 	
 	public EastBar() {
-		miniScreen = DiscoverMiniScreen.getInstance();
-		this.add(miniScreen);
+		this.add(DiscoverMiniScreen.getInstance());
 	}
 }
