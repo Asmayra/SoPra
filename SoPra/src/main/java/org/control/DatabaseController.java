@@ -10,7 +10,11 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 import org.model.User;
 
-
+/**
+ * Fügt euch auch mal als Autoren hierzu wenn ihr hier was gemacht habt
+ * @author Mattias Schoenke
+ *
+ */
 public class DatabaseController {
 
 	private static StandardServiceRegistryBuilder serviceRegistryBuilder;
@@ -98,4 +102,64 @@ public class DatabaseController {
 		session.close();
 		return obj;
 	}
+	
+	/**
+	 * Aktualisiert ein persistiertes Objekt mit den neuen Werten aus update. Wenn das Objekt noch nicht persistiert
+	 * wurde, wird es neu angelegt.
+	 * !!!!KANN NICHT PRIMARY KEY ÄNDERN!!!!
+	 * @param update Objekt von dem die neuen Werte gelesen werden
+	 * @return aktualisiertes Objekt
+	 */
+	public Object update(Object update)
+	{
+		session = sessionFactory.openSession();
+		session.beginTransaction();
+		Object result = session.merge(update);
+		session.getTransaction().commit();
+		session.close();
+		return result;
+	}
+	
+	/**
+	 * Löscht das persistente Objekt, das zu diesem Objekt gehört. Gibt keine Fehler wenn man 
+	 * nicht existente Daten löschen will.
+	 * @param delete Objekt dessen persistente Version gelöscht werden soll
+	 */
+	public void delete(Object delete)
+	{
+			session = sessionFactory.openSession();
+			session.beginTransaction();
+			session.delete(delete);
+			session.getTransaction().commit();
+			session.close();
+	}
+	
+	/**
+	 * Aktualisiert ein persistentes Objekt. Kann auch Primary ändern
+	 * @param c Klasse des zu änderden Objektes
+	 * @param id Primarykey des zu ändernden Objektes
+	 * @param update Objekt mit allen neuen Werten
+	 * @return Geändertes Objekt
+	 */
+	public Object updatePrimary(Class c, Serializable id, Object update)
+	{
+		session = sessionFactory.openSession();
+		session.beginTransaction();
+		
+		Object toUpdate = session.load(c, id);
+		
+		if(toUpdate == null)
+		{
+			return null;
+		}
+		
+		session.delete(toUpdate);
+		
+		session.persist(update);
+
+		session.getTransaction().commit();
+		session.close();
+		return update;
+	}
+	
 }

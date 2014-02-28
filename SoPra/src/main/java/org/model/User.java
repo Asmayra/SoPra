@@ -32,14 +32,17 @@ public class User {
 	private String country;
 	private String salt;
 	private String rights = "StandardUser";
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER) //Set Eager,because it's loaded at the Homescreen
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	// Set Eager,because it's loaded at the Homescreen
 	private Collection<Post> posts = new LinkedList<Post>();
-	
+
 	public Collection<Post> getPosts() {
 		return posts;
 	}
-/**
+
+	/**
 	 * Adds a Post to the User and sets him as the Autor
+	 * 
 	 * @param pst
 	 */
 	public void addPosts(Post pst) {
@@ -130,12 +133,15 @@ public class User {
 		Calendar birth = Calendar.getInstance();
 		Calendar now = Calendar.getInstance();
 		birth.setTime(dob);
-		Integer age = (now.YEAR - now.YEAR);
-		if (birth.MONTH < now.MONTH) {
+		Integer age = (now.get(Calendar.YEAR) - birth.get(Calendar.YEAR));
+		if (birth.get(Calendar.MONTH) < now.get(Calendar.MONTH)) {
 			age++;
-		} else if (birth.DAY_OF_MONTH < now.DAY_OF_MONTH) {
+		} else if (birth.get(Calendar.MONTH) == now.get(Calendar.MONTH)
+				&& birth.get(Calendar.DAY_OF_MONTH) < now.get(Calendar.DAY_OF_MONTH)) {
 			age++;
 		}
+		System.out.println(birth.get(Calendar.YEAR));
+		System.out.println(now.get(Calendar.YEAR));
 		return age.toString();
 	}
 
