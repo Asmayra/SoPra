@@ -21,8 +21,13 @@ public class EastBarTest {
         EastBar eb = new EastBar();
         
         DiscoverMiniScreen miniScreen = DiscoverMiniScreen.getInstance();
-        DiscoverElement discover = new DiscoverElement();
-        miniScreen.setDiscoverOne(discover);
+        DiscoverElement discover1 = new DiscoverElement();
+        DiscoverElement discover2 = new DiscoverElement();
+        DiscoverElement discover3 = new DiscoverElement();
+        
+        miniScreen.setDiscoverOne(discover1);
+        miniScreen.setDiscoverTwo(discover2);
+        miniScreen.setDiscoverThree(discover3);
         
         f.add(eb);
         f.setPreferredSize(new Dimension(400,600));

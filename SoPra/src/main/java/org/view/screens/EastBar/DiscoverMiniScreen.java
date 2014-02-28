@@ -1,5 +1,6 @@
 package org.view.screens.EastBar;
 
+import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
 /**
@@ -18,10 +19,18 @@ public class DiscoverMiniScreen extends JPanel {
 		return miniScreen;
 	}
 	private DiscoverMiniScreen() {
-
+		this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 	}
 
 	public void setDiscoverOne(JPanel discOne){
 		this.add(discOne);
+	}
+	
+	public void setDiscoverTwo(JPanel discTwo){
+		this.add(discTwo);
+	}
+	
+	public void setDiscoverThree(JPanel discThree){
+		this.add(discThree);
 	}
 }
