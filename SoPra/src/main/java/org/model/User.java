@@ -3,10 +3,12 @@ package org.model;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 
 import javax.imageio.ImageIO;
 import javax.persistence.CascadeType;
@@ -18,7 +20,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="USER_TABLE")
+@Table(name = "USER_TABLE")
 public class User {
 	@Id
 	private String username;
@@ -29,16 +31,14 @@ public class User {
 	private String city;
 	private String country;
 	private String salt;
-	private String rights ="StandardUser";	
+	private String rights = "StandardUser";
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER) //Set Eager,because it's loaded at the Homescreen
-	private Collection<Post> posts= new LinkedList<Post>();
-
-
-
+	private Collection<Post> posts = new LinkedList<Post>();
+	
 	public Collection<Post> getPosts() {
 		return posts;
 	}
-	/**
+/**
 	 * Adds a Post to the User and sets him as the Autor
 	 * @param pst
 	 */
@@ -46,66 +46,97 @@ public class User {
 		this.posts.add(pst);
 		pst.setAutor(this);
 	}
+
 	public String getRights() {
 		return rights;
 	}
+
 	public void setRights(String rights) {
 		this.rights = rights;
 	}
+
 	public String getUsername() {
 		return username;
 	}
+
 	public void setUsername(String username) {
 		this.username = username;
 	}
+
 	public String getPassword() {
 		return password;
 	}
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
 	public String getFirstname() {
 		return firstname;
 	}
+
 	public void setFirstname(String firstname) {
 		this.firstname = firstname;
 	}
+
 	public String getLastname() {
 		return lastname;
 	}
+
 	public void setLastname(String lastname) {
 		this.lastname = lastname;
 	}
+
 	public Date getDob() {
 		return dob;
 	}
+
 	public void setDob(Date dob) {
 		this.dob = dob;
 	}
+
 	public String getCity() {
 		return city;
 	}
+
 	public void setCity(String city) {
 		this.city = city;
 	}
+
 	public String getCountry() {
 		return country;
 	}
+
 	public void setCountry(String country) {
 		this.country = country;
 	}
+
 	public String getSalt() {
 		return salt;
 	}
+
 	public void setSalt(String salt) {
 		this.salt = salt;
 	}
-	public BufferedImage getPicture()  throws IOException {
-		//Test-Rumpf
+
+	public BufferedImage getPicture() throws IOException {
+		// Test-Rumpf
+		System.out.println("Load Image");
 		System.out.println("Load Image");
 		return ImageIO.read(new File("C:/Dropbox/SoPra/SoPraMusic/Dummy-Resources/dummy-avatar.png"));
 	}
 
-	
+	public String getAge() {
+		Calendar birth = Calendar.getInstance();
+		Calendar now = Calendar.getInstance();
+		birth.setTime(dob);
+		Integer age = (now.YEAR - now.YEAR);
+		if (birth.MONTH < now.MONTH) {
+			age++;
+		} else if (birth.DAY_OF_MONTH < now.DAY_OF_MONTH) {
+			age++;
+		}
+		return age.toString();
+	}
 
 }
