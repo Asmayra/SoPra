@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.imageio.ImageIO;
@@ -28,7 +29,7 @@ public class User {
 	private String salt;
 	private String rights ="StandardUser";	
 	@OneToMany
-	private Collection<Post> posts;
+	private Collection<Post> posts= new LinkedList<Post>();
 
 
 
@@ -99,6 +100,7 @@ public class User {
 	}
 	public BufferedImage getPicture()  throws IOException {
 		//Test-Rumpf
+		System.out.println("Load Image");
 		return ImageIO.read(new File("C:/Dropbox/SoPra/SoPraMusic/Dummy-Resources/dummy-avatar.png"));
 	}
 
