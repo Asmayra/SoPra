@@ -34,7 +34,7 @@ public class WestBar extends JPanel {
 		//c.gridheight=5;
 		add(songticker,c);
 		
-		this.setMinimumSize(new Dimension(290,800));
+		this.setMinimumSize(new Dimension(260,600));
 		
 	}
 	

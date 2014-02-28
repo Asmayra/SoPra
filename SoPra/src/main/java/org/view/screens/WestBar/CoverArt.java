@@ -17,7 +17,7 @@ public class CoverArt extends JPanel{
 	public CoverArt() {
 		albumcoverlabel = new JLabel(albumcover);
 		add(albumcoverlabel);
-		this.setPreferredSize(new Dimension(250,250));
+		this.setPreferredSize(new Dimension(250,180));
 	}
 	
 	public void setCoverArt(Image image){

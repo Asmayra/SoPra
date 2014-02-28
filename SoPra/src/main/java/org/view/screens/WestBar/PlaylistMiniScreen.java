@@ -32,10 +32,10 @@ public class PlaylistMiniScreen extends JPanel{
 		tabbedPane.addTab("Playlists", scrollUser);
 		createAdminPanel();
 		tabbedPane.addTab("Tickets", scrollAdmin);
-		tabbedPane.setPreferredSize(new Dimension(250,350));
+		tabbedPane.setPreferredSize(new Dimension(250,240));
 		add(tabbedPane);
 		
-		this.setPreferredSize(new Dimension(250,400));
+		this.setPreferredSize(new Dimension(250,250));
 		
 	}
 	
