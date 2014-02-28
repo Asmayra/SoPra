@@ -1,5 +1,6 @@
 package org.view.screens.WestBar;
 
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -26,6 +27,8 @@ public class SongTicker extends JPanel implements ActionListener{
         this.tickertext = sb + tickertext + sb;
         label.setText(sb.toString());
         this.add(label);
+        
+        this.setPreferredSize(new Dimension(250,100));
     }
 
     
