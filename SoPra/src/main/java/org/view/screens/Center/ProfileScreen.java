@@ -1,9 +1,17 @@
+
+
+//In Bearbeitung bei Sebastian
+
+
 package org.view.screens.Center;
 
 import java.awt.BorderLayout;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
@@ -13,9 +21,8 @@ import org.model.User;
 public class ProfileScreen extends JPanel {
 	private User userProfile;
 	private BufferedImage prflPicture;
-	private JPanel main;
 	private JPanel userOverview;
-	private JPanel userPicture;
+	private JLabel userPicture;
 	private JPanel userData;
 	private JPanel buttons;
 	private JPanel userName;
@@ -28,17 +35,22 @@ public class ProfileScreen extends JPanel {
 	
 	public ProfileScreen(User selectedUser) {
 		userProfile = selectedUser;
-		prflPicture = userProfile.getPicture();
-
-		main = new JPanel();
-		main.setLayout(new BorderLayout(0, 0));
+		//task: try catch Block hinzufügen für IOException
+		try {
+			prflPicture = userProfile.getPicture();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		setLayout(new BorderLayout(0, 0));
 
 		userOverview = new JPanel();
-		main.add(userOverview, BorderLayout.NORTH);
+		add(userOverview, BorderLayout.NORTH);
 		userOverview.setLayout(new BorderLayout(0, 0));
-
-		userPicture = new JPanel();
-		userPicture.add(comp);
+		
+		ImageIcon pic =new ImageIcon(prflPicture);
+		userPicture = new JLabel(pic);
+		userPicture.setSize(100, 100);
 		userOverview.add(userPicture, BorderLayout.WEST);
 
 		userData = new JPanel();
@@ -63,7 +75,7 @@ public class ProfileScreen extends JPanel {
 		userContent = new JPanel();
 		userContentScroll = new JScrollPane(userContent);
 		userContentScroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		main.add(userContent, BorderLayout.SOUTH);
+		add(userContentScroll, BorderLayout.SOUTH);
 		
 		
 
