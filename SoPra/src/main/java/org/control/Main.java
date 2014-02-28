@@ -14,10 +14,8 @@ import org.view.MainScreen;
  */
 public class Main {
 	public static void main(String[] args){
-			Main main = new Main();
 			LoginScreen ls = new LoginScreen();
 			ls.setVisible(true);
-			main.setUp();
 			
 			//****************************
 				//TestUser
