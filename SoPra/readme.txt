@@ -1,0 +1,2 @@
+1. aus dem root verzeichnis (dort wo die pom.xml liegt) muss in der konsole "mvn install" ausgeführt werden
+2. das Projekt wird compiliert, die tests werden ausgeführt und unter /target wird eine ausführbare .jar ableget
