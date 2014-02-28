@@ -1,5 +1,6 @@
 package org.view.screens.WestBar;
 
+import java.awt.Dimension;
 import java.awt.Image;
 
 import javax.swing.ImageIcon;
@@ -16,6 +17,7 @@ public class CoverArt extends JPanel{
 	public CoverArt() {
 		albumcoverlabel = new JLabel(albumcover);
 		add(albumcoverlabel);
+		this.setPreferredSize(new Dimension(250,250));
 	}
 	
 	public void setCoverArt(Image image){

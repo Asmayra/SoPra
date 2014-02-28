@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -14,9 +16,12 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import org.control.LoginControl;
+import org.control.RegControl;
+
 
 /**
- * Erzeugt das Loginfenster
+ * Erzeugt das Loginfenster. Ist ein Singleton
  * @author Michael Pfennings, Mattias Schoenke
  *
  */
@@ -27,11 +32,21 @@ public class LoginScreen extends JFrame {
 	
 	private JTextField loginText;
 	private JPasswordField passwordText;
+	private JLabel errorLabel;
 	
 	private final int MIN_WIDTH = 300;
 	private final int MIN_HEIGHT = 200;
+
 	
 	
+	public String getLoginText() {
+		return loginText.getText();
+	}
+
+	public String getPassword() {
+		return new String(passwordText.getPassword());
+	}
+
 	public LoginScreen(){
 		//this.setLayout(new BorderLayout());
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -49,16 +64,18 @@ public class LoginScreen extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setLayout(new BorderLayout());
 		
-		contentPane.add(initEingabe(), BorderLayout.CENTER);
+		contentPane.add(initEingabe(), BorderLayout.NORTH);
 		
-		contentPane.add(initButtons(), BorderLayout.SOUTH);
+		contentPane.add(initButtons(), BorderLayout.CENTER);
+		
+		contentPane.add(initErrorLabel(), BorderLayout.SOUTH);
 		
 		this.add(contentPane);
 	}
 	
 	/**
 	 * Erzeugt das "Eingabe"-Panel mit der Eingabemaske
-	 * @return
+	 * @return eingabe Das "Eingabe"-Panel
 	 */
 	private JComponent initEingabe()
 	{
@@ -105,12 +122,60 @@ public class LoginScreen extends JFrame {
 		buttons.setLayout(new FlowLayout());
 		
 		JButton loginButton = new JButton("Login");
+		loginButton.addActionListener(new LoginScreenLoginButtonListener());
 		JButton registerButton = new JButton("Registrieren");
+		registerButton.addActionListener(new LoginScreenRegisterButtonListener());
 		
 		buttons.add(loginButton);
 		buttons.add(registerButton);
 		
 		
 		return buttons;
+	}
+	
+	
+	/**
+	 * Erzeugt das "error"-Panel mit dem errorLabel
+	 * @return das "error-"Panel
+	 */
+	
+	private JComponent initErrorLabel(){
+		JPanel error = new JPanel();
+		errorLabel = new JLabel("Username oder Passwort falsch!");
+		errorLabel.setVisible(false);
+		error.add(errorLabel);
+		
+		return error;
+	}
+	
+	/**
+	 * Der Buttonlistener des Registierungsbuttons auf dem Loginscreen
+	 *
+	 */
+	private class LoginScreenRegisterButtonListener implements ActionListener{
+
+		public void actionPerformed(ActionEvent arg0) {
+			RegScreen.getInstance().setVisible(true);
+			RegScreen.getInstance().toFront();
+			
+		}
+		
+	}
+	/**
+	 * Der Buttonlistener des Loginbuttons auf dem Loginscreen
+	 *
+	 */
+	private class LoginScreenLoginButtonListener implements ActionListener{
+
+		public void actionPerformed(ActionEvent e) {
+			if (LoginControl.getInstance().checkLogin(getLoginText(), getPassword())){
+				//weitere Funktionen
+			}
+			
+			else {
+				errorLabel.setVisible(true);
+			}
+		}
+		
 	}
 }

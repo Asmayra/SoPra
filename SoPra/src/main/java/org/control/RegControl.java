@@ -2,16 +2,12 @@ package org.control;
 
 import java.io.IOException;
 import java.util.Date;
-
 import javax.swing.JLabel;
-
-import org.control.listener.RegCancelButtonListener;
-import org.control.listener.RegConfirmButtonListener;
 import org.model.User;
-import org.view.RegScreen;
+
 
 /**
- * Steuert die Registration eines neuen Nutzers mit dem System
+ * Steuert die Registration eines neuen Nutzers mit dem System. Ist ein Singleton
  * @author Michael Pfennings, Mattias Schoenke
  *
  */
@@ -32,14 +28,12 @@ public class RegControl {
 	
 	private String error;
 	
-	private RegScreen screen;
 	
 	
 	private static RegControl instance = null;
 
 	
 	private RegControl() {
-		screen = new RegScreen();
 		error = "";
 	}
 	
@@ -58,12 +52,10 @@ public class RegControl {
 	}
 	
 	/**
-	 * Versteckt die GUI und zerstört den SingleTon
+	 * zerstört den SingleTon
 	 */
 	public void destroy()
 	{
-		screen.setVisible(false);
-		screen = null;
 		RegControl.instance = null;
 	}
 	
@@ -75,7 +67,7 @@ public class RegControl {
 	 * @param city Stadt des neuen Nutzers
 	 * @param country Land des neuen Nutzers
 	 * @param dob Geburtsdatum des neuen Nutzers
-	 * @param Unverschlüsseltes Passwort des neuen Nutzers
+	 * @param password Unverschlüsseltes Passwort des neuen Nutzers
 	 * @pre Passwort und Pflichtfelder überprüft
 	 * @past Neuer Nutzer wurde zum System hinzugefügt
 	 */
@@ -101,7 +93,7 @@ public class RegControl {
 		try{
 			DatabaseController.getInstance().save(newUser);
 		}catch(IOException e){
-			System.out.println("USername already taken!");
+			System.out.println("Username already taken!");
 			accurate = false;
 		}
 		
@@ -111,15 +103,8 @@ public class RegControl {
 	
 	
 	/**
-	 * zeigt die Registrations maske
-	 */
-	public void showRegistration()
-	{
-		screen.setVisible(true);
-	}
-	
-	/**
 	 * Zeigt den Error auf der GUI an
+	 * @param errorLabel Label auf dem der Error angezeigt wird
 	 */
 	public void displayError(JLabel errorLabel)
 	{
@@ -161,7 +146,8 @@ public class RegControl {
 	}
 	
 	/**
-	 * Leert den error speicher
+	 * Leert den error speicher und versteckt das Label
+	 * @param errorLabel  Label auf dem der Error angezeigt wurde
 	 */
 	public void clearError(JLabel errorLabel)
 	{
@@ -186,6 +172,13 @@ public class RegControl {
 	@SuppressWarnings("unused")
 	/**
 	 * Überprüft ob alle Pflichtfelder eingegeben wurden
+	 * @param username Name des neuen Nutzers
+	 * @param firstname Vorname des neuen Nutzers
+	 * @param lastname Nachname des neuen Nutzers
+	 * @param city Stadt des neuen Nutzers
+	 * @param country Land des neuen Nutzers
+	 * @param dob Geburtsdatum des neuen Nutzers
+	 * @param mail Mailadresse des neuen Nutzers
 	 * @return true wenn alle Pflicheintrage vorhanden, false sonst
 	 */
 	public boolean checkRegistration(	String username,
@@ -222,6 +215,7 @@ public class RegControl {
 	
 	/**
 	 * Überprüft ob ein Nutzer bereits existiert
+	 * @param username Name des neuen Nutzers
 	 * @return true falls schon vorhanden, false sonst
 	 */
 	public boolean userExists(	String username	)

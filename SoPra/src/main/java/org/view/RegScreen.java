@@ -18,7 +18,7 @@ import javax.swing.JTextField;
 import org.control.RegControl;
 
 /**
- * Erstellt das Registrierungsfensters
+ * Erstellt das Registrierungsfensters. Ist ein Singleton
  * @author Michael Pfennings, Mattias Schoenke 
  *
  */
@@ -34,15 +34,25 @@ public class RegScreen extends JFrame{
 	private final int MIN_WIDTH = 400;
 	private final int MIN_HEIGHT = 300;
 	
+	private static RegScreen instance = null;
+	
 	
 	/**
 	 * Konstruktor zu RegScreen
 	 */
-	public RegScreen() {
-		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+	private RegScreen() {
+		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		initGui();
 	}
 	
+	public static RegScreen getInstance(){
+		if(instance == null)
+		{
+			instance = new RegScreen();
+		}
+		
+		return instance;
+	}
 	
 	/**
 	 * Initialisiert die Gui
@@ -53,12 +63,12 @@ public class RegScreen extends JFrame{
 		
 		contentPane = new JPanel();
 		contentPane.setLayout(new BorderLayout());
-		contentPane.add(initButtons(), BorderLayout.SOUTH);
-		contentPane.add(initEingabe(), BorderLayout.CENTER);
+		contentPane.add(initButtons(), BorderLayout.CENTER);
+		contentPane.add(initEingabe(), BorderLayout.NORTH);
 		
 		errorLabel = new JLabel("");
 		errorLabel.setVisible(false);
-		contentPane.add(errorLabel, BorderLayout.NORTH);
+		contentPane.add(errorLabel, BorderLayout.SOUTH);
 		
 		this.add(contentPane);
 		}
@@ -184,7 +194,10 @@ public class RegScreen extends JFrame{
 		return new String(passwordConfirmText.getPassword());
 	}
 
-	
+	/**
+	 * ButtonListener des "Bestätigen"-Buttons. Sendet eingebene Daten an die Registrierungssteuerung zum überprüfen.
+	 *
+	 */
 	private class RegConfirmButtonListener implements ActionListener {
 		
 		public RegConfirmButtonListener() {
@@ -227,12 +240,19 @@ public class RegScreen extends JFrame{
 //			}
 			
 			if(success)
+			{
 				control.completeRegistration(username, firstname, lastname, city, country, null, password);
+				RegScreen.this.dispose();
+			}
 			else
 				control.displayError(errorLabel);
 		} 
 	}
 	
+	/**
+	 * ButtonListener des "Cancel"-Buttons. Bricht den Registierungsvorgang ab und schließt das Registrierungsfenster.
+	 *
+	 */
 	private class RegCancelButtonListener implements ActionListener {
 
 		public RegCancelButtonListener() {
@@ -241,6 +261,7 @@ public class RegScreen extends JFrame{
 
 		public void actionPerformed(ActionEvent arg0) {
 			RegControl.getInstance().destroy();
+			RegScreen.this.dispose();
 
 		}
 
