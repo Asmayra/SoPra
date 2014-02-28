@@ -17,7 +17,7 @@ public class RegControlTest {
 	public static void createTestUser(){
 		User newUser = new User();
 		
-		newUser.setUsername("TestUser");
+		newUser.setUsername("RegisterTestUser");
 		
 		
 		
@@ -47,14 +47,18 @@ public class RegControlTest {
 	
 	@Test
 	public void userExistTest(){
-		assertTrue(RegControl.getInstance().userExists("TestUser"));
+		assertTrue(RegControl.getInstance().userExists("RegisterTestUser"));
 	}
 	
 	
 	
 	@AfterClass
 	public static void deleteTestuser(){
-		//Testuser aus Datenbank löschen
+		User newUser = (User) DatabaseController.getInstance().load(User.class, "RegisterTestUser");
+		
+		DatabaseController.getInstance().delete(newUser);
+		
+		assertTrue(DatabaseController.getInstance().load(User.class, "RegisterTestUser") == null);
 	}
 
 }

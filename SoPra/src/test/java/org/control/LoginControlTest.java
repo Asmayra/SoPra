@@ -40,7 +40,11 @@ public class LoginControlTest {
 	
 	@AfterClass
 	public static void deleteTestUser(){
-		//...
+		User newUser = (User) DatabaseController.getInstance().load(User.class, "LoginTestUser");
+		DatabaseController.getInstance().delete(newUser);
+		
+		assertTrue(DatabaseController.getInstance().load(User.class, "LoginTestUser") == null);
+		
 	}
 
 }
