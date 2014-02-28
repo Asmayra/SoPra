@@ -28,7 +28,7 @@ public class SongTicker extends JPanel implements ActionListener{
         label.setText(sb.toString());
         this.add(label);
         
-        this.setPreferredSize(new Dimension(250,30));
+        this.setPreferredSize(new Dimension(250,20));
     }
 
     

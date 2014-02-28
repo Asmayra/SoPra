@@ -56,7 +56,7 @@ public class Menu extends JPanel{
 		c.gridx = 8;
 		add(setting,c);		
 
-		this.setPreferredSize(new Dimension(250,100));
+		this.setPreferredSize(new Dimension(250,80));
 		
 	}
 
