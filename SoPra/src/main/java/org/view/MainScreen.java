@@ -17,7 +17,8 @@ import org.view.screens.WestBar.*;
  * 
  */
 public class MainScreen extends JFrame {
-	JPanel center, south, west, east;
+	private JPanel center, south, west, east;
+	private static MainScreen instance;
 
 	public JPanel getCenter() {
 		return center;
@@ -51,7 +52,14 @@ public class MainScreen extends JFrame {
 		this.east = east;
 	}
 
-	public MainScreen() {
+	public static MainScreen getInstance(){
+		if(instance == null){
+			instance = new MainScreen();
+		}
+		return instance;
+	}
+	
+	private MainScreen() {
 		this.setLayout(new BorderLayout());
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
