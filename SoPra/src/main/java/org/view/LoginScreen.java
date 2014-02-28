@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -35,7 +36,7 @@ public class LoginScreen extends JFrame {
 	private JLabel errorLabel;
 	
 	private final int MIN_WIDTH = 300;
-	private final int MIN_HEIGHT = 200;
+	private final int MIN_HEIGHT = 150;
 
 	
 	
@@ -60,6 +61,12 @@ public class LoginScreen extends JFrame {
 	{
 		this.setMaximumSize(new Dimension(MIN_WIDTH, MIN_HEIGHT));
 		this.setMinimumSize(new Dimension(MIN_WIDTH, MIN_HEIGHT));
+		
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		double width = screenSize.getWidth();
+		double height = screenSize.getHeight();
+		
+		this.setLocation( ( (int)width/2 - MIN_WIDTH/2) ,( (int) height/2 - MIN_HEIGHT/2 ) );
 		
 		contentPane = new JPanel();
 		contentPane.setLayout(new BorderLayout());
@@ -169,7 +176,8 @@ public class LoginScreen extends JFrame {
 
 		public void actionPerformed(ActionEvent e) {
 			if (LoginControl.getInstance().checkLogin(getLoginText(), getPassword())){
-				//weitere Funktionen
+				MainScreen.getInstance().setUpUserLayout();
+				LoginScreen.this.dispose();
 			}
 			
 			else {
