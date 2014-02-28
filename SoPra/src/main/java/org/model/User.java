@@ -3,6 +3,7 @@ package org.model;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -26,9 +27,17 @@ public class User {
 	private String country;
 	private String salt;
 	private String rights ="StandardUser";	
+	@OneToMany
+	private Collection<Post> posts;
 
 
 
+	public Collection<Post> getPosts() {
+		return posts;
+	}
+	public void setPosts(Collection<Post> posts) {
+		this.posts = posts;
+	}
 	public String getRights() {
 		return rights;
 	}
