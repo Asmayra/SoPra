@@ -35,8 +35,13 @@ public class User {
 	public Collection<Post> getPosts() {
 		return posts;
 	}
-	public void setPosts(Collection<Post> posts) {
-		this.posts = posts;
+	/**
+	 * Adds a Post to the User and sets him as the Autor
+	 * @param pst
+	 */
+	public void addPosts(Post pst) {
+		this.posts.add(pst);
+		pst.setAutor(this);
 	}
 	public String getRights() {
 		return rights;
