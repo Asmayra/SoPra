@@ -41,6 +41,7 @@ public class RegScreen extends JFrame{
 	 * Konstruktor zu RegScreen
 	 */
 	private RegScreen() {
+		super("Registrierung");
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		initGui();
 	}

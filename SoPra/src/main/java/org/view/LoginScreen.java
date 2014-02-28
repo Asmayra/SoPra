@@ -49,6 +49,7 @@ public class LoginScreen extends JFrame {
 	}
 
 	public LoginScreen(){
+		super("Login");
 		//this.setLayout(new BorderLayout());
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		initGui();
