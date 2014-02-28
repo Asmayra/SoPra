@@ -9,7 +9,7 @@ public class PasswordControlTest {
 	@Test
 	public void SaltGenerateTest() {
 		PasswordControl pwControl = new PasswordControl();
-		assertTrue((pwControl.generateSalt()) != (pwControl.generateSalt()));
+		assertFalse((pwControl.generateSalt()).equals(pwControl.generateSalt()));
 		
 	}
 	
