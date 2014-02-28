@@ -22,7 +22,8 @@ public class ProfileScreen extends JPanel {
 	private User userProfile;
 	private BufferedImage prflPicture;
 	private JPanel userOverview;
-	private JLabel userPicture;
+	private JPanel userPictureP;
+	private JLabel userPictureL;
 	private JPanel userData;
 	private JPanel buttons;
 	private JPanel userName;
@@ -32,6 +33,7 @@ public class ProfileScreen extends JPanel {
 	private JButton ignore;
 	private JButton media;
 	private JButton follow;
+	
 	
 	public ProfileScreen(User selectedUser) {
 		userProfile = selectedUser;
@@ -49,9 +51,9 @@ public class ProfileScreen extends JPanel {
 		userOverview.setLayout(new BorderLayout(0, 0));
 		
 		ImageIcon pic =new ImageIcon(prflPicture);
-		userPicture = new JLabel(pic);
-		userPicture.setSize(100, 100);
-		userOverview.add(userPicture, BorderLayout.WEST);
+		userPictureL = new JLabel(pic);
+		userPictureL.setSize(100, 100);
+		userOverview.add(userPictureL, BorderLayout.WEST);
 
 		userData = new JPanel();
 		userOverview.add(userData, BorderLayout.CENTER);
