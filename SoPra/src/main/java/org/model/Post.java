@@ -35,6 +35,7 @@ public class Post {
 	private long postId;
 	@ManyToOne
 	private User autor;
+	private String message;
 	@Transient
 	private Image prflPicture;
 	@Transient
@@ -52,7 +53,14 @@ public class Post {
 		this.autor = autor;
 	}
 	
-	public JLabel create(String message){
+	public void setMessage(String s){
+		this.message=s;
+	}
+	public String getMessage(){
+		return this.message;
+	}
+	
+	public JLabel create(){
 		JLabel pst = new JLabel();
 		pst.setLayout(new FlowLayout());
 		//Scale the Autor's Prifeile Picture

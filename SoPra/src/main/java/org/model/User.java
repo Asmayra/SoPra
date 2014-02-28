@@ -9,7 +9,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 import javax.imageio.ImageIO;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -28,7 +30,7 @@ public class User {
 	private String country;
 	private String salt;
 	private String rights ="StandardUser";	
-	@OneToMany
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER) //Set Eager,because it's loaded at the Homescreen
 	private Collection<Post> posts= new LinkedList<Post>();
 
 
