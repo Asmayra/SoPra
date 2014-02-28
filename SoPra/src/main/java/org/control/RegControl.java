@@ -3,6 +3,8 @@ package org.control;
 import java.io.IOException;
 import java.util.Date;
 
+import javax.swing.JLabel;
+
 import org.control.listener.RegCancelButtonListener;
 import org.control.listener.RegConfirmButtonListener;
 import org.model.User;
@@ -38,8 +40,6 @@ public class RegControl {
 	
 	private RegControl() {
 		screen = new RegScreen();
-		screen.addListenerToConfirmButton(new RegConfirmButtonListener());
-		screen.addListenerToCancelButton(new RegCancelButtonListener());
 		error = "";
 	}
 	
@@ -69,20 +69,35 @@ public class RegControl {
 	
 	/**
 	 * Schliesst die Registration ab
+	 * @param username Name des neuen Nutzers
+	 * @param firstname Vorname des neuen Nutzers
+	 * @param lastname Nachname des neuen Nutzers
+	 * @param city Stadt des neuen Nutzers
+	 * @param country Land des neuen Nutzers
+	 * @param dob Geburtsdatum des neuen Nutzers
+	 * @param Unverschlüsseltes Passwort des neuen Nutzers
+	 * @pre Passwort und Pflichtfelder überprüft
+	 * @past Neuer Nutzer wurde zum System hinzugefügt
 	 */
-	public void completeRegistration()
+	public void completeRegistration(	String username,
+										String firstname,
+										String lastname,
+										String city,
+										String country,
+										Date dob,
+										String password		)
 	{
 		User newUser = new User();
 		boolean accurate = true;
 		
-		newUser.setUsername(screen.getUsername());
-		newUser.setFirstname(screen.getFirstname());
-		newUser.setLastname(screen.getLastname());
-		newUser.setCity(screen.getCity());
-		newUser.setCountry(screen.getCountry());
+		newUser.setUsername(username);
+		newUser.setFirstname(firstname);
+		newUser.setLastname(lastname);
+		newUser.setCity(city);
+		newUser.setCountry(country);
 		
 		newUser.setSalt(PasswordControl.generateSalt());
-		newUser.setPassword(PasswordControl.encodePassword(screen.getPassword(), newUser.getSalt()));
+		newUser.setPassword(PasswordControl.encodePassword(password, newUser.getSalt()));
 		try{
 			DatabaseController.getInstance().save(newUser);
 		}catch(IOException e){
@@ -106,9 +121,10 @@ public class RegControl {
 	/**
 	 * Zeigt den Error auf der GUI an
 	 */
-	public void displayError()
+	public void displayError(JLabel errorLabel)
 	{
-		screen.displayError(error);
+		errorLabel.setText(error);
+		errorLabel.setVisible(true);
 	}
 	
 	/**
@@ -147,21 +163,23 @@ public class RegControl {
 	/**
 	 * Leert den error speicher
 	 */
-	public void clearError()
+	public void clearError(JLabel errorLabel)
 	{
 		error = "";
-		screen.clearError();
+		errorLabel.setText("");
+		errorLabel.setVisible(false);
 	}
 	
 
 	/**
 	 * Überprüft ob die Passwörter die bei Registration übergeben werden gleich sind oder leer
+	 * @param pass1 Passwort
+	 * @param pass2 Passwort Bestätigung
 	 * @return true wenn gleich und nicht leer, false sonst
 	 */
-	public boolean checkPasswords()
+	public boolean checkPasswords(	String pass1,
+									String pass2	)
 	{
-		String pass1 = screen.getPassword();
-		String pass2 = screen.getPasswordConfirm();
 		return pass1 != null && pass2 != null && !pass1.equals("") && pass1.equals(pass2);
 	}
 	
@@ -170,17 +188,14 @@ public class RegControl {
 	 * Überprüft ob alle Pflichtfelder eingegeben wurden
 	 * @return true wenn alle Pflicheintrage vorhanden, false sonst
 	 */
-	public boolean checkRegistration()
-	{
-		String username = screen.getUsername();
-		String firstname = screen.getFirstname();
-		String lastname = screen.getLastname();
-		String city = screen.getCity();
-		String country = screen.getCountry();
-		String dob = screen.getDob();
-		String mail = screen.getMail();
-		
-		
+	public boolean checkRegistration(	String username,
+										String firstname,
+										String lastname,
+										String city,
+										String country,
+										String dob,
+										String mail		)
+	{		
 		if(USERNAME && (username == null || username.equals("")))
 			return false;
 		
@@ -209,9 +224,9 @@ public class RegControl {
 	 * Überprüft ob ein Nutzer bereits existiert
 	 * @return true falls schon vorhanden, false sonst
 	 */
-	public boolean userExists()
+	public boolean userExists(	String username	)
 	{
-		return DatabaseController.getInstance().load(User.class, screen.getUsername()) != null;
+		return DatabaseController.getInstance().load(User.class, username) != null;
 	}
 
 }
