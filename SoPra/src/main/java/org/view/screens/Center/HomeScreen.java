@@ -23,12 +23,12 @@ public class HomeScreen extends JPanel{
 		//***********************************************
 			User tst = new User();
 			Post pst = new Post();
-			
-			Collection<Post> psts = new LinkedList<Post>();
-			tst.addPosts(pst);
 			tst.setUsername("FirstTestUser");
-			
-			this.add(pst.create(),BorderLayout.CENTER);
+			tst.setFirstname("Bob");
+			tst.addPosts(pst);
+			this.add(pst.create("Lorem ipsum dolor sit amet, "
+					+ "consetetur sadipscing elitr, sed diam nonumy eirmod "
+					+ "tempor invidunt ut labore et dolore magna aliquyam"),BorderLayout.CENTER);
 			
 		
 		

@@ -1,6 +1,11 @@
 package org.model;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
@@ -12,8 +17,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 /**
  * Entity for News like "New Playlist created"
@@ -29,7 +36,9 @@ public class Post {
 	@ManyToOne
 	private User autor;
 	@Transient
-	private BufferedImage prflPicture;
+	private Image prflPicture;
+	@Transient
+	private Image prflPic;
 	public long getPostId() {
 		return postId;
 	}
@@ -43,18 +52,32 @@ public class Post {
 		this.autor = autor;
 	}
 	
-	public JLabel create(){
+	public JLabel create(String message){
 		JLabel pst = new JLabel();
+		pst.setLayout(new FlowLayout());
+		//Scale the Autor's Prifeile Picture
 		try {
 			prflPicture = this.getAutor().getPicture();
-			prflPicture.getScaledInstance(50,50,BufferedImage.SCALE_DEFAULT);
+			prflPic= prflPicture.getScaledInstance(50, -1, BufferedImage.SCALE_DEFAULT);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		ImageIcon pic =new ImageIcon(prflPicture);
+		ImageIcon pic =new ImageIcon(prflPic);
 		JLabel autorPic = new JLabel(pic);
 		autorPic.setSize(50,50);		
 		pst.add(autorPic);
+		
+		JPanel content = new JPanel();
+		content.setLayout(new BoxLayout(content,BoxLayout.Y_AXIS));
+				
+		JLabel info = new JLabel(" "+autor.getFirstname()+" has great news!");
+		info.setFont(new Font("Arial",Font.BOLD,14));	
+		JLabel text = new JLabel(message);
+		content.add(info);
+		content.add(text);
+		content.setPreferredSize(new Dimension(250,100));
+		pst.add(content);
+
 		return pst;
 	}
 	
