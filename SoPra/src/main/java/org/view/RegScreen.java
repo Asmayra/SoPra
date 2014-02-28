@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
@@ -13,6 +14,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+
+import org.control.RegControl;
 
 /**
  * Erstellt das Registrierungsfensters
@@ -60,39 +63,6 @@ public class RegScreen extends JFrame{
 		this.add(contentPane);
 		}
 	
-
-	/**
-	 * Fügt den Actionlistener zum "Bestätigen"-Button hinzu, falls dieser noch keinen Actionlistener hat
-	 * @param listener Actionlistener des "Bestätigen"-Buttons
-	 * @return true falls der Actionlistener hinzugefügt wurde, sonst false
-	 */
-	
-	public boolean addListenerToConfirmButton(ActionListener listener)
-	{
-		if(confirmButton.getActionListeners() != null && confirmButton.getActionListeners().length > 0)
-			return false;
-		else
-		{
-			confirmButton.addActionListener(listener);
-			return true;
-		}
-	}
-	
-	/**
-	 * Fügt den Actionlistener zum "Abbrechen"-Button hinzu, falls dieser noch keinen Actionlistener hat
-	 * @param listener Actionlistener des "Abbrechen"-Buttons
-	 * @return true falls der Actionlistener hinzugefügt wurde, sonst false
-	 */
-	public boolean addListenerToCancelButton(ActionListener listener)
-	{
-		if(cancelButton.getActionListeners() != null && cancelButton.getActionListeners().length > 0)
-			return false;
-		else
-		{
-			cancelButton.addActionListener(listener);
-			return true;
-		}
-	}
 	
 	/**
 	 * Erzeugt das Buttonpanel mit dem "Bestätigen"- und "Abbrechen"-Button
@@ -103,7 +73,11 @@ public class RegScreen extends JFrame{
 		JPanel buttonPanel = new JPanel();
 		buttonPanel.setLayout(new FlowLayout());
 		confirmButton = new JButton("Absenden");
+		confirmButton.addActionListener(new RegConfirmButtonListener());
+		
 		cancelButton = new JButton("Abbrechen");
+		cancelButton.addActionListener(new RegCancelButtonListener());
+		
 		buttonPanel.add(confirmButton);
 		buttonPanel.add(cancelButton);
 		return buttonPanel;
@@ -161,26 +135,7 @@ public class RegScreen extends JFrame{
 		
 		
 	}
-	
-	/**
-	 * Gibt Fehlertext aus, wenn ein Fehler aufgetreten ist
-	 * @param error Fehlertext der ausgegeben wird
-	 */
-	
-	public void displayError(String error){
-		errorLabel.setText(error);
-		errorLabel.setVisible(true);
-		
-	}
-	
-	/**
-	 * Leert den Errorstring und versteckt das Errorlabel
-	 */
-	public void clearError()
-	{
-		errorLabel.setText("");
-		errorLabel.setVisible(false);
-	}
+
 	
 	// Getter um Textfeld auzulesen
 	public String getUsername()
@@ -229,4 +184,65 @@ public class RegScreen extends JFrame{
 		return new String(passwordConfirmText.getPassword());
 	}
 
+	
+	private class RegConfirmButtonListener implements ActionListener {
+		
+		public RegConfirmButtonListener() {
+			// TODO Auto-generated constructor stub
+		}
+
+		public void actionPerformed(ActionEvent arg0) {
+			RegControl control = RegControl.getInstance();
+			boolean success = true;
+			
+			control.clearError(errorLabel);
+			
+			String username = getUsername();
+			String firstname = getFirstname();
+			String lastname = getLastname();
+			String city = getCity();
+			String country = getCountry();
+			String dob = getDob();
+			String mail = getMail();
+			String password = getPassword();
+			String passwordConfirm = getPasswordConfirm();
+			
+			if(!control.checkRegistration(username, firstname, lastname, city, country, dob, mail))
+			{
+				control.addEntryError();
+				success = false;
+			}
+			
+			if(!control.checkPasswords( password, passwordConfirm ))
+			{
+				control.addPasswordError();
+				success = false;
+			}
+			
+			//Warten bis Hibernate läuft
+//			if(!control.userExists( username ))
+//			{
+//				control.addUserExistsError();
+//				success = false;
+//			}
+			
+			if(success)
+				control.completeRegistration(username, firstname, lastname, city, country, null, password);
+			else
+				control.displayError(errorLabel);
+		} 
+	}
+	
+	private class RegCancelButtonListener implements ActionListener {
+
+		public RegCancelButtonListener() {
+			// TODO Auto-generated constructor stub
+		}
+
+		public void actionPerformed(ActionEvent arg0) {
+			RegControl.getInstance().destroy();
+
+		}
+
+	}
 }

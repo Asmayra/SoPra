@@ -83,6 +83,10 @@ public class User {
 	public void setSalt(String salt) {
 		this.salt = salt;
 	}
+	public BufferedImage getPicture()  throws IOException {
+		//Test-Rumpf
+		return ImageIO.read(new File("C:/Dropbox/SoPra/SoPraMusic/Dummy-Resources/dummy-avatar.png"));
+	}
 
 	
 
