@@ -5,7 +5,6 @@ import java.awt.event.ActionListener;
 
 public class CloseButtonListener implements ActionListener {
 
-	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		// TODO Auto-generated method stub
 		

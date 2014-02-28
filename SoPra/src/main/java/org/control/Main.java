@@ -16,9 +16,8 @@ public class Main {
 	/**
 	 * Initializes the Mainscreen with a default Layout
 	 */
-	public void setUp(){
-		MainScreen mainScreen = new MainScreen();
-		mainScreen.setUpUserLayout();
+	public void setUp(){	
+		MainScreen.getInstance().setUpUserLayout();
 		
 	}
 	
