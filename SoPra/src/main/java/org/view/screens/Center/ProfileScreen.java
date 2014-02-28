@@ -36,11 +36,11 @@ public class ProfileScreen extends JPanel {
 	private JButton ignore;
 	private JButton media;
 	private JButton follow;
-	private JLabel lblVornameame;
-	private JLabel lblNachname;
-	private JLabel lblStadt;
-	private JLabel lblLand;
-	private JLabel lblAlter;
+	private JLabel lblName;
+	private JLabel lblLastName;
+	private JLabel lblCity;
+	private JLabel lblCountry;
+	private JLabel lblAge;
 	
 	
 	public ProfileScreen(User selectedUser) {
@@ -66,11 +66,18 @@ public class ProfileScreen extends JPanel {
 		userData = new JPanel();
 		userData.setLayout(new GridLayout(1, 0, 0, 0));
 		
-		lblVornameame = new JLabel("Vorname:"+userProfile.getFirstname());
-		lblNachname = new JLabel("Nachname:"+userProfile.getLastname());
-		lblStadt = new JLabel("Stadt:"+userProfile.getCity());
-		lblLand = new JLabel("Land:"+userProfile.getCountry());
-		lblAlter = new JLabel("Alter: "+userProfile.getAge());
+		lblName = new JLabel("Vorname:"+userProfile.getFirstname());
+		userData.add(lblName);
+		lblLastName = new JLabel("Nachname:"+userProfile.getLastname());
+		userData.add(lblLastName);
+		lblCity = new JLabel("Stadt:"+userProfile.getCity());
+		userData.add(lblCity);
+		lblCountry = new JLabel("Land:"+userProfile.getCountry());
+		userData.add(lblCountry);
+		lblAge = new JLabel("Alter:"+userProfile.getAge());
+		userData.add(lblAge);
+		
+
 		
 		userOverview.add(userData, BorderLayout.CENTER);
 
