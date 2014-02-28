@@ -6,6 +6,8 @@
 package org.view.screens.Center;
 
 import java.awt.BorderLayout;
+import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
@@ -20,9 +22,8 @@ import org.model.User;
 
 public class ProfileScreen extends JPanel {
 	private User userProfile;
-	private BufferedImage prflPicture;
+	private Image prflPicture;
 	private JPanel userOverview;
-	private JPanel userPictureP;
 	private JLabel userPictureL;
 	private JPanel userData;
 	private JPanel buttons;
@@ -40,6 +41,7 @@ public class ProfileScreen extends JPanel {
 		//task: try catch Block hinzufügen für IOException
 		try {
 			prflPicture = userProfile.getPicture();
+			prflPicture= prflPicture.getScaledInstance(150, -1, BufferedImage.SCALE_DEFAULT);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -52,10 +54,11 @@ public class ProfileScreen extends JPanel {
 		
 		ImageIcon pic =new ImageIcon(prflPicture);
 		userPictureL = new JLabel(pic);
-		userPictureL.setSize(100, 100);
 		userOverview.add(userPictureL, BorderLayout.WEST);
 
 		userData = new JPanel();
+		userData.setLayout(new GridLayout(1, 0, 0, 0));
+		
 		userOverview.add(userData, BorderLayout.CENTER);
 
 		buttons = new JPanel();
@@ -77,7 +80,7 @@ public class ProfileScreen extends JPanel {
 		userContent = new JPanel();
 		userContentScroll = new JScrollPane(userContent);
 		userContentScroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		add(userContentScroll, BorderLayout.SOUTH);
+		add(userContentScroll, BorderLayout.CENTER);
 		
 		
 
