@@ -1,12 +1,9 @@
 package org.control;
 
 import java.io.IOException;
-import java.util.Date;
-
 import org.model.Post;
 import org.model.User;
 import org.view.LoginScreen;
-import org.view.MainScreen;
 /**
  * MainControll Class
  * @author Philipp
@@ -37,31 +34,6 @@ public class Main {
 					e.printStackTrace();
 				}
 			
-			//****************************
-			
-			
-			
-			
+			//****************************		
 	}
-	/**
-	 * Initializes the Mainscreen with a default Layout
-	 */
-	public void setUp(){	
-		MainScreen.getInstance().setUpUserLayout();
-		
-	}
-	
-	//jframe test
-	public static String getHelloWorld() {
-		 
-		return "Hello World";
- 
-	}
- 
-	public static String getHelloWorld2() {
- 
-		return "Hello World 2";
- 
-	}
-
 }
