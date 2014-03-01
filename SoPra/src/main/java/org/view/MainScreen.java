@@ -3,6 +3,7 @@ package org.view;
 import java.awt.BorderLayout;
 
 import javax.swing.JFrame;
+import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
 import org.view.screens.Center.*;
@@ -17,7 +18,8 @@ import org.view.screens.WestBar.*;
  * 
  */
 public class MainScreen extends JFrame {
-	private JPanel center, south, west, east;
+	private JPanel center, south, west;
+	private JLayeredPane east;
 	private static MainScreen instance;
 
 	public JPanel getCenter() {
@@ -44,11 +46,11 @@ public class MainScreen extends JFrame {
 		this.west = west;
 	}
 
-	public JPanel getEast() {
+	public JLayeredPane getEast() {
 		return east;
 	}
 
-	public void setEast(JPanel east) {
+	public void setEast(JLayeredPane east) {
 		this.east = east;
 	}
 
@@ -131,19 +133,5 @@ public class MainScreen extends JFrame {
 		this.update();
 	}
 
-	public void showAdminTicketMiniScreen(AdminTicketMiniScreen screen) {
-		this.east = screen;
-		this.update();
-	}
-
-	public void showDiscoverMiniScreen(DiscoverMiniScreen screen) {
-		this.east = screen;
-		this.update();
-	}
-
-	public void showSearchMask(SearchMask screen) {
-		this.east = screen;
-		this.update();
-	}
 
 }

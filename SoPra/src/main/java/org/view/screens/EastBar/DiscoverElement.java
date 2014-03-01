@@ -13,30 +13,47 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+/**
+ * 
+ * @author Tim Lange
+ *
+ */
 public class DiscoverElement extends JPanel {
+	
+	private JLabel label = new JLabel();
+	private JLabel pictureLabel;
+	
+	public JLabel getLabel() {
+		return label;
+	}
 
-	public DiscoverElement() {
-		
-		this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
-		
-		JLabel label = new JLabel();
-		label.setText("beispieltext");
+	public void setLabel(JLabel label) {
+		this.label = label;
+		this.updateComponents();
+	}
+
+	public JLabel getPicture() {
+		return pictureLabel;
+	}
+
+	public void setPicture(JLabel pictureLabel) {
+		this.pictureLabel = pictureLabel;
+		this.updateComponents();
+	}
+
+	private void updateComponents(){
+		this.removeAll();
 		this.add(label);
-		BufferedImage image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_RGB);
-		URL url = this.getClass().getResource("placeholder.jpg");
-		//BufferedImage img = ImageIO.read(this.getClass().getResource("/res/testMap.png"));
-
-		try {
-			image = ImageIO.read(new File(System.getProperty("user.dir")+"\\src\\main\\java\\placeholder.jpg"));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		ImageIcon imageIcon = new ImageIcon(image);
-
-
-		JLabel picture = new JLabel(imageIcon);
-		this.add(picture);
+		this.add(pictureLabel);
+		this.validate();
+		this.repaint();
+	}
+	
+	public DiscoverElement(String text, JLabel pictureLabel) {
+		this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+		this.label.setText(text);
+		this.pictureLabel = pictureLabel;
+		this.add(this.label);
+		this.add(this.pictureLabel);
 	}
 }
