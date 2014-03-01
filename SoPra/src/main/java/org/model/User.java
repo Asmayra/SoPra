@@ -126,7 +126,7 @@ public class User {
 		// Test-Rumpf
 		System.out.println("Load Image");
 		System.out.println("Load Image");
-		return ImageIO.read(new File("C:/Dropbox/SoPra/SoPraMusic/Dummy-Resources/dummy-avatar.png"));
+		return ImageIO.read(new File(System.getProperty("user.dir")+"\\src\\main\\java\\placeholder.jpg"));
 	}
 
 	public String getAge() {
