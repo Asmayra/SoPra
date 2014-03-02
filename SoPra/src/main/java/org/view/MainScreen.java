@@ -73,7 +73,7 @@ public class MainScreen extends JFrame {
 		// Add the MusicPlayer at the button
 		this.south = new MusicPlayer();
 		// Add a MiniDiscover bar in the right
-		this.east = new EastBar();
+		this.east = EastBar.getInstance();
 		// Add the Westbar(BoxLayout) with a Menu, a Playlist MiniScreen and a
 		// AcoverArt with a SongTicker
 		this.west = new WestBar();

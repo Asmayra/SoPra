@@ -24,7 +24,7 @@ public class EastBarTest {
         
     	JFrame f = new JFrame("EastBar");
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        EastBar eb = new EastBar();
+        EastBar eb = EastBar.getInstance();
         		
 		BufferedImage image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_RGB);
 		URL url = this.getClass().getResource("placeholder.jpg");
@@ -37,11 +37,11 @@ public class EastBarTest {
 		JLabel pictureLabel = new JLabel(imageIcon);
         
         DiscoverMiniScreen miniScreen = DiscoverMiniScreen.getInstance();
-        DiscoverElement discover1 = new DiscoverElement("text1", pictureLabel);
+        DiscoverElement discover1 = new DiscoverElement("text1", pictureLabel, "url1");
         pictureLabel = new JLabel(imageIcon);
-        DiscoverElement discover2 = new DiscoverElement("text2", pictureLabel);
+        DiscoverElement discover2 = new DiscoverElement("text2", pictureLabel, "url2");
         pictureLabel = new JLabel(imageIcon);
-        DiscoverElement discover3 = new DiscoverElement("text3", pictureLabel);
+        DiscoverElement discover3 = new DiscoverElement("text3", pictureLabel, "url3");
         
         miniScreen.setDiscoverOne(discover1);
         miniScreen.setDiscoverTwo(discover2);
@@ -54,7 +54,7 @@ public class EastBarTest {
         f.setVisible(true);
 
         pictureLabel = new JLabel(imageIcon);
-        DiscoverElement discover4 = new DiscoverElement("text4", pictureLabel);
+        DiscoverElement discover4 = new DiscoverElement("text4", pictureLabel, "url4");
         miniScreen.setDiscoverTwo(discover4);
         
     	
