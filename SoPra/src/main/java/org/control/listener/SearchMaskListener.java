@@ -13,6 +13,7 @@ import java.util.List;
 
 import javax.swing.JLabel;
 
+import org.control.SearchController;
 import org.view.screens.EastBar.EastBar;
 import org.view.screens.EastBar.SearchMask;
 
@@ -35,22 +36,11 @@ public class SearchMaskListener implements KeyListener, ActionListener, MouseLis
 	 * set the results to the result pan and show it
 	 */
 	private void setResults(){
-		EastBar.getInstance().setResults(this.generateResults());
+		EastBar.getInstance().setResults(new SearchController().generateResults(SearchMask.getInstance().getSearchInput()));
 		EastBar.getInstance().showResultsPan();
 	}
 	
-	/**
-	 * generate the results to be show
-	 * @return return List with results
-	 */
-	private List<String> generateResults(){
-		List<String> resultList = new ArrayList<String>();
-		for(int i=0; i<10; i++){
-			resultList.add(SearchMask.getInstance().getSearchInput()+i);
-		}
-		
-		return resultList;
-	}
+
 
 	public void actionPerformed(ActionEvent e) {
 		SearchMask.getInstance().resetSearchInput();

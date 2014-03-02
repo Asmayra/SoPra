@@ -2,11 +2,15 @@ package org.control;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.List;
 
+import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.criterion.Restrictions;
 import org.hibernate.service.ServiceRegistry;
 import org.model.User;
 
@@ -101,6 +105,26 @@ public class DatabaseController {
 		session.getTransaction().commit();
 		session.close();
 		return obj;
+	}
+	
+	/**
+	 * select form database with given keyword
+	 * @param keyword String with keyword
+	 * @return List with results
+	 */
+	public List<?> queryForKeyword(String keyword){
+		session = sessionFactory.openSession();
+		session.beginTransaction();
+
+		//Query q = session.createQuery("SELECT firstname from User WHERE to_tsvector(username) @@ to_tsquery(:keyword)");;
+		//q.setParameter("keyword", keyword);
+		//List<?> results = q.list();
+		Criteria crit = session.createCriteria(User.class);
+		crit.add(Restrictions.ilike("username", "%"+keyword+"%"));
+		List<?> results = crit.list();	
+		session.getTransaction().commit();
+		session.close();
+		return results;
 	}
 	
 	/**

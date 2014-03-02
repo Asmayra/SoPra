@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 
 import org.control.listener.MoreDiscoverButtonListener;
 import org.control.listener.SearchMaskListener;
+import org.model.User;
 
 /**
  * 
@@ -78,15 +79,15 @@ public class EastBar extends JLayeredPane{
 	/**
 	 * set the results shown in the resultspan
 	 */
-	public void setResults(List<String> resultList) {
+	public void setResults(List<?> resultList) {
 		resultsPan.removeAll();
 		SearchMaskListener listen = new SearchMaskListener();
 		
-		Iterator<String> itr = resultList.iterator();
+		Iterator<?> itr = resultList.iterator();
 		JLabel element;
 		
 		while(itr.hasNext()){
-			element = new JLabel(itr.next().toString());
+			element = new JLabel(((User) itr.next()).getFirstname());
 			element.addMouseListener(listen);
 			resultsPan.add(element);
 		}
