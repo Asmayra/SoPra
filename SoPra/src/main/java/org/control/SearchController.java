@@ -30,7 +30,7 @@ public class SearchController {
 		//User usr = (User)DatabaseController.getInstance().load(User.class, searchKeyword);
 		List<?> resultList = new ArrayList<String>();
 		
-		resultList = DatabaseController.getInstance().queryForKeyword(searchKeyword);
+		resultList = DatabaseController.getInstance().queryForKeyword(User.class, "username", searchKeyword);
 		
 		
 		return resultList;

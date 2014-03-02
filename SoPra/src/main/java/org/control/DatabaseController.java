@@ -108,19 +108,21 @@ public class DatabaseController {
 	}
 	
 	/**
-	 * select form database with given keyword
+	 * select form database with given keyword	
+	 * @param c Class of the Object
+	 * @param property column name to be selected from
 	 * @param keyword String with keyword
 	 * @return List with results
 	 */
-	public List<?> queryForKeyword(String keyword){
+	public List<?> queryForKeyword(Class c, String property, String keyword){
 		session = sessionFactory.openSession();
 		session.beginTransaction();
 
 		//Query q = session.createQuery("SELECT firstname from User WHERE to_tsvector(username) @@ to_tsquery(:keyword)");;
 		//q.setParameter("keyword", keyword);
 		//List<?> results = q.list();
-		Criteria crit = session.createCriteria(User.class);
-		crit.add(Restrictions.ilike("username", "%"+keyword+"%"));
+		Criteria crit = session.createCriteria(c);
+		crit.add(Restrictions.ilike(property, "%"+keyword+"%"));
 		List<?> results = crit.list();	
 		session.getTransaction().commit();
 		session.close();
