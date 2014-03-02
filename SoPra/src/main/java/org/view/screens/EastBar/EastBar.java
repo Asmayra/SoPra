@@ -42,11 +42,11 @@ public class EastBar extends JLayeredPane{
 		//this.setPreferredSize(new Dimension(300, 310));
 		
 		//add SearchMask Component
-		SearchMask.getInstance().setBounds(0, 0, 150, 20);
+		SearchMask.getInstance().setBounds(0, 0, 180, 20);
 		this.add(SearchMask.getInstance(), new Integer(0));
 		
 		//add DiscoverComponent
-		DiscoverMiniScreen.getInstance().setBounds(20, 20, (int) DiscoverMiniScreen.getInstance().getPreferredSize().getWidth(), (int) DiscoverMiniScreen.getInstance().getPreferredSize().getHeight());
+		DiscoverMiniScreen.getInstance().setBounds(20, 20, 200, 500);
 		this.add(DiscoverMiniScreen.getInstance(), new Integer(0));
 		
 		//add moreButton component
@@ -55,11 +55,22 @@ public class EastBar extends JLayeredPane{
 		moreButton.addActionListener(new MoreDiscoverButtonListener());
 
 		//setup resultspan for search results
-		resultsPan.setLayout(new BoxLayout(resultsPan, BoxLayout.PAGE_AXIS));
-		resultsPan.setBackground(Color.gray);
-		resultsPan.setBounds( 40, 25,  100, 200 );
-		resultsPan.setVisible(false);
-		this.add(resultsPan, new Integer(2));
+		this.resultsPan.setLayout(new BoxLayout(resultsPan, BoxLayout.PAGE_AXIS));
+		this.resultsPan.setBackground(Color.gray);
+		this.resultsPanHeight(0);
+		this.resultsPan.setVisible(true);
+		this.add(this.resultsPan, new Integer(2));
+	}
+	
+	/**
+	 * set resultspanel height to fit it to the results length
+	 * @param y pixels
+	 */
+	public void resultsPanHeight(int y){
+		if(y<0){
+			y=0;
+		}
+		this.resultsPan.setBounds(20, 22, 125, y);
 	}
 	
 	/**

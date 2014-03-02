@@ -23,7 +23,6 @@ public class DiscoverMiniScreen extends JPanel {
 		return miniScreen;
 	}
 	private DiscoverMiniScreen() {
-		this.setPreferredSize(new Dimension(200, 500));
 		this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 		
 	}

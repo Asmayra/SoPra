@@ -36,7 +36,7 @@ public class SearchMaskListener implements KeyListener, ActionListener, MouseLis
 	 * set the results to the result pan and show it
 	 */
 	private void setResults(){
-		EastBar.getInstance().setResults(new SearchController().generateResults(SearchMask.getInstance().getSearchInput()));
+		new SearchController().generateResults(SearchMask.getInstance().getSearchInput());
 		EastBar.getInstance().showResultsPan();
 	}
 	

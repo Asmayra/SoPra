@@ -15,8 +15,7 @@ import org.hibernate.service.ServiceRegistry;
 import org.model.User;
 
 /**
- * Fügt euch auch mal als Autoren hierzu wenn ihr hier was gemacht habt
- * @author Mattias Schoenke
+ * @author Philipp Kather, Mattias Schoenke, Tim Lange
  *
  */
 public class DatabaseController {

@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.model.User;
+import org.view.screens.EastBar.EastBar;
 import org.view.screens.EastBar.SearchMask;
 
 public class SearchController {
@@ -15,8 +16,10 @@ public class SearchController {
 	 * @param searchKeyword String to search for
 	 * @return List with results
 	 */
-	public List<?> generateResults(String searchKeyword){	
-		return databaseQueries(searchKeyword);
+	public void generateResults(String searchKeyword){	
+		List<?> resultList = databaseQueries(searchKeyword);
+		EastBar.getInstance().resultsPanHeight(resultList.size()*14);
+		EastBar.getInstance().setResults(resultList);
 	}
 	
 	/**
