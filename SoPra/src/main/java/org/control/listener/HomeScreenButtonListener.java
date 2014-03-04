@@ -10,7 +10,7 @@ public class HomeScreenButtonListener implements ActionListener  {
 
 	
 	public void actionPerformed(ActionEvent e) {
-		MainScreen.getInstance().showHomeScreen(new HomeScreen());
+		MainScreen.getInstance().showHomeScreen(HomeScreen.getInstance());
 		
 	}
 

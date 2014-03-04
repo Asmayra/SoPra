@@ -21,7 +21,7 @@ public class Mailbox extends JPanel{
 	public static Mailbox instance = null;
 	
 	private Mailbox(){
-	
+		initGui();
 	}
 	
 	public static Mailbox getInstance(){

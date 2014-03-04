@@ -17,7 +17,19 @@ import org.model.User;
 import org.view.MainScreen;
 
 public class HomeScreen extends JPanel{
-	public HomeScreen(){
+	
+	private static HomeScreen instance = null;
+	
+	public static HomeScreen getInstance()
+	{
+		if(instance == null)
+			instance = new HomeScreen();
+		
+		return instance;
+	}
+	
+	
+	private HomeScreen(){
 		this.setLayout(new BorderLayout());
 		JLabel title = new JLabel("HOME");
 		title.setPreferredSize(new Dimension(400,20));
