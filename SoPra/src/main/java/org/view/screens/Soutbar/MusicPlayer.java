@@ -1,21 +1,32 @@
 package org.view.screens.Soutbar;
 
-import javax.swing.JPanel;
 import javax.swing.*;
 
 public class MusicPlayer extends JPanel {
-	private JButton Btn_Stop;
-	private JButton Btn_Start;
-	private JButton Btn_Forward;
-	private JButton Btn_Back;
+	JButton Btn_Stop = new JButton();
+	JButton Btn_Start= new JButton();
+	JButton Btn_Forward= new JButton();
+	JButton Btn_Back= new JButton();
 	JProgressBar ProgressBar = new JProgressBar();
 /*=============================================================================*/
 	public void main(){
-		initialize();
-		System.out.println("qwe");
+		javax.swing.SwingUtilities.invokeLater(new Runnable() {
+			public void run() {
+				initialize();
+			}
+		});
 	}
 	public void initialize(){
-		JPanel Panel = new JPanel();
+		JFrame.setDefaultLookAndFeelDecorated(true);
+		JFrame Player_Frame = new JFrame("Media Player frame");
+		JPanel Player_Panel = new JPanel();
 		//Panel.isVisible();
+		Player_Panel.setLayout(null);
+		//
+		JLabel Lable = new JLabel("TestLabel");
+		Player_Panel.add(Lable);
+		
+		
+		Player_Frame.getContentPane().add(Player_Panel);
 	}
 }

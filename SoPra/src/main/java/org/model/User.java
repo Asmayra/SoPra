@@ -15,6 +15,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -32,12 +33,15 @@ public class User {
 	private String country;
 	private String salt;
 	private String rights = "StandardUser";
+	private String imagePath;
+	@ManyToMany
 	private List<User> following;
+	@ManyToMany
 	private List<User> ignoring;
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	// Set Eager,because it's loaded at the Homescreen
 	private Collection<Post> posts = new LinkedList<Post>();
-
+	
 	public Collection<Post> getPosts() {
 		return posts;
 	}
@@ -159,6 +163,34 @@ public class User {
 			return true;
 		}
 		return false;
+	}
+
+	public String getImagePath() {
+		return imagePath;
+	}
+
+	public void setImagePath(String imagePath) {
+		this.imagePath = imagePath;
+	}
+
+	public void unfollow(User user) {
+		following.remove(user);
+		
+	}
+
+	public void follow(User user) {
+		following.add(user);
+		
+	}
+	
+	public void unignore(User user) {
+		ignoring.remove(user);
+		
+	}
+
+	public void ignore(User user) {
+		ignoring.add(user);
+		
 	}
 
 }
