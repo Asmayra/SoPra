@@ -22,9 +22,9 @@ public class CreatePostButtonListener implements ActionListener  {
 		 JTextField messageTxt = new JTextField();
 		 messageTxt.setPreferredSize(new Dimension(100,320));
 		 JButton abbort = new JButton("Abbrechen");
+		 JButton post	= new JButton("Posten");
+		 abbort.addActionListener(new CloseFrameListener(createPostFrame));
 		 
-		 
-		
 	}
 
 }
