@@ -6,6 +6,8 @@
 package org.view.screens.Center;
 
 import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridLayout;
 import java.awt.Image;
@@ -13,18 +15,23 @@ import java.awt.Insets;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.SwingConstants;
 
+import org.control.LoginControl;
 import org.model.User;
 
 public class ProfileScreen extends JPanel {
 	private User userProfile;
 	private Image prflPicture;
+	private boolean ignoreProfile;
+	private boolean followProfile;
 	private JPanel userOverview;
 	private JLabel userPictureL;
 	private JPanel userData;
@@ -41,6 +48,8 @@ public class ProfileScreen extends JPanel {
 	private JLabel lblCity;
 	private JLabel lblCountry;
 	private JLabel lblAge;
+	private JLabel lblUserName;
+	
 	
 	
 	public ProfileScreen(User selectedUser) {
@@ -53,6 +62,9 @@ public class ProfileScreen extends JPanel {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		if (LoginControl.getInstance().getCurrentUser().isFollowing(userProfile)){
+			followProfile=true;
+		}
 		setLayout(new BorderLayout(0, 0));
 
 		userOverview = new JPanel();
@@ -64,8 +76,11 @@ public class ProfileScreen extends JPanel {
 		userOverview.add(userPictureL, BorderLayout.WEST);
 
 		userData = new JPanel();
-		userData.setLayout(new GridLayout(1, 0, 0, 0));
+		userData.setLayout(new BoxLayout(userData, BoxLayout.Y_AXIS));
 		
+		lblUserName = new JLabel(userProfile.getUsername());
+		lblUserName.setFont(new Font("Tahoma", Font.BOLD, 20));
+		userData.add(lblUserName);
 		lblName = new JLabel("Vorname:"+userProfile.getFirstname());
 		userData.add(lblName);
 		lblLastName = new JLabel("Nachname:"+userProfile.getLastname());
@@ -76,6 +91,9 @@ public class ProfileScreen extends JPanel {
 		userData.add(lblCountry);
 		lblAge = new JLabel("Alter:"+userProfile.getAge());
 		userData.add(lblAge);
+		
+
+		
 		
 
 		
