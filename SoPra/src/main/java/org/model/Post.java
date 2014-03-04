@@ -13,6 +13,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -35,6 +36,7 @@ public class Post {
 	private long postId;
 	@ManyToOne
 	private User autor;
+	@Lob
 	private String message;
 	@Transient
 	private Image prflPicture;
@@ -54,7 +56,7 @@ public class Post {
 	}
 	
 	public void setMessage(String s){
-		this.message=s;
+		this.message="<html><body>"+s+"</body></html>";
 	}
 	public String getMessage(){
 		return this.message;
@@ -83,7 +85,7 @@ public class Post {
 		JLabel text = new JLabel(message);
 		content.add(info);
 		content.add(text);
-		content.setPreferredSize(new Dimension(250,100));
+		content.setPreferredSize(new Dimension(330,100));
 		pst.add(content);
 
 		return pst;

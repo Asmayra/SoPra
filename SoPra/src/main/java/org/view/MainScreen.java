@@ -77,10 +77,6 @@ public class MainScreen extends JFrame {
 		// Add the Westbar(BoxLayout) with a Menu, a Playlist MiniScreen and a
 		// AcoverArt with a SongTicker
 		this.west = new WestBar();
-		west.add(new Menu());
-		west.add(new PlaylistMiniScreen());
-		west.add(new CoverArt());
-		west.add(new SongTicker());
 		// Add the HomeScreen to the Center
 		this.center = new HomeScreen();
 		this.update();
