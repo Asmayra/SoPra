@@ -3,6 +3,7 @@ package org.control.listener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import org.control.DatabaseController;
 import org.control.LoginControl;
 import org.model.Post;
 
@@ -25,6 +26,7 @@ public class CreatePost implements ActionListener{
 		Post pst = new Post();
 		LoginControl.getInstance().getCurrentUser().addPosts(pst);
 		pst.setMessage(message);	
+		DatabaseController.getInstance().update(LoginControl.getInstance().getCurrentUser());
 	}
 	
 }

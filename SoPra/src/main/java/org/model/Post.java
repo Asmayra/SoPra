@@ -20,6 +20,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -42,6 +43,7 @@ public class Post {
 	private Image prflPicture;
 	@Transient
 	private Image prflPic;
+	
 	public long getPostId() {
 		return postId;
 	}
@@ -62,8 +64,8 @@ public class Post {
 		return this.message;
 	}
 	
-	public JLabel create(){
-		JLabel pst = new JLabel();
+	public JPanel create(){
+		JPanel pst = new JPanel();
 		pst.setLayout(new FlowLayout());
 		//Scale the Autor's Prifeile Picture
 		try {
@@ -87,7 +89,7 @@ public class Post {
 		content.add(text);
 		content.setPreferredSize(new Dimension(330,100));
 		pst.add(content);
-
+		
 		return pst;
 	}
 	
