@@ -26,9 +26,9 @@ public class HomeScreen extends JPanel{
 			tst.setUsername("FirstTestUser");
 			tst.setFirstname("Bob");
 			tst.addPosts(pst);
-			pst.setMessage("Lorem ipsum dolor sit amet, "
-					+ "consetetur sadipscing elitr, sed diam nonumy eirmod "
-					+ "tempor invidunt ut labore et dolore magna aliquyam");
+			pst.setMessage("Lorem ipsum dolor sit amet, consetetur sadipscing elitr, "
+					+ "sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, "
+					+ "sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. ");
 			this.add(pst.create(),BorderLayout.CENTER);
 			
 		
