@@ -17,27 +17,31 @@ public class Song {
 	private int songId;	
 	@ManyToOne
 	private User interpret;
-	private String name;
+	private String title;
+	private String location;
 	private int playtime;
+	private int vrgRating;
 	
-	
+	public Song(User u, String s1, String s2){
+		interpret = u;
+		title = s1;
+		location = s2;
+		vrgRating = 0;
+		setPlaytime();
+	}
 	public User getInterpret() {
 		return interpret;
 	}
-	public void setInterpret(User interpret) {
-		this.interpret = interpret;
+
+	public String getTitle() {
+		return title;
 	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
+
 	public int getPlaytime() {
 		return playtime;
 	}
-	public void setPlaytime(int playtime) {
-		this.playtime = playtime;
+	private void setPlaytime() {
+		//Berechnung der Playtime der zugehörigen Datei
 	}
 
 }
