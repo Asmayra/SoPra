@@ -22,7 +22,7 @@ import org.view.screens.EastBar.EastBar;
 public class EastBarTest {
 
     private void display() {
-        
+        System.out.println(ClassLoader.getSystemClassLoader().getResource("placeholder.jpg"));
     	JFrame f = new JFrame("EastBar");
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         EastBar eb = EastBar.getInstance();
