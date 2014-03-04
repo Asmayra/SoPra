@@ -24,25 +24,25 @@ public class LoadImageController {
 	 * @param imagePath String to the location of the file on the filesystem
 	 * @return loaded ImageIcon
 	 */
-	public static ImageIcon loadImage(String imagePath){
-		BufferedImage image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_RGB);
-		File currDir = new File(".");
-	    String path = currDir.getAbsolutePath();
-	    path = path.substring(0, path.length()-1);
-	    System.out.println(path);
-		try {
-			image = ImageIO.read(new File(System.getProperty("user.dir")+"\\src\\main\\resources\\"+imagePath));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		ImageIcon imageIcon = new ImageIcon(image);
-		
+	public static ImageIcon loadPictureIcon(String imagePath){
+		ImageIcon imageIcon = new ImageIcon(loadBufferedImage(imagePath));
 		return imageIcon;
 	}
 	
-	private static String CurrentDir(){
-		String path=System.getProperty("java.class.path");
-		String FileSeparator=(String)System.getProperty("file.separator");
-		return path.substring(0, path.lastIndexOf(FileSeparator)+1);
+	/**
+	 * load BufferedImage from Filesystem
+	 * @param imagePath String to the location of the file on the filesystem
+	 * @return loaded ImageIcon
+	 */
+	public static BufferedImage loadBufferedImage(String imagePath){
+		BufferedImage image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_RGB);
+		try {
+			image = ImageIO.read(ClassLoader.getSystemClassLoader().getResource(imagePath));
+			//image = ImageIO.read(new File(System.getProperty("user.dir")+"\\src\\main\\resources\\"+imagePath));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return image;
 	}
 }

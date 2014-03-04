@@ -32,13 +32,13 @@ public class DiscoverElement extends JPanel {
 	/**
 	 * creates an Discover Element
 	 * @param text String to be shown as description
-	 * @param pictureLabel JLabel with picture to be shown
+	 * @param pictureIcon JLabel with picture to be shown
 	 * @param url to get to this discover
 	 */
-	public DiscoverElement(String text, JLabel pictureLabel, String url) {
+	public DiscoverElement(String text, ImageIcon pictureIcon, String url) {
 		this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 		this.label = new JLabel("<html><body>"+text+"</body></html>");
-		this.pictureLabel = pictureLabel;
+		this.pictureLabel = new JLabel(pictureIcon);
 		this.add(this.label);
 		this.add(this.pictureLabel);
 		this.url = url;

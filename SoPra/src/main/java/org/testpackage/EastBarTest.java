@@ -22,21 +22,15 @@ import org.view.screens.EastBar.EastBar;
 public class EastBarTest {
 
     private void display() {
-        System.out.println(ClassLoader.getSystemClassLoader().getResource("placeholder.jpg"));
     	JFrame f = new JFrame("EastBar");
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         EastBar eb = EastBar.getInstance();
-        		
-		BufferedImage image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_RGB);
-	
-		JLabel pictureLabel = new JLabel(LoadImageController.loadImage("placeholder.jpg"));
+    
         
         DiscoverMiniScreen miniScreen = DiscoverMiniScreen.getInstance();
-        DiscoverElement discover1 = new DiscoverElement("text1", pictureLabel, "url1");
-        pictureLabel = new JLabel(LoadImageController.loadImage("placeholder.jpg"));
-        DiscoverElement discover2 = new DiscoverElement("text2", pictureLabel, "url2");
-        pictureLabel = new JLabel(LoadImageController.loadImage("placeholder.jpg"));
-        DiscoverElement discover3 = new DiscoverElement("text3", pictureLabel, "url3");
+        DiscoverElement discover1 = new DiscoverElement("text1", LoadImageController.loadPictureIcon("placeholder.jpg"), "url1");
+	    DiscoverElement discover2 = new DiscoverElement("text2", LoadImageController.loadPictureIcon("placeholder.jpg"), "url2");
+	    DiscoverElement discover3 = new DiscoverElement("text3", LoadImageController.loadPictureIcon("placeholder.jpg"), "url3");
         
         miniScreen.setDiscoverOne(discover1);
         miniScreen.setDiscoverTwo(discover2);
@@ -48,8 +42,7 @@ public class EastBarTest {
         f.setLocationRelativeTo(null);
         f.setVisible(true);
 
-        pictureLabel = new JLabel(LoadImageController.loadImage("placeholder.jpg"));
-        DiscoverElement discover4 = new DiscoverElement("text4", pictureLabel, "url4");
+        DiscoverElement discover4 = new DiscoverElement("text4", LoadImageController.loadPictureIcon("placeholder.jpg"), "url4");
         miniScreen.setDiscoverTwo(discover4);
         
     	

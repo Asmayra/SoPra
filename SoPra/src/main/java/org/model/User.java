@@ -19,6 +19,10 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+
+import org.control.LoadImageController;
 
 @Entity
 @Table(name = "USER_TABLE")
@@ -129,10 +133,7 @@ public class User {
 	}
 
 	public BufferedImage getPicture() throws IOException {
-		// Test-Rumpf
-		System.out.println("Load Image");
-		System.out.println("Load Image");
-		return ImageIO.read(new File(System.getProperty("user.dir") + "\\src\\main\\resources\\placeholder.jpg"));
+		return LoadImageController.loadBufferedImage(this.imagePath);
 	}
 
 	public String getAge() {

@@ -23,22 +23,11 @@ import org.view.screens.EastBar.EastBar;
 public class DiscoverControl {
 	
 	public DiscoverControl(){
-		BufferedImage image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_RGB);
-		URL url = this.getClass().getResource("placeholder.jpg");
-		try {
-			image = ImageIO.read(new File(System.getProperty("user.dir")+"\\src\\main\\resources\\placeholder.jpg"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		ImageIcon imageIcon = new ImageIcon(image);
-		JLabel pictureLabel = new JLabel(imageIcon);
-	    
+   
 	    DiscoverMiniScreen miniScreen = DiscoverMiniScreen.getInstance();
-	    DiscoverElement discover1 = new DiscoverElement("text1", pictureLabel, "url1");
-	    pictureLabel = new JLabel(imageIcon);
-	    DiscoverElement discover2 = new DiscoverElement("text2", pictureLabel, "url2");
-	    pictureLabel = new JLabel(imageIcon);
-	    DiscoverElement discover3 = new DiscoverElement("text3", pictureLabel, "url3");
+	    DiscoverElement discover1 = new DiscoverElement("text1", LoadImageController.loadPictureIcon("placeholder.jpg"), "url1");
+	    DiscoverElement discover2 = new DiscoverElement("text2", LoadImageController.loadPictureIcon("placeholder.jpg"), "url2");
+	    DiscoverElement discover3 = new DiscoverElement("text3", LoadImageController.loadPictureIcon("placeholder.jpg"), "url3");
 	    
 	    miniScreen.setDiscoverOne(discover1);
 	    miniScreen.setDiscoverTwo(discover2);
