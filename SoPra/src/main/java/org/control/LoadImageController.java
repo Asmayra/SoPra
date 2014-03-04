@@ -26,6 +26,10 @@ public class LoadImageController {
 	 */
 	public static ImageIcon loadImage(String imagePath){
 		BufferedImage image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_RGB);
+		File currDir = new File(".");
+	    String path = currDir.getAbsolutePath();
+	    path = path.substring(0, path.length()-1);
+	    System.out.println(path);
 		try {
 			image = ImageIO.read(new File(System.getProperty("user.dir")+"\\src\\main\\resources\\"+imagePath));
 		} catch (IOException e) {
@@ -34,5 +38,11 @@ public class LoadImageController {
 		ImageIcon imageIcon = new ImageIcon(image);
 		
 		return imageIcon;
+	}
+	
+	public static String CurrentDir(){
+		String path=System.getProperty("java.class.path");
+		String FileSeparator=(String)System.getProperty("file.separator");
+		return path.substring(0, path.lastIndexOf(FileSeparator)+1);
 	}
 }
