@@ -14,6 +14,9 @@ public class Main {
 			LoginScreen ls = new LoginScreen();
 			ls.setVisible(true);
 			
+			//disover control initialize
+			DiscoverControl discContr = new DiscoverControl();
+			
 			//****************************
 				//TestUser
 				//Passwort: passwort
