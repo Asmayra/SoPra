@@ -128,7 +128,7 @@ public class User {
 		// Test-Rumpf
 		System.out.println("Load Image");
 		System.out.println("Load Image");
-		return ImageIO.read(new File(System.getProperty("user.dir")+"\\src\\main\\resources\\placeholder.jpg"));
+		return ImageIO.read(new File(System.getProperty("user.dir") + "\\src\\main\\resources\\placeholder.jpg"));
 	}
 
 	public String getAge() {
@@ -148,7 +148,14 @@ public class User {
 	}
 
 	public boolean isFollowing(User user) {
-		if(following.contains(user)){
+		if (following.contains(user)) {
+			return true;
+		}
+		return false;
+	}
+
+	public boolean isIgnoring(User user) {
+		if (ignoring.contains(user)) {
 			return true;
 		}
 		return false;
