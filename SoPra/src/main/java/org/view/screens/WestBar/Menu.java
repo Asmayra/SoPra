@@ -11,6 +11,9 @@ import javax.swing.plaf.basic.BasicOptionPaneUI.ButtonActionListener;
 
 import org.control.LoadImageController;
 import org.control.SoPra;
+import org.control.listener.HomeScreenButtonListener;
+import org.control.listener.LogOutButtonListener;
+import org.control.listener.MailButtonListener;
 
 public class Menu extends JPanel{
 	
@@ -27,8 +30,14 @@ public class Menu extends JPanel{
 	public Menu() {
 		
 		home.setPreferredSize(new Dimension(BUTTONSIZE,BUTTONSIZE));
+		home.addActionListener(new HomeScreenButtonListener());
+		
 		mail.setPreferredSize(new Dimension(BUTTONSIZE,BUTTONSIZE));
+		mail.addActionListener(new MailButtonListener());
+		
 		logOut.setPreferredSize(new Dimension(BUTTONSIZE,BUTTONSIZE));
+		logOut.addActionListener(new LogOutButtonListener());
+		
 		setting.setPreferredSize(new Dimension(BUTTONSIZE,BUTTONSIZE));
 		
 		setLayout(new GridBagLayout());
@@ -53,9 +62,9 @@ public class Menu extends JPanel{
 		c.gridx =6;
 		add(mail,c);
 		c.gridx =7;
-		add(logOut,c);
+		add(setting,c);
 		c.gridx = 8;
-		add(setting,c);		
+		add(logOut,c);		
 
 		this.setPreferredSize(new Dimension(250,80));
 		

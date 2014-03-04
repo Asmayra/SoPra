@@ -3,11 +3,14 @@ package org.control.listener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import org.view.MainScreen;
+import org.view.screens.Center.HomeScreen;
+
 public class HomeScreenButtonListener implements ActionListener  {
 
-	@Override
+	
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+		MainScreen.getInstance().showHomeScreen(new HomeScreen());
 		
 	}
 
