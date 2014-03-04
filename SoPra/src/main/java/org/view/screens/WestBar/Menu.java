@@ -25,7 +25,7 @@ public class Menu extends JPanel{
 	private JButton mail = new JButton(dummyIcon);
 	private JButton logOut = new JButton(dummyIcon);
 	private JButton setting = new JButton(dummyIcon);
-	private JButton avatar = new JButton(LoadImageController.loadImage("placeholder.jpg"));//benutzerbild x
+	private JButton avatar = new JButton(LoadImageController.loadPictureIcon("placeholder.jpg"));//benutzerbild x
 
 	public Menu() {
 		
