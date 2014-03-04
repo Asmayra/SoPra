@@ -19,6 +19,8 @@ import javax.swing.JTextField;
 
 import org.control.LoginControl;
 import org.control.RegControl;
+import org.control.listener.LoginScreenLoginButtonListener;
+import org.control.listener.LoginScreenRegisterButtonListener;
 
 
 /**
@@ -130,7 +132,7 @@ public class LoginScreen extends JFrame {
 		buttons.setLayout(new FlowLayout());
 		
 		JButton loginButton = new JButton("Login");
-		loginButton.addActionListener(new LoginScreenLoginButtonListener());
+		loginButton.addActionListener(new LoginScreenLoginButtonListener(this));
 		JButton registerButton = new JButton("Registrieren");
 		registerButton.addActionListener(new LoginScreenRegisterButtonListener());
 		
@@ -156,35 +158,9 @@ public class LoginScreen extends JFrame {
 		return error;
 	}
 	
-	/**
-	 * Der Buttonlistener des Registierungsbuttons auf dem Loginscreen
-	 *
-	 */
-	private class LoginScreenRegisterButtonListener implements ActionListener{
-
-		public void actionPerformed(ActionEvent arg0) {
-			RegScreen.getInstance().setVisible(true);
-			RegScreen.getInstance().toFront();
-			
-		}
-		
+	public void displayErrorLabel(){
+		errorLabel.setVisible(true);
 	}
-	/**
-	 * Der Buttonlistener des Loginbuttons auf dem Loginscreen
-	 *
-	 */
-	private class LoginScreenLoginButtonListener implements ActionListener{
+	
 
-		public void actionPerformed(ActionEvent e) {
-			if (LoginControl.getInstance().checkLogin(getLoginText(), getPassword())){
-				MainScreen.getInstance().setUpUserLayout();
-				LoginScreen.this.dispose();
-			}
-			
-			else {
-				errorLabel.setVisible(true);
-			}
-		}
-		
-	}
 }
