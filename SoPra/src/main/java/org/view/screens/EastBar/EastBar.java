@@ -37,7 +37,7 @@ public class EastBar extends JLayeredPane{
 	
 	private EastBar() {
 		this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
-		//this.setBorder(BorderFactory.createLineBorder(Color.red));
+		this.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		
 		//this.setPreferredSize(new Dimension(300, 310));
 		
