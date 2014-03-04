@@ -16,6 +16,8 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import org.control.RegControl;
+import org.control.listener.RegCancelButtonListener;
+import org.control.listener.RegConfirmButtonListener;
 
 /**
  * Erstellt das Registrierungsfensters. Ist ein Singleton
@@ -84,10 +86,10 @@ public class RegScreen extends JFrame{
 		JPanel buttonPanel = new JPanel();
 		buttonPanel.setLayout(new FlowLayout());
 		confirmButton = new JButton("Absenden");
-		confirmButton.addActionListener(new RegConfirmButtonListener());
+		confirmButton.addActionListener(new RegConfirmButtonListener(this));
 		
 		cancelButton = new JButton("Abbrechen");
-		cancelButton.addActionListener(new RegCancelButtonListener());
+		cancelButton.addActionListener(new RegCancelButtonListener(this));
 		
 		buttonPanel.add(confirmButton);
 		buttonPanel.add(cancelButton);
@@ -195,76 +197,10 @@ public class RegScreen extends JFrame{
 		return new String(passwordConfirmText.getPassword());
 	}
 
-	/**
-	 * ButtonListener des "Bestätigen"-Buttons. Sendet eingebene Daten an die Registrierungssteuerung zum überprüfen.
-	 *
-	 */
-	private class RegConfirmButtonListener implements ActionListener {
-		
-		public RegConfirmButtonListener() {
-			// TODO Auto-generated constructor stub
-		}
-
-		public void actionPerformed(ActionEvent arg0) {
-			RegControl control = RegControl.getInstance();
-			boolean success = true;
-			
-			control.clearError(errorLabel);
-			
-			String username = getUsername();
-			String firstname = getFirstname();
-			String lastname = getLastname();
-			String city = getCity();
-			String country = getCountry();
-			String dob = getDob();
-			String mail = getMail();
-			String password = getPassword();
-			String passwordConfirm = getPasswordConfirm();
-			
-			if(!control.checkRegistration(username, firstname, lastname, city, country, dob, mail))
-			{
-				control.addEntryError();
-				success = false;
-			}
-			
-			if(!control.checkPasswords( password, passwordConfirm ))
-			{
-				control.addPasswordError();
-				success = false;
-			}
-			
-			//Warten bis Hibernate läuft
-//			if(!control.userExists( username ))
-//			{
-//				control.addUserExistsError();
-//				success = false;
-//			}
-			
-			if(success)
-			{
-				control.completeRegistration(username, firstname, lastname, city, country, null, password);
-				RegScreen.this.dispose();
-			}
-			else
-				control.displayError(errorLabel);
-		} 
+	public JLabel getErrorLabel(){
+		return errorLabel;
 	}
 	
-	/**
-	 * ButtonListener des "Cancel"-Buttons. Bricht den Registierungsvorgang ab und schließt das Registrierungsfenster.
-	 *
-	 */
-	private class RegCancelButtonListener implements ActionListener {
+	
 
-		public RegCancelButtonListener() {
-			// TODO Auto-generated constructor stub
-		}
-
-		public void actionPerformed(ActionEvent arg0) {
-			RegControl.getInstance().destroy();
-			RegScreen.this.dispose();
-
-		}
-
-	}
 }
