@@ -15,6 +15,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -33,12 +34,14 @@ public class User {
 	private String salt;
 	private String rights = "StandardUser";
 	private String imagePath;
+	@ManyToMany
 	private List<User> following;
+	@ManyToMany
 	private List<User> ignoring;
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	// Set Eager,because it's loaded at the Homescreen
 	private Collection<Post> posts = new LinkedList<Post>();
-
+	
 	public Collection<Post> getPosts() {
 		return posts;
 	}
