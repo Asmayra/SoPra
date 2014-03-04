@@ -24,7 +24,7 @@ public class LoadImageController {
 	 * @param imagePath String to the location of the file on the filesystem
 	 * @return loaded ImageIcon
 	 */
-	public static ImageIcon loadPictureIcon(String imagePath){
+	public static ImageIcon loadImageIcon(String imagePath){
 		ImageIcon imageIcon = new ImageIcon(loadBufferedImage(imagePath));
 		return imageIcon;
 	}
