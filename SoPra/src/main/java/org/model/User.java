@@ -133,7 +133,11 @@ public class User {
 	}
 
 	public BufferedImage getPicture() throws IOException {
-		return LoadImageController.loadBufferedImage(this.imagePath);
+		if(this.imagePath == null || this.imagePath == ""){
+			return LoadImageController.loadBufferedImage("placeholder.jpg");
+		} else{
+			return LoadImageController.loadBufferedImage(this.imagePath);
+		}
 	}
 
 	public String getAge() {
