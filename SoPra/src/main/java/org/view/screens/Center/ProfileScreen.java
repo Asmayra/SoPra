@@ -12,6 +12,7 @@ import java.awt.Image;
 import java.awt.Insets;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.Iterator;
 
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -22,6 +23,7 @@ import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 
+import org.control.IgnoreButtonListener;
 import org.control.LoginControl;
 import org.control.listener.FollowButtonListener;
 import org.model.User;
@@ -114,6 +116,7 @@ public class ProfileScreen extends JPanel {
 		} else {
 			ignore = new JButton("ignore");
 		}
+		ignore.addActionListener(new IgnoreButtonListener());
 		buttons.add(message);
 		buttons.add(media);
 		buttons.add(follow);
@@ -148,6 +151,15 @@ public class ProfileScreen extends JPanel {
 
 	public User getUserProfile() {
 		return userProfile;
+	}
+
+	public void showMedia() {
+		userContent.removeAll();
+		for (int i = 0; i < userProfile.getPosts().size();i++)
+		userContent.setLayout(new BoxLayout(userContent, BoxLayout.Y_AXIS));
+		Iterator posts = userProfile.getPosts().iterator();
+		userContent.add();
+		
 	}
 
 }
