@@ -10,6 +10,9 @@ import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreePath;
 
+import org.control.LoginControl;
+import org.model.User;
+
 public class PlaylistMiniScreen extends JPanel{
 	
 	private JTabbedPane tabbedPane  = new JTabbedPane();
@@ -17,6 +20,7 @@ public class PlaylistMiniScreen extends JPanel{
 	private JPanel user = new JPanel();
 	private JButton subscriptions; 
 	private JButton favorits;
+	private JButton genres;
 	private JScrollPane scrollUser;
 	private JScrollPane scrollAdmin;
 	private JLabel invisible;
@@ -25,14 +29,21 @@ public class PlaylistMiniScreen extends JPanel{
 	DefaultMutableTreeNode rootUser = new DefaultMutableTreeNode("root");
 	DefaultMutableTreeNode rootAdmin = new DefaultMutableTreeNode("root");
 	
+	private User currentUser;
+	
 	
 	public PlaylistMiniScreen() {
+		LoginControl logcon = LoginControl.getInstance();
+		currentUser = logcon.getCurrentUser();
+		
 		this.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		createUserPanel();
 		
 		tabbedPane.addTab("Playlists", scrollUser);
-		createAdminPanel();
-		tabbedPane.addTab("Tickets", scrollAdmin);
+		if(currentUser.getRights().equals("Admin")){
+			createAdminPanel();
+			tabbedPane.addTab("Tickets", scrollAdmin);
+		}
 		tabbedPane.setPreferredSize(new Dimension(250,240));
 		add(tabbedPane);
 		
@@ -122,6 +133,7 @@ public class PlaylistMiniScreen extends JPanel{
 		//Buttons
 		subscriptions = new JButton("Subscriptions");
 		favorits = new JButton("Favoriten");
+		genres = new JButton("Genres");
 		subscriptions.setOpaque(false);
 		subscriptions.setContentAreaFilled(false);
 		subscriptions.setBorderPainted(false);
@@ -130,6 +142,10 @@ public class PlaylistMiniScreen extends JPanel{
 		favorits.setContentAreaFilled(false);
 		favorits.setBorderPainted(false);
 		favorits.setBackground(Color.WHITE);
+		genres.setOpaque(false);
+		genres.setContentAreaFilled(false);
+		genres.setBorderPainted(false);
+		genres.setBackground(Color.WHITE);
 		
 		//Layoutmanager + Anordnung
 		GridBagConstraints c  = new GridBagConstraints();
@@ -141,10 +157,15 @@ public class PlaylistMiniScreen extends JPanel{
 		c.weightx = 0.0001;
 		c.weighty = 0.0001;
 		user.add(subscriptions,c);
-		c.gridy = 1;
+		c.gridy++;
 		user.add(favorits,c);
+		
+		if(currentUser.getRights().equals("Admin")){
+			c.gridy++;
+			user.add(genres,c);
+		}
 		c.gridx=0;
-		c.gridy = 2;
+		c.gridy++;
 		c.weightx = 0.1;
 		c.weighty = 0.1;
 		user.add(playlists,c);
