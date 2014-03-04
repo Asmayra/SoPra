@@ -39,6 +39,8 @@ public class LoginScreen extends JFrame {
 	
 	private final int MIN_WIDTH = 300;
 	private final int MIN_HEIGHT = 150;
+	
+	private static LoginScreen instance = null;
 
 	
 	
@@ -50,11 +52,21 @@ public class LoginScreen extends JFrame {
 		return new String(passwordText.getPassword());
 	}
 
-	public LoginScreen(){
+	private LoginScreen(){
 		super("Login");
 		//this.setLayout(new BorderLayout());
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		initGui();
+	}
+	
+	
+	public static LoginScreen getInstance(){
+		if(instance == null)
+		{
+			instance = new LoginScreen();
+		}
+		
+		return instance;
 	}
 	
 	/**

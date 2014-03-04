@@ -3,11 +3,14 @@ package org.control.listener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import org.view.MainScreen;
+import org.view.screens.Center.Mailbox;
+
 public class MailButtonListener implements ActionListener  {
 
-	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+		MainScreen.getInstance().showMailbox(Mailbox.getInstance());
+		
 		
 	}
 
