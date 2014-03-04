@@ -87,19 +87,18 @@ public class MainScreen extends JFrame {
 	 * Updates the 4 Areas of the MainScreen
 	 */
 	public void updateAll() {
-		this.removeAll();
 		this.add(center, BorderLayout.CENTER);
 		this.add(east, BorderLayout.EAST);
 		this.add(south, BorderLayout.SOUTH);
 		this.add(west, BorderLayout.WEST);
 		this.pack();
-		this.repaint();
 		this.setVisible(true);
 	}
 	
 	public void updateCenter(JPanel screen)
 	{
 		this.remove(center);
+		this.pack();
 		this.center = screen;
 		this.add(center, BorderLayout.CENTER);
 		this.pack();
@@ -109,6 +108,7 @@ public class MainScreen extends JFrame {
 	public void updateWest(JPanel screen)
 	{
 		this.remove(west);
+		this.pack();
 		this.west = screen;
 		this.add(west, BorderLayout.WEST);
 		this.pack();
@@ -118,6 +118,7 @@ public class MainScreen extends JFrame {
 	public void updateEast(JLayeredPane screen)
 	{
 		this.remove(east);
+		this.pack();
 		this.east = screen;
 		this.add(east, BorderLayout.EAST);
 		this.pack();
@@ -127,6 +128,7 @@ public class MainScreen extends JFrame {
 	public void updateSouth(JPanel screen)
 	{
 		this.remove(south);
+		this.pack();
 		this.south = screen;
 		this.add(south, BorderLayout.SOUTH);
 		this.pack();

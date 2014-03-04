@@ -1,6 +1,7 @@
 package org.view.screens.Center;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 
 import javax.swing.JButton;
@@ -14,7 +15,8 @@ import org.view.LoginScreen;
 
 public class Mailbox extends JPanel{
 	
-	
+	private final int TABLE_WIDTH = 400;
+	private final int TABLE_HEIGHT = 300;
 	private JTable msgTable;
 	private DefaultTableModel msgTableModel;
 	
@@ -51,6 +53,9 @@ public class Mailbox extends JPanel{
 				return false;
 			}
 		};
+		
+		msgTable.setPreferredSize(new Dimension(TABLE_WIDTH, TABLE_HEIGHT));
+		
 		msgTable.setModel(msgTableModel);
 		msgTableModel.addColumn("Absender");
 		msgTableModel.addColumn("Betreff");
@@ -59,6 +64,7 @@ public class Mailbox extends JPanel{
 		
 		
 		JScrollPane tableScrollPane = new JScrollPane(msgTable);
+		tableScrollPane.setPreferredSize(new Dimension(TABLE_WIDTH, TABLE_HEIGHT));
 		return tableScrollPane;
 		
 		
