@@ -11,10 +11,13 @@ import org.model.User;
 public class LoginControl {
 	
 	private static LoginControl instance = null;
+	private static User currentUser = null;
 	private LoginControl(){
 		
 	}
-	
+	private static User getCurrentUser(){
+		return currentUser;
+	}
 	
 	public static LoginControl getInstance(){
 		if(instance == null)
@@ -37,7 +40,7 @@ public class LoginControl {
 		if( ( username == null || username.equals("") ) || ( password == null || password.equals("") ) )
 			return false;
 		User loginUser = (User) DatabaseController.getInstance().load(User.class, username);
-		
+		currentUser = loginUser;
 		if (loginUser != null ){
 			String salt = loginUser.getSalt();
 		
