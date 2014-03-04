@@ -17,9 +17,9 @@ import javax.swing.JTextField;
 public class CreatePostButtonListener implements ActionListener  {
 	
 	public void actionPerformed(ActionEvent arg0) {
-		 JFrame createPostFrame = new JFrame();
+		 JFrame createPostFrame = new JFrame("Post erstellen");
 		 //Create a new Textfield for the Post-Message
-		 JTextArea messageTxt = new JTextArea("Post erstellen");
+		 JTextArea messageTxt = new JTextArea();
 		 messageTxt.setPreferredSize(new Dimension(330,100));
 		 messageTxt.setLineWrap(true);
 		 messageTxt.setWrapStyleWord(true);
@@ -37,6 +37,7 @@ public class CreatePostButtonListener implements ActionListener  {
 		 createPostFrame.add(order);
 		 createPostFrame.pack();
 		 createPostFrame.setVisible(true);
+		 
 	}
 	
 

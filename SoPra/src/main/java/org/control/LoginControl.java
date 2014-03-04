@@ -36,7 +36,7 @@ public class LoginControl {
 	 */
 	public boolean checkLogin(String username, String password)
 	{
-		/*
+		
 		if( ( username == null || username.equals("") ) || ( password == null || password.equals("") ) )
 			return false;
 		User loginUser = (User) DatabaseController.getInstance().load(User.class, username);
@@ -56,8 +56,8 @@ public class LoginControl {
 		else{
 			return false;
 		}
-		*/
-		return true;
+		
+		
 		
 	}
 
