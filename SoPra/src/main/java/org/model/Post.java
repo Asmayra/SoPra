@@ -56,7 +56,7 @@ public class Post {
 	}
 	
 	public void setMessage(String s){
-		this.message="<html><body>"+s+"</body></html>";
+		this.message=s;
 	}
 	public String getMessage(){
 		return this.message;
@@ -82,7 +82,7 @@ public class Post {
 				
 		JLabel info = new JLabel(" "+autor.getFirstname()+" has great news!");
 		info.setFont(new Font("Arial",Font.BOLD,14));	
-		JLabel text = new JLabel(message);
+		JLabel text = new JLabel("<html><body>"+message+"</body></html>");
 		content.add(info);
 		content.add(text);
 		content.setPreferredSize(new Dimension(330,100));
