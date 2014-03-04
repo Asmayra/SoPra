@@ -15,7 +15,7 @@ public class LoginControl {
 	private LoginControl(){
 		
 	}
-	private static User getCurrentUser(){
+	public User getCurrentUser(){
 		return currentUser;
 	}
 	
@@ -40,7 +40,7 @@ public class LoginControl {
 		if( ( username == null || username.equals("") ) || ( password == null || password.equals("") ) )
 			return false;
 		User loginUser = (User) DatabaseController.getInstance().load(User.class, username);
-		currentUser = loginUser;
+		
 		if (loginUser != null ){
 			String salt = loginUser.getSalt();
 		
@@ -48,8 +48,9 @@ public class LoginControl {
 			String pass = PasswordControl.encodePassword(password, salt);
 			
 			String userPass = loginUser.getPassword();
-			
-			return PasswordControl.comparePasswords(pass, userPass);		
+			currentUser = loginUser;
+			return PasswordControl.comparePasswords(pass, userPass);	
+				
 			
 		}
 		else{
