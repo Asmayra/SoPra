@@ -30,12 +30,14 @@ public class Playlist {
 	private Collection<Song> songs;
 	private String name;
 	
+	public Playlist (User u){
+		owner = u;
+	}
+	
 	public User getOwner(){
 		return this.owner;
 	}
-	public void setOwner(User owner) {
-		this.owner = owner;
-	}
+	
 	public Collection<Song> getSongs() {
 		return songs;
 	}

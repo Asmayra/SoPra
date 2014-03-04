@@ -8,8 +8,8 @@ public class Album extends Playlist {
 	
 	private String coverart;
 
-	public Album() {
-		// TODO Auto-generated constructor stub
+	public Album(User u) {
+		super(u);
 	}
 
 	public String getCoverart() {

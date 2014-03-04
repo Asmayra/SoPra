@@ -4,6 +4,7 @@
 package org.view.screens.Center;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
@@ -20,12 +21,14 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 
 import org.control.IgnoreButtonListener;
 import org.control.LoginControl;
 import org.control.listener.FollowButtonListener;
+import org.model.Post;
 import org.model.User;
 
 public class ProfileScreen extends JPanel {
@@ -37,12 +40,17 @@ public class ProfileScreen extends JPanel {
 	private JLabel userPictureL;
 	private JPanel userData;
 	private JPanel buttons;
-	private JPanel userName;
-	private JScrollPane userContentScroll;
-	private JPanel userContent;
+	private JScrollPane userContentScrollPlaylists;
+	private JScrollPane userContentScrollAlben;
+	private JScrollPane userContentScrollPosts;
+	private JScrollPane userContentScrollSongs;
+	private JTabbedPane userContent;
+	private JPanel playlists;
+	private JPanel alben;
+	private JPanel posts;
+	private JPanel songs;
 	private JButton message;
 	private JButton ignore;
-	private JButton media;
 	private JButton follow;
 	private JLabel lblName;
 	private JLabel lblLastName;
@@ -104,31 +112,56 @@ public class ProfileScreen extends JPanel {
 		userOverview.add(buttons, BorderLayout.SOUTH);
 
 		message = new JButton("Nachricht senden");
-		media = new JButton("Musik-Sammlung");
-		if (followProfile){
-			follow = new JButton("unfollow");
-		} else {
-			follow = new JButton("follow");
-		}
-		follow.addActionListener(new FollowButtonListener());
-		if (ignoreProfile){
-			ignore = new JButton("unignore");
-		} else {
-			ignore = new JButton("ignore");
-		}
-		ignore.addActionListener(new IgnoreButtonListener());
 		buttons.add(message);
-		buttons.add(media);
-		buttons.add(follow);
-		buttons.add(ignore);
+		if (userProfile != LoginControl.getInstance().getCurrentUser()){
+			if (followProfile){
+				follow = new JButton("unfollow");
+			} else {
+				follow = new JButton("follow");
+			}
+			follow.addActionListener(new FollowButtonListener());
+			if (ignoreProfile){
+				ignore = new JButton("unignore");
+			} else {
+				ignore = new JButton("ignore");
+			}
+			ignore.addActionListener(new IgnoreButtonListener());
+			buttons.add(follow);
+			buttons.add(ignore);
+		}
+		
+		
 
-		userName = new JPanel();
-		userOverview.add(userName, BorderLayout.NORTH);
 
-		userContent = new JPanel();
-		userContentScroll = new JScrollPane(userContent);
-		userContentScroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		add(userContentScroll, BorderLayout.CENTER);
+		userContent = new JTabbedPane();
+		playlists = new JPanel();
+		alben = new JPanel();
+		
+		
+		posts = new JPanel();
+		posts.removeAll();
+		posts.setLayout(new BoxLayout(userContent, BoxLayout.Y_AXIS));
+		Iterator<Post> p = userProfile.getPosts().iterator();
+		while (p.hasNext()){
+			posts.add(p.next().create());
+		}
+		
+		songs = new JPanel();
+		userContentScrollPlaylists = new JScrollPane(playlists);
+		userContentScrollAlben = new JScrollPane(alben);
+		userContentScrollPosts = new JScrollPane(posts);
+		userContentScrollSongs = new JScrollPane(songs);
+		userContentScrollPlaylists.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		userContentScrollAlben.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		userContentScrollPosts.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		userContentScrollSongs.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		userContent.addTab("Playlists", userContentScrollPlaylists);
+		userContent.addTab("Posts", userContentScrollPosts);
+		if (LoginControl.getInstance().getCurrentUser().getRights()=="Artist"||LoginControl.getInstance().getCurrentUser().getRights()=="LabelManager"){
+			userContent.addTab("Songs", userContentScrollSongs);
+			userContent.addTab("Alben", userContentScrollAlben);
+		}
+		add(userContent, BorderLayout.CENTER);
 
 	}
 	
@@ -152,14 +185,17 @@ public class ProfileScreen extends JPanel {
 	public User getUserProfile() {
 		return userProfile;
 	}
-
-	public void showMedia() {
-		userContent.removeAll();
-		for (int i = 0; i < userProfile.getPosts().size();i++)
-		userContent.setLayout(new BoxLayout(userContent, BoxLayout.Y_AXIS));
-		Iterator posts = userProfile.getPosts().iterator();
-		userContent.add();
+	
+	public void showPosts() {
+		posts.removeAll();
+		posts.setLayout(new BoxLayout(userContent, BoxLayout.Y_AXIS));
+		Iterator<Post> p = userProfile.getPosts().iterator();
+		while (p.hasNext()){
+			posts.add(p.next().create());
+		}
 		
 	}
+
+
 
 }
