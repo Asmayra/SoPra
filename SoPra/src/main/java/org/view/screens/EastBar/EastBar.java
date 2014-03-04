@@ -36,22 +36,22 @@ public class EastBar extends JLayeredPane{
 	}
 	
 	private EastBar() {
-		//this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+		this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 		//this.setBorder(BorderFactory.createLineBorder(Color.red));
 		
 		//this.setPreferredSize(new Dimension(300, 310));
 		
 		//add SearchMask Component
-		SearchMask.getInstance().setBounds(0, 0, 180, 20);
+		//SearchMask.getInstance().setBounds(0, 0, 180, 20);
 		this.add(SearchMask.getInstance(), new Integer(0));
 		
 		//add DiscoverComponent
-		DiscoverMiniScreen.getInstance().setBounds(20, 20, 200, 500);
+		//DiscoverMiniScreen.getInstance().setBounds(20, 20, 200, 500);
 		this.add(DiscoverMiniScreen.getInstance(), new Integer(0));
 		
 		//add moreButton component
-		moreButton.setBounds(50, 420, 100, 25); 
-		this.add(moreButton, new Integer(1));
+		//moreButton.setBounds(50, 420, 100, 25); 
+		this.add(moreButton, new Integer(0));
 		moreButton.addActionListener(new MoreDiscoverButtonListener());
 
 		//setup resultspan for search results
