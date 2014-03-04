@@ -17,6 +17,7 @@ public class LoginScreenLoginButtonListener implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 		if (LoginControl.getInstance().checkLogin(login.getLoginText(), login.getPassword())){
+			System.out.println("UserLayout aufgesetzt");
 			MainScreen.getInstance().setUpUserLayout();
 			login.dispose();
 		}
