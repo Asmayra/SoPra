@@ -32,6 +32,7 @@ public class User {
 	private String country;
 	private String salt;
 	private String rights = "StandardUser";
+	private String imagePath;
 	private List<User> following;
 	private List<User> ignoring;
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -159,6 +160,34 @@ public class User {
 			return true;
 		}
 		return false;
+	}
+
+	public String getImagePath() {
+		return imagePath;
+	}
+
+	public void setImagePath(String imagePath) {
+		this.imagePath = imagePath;
+	}
+
+	public void unfollow(User user) {
+		following.remove(user);
+		
+	}
+
+	public void follow(User user) {
+		following.add(user);
+		
+	}
+	
+	public void unignore(User user) {
+		ignoring.remove(user);
+		
+	}
+
+	public void ignore(User user) {
+		ignoring.add(user);
+		
 	}
 
 }
