@@ -42,7 +42,7 @@ public class RegConfirmButtonListener implements ActionListener {
 			success = false;
 		}
 		
-		if(!control.userExists( username ))
+		if(control.userExists( username ))
 		{
 			control.addUserExistsError();
 			success = false;
