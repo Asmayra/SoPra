@@ -8,6 +8,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
 
+import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -33,6 +34,7 @@ public class HomeScreen extends JPanel{
 	
 	
 	private HomeScreen(){
+		this.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		this.setLayout(new BorderLayout());
 		JLabel title = new JLabel("HOME");
 		title.setPreferredSize(new Dimension(400,20));

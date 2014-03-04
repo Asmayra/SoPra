@@ -27,6 +27,7 @@ public class PlaylistMiniScreen extends JPanel{
 	
 	
 	public PlaylistMiniScreen() {
+		this.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		createUserPanel();
 		
 		tabbedPane.addTab("Playlists", scrollUser);

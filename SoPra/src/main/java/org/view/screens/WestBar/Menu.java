@@ -1,5 +1,6 @@
 package org.view.screens.WestBar;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
@@ -28,7 +29,7 @@ public class Menu extends JPanel{
 	private JButton avatar = new JButton(LoadImageController.loadImageIcon("placeholder.jpg"));//benutzerbild x
 
 	public Menu() {
-		
+		this.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		home.setPreferredSize(new Dimension(BUTTONSIZE,BUTTONSIZE));
 		home.addActionListener(new HomeScreenButtonListener());
 		
