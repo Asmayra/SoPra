@@ -14,6 +14,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import org.control.LoadImageController;
 import org.view.screens.EastBar.DiscoverElement;
 import org.view.screens.EastBar.DiscoverMiniScreen;
 import org.view.screens.EastBar.EastBar;
@@ -27,20 +28,14 @@ public class EastBarTest {
         EastBar eb = EastBar.getInstance();
         		
 		BufferedImage image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_RGB);
-		URL url = this.getClass().getResource("placeholder.jpg");
-		try {
-			image = ImageIO.read(new File(System.getProperty("user.dir")+"\\src\\main\\java\\placeholder.jpg"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		ImageIcon imageIcon = new ImageIcon(image);
-		JLabel pictureLabel = new JLabel(imageIcon);
+	
+		JLabel pictureLabel = new JLabel(LoadImageController.loadImage("placeholder.jpg"));
         
         DiscoverMiniScreen miniScreen = DiscoverMiniScreen.getInstance();
         DiscoverElement discover1 = new DiscoverElement("text1", pictureLabel, "url1");
-        pictureLabel = new JLabel(imageIcon);
+        pictureLabel = new JLabel(LoadImageController.loadImage("placeholder.jpg"));
         DiscoverElement discover2 = new DiscoverElement("text2", pictureLabel, "url2");
-        pictureLabel = new JLabel(imageIcon);
+        pictureLabel = new JLabel(LoadImageController.loadImage("placeholder.jpg"));
         DiscoverElement discover3 = new DiscoverElement("text3", pictureLabel, "url3");
         
         miniScreen.setDiscoverOne(discover1);
@@ -53,7 +48,7 @@ public class EastBarTest {
         f.setLocationRelativeTo(null);
         f.setVisible(true);
 
-        pictureLabel = new JLabel(imageIcon);
+        pictureLabel = new JLabel(LoadImageController.loadImage("placeholder.jpg"));
         DiscoverElement discover4 = new DiscoverElement("text4", pictureLabel, "url4");
         miniScreen.setDiscoverTwo(discover4);
         

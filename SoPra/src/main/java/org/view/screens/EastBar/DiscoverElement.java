@@ -22,7 +22,7 @@ import org.control.listener.DiscoverElementListener;
  */
 public class DiscoverElement extends JPanel {
 	
-	private JLabel label = new JLabel();
+	private JLabel label;
 	private JLabel pictureLabel;
 	private String url;
 	
@@ -37,7 +37,7 @@ public class DiscoverElement extends JPanel {
 	 */
 	public DiscoverElement(String text, JLabel pictureLabel, String url) {
 		this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
-		this.label.setText(text);
+		this.label = new JLabel("<html><body>"+text+"</body></html>");
 		this.pictureLabel = pictureLabel;
 		this.add(this.label);
 		this.add(this.pictureLabel);
