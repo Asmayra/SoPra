@@ -1,5 +1,6 @@
 package org.control;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
 
@@ -11,10 +12,11 @@ public class MailboxControl {
 
 	
 	private static MailboxControl instance = null;
+	private ArrayList<Integer> markedRows;
 	
-	
+ 	
 	private MailboxControl() {
-		// TODO Auto-generated constructor stub
+		markedRows = new ArrayList<Integer>();
 	}
 	
 	public static MailboxControl getInstance()
@@ -39,5 +41,27 @@ public class MailboxControl {
 				tempMessage = it.next();
 				Mailbox.getInstance().addRow(tempMessage.getSender().getUsername(),tempMessage.getSubject(),tempMessage.getDate());
 			}
+	}
+	
+	
+	public boolean markRow(int row)
+	{
+		if(markedRows.contains(new Integer(row)))
+		{
+			markedRows.remove(new Integer(row));
+			System.out.println("Removed: " + row);
+			return false;
+		}
+		else
+		{
+			markedRows.add(row);
+			System.out.println("Added: " + row);
+			return true;
+		}
+	}
+	
+	public void deleteMarked()
+	{
+		
 	}
 }

@@ -1,6 +1,7 @@
 package org.view.screens.Center;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -19,6 +20,7 @@ import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 
+import org.control.MailboxControl;
 import org.view.LoginScreen;
 
 public class Mailbox extends JPanel{
@@ -116,7 +118,7 @@ public class Mailbox extends JPanel{
 	public void deleteRow(int id){
 		msgTableModel.removeRow(id);
 	}
-}
+
 	
 	
 	@SuppressWarnings("serial")
@@ -124,7 +126,7 @@ public class Mailbox extends JPanel{
 		
 		public ButtonRenderer()
 		{
-			setOpaque(true);
+//			setOpaque(true);
 		}
 		
 		public Component getTableCellRendererComponent( JTable table,
@@ -134,18 +136,18 @@ public class Mailbox extends JPanel{
 														int row,
 														int column	)
 		{
-			if(isSelected)
-			{
-				setForeground(table.getSelectionForeground());
-				setBackground(table.getSelectionBackground());
-			}
-			else
-			{
-				setForeground(table.getForeground());
-				setBackground(UIManager.getColor("Button.background"));
-			}
+//			if(isSelected)
+//			{
+//				setForeground(table.getSelectionForeground());
+//				setBackground(table.getSelectionBackground());
+//			}
+//			else
+//			{
+//				setForeground(table.getForeground());
+//				setBackground(UIManager.getColor("Button.background"));
+//			}
 			
-			setText((value == null) ? "test" : value.toString());
+//			setText((value == null) ? "" : value.toString());
 			return this;
 		}
 	}
@@ -179,19 +181,19 @@ public class Mailbox extends JPanel{
 														int row,
 														int column		)
 		{
-			if(isSelected)
-			{
-				button.setForeground(table.getSelectionForeground());
-				button.setBackground(table.getSelectionBackground());
-			}
-			else
-			{
-				button.setForeground(table.getForeground());
-				button.setBackground(table.getBackground());
-			}
+//			if(isSelected)
+//			{
+//				button.setForeground(table.getSelectionForeground());
+//				button.setBackground(table.getSelectionBackground());
+//			}
+//			else
+//			{
+//				button.setForeground(table.getForeground());
+//				button.setBackground(table.getBackground());
+//			}
 			
-			label = (value == null) ? "test" : value.toString();
-			button.setText(label);
+//			label = (value == null) ? "" : value.toString();
+//			button.setText(label);
 			isPushed = true;
 			return button;
 		}
@@ -200,11 +202,23 @@ public class Mailbox extends JPanel{
 		{
 			if(isPushed)
 			{
-				System.out.println("test");
+				if(MailboxControl.getInstance().markRow(msgTable.getSelectedRow()))
+				{
+					button.setForeground(Color.RED);
+					button.setBackground(Color.RED);
+					
+					button.setText("test");
+				}
+				else
+				{
+					button.setForeground(Color.GREEN);
+					button.setBackground(Color.GREEN);
+				}
+				button.repaint();
 			}
 			
 			isPushed = false;
-			return new String(label);
+			return new String("");
 		}
 		
 		public boolean stopCellEditing()
@@ -218,4 +232,6 @@ public class Mailbox extends JPanel{
 			super.fireEditingStopped();
 		}
 	}
+	
+}
 
