@@ -1,15 +1,23 @@
 package org.view.screens.Center;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.DefaultCellEditor;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JComponent;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
 
 import org.view.LoginScreen;
 
@@ -62,6 +70,9 @@ public class Mailbox extends JPanel{
 		msgTableModel.addColumn("Datum");
 		msgTableModel.addColumn("");
 		
+		msgTable.getColumn("").setCellRenderer( new ButtonRenderer());
+		msgTable.getColumn("").setCellEditor(new ButtonEditor(new JCheckBox()));
+		
 		
 		JScrollPane tableScrollPane = new JScrollPane(msgTable);
 		tableScrollPane.setPreferredSize(new Dimension(TABLE_WIDTH, TABLE_HEIGHT));
@@ -85,5 +96,123 @@ public class Mailbox extends JPanel{
 		buttonPanel.add(delButton);
 		return buttonPanel;
 	}
-
+	
+	public void clearTable(){
+		msgTableModel.setRowCount(0);
+	}
+	
+	public void addRow(String sender, String subject, String date){
+		String[] newRow = new String[3];
+		newRow[0] = sender;
+		newRow[1] = subject;
+		newRow[2] = date;
+		msgTableModel.addRow(newRow);
+		
+	}
+	
+	public void deleteRow(int id){
+		msgTableModel.removeRow(id);
+	}
 }
+	
+	
+	class ButtonRenderer extends JButton implements TableCellRenderer {
+		
+		public ButtonRenderer()
+		{
+			setOpaque(true);
+		}
+		
+		public Component getTableCellRendererComponent( JTable table,
+														Object value,
+														boolean isSelected,
+														boolean hasFocus,
+														int row,
+														int column	)
+		{
+			if(isSelected)
+			{
+				setForeground(table.getSelectionForeground());
+				setBackground(table.getSelectionBackground());
+			}
+			else
+			{
+				setForeground(table.getForeground());
+				setBackground(UIManager.getColor("Button.background"));
+			}
+			
+			setText((value == null) ? "test" : "test"); //value.toString());
+			return this;
+		}
+	}
+	
+	class ButtonEditor extends DefaultCellEditor
+	{
+		
+		protected JButton button;
+		
+		private String label;
+		private boolean isPushed = true;
+		
+		public ButtonEditor(JCheckBox checkBox)
+		{
+			super(checkBox);
+			button = new JButton();
+			button.setOpaque(true);
+			button.addActionListener(new ActionListener() {
+
+				public void actionPerformed(ActionEvent arg0) {
+					fireEditingStopped();
+					
+				}
+			});
+		}
+		
+		public Component getTableCellEditorComponent( 	JTable table,
+														Object value,
+														boolean isSelected,
+														int row,
+														int column		)
+		{
+			if(isSelected)
+			{
+				button.setForeground(table.getSelectionForeground());
+				button.setBackground(table.getSelectionBackground());
+			}
+			else
+			{
+				button.setForeground(table.getForeground());
+				button.setBackground(table.getBackground());
+			}
+			
+			label = (value == null) ? "test" : value.toString();
+			button.setText(label);
+			isPushed = true;
+			return button;
+		}
+		
+		public Object getCellEditorValue()
+		{
+			if(isPushed)
+			{
+				System.out.println("test");
+				JOptionPane.showMessageDialog(button, label + " test");
+			}
+			
+			isPushed = false;
+			return new String(label);
+		}
+		
+		public boolean stopCellEditing()
+		{
+			isPushed = false;
+			return super.stopCellEditing();
+		}
+		
+		protected void fireEditingStopped()
+		{
+			super.fireEditingStopped();
+		}
+	}
+	
+

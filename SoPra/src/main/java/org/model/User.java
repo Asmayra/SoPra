@@ -47,7 +47,7 @@ public class User {
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	// Set Eager,because it's loaded at the Homescreen
 	private Collection<Post> posts = new LinkedList<Post>();
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Collection<Message> messages = new LinkedList<Message>();
 	
 	public Collection<Post> getPosts() {
