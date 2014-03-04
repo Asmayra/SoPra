@@ -58,7 +58,10 @@ public class Mailbox extends JPanel{
 		msgTable = new JTable();
 		msgTableModel = new DefaultTableModel(){
 			public boolean isCellEditable(int rowIndex, int columnIndex){
-				return false;
+				if(columnIndex == 3)
+					return true;
+				else
+					return false;
 			}
 		};
 		
@@ -68,10 +71,10 @@ public class Mailbox extends JPanel{
 		msgTableModel.addColumn("Absender");
 		msgTableModel.addColumn("Betreff");
 		msgTableModel.addColumn("Datum");
-		msgTableModel.addColumn("");
+		msgTableModel.addColumn("Makiert");
 		
-		msgTable.getColumn("").setCellRenderer( new ButtonRenderer());
-		msgTable.getColumn("").setCellEditor(new ButtonEditor(new JCheckBox()));
+		msgTable.getColumn("Makiert").setCellRenderer( new ButtonRenderer());
+		msgTable.getColumn("Makiert").setCellEditor(new ButtonEditor(new JCheckBox()));
 		
 		
 		JScrollPane tableScrollPane = new JScrollPane(msgTable);
@@ -116,6 +119,7 @@ public class Mailbox extends JPanel{
 }
 	
 	
+	@SuppressWarnings("serial")
 	class ButtonRenderer extends JButton implements TableCellRenderer {
 		
 		public ButtonRenderer()
@@ -141,18 +145,19 @@ public class Mailbox extends JPanel{
 				setBackground(UIManager.getColor("Button.background"));
 			}
 			
-			setText((value == null) ? "test" : "test"); //value.toString());
+			setText((value == null) ? "test" : value.toString());
 			return this;
 		}
 	}
 	
+	@SuppressWarnings("serial")
 	class ButtonEditor extends DefaultCellEditor
 	{
 		
 		protected JButton button;
 		
 		private String label;
-		private boolean isPushed = true;
+		private boolean isPushed;
 		
 		public ButtonEditor(JCheckBox checkBox)
 		{
@@ -161,7 +166,7 @@ public class Mailbox extends JPanel{
 			button.setOpaque(true);
 			button.addActionListener(new ActionListener() {
 
-				public void actionPerformed(ActionEvent arg0) {
+				public void actionPerformed(ActionEvent e) {
 					fireEditingStopped();
 					
 				}
@@ -196,7 +201,6 @@ public class Mailbox extends JPanel{
 			if(isPushed)
 			{
 				System.out.println("test");
-				JOptionPane.showMessageDialog(button, label + " test");
 			}
 			
 			isPushed = false;
@@ -214,5 +218,4 @@ public class Mailbox extends JPanel{
 			super.fireEditingStopped();
 		}
 	}
-	
 
