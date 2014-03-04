@@ -107,6 +107,8 @@ public class AdminGenreListener  extends MouseAdapter{
 			Genre neuesGenre = currentParentGenre.getSubGenres().getLast();
 			
 			neuesGenre.setName((String)current.getUserObject());
+			
+			current.setUserObject(neuesGenre);
 		}
 
 		public void treeNodesInserted(TreeModelEvent e) {

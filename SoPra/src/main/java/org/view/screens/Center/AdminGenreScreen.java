@@ -20,6 +20,17 @@ public class AdminGenreScreen extends JPanel {
 	private Genre root;
 	private JTree genretree;
 	
+	private static AdminGenreScreen instance = null;
+	
+	public static AdminGenreScreen getInstance()
+	{
+		if(instance == null){
+			Genre emptyroot = new Genre();
+			instance = new AdminGenreScreen(emptyroot);
+		}
+		return instance;
+	}
+	
 	public AdminGenreScreen(Genre root){
 		this.setLayout(new GridBagLayout());
 		this.setRoot(root);
