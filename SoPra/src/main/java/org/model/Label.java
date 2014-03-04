@@ -32,7 +32,7 @@ public class Label {
 		this.name = name;
 	}
 
-	public List<User> getManager() {
+	public Collection<User> getManager() {
 		return manager;
 	}
 

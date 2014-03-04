@@ -21,9 +21,10 @@ public class Genre {
 	@GeneratedValue(strategy = GenerationType.AUTO)	
 	private int genreId;
 	private String name;
+	@ManyToOne
 	private Genre parent;
 	@OneToMany
-	private LinkedList<Genre> subGenres;
+	private Collection<Genre> subGenres;
 
 	public Genre(){
 		subGenres = new LinkedList<Genre>();

@@ -36,7 +36,7 @@ public class Playlist {
 	public void setOwner(User owner) {
 		this.owner = owner;
 	}
-	public List<Song> getSongs() {
+	public Collection<Song> getSongs() {
 		return songs;
 	}
 	public void setSongs(List<Song> songs) {

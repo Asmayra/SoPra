@@ -26,7 +26,7 @@ public class CreatePostButtonListener implements ActionListener  {
 		 JButton abbort = new JButton("Abbrechen");
 		 JButton post	= new JButton("Posten");
 		 abbort.addActionListener(new CloseFrameListener(createPostFrame));		
-		 post.addActionListener(new CreatePost(messageTxt.getText()));
+		 post.addActionListener(new CreatePost(messageTxt));
 		 createPostFrame.setLayout(new BorderLayout());
 		 createPostFrame.add(messageTxt,BorderLayout.NORTH);
 		 JPanel order = new JPanel();
