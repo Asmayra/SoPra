@@ -6,11 +6,13 @@ import java.io.IOException;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 
-import javassist.bytecode.Descriptor.Iterator;
+
+
 
 import javax.imageio.ImageIO;
 import javax.persistence.CascadeType;
@@ -46,9 +48,14 @@ public class User {
 	private List<User> ignoring;
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	// Set Eager,because it's loaded at the Homescreen
-	private Collection<Post> posts = new LinkedList<Post>();
+	private Collection<Post> posts;
 	@OneToMany
 	private Collection<Message> messages = new LinkedList<Message>();
+	
+	public User(){
+		this.posts = new LinkedList<Post>();
+	}
+	
 	
 	public Collection<Post> getPosts() {
 		return posts;
@@ -84,6 +91,7 @@ public class User {
 		this.posts.add(pst);
 		
 	}
+
 
 	public String getRights() {
 		return rights;

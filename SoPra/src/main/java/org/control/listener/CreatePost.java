@@ -3,6 +3,7 @@ package org.control.listener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JFrame;
 import javax.swing.JTextArea;
 
 import org.control.DatabaseController;
@@ -16,12 +17,14 @@ import org.model.Post;
  */
 public class CreatePost implements ActionListener{
 	JTextArea message;
+	JFrame frame;
 	/**
 	 * 
 	 * @param message The text to post
 	 */
-	public CreatePost(JTextArea message){
+	public CreatePost(JTextArea message,JFrame frame){
 		this.message = message;
+		this.frame = frame;
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -29,6 +32,9 @@ public class CreatePost implements ActionListener{
 		LoginControl.getInstance().getCurrentUser().addPosts(pst);
 		pst.setMessage(message.getText());	
 		DatabaseController.getInstance().update(LoginControl.getInstance().getCurrentUser());
+		frame.setVisible(false);
+		frame.dispose();
+		
 	}
 	
 }

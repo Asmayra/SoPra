@@ -13,6 +13,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 import org.control.LoginControl;
 import org.control.listener.CreatePostButtonListener;
@@ -43,14 +44,18 @@ public class HomeScreen extends JPanel{
 		createPostBtn.addActionListener(new CreatePostButtonListener());
 		this.add(createPostBtn,BorderLayout.SOUTH);
 		//***********************************************
+		
 		JPanel currentPosts = new JPanel();
+		JScrollPane scrollBar = new JScrollPane();
+		scrollBar.setPreferredSize(new Dimension(430,500));
+		scrollBar.setViewportView(currentPosts);
 		currentPosts.setLayout(new BoxLayout(currentPosts,BoxLayout.Y_AXIS));		
 		Iterator<Post> it = LoginControl.getInstance().getCurrentUser().getPosts().iterator(); 
 		while(it.hasNext()){
 			currentPosts.add(it.next().create());	
 		}
 		
-		this.add(currentPosts,BorderLayout.CENTER);	
+		this.add(scrollBar,BorderLayout.CENTER);	
 		//***********************************************
 		
 	}

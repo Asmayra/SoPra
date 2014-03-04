@@ -19,10 +19,14 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.swing.BoxLayout;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.UIManager;
+
+import org.control.listener.DeletePost;
 
 /**
  * Entity for News like "New Playlist created"
@@ -67,10 +71,11 @@ public class Post {
 	 * Creates a panel with a order for posts
 	 * @return a JPanel with this very design
 	 */
-	public JPanel create(){
+	public JPanel create(){	
+		//Basic Layout
 		JPanel pst = new JPanel();
 		pst.setLayout(new FlowLayout());
-		//Scale the Autor's Prifeile Picture
+		//Scale the Autor's Profile Picture
 		try {
 			prflPicture = this.getAutor().getPicture();
 			prflPic= prflPicture.getScaledInstance(50, -1, BufferedImage.SCALE_DEFAULT);
@@ -80,22 +85,33 @@ public class Post {
 		ImageIcon pic =new ImageIcon(prflPic);
 		JLabel autorPic = new JLabel(pic);
 		autorPic.setSize(50,50);		
-		pst.add(autorPic);
 		
 		JPanel content = new JPanel();
 		content.setLayout(new BoxLayout(content,BoxLayout.Y_AXIS));
-				
+		//Structure Panel
+		JPanel structure = new JPanel();
+		structure.setLayout(new BoxLayout(structure,BoxLayout.Y_AXIS));
 		JLabel info = new JLabel(" "+autor.getFirstname()+" has great news!");
 		info.setFont(new Font("Arial",Font.BOLD,14));	
-		System.out.println("Posttext:" + message);
+		structure.add(info);
 		JLabel text = new JLabel("<html><body>"+message+"</body></html>");
+		//********************
+		//Delete Button
+		JButton del = new JButton("del");	
+		del.addActionListener(new DeletePost(this));
+		structure.add(autorPic);
+		structure.add(del);
+		//***********
+		pst.add(structure);
 		content.add(info);
 		content.add(text);
 		content.setPreferredSize(new Dimension(330,100));
 		pst.add(content);
-		
+			
 		return pst;
 	}
+	
+	
 	
 
 }
