@@ -27,6 +27,7 @@ import javax.swing.JPanel;
 import javax.swing.UIManager;
 
 import org.control.listener.DeletePost;
+import org.control.listener.OpenProfile;
 
 /**
  * Entity for News like "New Playlist created"
@@ -84,7 +85,8 @@ public class Post {
 		}
 		ImageIcon pic =new ImageIcon(prflPic);
 		JLabel autorPic = new JLabel(pic);
-		autorPic.setSize(50,50);		
+		autorPic.setSize(50,50);	
+		autorPic.addMouseListener(new OpenProfile(this.getAutor()));
 		
 		JPanel content = new JPanel();
 		content.setLayout(new BoxLayout(content,BoxLayout.Y_AXIS));
