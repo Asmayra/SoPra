@@ -48,17 +48,11 @@ public class User {
 	private List<User> ignoring;
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	// Set Eager,because it's loaded at the Homescreen
-<<<<<<< HEAD
-	private Collection<Post> posts;
-	@OneToMany
-=======
 	private Collection<Post> posts = new LinkedList<Post>();
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
->>>>>>> branch 'master' of https://github.com/Asmayra/SoPra.git
 	private Collection<Message> messages = new LinkedList<Message>();
 	
 	public User(){
-		this.posts = new LinkedList<Post>();
 	}
 	
 	
