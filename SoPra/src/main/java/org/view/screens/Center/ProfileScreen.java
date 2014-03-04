@@ -4,16 +4,10 @@
 package org.view.screens.Center;
 
 import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridLayout;
 import java.awt.Image;
-import java.awt.Insets;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.util.Iterator;
 
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -23,13 +17,12 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.ScrollPaneConstants;
-import javax.swing.SwingConstants;
 
 import org.control.IgnoreButtonListener;
 import org.control.LoginControl;
 import org.control.listener.FollowButtonListener;
-import org.model.Post;
 import org.model.User;
+import org.view.ProfilePostsPanel;
 
 public class ProfileScreen extends JPanel {
 	private User userProfile;
@@ -136,17 +129,9 @@ public class ProfileScreen extends JPanel {
 		userContent = new JTabbedPane();
 		playlists = new JPanel();
 		alben = new JPanel();
-		
-		
-		posts = new JPanel();
-		posts.removeAll();
-		posts.setLayout(new BoxLayout(userContent, BoxLayout.Y_AXIS));
-		Iterator<Post> p = userProfile.getPosts().iterator();
-		while (p.hasNext()){
-			posts.add(p.next().create());
-		}
-		
+		posts = new ProfilePostsPanel(userProfile);
 		songs = new JPanel();
+		
 		userContentScrollPlaylists = new JScrollPane(playlists);
 		userContentScrollAlben = new JScrollPane(alben);
 		userContentScrollPosts = new JScrollPane(posts);
@@ -184,16 +169,6 @@ public class ProfileScreen extends JPanel {
 
 	public User getUserProfile() {
 		return userProfile;
-	}
-	
-	public void showPosts() {
-		posts.removeAll();
-		posts.setLayout(new BoxLayout(userContent, BoxLayout.Y_AXIS));
-		Iterator<Post> p = userProfile.getPosts().iterator();
-		while (p.hasNext()){
-			posts.add(p.next().create());
-		}
-		
 	}
 
 

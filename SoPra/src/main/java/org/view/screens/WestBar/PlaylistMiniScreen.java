@@ -5,12 +5,15 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.event.ActionListener;
 
 import javax.swing.*;
+import javax.swing.plaf.basic.BasicOptionPaneUI.ButtonActionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreePath;
 
 import org.control.LoginControl;
+import org.control.listener.GenresButtonListener;
 import org.model.User;
 
 public class PlaylistMiniScreen extends JPanel{
@@ -162,6 +165,7 @@ public class PlaylistMiniScreen extends JPanel{
 		
 		if(currentUser.getRights().equals("Admin")){
 			c.gridy++;
+			genres.addActionListener(new GenresButtonListener());
 			user.add(genres,c);
 		}
 		c.gridx=0;
