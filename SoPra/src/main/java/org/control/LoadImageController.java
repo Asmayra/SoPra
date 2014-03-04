@@ -40,7 +40,7 @@ public class LoadImageController {
 		return imageIcon;
 	}
 	
-	public static String CurrentDir(){
+	private static String CurrentDir(){
 		String path=System.getProperty("java.class.path");
 		String FileSeparator=(String)System.getProperty("file.separator");
 		return path.substring(0, path.lastIndexOf(FileSeparator)+1);
