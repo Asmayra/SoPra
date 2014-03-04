@@ -38,7 +38,7 @@ public class User {
 	private String city;
 	private String country;
 	private String salt;
-	private String rights = "StandardUser";
+	private String rights = "StandardUser"; // Admin, Artist, LabelManager
 	private String imagePath;
 	@ManyToMany
 	private List<User> following;
