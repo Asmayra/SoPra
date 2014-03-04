@@ -61,7 +61,7 @@
          <property name="hibernate.transaction.factory_class">org.hibernate.transaction.JDBCTransactionFactory</property>
 
         <!-- Names the annotated entity class -->
-        <mapping class="org.model.Messages"/>
+        <mapping class="org.model.Message"/>
         <mapping class="org.model.Playlist"/>
         <mapping class="org.model.Song"/>
         <mapping class="org.model.Ticket"/>
