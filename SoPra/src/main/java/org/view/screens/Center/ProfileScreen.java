@@ -1,7 +1,5 @@
 
-
 //In Bearbeitung bei Sebastian
-
 
 package org.view.screens.Center;
 
@@ -25,6 +23,7 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 
 import org.control.LoginControl;
+import org.control.listener.FollowButtonListener;
 import org.model.User;
 
 public class ProfileScreen extends JPanel {
@@ -49,12 +48,10 @@ public class ProfileScreen extends JPanel {
 	private JLabel lblCountry;
 	private JLabel lblAge;
 	private JLabel lblUserName;
-	
-	
-	
+
 	public ProfileScreen(User selectedUser) {
 		userProfile = selectedUser;
-		//task: try catch Block hinzufügen für IOException
+		// task: try catch Block hinzufügen für IOException
 		try {
 			prflPicture = userProfile.getPicture();
 			prflPicture = prflPicture.getScaledInstance(150, -1, BufferedImage.SCALE_DEFAULT);
@@ -62,66 +59,95 @@ public class ProfileScreen extends JPanel {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if (LoginControl.getInstance().getCurrentUser().isFollowing(userProfile)){
-			followProfile=true;
+		if (LoginControl.getInstance().getCurrentUser().isFollowing(userProfile)) {
+			followProfile = true;
+		} else {
+			followProfile = false;
+		}
+		if (LoginControl.getInstance().getCurrentUser().isIgnoring(userProfile)) {
+			ignoreProfile = true;
+		} else {
+			ignoreProfile = false;
 		}
 		setLayout(new BorderLayout(0, 0));
 
 		userOverview = new JPanel();
 		add(userOverview, BorderLayout.NORTH);
 		userOverview.setLayout(new BorderLayout(0, 0));
-		
-		ImageIcon pic =new ImageIcon(prflPicture);
+
+		ImageIcon pic = new ImageIcon(prflPicture);
 		userPictureL = new JLabel(pic);
 		userOverview.add(userPictureL, BorderLayout.WEST);
 
 		userData = new JPanel();
 		userData.setLayout(new BoxLayout(userData, BoxLayout.Y_AXIS));
-		
+
 		lblUserName = new JLabel(userProfile.getUsername());
 		lblUserName.setFont(new Font("Tahoma", Font.BOLD, 20));
 		userData.add(lblUserName);
-		lblName = new JLabel("Vorname:"+userProfile.getFirstname());
+		lblName = new JLabel("Vorname:" + userProfile.getFirstname());
 		userData.add(lblName);
-		lblLastName = new JLabel("Nachname:"+userProfile.getLastname());
+		lblLastName = new JLabel("Nachname:" + userProfile.getLastname());
 		userData.add(lblLastName);
-		lblCity = new JLabel("Stadt:"+userProfile.getCity());
+		lblCity = new JLabel("Stadt:" + userProfile.getCity());
 		userData.add(lblCity);
-		lblCountry = new JLabel("Land:"+userProfile.getCountry());
+		lblCountry = new JLabel("Land:" + userProfile.getCountry());
 		userData.add(lblCountry);
-		lblAge = new JLabel("Alter:"+userProfile.getAge());
+		lblAge = new JLabel("Alter:" + userProfile.getAge());
 		userData.add(lblAge);
-		
 
-		
-		
-
-		
 		userOverview.add(userData, BorderLayout.CENTER);
 
 		buttons = new JPanel();
 		userOverview.add(buttons, BorderLayout.SOUTH);
-		
+
 		message = new JButton("Nachricht senden");
 		media = new JButton("Musik-Sammlung");
-		follow = new JButton("follow");
-		ignore = new JButton("ignore");
+		if (followProfile){
+			follow = new JButton("unfollow");
+		} else {
+			follow = new JButton("follow");
+		}
+		follow.addActionListener(new FollowButtonListener());
+		if (ignoreProfile){
+			ignore = new JButton("unignore");
+		} else {
+			ignore = new JButton("ignore");
+		}
 		buttons.add(message);
 		buttons.add(media);
 		buttons.add(follow);
 		buttons.add(ignore);
-		
 
 		userName = new JPanel();
 		userOverview.add(userName, BorderLayout.NORTH);
-		
+
 		userContent = new JPanel();
 		userContentScroll = new JScrollPane(userContent);
 		userContentScroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		add(userContentScroll, BorderLayout.CENTER);
-		
-		
 
+	}
+	
+	public boolean getIgnore(){
+		return ignoreProfile;
+	}
+	
+	public boolean getFollow(){
+		return followProfile;
+	}
+
+	public void setFollow(boolean b) {
+		followProfile = b;
+		
+	}
+	
+	public void setIgnore(boolean b){
+		ignoreProfile = b;
+	}
+
+	public User getUserProfile() {
+		return userProfile;
 	}
 
 }
