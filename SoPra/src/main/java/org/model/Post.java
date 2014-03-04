@@ -37,7 +37,6 @@ public class Post {
 	private long postId;
 	@ManyToOne
 	private User autor;
-	@Lob
 	private String message;
 	@Transient
 	private Image prflPicture;
@@ -64,6 +63,10 @@ public class Post {
 		return this.message;
 	}
 	
+	/**
+	 * Creates a panel with a order for posts
+	 * @return a JPanel with this very design
+	 */
 	public JPanel create(){
 		JPanel pst = new JPanel();
 		pst.setLayout(new FlowLayout());
@@ -84,6 +87,7 @@ public class Post {
 				
 		JLabel info = new JLabel(" "+autor.getFirstname()+" has great news!");
 		info.setFont(new Font("Arial",Font.BOLD,14));	
+		System.out.println("Posttext:" + message);
 		JLabel text = new JLabel("<html><body>"+message+"</body></html>");
 		content.add(info);
 		content.add(text);

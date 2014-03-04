@@ -48,7 +48,7 @@ public class DatabaseController {
 	private void initDatabaseConnection(){
 		Configuration cfg = new Configuration();
 	       
-	    cfg.setProperty("hibernate.connection.url", "jdbc:postgresql://ec2-54-197-238-239.compute-1.amazonaws.com:5432/dc38385afumsn0?user=yuxvjihrqgsqoz&password=DslK6nwLkoC8PINe7iouQ1F4EU&ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory");
+	    cfg.setProperty("hibernate.connection.url", "jdbc:postgresql://ec2-54-225-102-235.compute-1.amazonaws.com:5432/dei8266ii6cst9?user=rnjnalovogbjge&password=WogEpoKP1k3MlJ6Hil0M2Pv7el&ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory");
 	    cfg.configure("/Hibernate.cfg.xml");
 	    cfg.setProperty("hibernate.temp.use_jdbc_metadata_defaults","false");
 	    serviceRegistryBuilder = new StandardServiceRegistryBuilder();
