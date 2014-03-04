@@ -7,9 +7,11 @@ import java.util.Collection;
 import java.util.LinkedList;
 
 import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import org.control.listener.CreatePostButtonListener;
 import org.model.Post;
 import org.model.User;
 import org.view.MainScreen;
@@ -20,6 +22,9 @@ public class HomeScreen extends JPanel{
 		JLabel title = new JLabel("HOME");
 		title.setPreferredSize(new Dimension(400,20));
 		this.add(title,BorderLayout.NORTH);
+		JButton createPostBtn = new JButton("Post erstellen");
+		createPostBtn.addActionListener(new CreatePostButtonListener());
+		this.add(createPostBtn,BorderLayout.SOUTH);
 		//***********************************************
 			User tst = new User();
 			Post pst = new Post();
