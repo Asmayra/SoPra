@@ -8,10 +8,8 @@ import org.view.screens.EastBar.DiscoverElement;
 public class DiscoverElementListener implements MouseListener{
 
 
-
 	public void mouseClicked(MouseEvent e) {
 		System.out.println(((DiscoverElement) e.getSource()).getUrl());
-		
 	}
 
 	public void mouseEntered(MouseEvent e) {
