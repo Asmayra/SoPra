@@ -42,6 +42,13 @@ public class DatabaseController {
 		return instance;
 	}
 	
+	
+	public static SessionFactory getSessionFactory() {
+		return sessionFactory;
+	}
+	public static void setSessionFactory(SessionFactory sessionFactory) {
+		DatabaseController.sessionFactory = sessionFactory;
+	}
 	/**
 	 * initializes the Database Connection, creates
 	 */
