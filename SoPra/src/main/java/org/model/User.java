@@ -161,4 +161,24 @@ public class User {
 		return false;
 	}
 
+	public void unfollow(User user) {
+		following.remove(user);
+		
+	}
+
+	public void follow(User user) {
+		following.add(user);
+		
+	}
+	
+	public void unignore(User user) {
+		ignoring.remove(user);
+		
+	}
+
+	public void ignore(User user) {
+		ignoring.add(user);
+		
+	}
+
 }
