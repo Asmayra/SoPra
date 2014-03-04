@@ -1,5 +1,8 @@
 package org.view.screens.Center;
 
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.util.List;
 
 import javax.swing.JPanel;
@@ -18,14 +21,18 @@ public class AdminGenreScreen extends JPanel {
 	private JTree genretree;
 	
 	public AdminGenreScreen(Genre root){
+		this.setLayout(new GridBagLayout());
 		this.setRoot(root);
-		DefaultMutableTreeNode top = new DefaultMutableTreeNode("Genres:");
+		DefaultMutableTreeNode top = new DefaultMutableTreeNode(root);
 		createNodes(top, root);
 		genretree=new JTree(top);
 		AdminGenreListener listener = new AdminGenreListener();
 		genretree.addMouseListener(listener);
 		genretree.setEditable(true);
-		this.add(genretree);
+		genretree.setPreferredSize(new Dimension(300,400));
+		GridBagConstraints c = new GridBagConstraints();
+		c.fill=GridBagConstraints.BOTH;
+		this.add(genretree,c);
 	}
 	
 	private void createNodes(DefaultMutableTreeNode top, Genre topGenre){
@@ -50,10 +57,6 @@ public class AdminGenreScreen extends JPanel {
 			count+=getNumberOfNodes(node.getSubGenres().get(i));
 	    }
 	    return count;
-	}
-	
-	private void addGenresToTree(){
-		
 	}
 	
 	public void deleteGenreFromTree(int index){
