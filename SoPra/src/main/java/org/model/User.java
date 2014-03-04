@@ -32,6 +32,8 @@ public class User {
 	private String country;
 	private String salt;
 	private String rights = "StandardUser";
+	private List<User> following;
+	private List<User> ignoring;
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	// Set Eager,because it's loaded at the Homescreen
 	private Collection<Post> posts = new LinkedList<Post>();
@@ -143,6 +145,13 @@ public class User {
 		System.out.println(birth.get(Calendar.YEAR));
 		System.out.println(now.get(Calendar.YEAR));
 		return age.toString();
+	}
+
+	public boolean isFollowing(User user) {
+		if(following.contains(user)){
+			return true;
+		}
+		return false;
 	}
 
 }
