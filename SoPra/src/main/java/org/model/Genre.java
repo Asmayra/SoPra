@@ -2,6 +2,7 @@ package org.model;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -20,11 +21,12 @@ public class Genre {
 	@GeneratedValue(strategy = GenerationType.AUTO)	
 	private int genreId;
 	private String name;
+	private Genre parent;
 	@OneToMany
-	private Collection<Genre> subGenres;
+	private LinkedList<Genre> subGenres;
 
-	public Genre() {
-		// TODO Auto-generated constructor stub
+	public Genre(){
+		subGenres = new LinkedList<Genre>();
 	}
 
 	public String getName() {
@@ -35,14 +37,29 @@ public class Genre {
 		this.name = name;
 	}
 
-	public List<Genre> getSubGenres() {
-		return subGenres;
+	public LinkedList<Genre> getSubGenres() {
+		return (LinkedList<Genre>) subGenres;
 	}
 
-	public void setSubGenres(List<Genre> subGenres) {
+	public void setSubGenres(LinkedList<Genre> subGenres) {
 		this.subGenres = subGenres;
 	}
 	
+	public void addSubGenre(Genre sub){
+		subGenres.add(sub);
+	}
+
+	public Genre getParent() {
+		return parent;
+	}
+
+	public void setParent(Genre parent) {
+		this.parent = parent;
+	}
 	
+	@Override
+	public String toString(){
+		return name;
+	}
 
 }
