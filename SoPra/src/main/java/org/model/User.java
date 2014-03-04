@@ -128,7 +128,7 @@ public class User {
 		// Test-Rumpf
 		System.out.println("Load Image");
 		System.out.println("Load Image");
-		return ImageIO.read(new File(System.getProperty("user.dir")+"\\src\\main\\java\\placeholder.jpg"));
+		return ImageIO.read(new File(System.getProperty("user.dir")+"\\src\\main\\resources\\placeholder.jpg"));
 	}
 
 	public String getAge() {

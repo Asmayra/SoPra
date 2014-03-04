@@ -30,11 +30,7 @@ public class HomeScreen extends JPanel{
 					+ "sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, "
 					+ "sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. ");
 			this.add(pst.create(),BorderLayout.CENTER);
-			
-		
-		
-		
-		
+					
 		//***********************************************
 		
 	}

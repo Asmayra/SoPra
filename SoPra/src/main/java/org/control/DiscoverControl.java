@@ -26,7 +26,7 @@ public class DiscoverControl {
 		BufferedImage image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_RGB);
 		URL url = this.getClass().getResource("placeholder.jpg");
 		try {
-			image = ImageIO.read(new File(System.getProperty("user.dir")+"\\src\\main\\java\\placeholder.jpg"));
+			image = ImageIO.read(new File(System.getProperty("user.dir")+"\\src\\main\\resources\\placeholder.jpg"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
