@@ -3,7 +3,9 @@ package org.view.screens.Center;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.LinkedList;
 
 import javax.swing.BoxLayout;
@@ -11,6 +13,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import org.control.LoginControl;
 import org.control.listener.CreatePostButtonListener;
 import org.model.Post;
 import org.model.User;
@@ -38,16 +41,14 @@ public class HomeScreen extends JPanel{
 		createPostBtn.addActionListener(new CreatePostButtonListener());
 		this.add(createPostBtn,BorderLayout.SOUTH);
 		//***********************************************
-			User tst = new User();
-			Post pst = new Post();
-			tst.setUsername("FirstTestUser");
-			tst.setFirstname("Bob");
-			tst.addPosts(pst);
-			pst.setMessage("Lorem ipsum dolor sit amet, consetetur sadipscing elitr, "
-					+ "sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, "
-					+ "sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. ");
-			this.add(pst.create(),BorderLayout.CENTER);
-					
+		JPanel currentPosts = new JPanel();
+		currentPosts.setLayout(new BoxLayout(currentPosts,BoxLayout.Y_AXIS));		
+		Iterator<Post> it = LoginControl.getInstance().getCurrentUser().getPosts().iterator(); 
+		while(it.hasNext()){
+			currentPosts.add(it.next().create());	
+		}
+		
+		this.add(currentPosts,BorderLayout.CENTER);	
 		//***********************************************
 		
 	}

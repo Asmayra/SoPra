@@ -15,7 +15,7 @@ public class Main {
 			ls.setVisible(true);
 			
 			//disover control initialize
-			DiscoverControl discContr = new DiscoverControl();
+			//DiscoverControl discContr = new DiscoverControl();
 			
 			//****************************
 				//TestUser
