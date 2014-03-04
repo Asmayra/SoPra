@@ -2,6 +2,7 @@ package org.view;
 
 import java.awt.BorderLayout;
 
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
@@ -78,55 +79,86 @@ public class MainScreen extends JFrame {
 		// AcoverArt with a SongTicker
 		this.west = new WestBar();
 		// Add the HomeScreen to the Center
-		this.center = new HomeScreen();
-		this.update();
+		this.center = HomeScreen.getInstance();
+		this.updateAll();
 	}
 
 	/**
 	 * Updates the 4 Areas of the MainScreen
 	 */
-	public void update() {
+	public void updateAll() {
+		this.removeAll();
 		this.add(center, BorderLayout.CENTER);
 		this.add(east, BorderLayout.EAST);
 		this.add(south, BorderLayout.SOUTH);
 		this.add(west, BorderLayout.WEST);
 		this.pack();
+		this.repaint();
+		this.setVisible(true);
+	}
+	
+	public void updateCenter(JPanel screen)
+	{
+		this.remove(center);
+		this.center = screen;
+		this.add(center, BorderLayout.CENTER);
+		this.pack();
+		this.setVisible(true);
+	}
+	
+	public void updateWest(JPanel screen)
+	{
+		this.remove(west);
+		this.west = screen;
+		this.add(west, BorderLayout.WEST);
+		this.pack();
+		this.setVisible(true);
+	}
+	
+	public void updateEast(JLayeredPane screen)
+	{
+		this.remove(east);
+		this.east = screen;
+		this.add(east, BorderLayout.EAST);
+		this.pack();
+		this.setVisible(true);
+	}
+	
+	public void updateSouth(JPanel screen)
+	{
+		this.remove(south);
+		this.south = screen;
+		this.add(south, BorderLayout.SOUTH);
+		this.pack();
 		this.setVisible(true);
 	}
 
 	public void showAdminGenreScreen(AdminGenreScreen screen) {
-		this.center = screen;
-		this.update();
+		this.updateCenter(screen);
 	}
 
 	public void showAdminHomeScreen(AdminHomeScreen screen) {
-		this.center = screen;
-		this.update();
+		this.updateCenter(screen);
 	}
 
 	public void showDiscoverExtendedScreen(DiscoverExtendedScreen screen) {
-		this.center = screen;
-		this.update();
+		this.updateCenter(screen);
 	}
 
 	public void showHomeScreen(HomeScreen screen) {
-		this.center = screen;
-		this.update();
+		updateCenter(screen);
 	}
 
 	public void showMailbox(Mailbox screen) {
-		this.center = screen;
-		this.update();
+		updateCenter(screen);
 	}
 
 	public void showPlaylistExtendedScreen(PlaylistExtendedScreen screen) {
-		this.center = screen;
-		this.update();
+		this.updateCenter(screen);
 	}
 
 	public void showPfofileScreen(ProfileScreen screen) {
-		this.center = screen;
-		this.update();
+		this.updateCenter(screen);
 	}
 
 
