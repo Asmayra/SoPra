@@ -10,6 +10,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 
+import javassist.bytecode.Descriptor.Iterator;
+
 import javax.imageio.ImageIO;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -46,18 +48,41 @@ public class User {
 	// Set Eager,because it's loaded at the Homescreen
 	private Collection<Post> posts = new LinkedList<Post>();
 	
+	private Collection<Message> messages = new LinkedList<Message>();
+	
 	public Collection<Post> getPosts() {
 		return posts;
 	}
-
+	
+	public Collection<Message> getMessages() {
+		return messages;
+	}
+	
+	
+	public void addMessage(Message message) {
+		message.setSender(this);
+		this.messages.add(message);
+	}
+	
+	public void removeMessage(Message message) {
+		java.util.Iterator<Message> it = messages.iterator();
+		
+		while (it.hasNext() ){
+			if (it.next().getMessageId() == message.getMessageId()){
+				it.remove();
+			}
+		}
+	}
+	
 	/**
 	 * Adds a Post to the User and sets him as the Autor
 	 * 
 	 * @param pst
 	 */
 	public void addPosts(Post pst) {
-		this.posts.add(pst);
 		pst.setAutor(this);
+		this.posts.add(pst);
+		
 	}
 
 	public String getRights() {
