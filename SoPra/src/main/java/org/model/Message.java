@@ -19,6 +19,8 @@ public class Message {
 	@ManyToOne
 	private User[] recipient;
 	private String content;
+	private String subject;
+	private String date;
 	
 	public User getSender() {
 		return sender;
@@ -41,5 +43,17 @@ public class Message {
 	
 	public int getMessageId(){
 		return this.messageId;
+	}
+	public String getSubject() {
+		return subject;
+	}
+	public void setSubject(String subject) {
+		this.subject = subject;
+	}
+	public String getDate() {
+		return date;
+	}
+	public void setDate(String date) {
+		this.date = date;
 	}
 }

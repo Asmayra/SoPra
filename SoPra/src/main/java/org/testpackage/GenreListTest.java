@@ -27,6 +27,8 @@ public class GenreListTest{
 		Genre DeathMetal = new Genre();
 		DeathMetal.setName("Death Metal");
 		
+		DeathMetal.setParent(Metal);
+		Indierock.setParent(Rock);
 		Rock.addSubGenre(Indierock);
 		Metal.addSubGenre(DeathMetal);
 		root.addSubGenre(Rock);
