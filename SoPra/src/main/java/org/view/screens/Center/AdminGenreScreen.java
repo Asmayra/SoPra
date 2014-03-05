@@ -26,7 +26,6 @@ public class AdminGenreScreen extends JPanel {
 	private static AdminGenreScreen instance = null;
 	
 	/**
-	 * 
 	 * @return Instanz des AdminGenreScreens
 	 */
 	public static AdminGenreScreen getInstance()

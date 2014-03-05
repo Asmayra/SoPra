@@ -8,6 +8,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+/**
+ * Erhält die Infos des aktuell abgespielten Lieds und zeigt diese in einem Lauftext an
+ * @author Max Küper, Tim Michels
+ *
+ */
 public class SongTicker extends JPanel implements ActionListener{
 	
 	private String tickertext = "";
@@ -51,6 +56,9 @@ public class SongTicker extends JPanel implements ActionListener{
 		this.tickertext = tickertextinput+"  "+tickertextinput.substring(0, numberofletters);
 	}
 
+	/**
+	 * Vom Ticker ausgelöst wird der Anzeigetext weiterlaufen gelassen
+	 */
 	public void actionPerformed(ActionEvent arg0) {
         index++;
         if (index > tickertext.length() - numberofletters) {

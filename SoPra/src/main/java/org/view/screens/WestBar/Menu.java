@@ -15,7 +15,10 @@ import org.control.listener.HomeScreenButtonListener;
 import org.control.listener.LogOutButtonListener;
 import org.control.listener.MailButtonListener;
 import org.control.listener.SettingsButtonListener;
-
+/**
+ * erstellt das Menu
+ * @author Tim Michels, Max Küper
+ */
 public class Menu extends JPanel{
 	
 	private JLabel userName;
@@ -27,7 +30,9 @@ public class Menu extends JPanel{
 	private JButton logOut = new JButton(dummyIcon);
 	private JButton setting = new JButton(dummyIcon);
 	private JButton avatar = new JButton(LoadImageControl.loadImageIcon("placeholder.jpg"));//benutzerbild x
-
+	/**
+	 * erstllt ein JPanel mit Knöpfen und einer kleinen Version des Profilbilds
+	 */
 	public Menu() {
 		this.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		home.setPreferredSize(new Dimension(BUTTONSIZE,BUTTONSIZE));
