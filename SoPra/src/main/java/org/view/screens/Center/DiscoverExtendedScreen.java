@@ -34,13 +34,11 @@ public class DiscoverExtendedScreen extends JPanel{
 	}
 	
 	private void showRecommendations(){
-		int numberofartists = discoverArtists.size();
-		int numberofalbums = discoverAlbums.size();
-		int numberofsongs = discoverSongs.size();
-		
+		try{
 		LinkedList<DiscoverElement> all = (LinkedList<DiscoverElement>) discoverArtists.clone();
 		all.addAll(discoverAlbums);
 		all.addAll(discoverSongs);
+		System.out.println(all.size());
 		
 		for(int i=0;i<all.size();i++){
 			GridBagConstraints c = new GridBagConstraints();
@@ -49,7 +47,7 @@ public class DiscoverExtendedScreen extends JPanel{
 			this.add(all.get(i),c);
 		}
 		
-		this.updateUI();
+		this.updateUI();}catch(NullPointerException exc){}
 	}
 	
 
