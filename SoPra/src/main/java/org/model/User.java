@@ -73,7 +73,6 @@ public class User {
 	
 	
 	public void addMessage(Message message) {
-		message.setSender(this);
 		this.messages.add(message);
 	}
 	
