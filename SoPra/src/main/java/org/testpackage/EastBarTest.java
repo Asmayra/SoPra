@@ -14,7 +14,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import org.control.LoadImageController;
+import org.control.LoadImageControl;
 import org.view.screens.EastBar.DiscoverElement;
 import org.view.screens.EastBar.DiscoverMiniScreen;
 import org.view.screens.EastBar.EastBar;
@@ -28,9 +28,9 @@ public class EastBarTest {
     
         
         DiscoverMiniScreen miniScreen = DiscoverMiniScreen.getInstance();
-        DiscoverElement discover1 = new DiscoverElement("text1", LoadImageController.loadImageIcon("placeholder.jpg"), "url1");
-	    DiscoverElement discover2 = new DiscoverElement("text2", LoadImageController.loadImageIcon("placeholder.jpg"), "url2");
-	    DiscoverElement discover3 = new DiscoverElement("text3", LoadImageController.loadImageIcon("placeholder.jpg"), "url3");
+        DiscoverElement discover1 = new DiscoverElement("text1", LoadImageControl.loadImageIcon("placeholder.jpg"), "url1");
+	    DiscoverElement discover2 = new DiscoverElement("text2", LoadImageControl.loadImageIcon("placeholder.jpg"), "url2");
+	    DiscoverElement discover3 = new DiscoverElement("text3", LoadImageControl.loadImageIcon("placeholder.jpg"), "url3");
         
         miniScreen.setDiscoverOne(discover1);
         miniScreen.setDiscoverTwo(discover2);
@@ -42,7 +42,7 @@ public class EastBarTest {
         f.setLocationRelativeTo(null);
         f.setVisible(true);
 
-        DiscoverElement discover4 = new DiscoverElement("text4", LoadImageController.loadImageIcon("placeholder.jpg"), "url4");
+        DiscoverElement discover4 = new DiscoverElement("text4", LoadImageControl.loadImageIcon("placeholder.jpg"), "url4");
         miniScreen.setDiscoverTwo(discover4);
         
     	

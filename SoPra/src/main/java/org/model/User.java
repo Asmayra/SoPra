@@ -33,7 +33,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 import org.control.DatabaseControl;
-import org.control.LoadImageController;
+import org.control.LoadImageControl;
 import org.hibernate.Session;
 
 @Entity
@@ -208,9 +208,9 @@ public class User {
 
 	public BufferedImage getPicture() throws IOException {
 		if(this.imagePath == null || this.imagePath == ""){
-			return LoadImageController.loadBufferedImage("placeholder.jpg");
+			return LoadImageControl.loadBufferedImage("placeholder.jpg");
 		} else{
-			return LoadImageController.loadBufferedImage(this.imagePath);
+			return LoadImageControl.loadBufferedImage(this.imagePath);
 		}
 	}
 

@@ -12,7 +12,7 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-import org.control.LoadImageController;
+import org.control.LoadImageControl;
 import org.view.screens.EastBar.DiscoverElement;
 import org.view.screens.EastBar.DiscoverMiniScreen;
 import org.view.screens.EastBar.EastBar;
@@ -22,7 +22,7 @@ public class MoreDiscoverButtonListener implements ActionListener{
 	public void actionPerformed(ActionEvent arg0) {
 		System.out.println("mehr Empfehlungen");
 		
-		JLabel pictureLabel = new JLabel(LoadImageController.loadImageIcon("Placeholder.jpg"));
+		JLabel pictureLabel = new JLabel(LoadImageControl.loadImageIcon("Placeholder.jpg"));
 		//DiscoverMiniScreen.getInstance().setDiscoverOne(new DiscoverElement(UUID.randomUUID().toString(), pictureLabel, UUID.randomUUID().toString()));
 
 	}
