@@ -67,6 +67,11 @@ public class User {
 	
 	public User(){
 		
+		
+		
+	}
+	
+	public void createFavorites(){
 		try{
 			Playlist favorites = new Playlist(this);
 			favorites.setName("Favorites");
@@ -74,9 +79,7 @@ public class User {
 		} catch (IllegalArgumentException e){
 			e.printStackTrace();
 		}
-		
 	}
-	
 	
 	public List<User> getFollowing() {
 		return following;
