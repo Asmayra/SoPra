@@ -50,7 +50,6 @@ public class LoginControl {
 			
 			String userPass = loginUser.getPassword();
 			currentUser = loginUser;
-			currentUser.addMessage(new Message());
 			return PasswordControl.comparePasswords(pass, userPass);	
 				
 			
