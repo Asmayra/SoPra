@@ -15,7 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import org.control.DatabaseController;
+import org.control.DatabaseControl;
 import org.control.LoginControl;
 import org.control.PasswordControl;
 import org.control.listener.SettingsControlListener;
@@ -43,7 +43,7 @@ public class SettingsScreen extends JPanel{
 	private SettingsScreen(){
 		this.setUpProfileDataFields();
 		this.setPreferredSize(new Dimension(400, 300));
-		this.benutzer = (User) DatabaseController.getInstance().load(User.class, LoginControl.getInstance().getCurrentUser().getUsername());
+		this.benutzer = (User) DatabaseControl.getInstance().load(User.class, LoginControl.getInstance().getCurrentUser().getUsername());
 		
 		this.insertDataToFields();
 	}

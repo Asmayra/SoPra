@@ -32,7 +32,7 @@ import javax.persistence.Table;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-import org.control.DatabaseController;
+import org.control.DatabaseControl;
 import org.control.LoadImageController;
 import org.hibernate.Session;
 

@@ -58,7 +58,7 @@ public class LoginControl {
 		
 		if( ( username == null || username.equals("") ) || ( password == null || password.equals("") ) )
 			return false;
-		User loginUser = (User) DatabaseController.getInstance().load(User.class, username);
+		User loginUser = (User) DatabaseControl.getInstance().load(User.class, username);
 		
 		if (loginUser != null ){
 			String salt = loginUser.getSalt();
