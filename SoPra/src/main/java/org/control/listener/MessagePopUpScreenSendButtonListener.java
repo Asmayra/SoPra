@@ -15,7 +15,10 @@ public class MessagePopUpScreenSendButtonListener implements ActionListener {
 		String content = MessagePopUpScreen.getInstance().getMessageText();
 		
 		if( MailboxControl.getInstance().sendMessage(LoginControl.getInstance().getCurrentUser(), recipent, subject, content) )
+		{
 			MessagePopUpScreen.getInstance().dispose();
+			MailboxControl.getInstance().updateTable();
+		}
 		else
 			MessagePopUpScreen.getInstance().displayError();
 	}

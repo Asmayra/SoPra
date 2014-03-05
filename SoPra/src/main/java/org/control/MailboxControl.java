@@ -64,7 +64,7 @@ public class MailboxControl {
 		
 		Message newMsg = new Message();
 		newMsg.setSender(sender);
-		newMsg.setRecipient(recv);
+//		newMsg.setRecipient(recv);
 		newMsg.setSubject(subject);
 		newMsg.setContent(content);
 		newMsg.setDate(new Date().toString());
@@ -92,7 +92,7 @@ public class MailboxControl {
 		
 		messages.addAll(curUser.getMessages());
 		for(Message m : messages)
-				Mailbox.getInstance().addRow(m.getSender().getUsername(),m.getSubject(),m.getDate());
+				Mailbox.getInstance().addRow(m.getSender().getUsername(), m.getSubject(), m.getDate());
 	}
 	
 	
