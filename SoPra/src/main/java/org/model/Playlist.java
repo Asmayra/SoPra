@@ -32,6 +32,7 @@ public class Playlist {
 	
 	public Playlist (User u){
 		owner = u;
+		
 	}
 	
 	public User getOwner(){
@@ -53,7 +54,14 @@ public class Playlist {
 	public String getName() {
 		return name;
 	}
-	public void setName(String name) {
+	public void setName(String name) throws IllegalArgumentException {
+		if (name == "Favorites"){
+			for (int i = 0; i <this.getOwner().getPlaylists().size();i++){
+				if (this.getOwner().getPlaylists().get(i).getName()=="Favorites"){
+					throw new IllegalArgumentException( "Nur eine Playlist mit Namen Favorites erlaubt." ); 
+				}
+			}
+		}
 		this.name = name;
 	}
 
