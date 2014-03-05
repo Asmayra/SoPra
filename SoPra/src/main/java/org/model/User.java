@@ -47,9 +47,9 @@ public class User {
 	private String salt;
 	private String rights = "StandardUser"; // Admin, Artist, LabelManager
 	private String imagePath;
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<User> following;
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<User> ignoring;
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	// Set Eager,because it's loaded at the Homescreen
@@ -203,17 +203,9 @@ public class User {
 	}
 
 	public boolean isFollowing(User usr) {
-		Session session = DatabaseController.getInstance().getSessionFactory().openSession();
-		session.beginTransaction();
-		User obj = (User)session.get(User.class, this.getUsername());
-		if (obj.following.contains(usr)) {
-			DatabaseController.getInstance().update(obj);
-			session.getTransaction().commit();
-			session.close();
+		if (following.contains(usr)) {
 			return true;
 		}
-		session.getTransaction().commit();
-		session.close();
 		return false;
 	}
 
@@ -234,25 +226,11 @@ public class User {
 	}
 
 	public void unfollow(User usr) {
-		Session session = DatabaseController.getInstance().getSessionFactory().openSession();
-		session.beginTransaction();
-		User obj = (User)session.get(User.class, this.getUsername());
-		obj.following.remove(usr);
-		DatabaseController.getInstance().update(obj);
-		session.getTransaction().commit();
-		session.close();
-		
+		following.remove(usr);	
 	}
 
 	public void follow(User usr) {
-		Session session = DatabaseController.getInstance().getSessionFactory().openSession();
-		session.beginTransaction();
-		User obj = (User)session.get(User.class, this.getUsername());
-		obj.following.add(usr);
-		DatabaseController.getInstance().update(obj);
-		session.getTransaction().commit();
-		session.close();
-		
+		following.add(usr);	
 	}
 	
 	public void unignore(User user) {
