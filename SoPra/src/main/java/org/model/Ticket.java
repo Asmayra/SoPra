@@ -60,7 +60,7 @@ public class Ticket {
 	
 	/**
 	 * Generates a Panel for tickets
-	 * @return
+	 * @return ticketPanel
 	 */
 	public JPanel create(){
 		JPanel ticketPanel = new JPanel();

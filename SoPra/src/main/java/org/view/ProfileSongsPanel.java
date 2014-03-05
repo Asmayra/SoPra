@@ -7,9 +7,8 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import org.control.DatabaseController;
+import org.control.DatabaseControl;
 import org.control.LoginControl;
-import org.model.Album;
 import org.model.Song;
 import org.model.User;
 
@@ -28,7 +27,7 @@ public class ProfileSongsPanel extends JPanel {
 				return column == 5;
 			}
 		};
-		System.out.println(DatabaseController.getInstance().queryForKeyword(Song.class, "location", "lied"));
+		System.out.println(DatabaseControl.getInstance().queryForKeyword(Song.class, "location", "lied"));
 		System.out.println("Test");
 		this.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		table = new JTable();
