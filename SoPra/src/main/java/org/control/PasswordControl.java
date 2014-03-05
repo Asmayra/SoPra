@@ -15,6 +15,8 @@ public class PasswordControl {
 	 * @param pass unverschlüsseltes Passwort
 	 * @param salt Salt zur Verschlüsselung
 	 * @return verschlüsseltes Passwort
+	 * @pre pass und salt nicht null
+	 * @post true
 	 */
 	public static String encodePassword(String pass, String salt)
 	{

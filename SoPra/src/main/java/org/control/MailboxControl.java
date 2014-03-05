@@ -9,6 +9,11 @@ import org.model.Message;
 import org.model.User;
 import org.view.screens.Center.Mailbox;
 
+/**
+ * Stellt Methoden zur Verwaltung der Mailbox und erstellen neuer Nachrichten bereit
+ * @author Michael Pfennings, Mattias Schoenke
+ *
+ */
 public class MailboxControl {
 
 	
@@ -22,6 +27,10 @@ public class MailboxControl {
 		messages = new ArrayList<Message>();
 	}
 	
+	/**
+	 * Singleton
+	 * @return Instanz des Singletons
+	 */
 	public static MailboxControl getInstance()
 	{
 		if(instance == null)
@@ -30,12 +39,21 @@ public class MailboxControl {
 		return instance;
 	}
 	
-	
-	public boolean sendMessage(User sender, String[] receips, String subject, String content)
+	/**
+	 * Sendet eine neue Nachricht an die angegebenen Benutzer
+	 * @param sender Sender der Nachricht
+	 * @param recipients Empfänger der Nachricht
+	 * @param subject Betreff der Nachricht
+	 * @param content Inhalt der Nachricht
+	 * @return true wenn Nachricht versendet wurde, false sonst
+	 * @pre kein Parameter ist null
+	 * @post eine neue Nachricht wurde erzeugt und den Empfängern zugestellt
+	 */
+	public boolean sendMessage(User sender, String[] recipients, String subject, String content)
 	{
-		User[] recv = new User[receips.length];
+		User[] recv = new User[recipients.length];
 		int i = 0;
-		for(String s : receips)
+		for(String s : recipients)
 		{
 			if( ( recv[i] = (User) DatabaseController.getInstance().load(User.class, s) ) == null ) 
 				return false;
@@ -60,7 +78,9 @@ public class MailboxControl {
 	}
 	
 	
-	
+	/**
+	 * Aktualisiert die Tabelle in der Mailbox mit neuen Daten
+	 */
 	public void updateTable(){
 		
 		messages.clear();
@@ -74,6 +94,11 @@ public class MailboxControl {
 	}
 	
 	
+	/**
+	 * Makiert oder demakiert eine Zeile der Tabelle zum Löschen
+	 * @param row Zeile die makiert wird
+	 * @return true wenn zeile makiert wurde, false wenn demakiert wurde
+	 */
 	public boolean markRow(int row)
 	{
 		if(markedRows.contains(new Integer(row)))
@@ -90,6 +115,9 @@ public class MailboxControl {
 		}
 	}
 	
+	/**
+	 * Löscht alle makierten Nachrichten
+	 */
 	public void deleteMarked()
 	{
 		User curUser = LoginControl.getInstance().getCurrentUser();

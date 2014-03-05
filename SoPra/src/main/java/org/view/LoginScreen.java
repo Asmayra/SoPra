@@ -43,7 +43,7 @@ public class LoginScreen extends JFrame {
 	private static LoginScreen instance = null;
 
 	
-	
+
 	public String getLoginText() {
 		return loginText.getText();
 	}
@@ -170,6 +170,9 @@ public class LoginScreen extends JFrame {
 		return error;
 	}
 	
+	/**
+	 * Zeigt einen Fehler an
+	 */
 	public void displayErrorLabel(){
 		errorLabel.setVisible(true);
 	}

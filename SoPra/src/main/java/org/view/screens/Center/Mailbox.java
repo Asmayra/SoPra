@@ -26,6 +26,11 @@ import org.control.listener.MailboxNewMessageButtonListener;
 import org.control.listener.MailboxReplyMessageButtonListener;
 import org.view.LoginScreen;
 
+/**
+ * 
+ * @author Michael Pfennings, Mattias Schoenke
+ *
+ */
 public class Mailbox extends JPanel{
 	
 	private final int TABLE_WIDTH = 400;
@@ -39,6 +44,10 @@ public class Mailbox extends JPanel{
 		initGui();
 	}
 	
+	/**
+	 * Singleton
+	 * @return Instanz des Singletons
+	 */
 	public static Mailbox getInstance(){
 		if(instance == null)
 		{
@@ -112,6 +121,12 @@ public class Mailbox extends JPanel{
 		msgTableModel.setRowCount(0);
 	}
 	
+	/**
+	 * Fügt eine neue Zeile zur Tabelle hinzu
+	 * @param sender Sender der Nachricht
+	 * @param subject Betreff der Nachricht
+	 * @param date Datum der Nachricht
+	 */
 	public void addRow(String sender, String subject, String date){
 		String[] newRow = new String[3];
 		newRow[0] = sender;
@@ -121,6 +136,12 @@ public class Mailbox extends JPanel{
 		
 	}
 	
+	/**
+	 * Löscht eine Zeile in der Tabelle
+	 * @param id Index der Zeile die gelöscht werden soll
+	 * @pre id ist gültiger index der Tabelle
+	 * @post Zeile wurde von der Tabelle entfernt
+	 */
 	public void deleteRow(int id){
 		msgTableModel.removeRow(id);
 	}

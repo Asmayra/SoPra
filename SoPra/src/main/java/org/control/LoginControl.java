@@ -1,6 +1,5 @@
 package org.control;
 
-import org.model.Message;
 import org.model.User;
 
 /**
@@ -12,14 +11,31 @@ import org.model.User;
 public class LoginControl {
 	
 	private static LoginControl instance = null;
-	private static User currentUser = null;
+	private User currentUser = null;
 	private LoginControl(){
 		
 	}
+	
+	/**
+	 * Gibt den aktuellen Nutzer zurück
+	 * @return aktuell eingeloggter Nutzer
+	 */
 	public User getCurrentUser(){
 		return currentUser;
 	}
 	
+
+	/**
+	 * Setzt den aktuellen Nutzer zurück, aka kein Nutzer eingeloggt
+	 */
+	public void resetCurrentUser(){
+		this.currentUser = null;
+	}
+	
+	/**
+	 * Singleton
+	 * @return Instanz des Singletons
+	 */
 	public static LoginControl getInstance(){
 		if(instance == null)
 		{
@@ -33,7 +49,9 @@ public class LoginControl {
 	 * Überprüft ob das Passwort zum mit dem des angegebenen Benutzers übereinstimmt
 	 * @param nutzer Username der beim einloggen angegeben wurde
 	 * @param passwort Passwort das beim einloggen angegeben wurde
-	 * @return
+	 * @return true wenn Login erfolgreich, false sonst
+	 * @pre true
+	 * @post Der Nutzer hat sich eingeloggt
 	 */
 	public boolean checkLogin(String username, String password)
 	{

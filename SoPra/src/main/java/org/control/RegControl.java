@@ -69,7 +69,7 @@ public class RegControl {
 	 * @param dob Geburtsdatum des neuen Nutzers
 	 * @param password Unverschlüsseltes Passwort des neuen Nutzers
 	 * @pre Passwort und Pflichtfelder überprüft
-	 * @past Neuer Nutzer wurde zum System hinzugefügt
+	 * @post Neuer Nutzer wurde zum System hinzugefügt
 	 */
 	public void completeRegistration(	String username,
 										String firstname,
@@ -217,6 +217,8 @@ public class RegControl {
 	 * Überprüft ob ein Nutzer bereits existiert
 	 * @param username Name des neuen Nutzers
 	 * @return true falls schon vorhanden, false sonst
+	 * @pre username nicht null
+	 * @post true
 	 */
 	public boolean userExists(	String username	)
 	{
