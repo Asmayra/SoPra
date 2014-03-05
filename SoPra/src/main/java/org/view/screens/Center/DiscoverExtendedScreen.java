@@ -6,8 +6,10 @@ import java.awt.GridBagLayout;
 import java.awt.ScrollPane;
 import java.util.LinkedList;
 
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
 
 import org.model.Genre;
 import org.view.screens.EastBar.DiscoverElement;
@@ -20,8 +22,13 @@ public class DiscoverExtendedScreen extends JPanel{
 	private LinkedList<DiscoverElement> discoverArtists;
 	private LinkedList<DiscoverElement> discoverAlbums;
 	private LinkedList<DiscoverElement> discoverSongs;
-	private JScrollPane scrolPan;
-	private JPanel help = new JPanel();
+	private JScrollPane scrolArtist;
+	private JScrollPane scrolAlbum;
+	private JScrollPane scrolSong;
+	private JTabbedPane tabPane = new JTabbedPane();
+	private JPanel artist = new JPanel();
+	private JPanel album = new JPanel();
+	private JPanel song = new JPanel();
 	
 	private static DiscoverExtendedScreen instance = null;
 	
@@ -41,35 +48,53 @@ public class DiscoverExtendedScreen extends JPanel{
 	 * Konstruktor
 	 */
 	public DiscoverExtendedScreen(){
-		this.setPreferredSize(new Dimension(500,500));
-		help.setLayout(new GridBagLayout());
-		showRecommendations();
-		scrolPan = new JScrollPane(help);
-		this.add(scrolPan);
+		tabPane.setPreferredSize(new Dimension(500,500));
+		artist.setLayout(new GridBagLayout());
+		scrolArtist = new JScrollPane(artist);
+		tabPane.addTab("Künstler", scrolArtist);
+		
+		album.setLayout(new GridBagLayout());
+		scrolAlbum = new JScrollPane(album);
+		tabPane.addTab("Album", scrolAlbum);
+		
+		song.setLayout(new GridBagLayout());
+		scrolSong= new JScrollPane(song);
+		tabPane.addTab("Song", scrolSong);
+		
+		this.add(tabPane);
 	}
 	
 	/**
 	 * Anordnen der Empfehlungen
 	 */
-	private void showRecommendations(){
+	public void showRecommendations(){
 		try{
-		LinkedList<DiscoverElement> all = (LinkedList<DiscoverElement>) discoverArtists.clone();
-		all.addAll(discoverAlbums);
-		all.addAll(discoverSongs);
-		System.out.println(all.size());
+		GridBagConstraints c = new GridBagConstraints();
+		c.ipadx=20;
+		c.ipady=20;
 		
-		for(int i=0;i<all.size();i++){
-			GridBagConstraints c = new GridBagConstraints();
+		for(int i=0;i<discoverArtists.size();i++){
+			
 			c.gridx=(i%3);
 			c.gridy=(i/3);
-			help.add(all.get(i),c);
+			artist.add(discoverArtists.get(i),c);
+		}
+		for(int i=0;i<discoverAlbums.size();i++){
+			
+			c.gridx=(i%3);
+			c.gridy=(i/3);
+			album.add(discoverAlbums.get(i),c);
+		}
+		for(int i=0;i<discoverSongs.size();i++){
+			
+			c.gridx=(i%3);
+			c.gridy=(i/3);
+			song.add(discoverSongs.get(i),c);
 		}
 		
-		scrolPan.updateUI();
-		}catch(NullPointerException exc){}
+		}catch(NullPointerException exc){System.err.println("error");}
 	}
 	
-
 	public LinkedList<DiscoverElement> getDiscoverArtists() {
 		return discoverArtists;
 	}

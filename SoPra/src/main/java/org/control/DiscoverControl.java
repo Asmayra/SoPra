@@ -23,27 +23,32 @@ public class DiscoverControl {
 	    DiscoverExtendedScreen extScreen = DiscoverExtendedScreen.getInstance();
 	    
 	    //Erzeugen von Dummydaten
-	    DiscoverElement discover1 = new DiscoverElement("text1", LoadImageControl.loadImageIcon("placeholder.jpg"), "url1");
-	    DiscoverElement discover2 = new DiscoverElement("text2", LoadImageControl.loadImageIcon("placeholder.jpg"), "url2");
-	    DiscoverElement discover3 = new DiscoverElement("text3", LoadImageControl.loadImageIcon("placeholder.jpg"), "url3");
-	    DiscoverElement discover4 = new DiscoverElement("text4", LoadImageControl.loadImageIcon("placeholder.jpg"), "url4");
-	    DiscoverElement discover5 = new DiscoverElement("text5", LoadImageControl.loadImageIcon("placeholder.jpg"), "url5");
-	    DiscoverElement discover6 = new DiscoverElement("text6", LoadImageControl.loadImageIcon("placeholder.jpg"), "url6");
+	    DiscoverElement discover1mini = new DiscoverElement("text1", LoadImageControl.loadImageIcon("placeholder.jpg"), "url1");
+	    DiscoverElement discover2mini = new DiscoverElement("text2", LoadImageControl.loadImageIcon("placeholder.jpg"), "url2");
+	    DiscoverElement discover3mini = new DiscoverElement("text3", LoadImageControl.loadImageIcon("placeholder.jpg"), "url3");
 	    
-	    miniScreen.setDiscoverOne(discover1);
-	    miniScreen.setDiscoverTwo(discover2);
-	    miniScreen.setDiscoverThree(discover3);
+	    miniScreen.setDiscoverOne(discover1mini);
+	    miniScreen.setDiscoverTwo(discover2mini);
+	    miniScreen.setDiscoverThree(discover3mini);
 	    
-	    artists.add(discover1);
-	    artists.add(discover4);
-	    albums.add(discover2);
-	    albums.add(discover5);
-	    songs.add(discover3);
-	    songs.add(discover6);
+	    for (int i = 0; i < 12; i++) {
+	    	 DiscoverElement discover = new DiscoverElement("Künstler "+(i+1), LoadImageControl.loadImageIcon("placeholder.jpg"), "url "+i);
+	    	 artists.add(discover);
+		}
+	    for (int i = 0; i < 126 ;i++) {
+	    	 DiscoverElement discover = new DiscoverElement("Lied "+(i+1), LoadImageControl.loadImageIcon("placeholder.jpg"), "url "+i);
+	    	 songs.add(discover);
+		}
+	    for (int i = 0; i < 15; i++) {
+	    	 DiscoverElement discover = new DiscoverElement("Album "+(i+1), LoadImageControl.loadImageIcon("placeholder.jpg"), "url "+i);
+	    	 albums.add(discover);
+		}
+	    
 	    
 	    extScreen.setDiscoverArtists(artists);
 	    extScreen.setDiscoverAlbums(albums);
 	    extScreen.setDiscoverSongs(songs);
+	    extScreen.showRecommendations();
 	    
 	    
 	}
