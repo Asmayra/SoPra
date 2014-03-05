@@ -9,6 +9,8 @@ import javax.swing.JTextArea;
 import org.control.DatabaseControl;
 import org.control.LoginControl;
 import org.model.Post;
+import org.view.MainScreen;
+import org.view.screens.Center.HomeScreen;
 
 /**
  * Creates a Post with the give Text
@@ -34,6 +36,7 @@ public class CreatePost implements ActionListener{
 		DatabaseControl.getInstance().update(LoginControl.getInstance().getCurrentUser());
 		frame.setVisible(false);
 		frame.dispose();
+		MainScreen.getInstance().updateCenter(new HomeScreen());
 		
 	}
 	

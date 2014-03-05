@@ -42,7 +42,7 @@ public class PasswordControl {
 	 */
 	public static String generateSalt()
 	{
-		String chars = "abcdefghijklmnopqrstuvwxyz1234567890!§$%&/()=?";
+		String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890!§$%&/()=?";
 		
 		String salt = "";
 		

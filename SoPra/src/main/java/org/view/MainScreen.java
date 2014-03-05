@@ -9,7 +9,7 @@ import javax.swing.JPanel;
 
 import org.view.screens.Center.*;
 import org.view.screens.EastBar.*;
-import org.view.screens.Soutbar.*;
+import org.view.screens.Southbar.*;
 import org.view.screens.WestBar.*;
 
 /**
