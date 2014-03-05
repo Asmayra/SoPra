@@ -4,14 +4,27 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import org.control.MailboxControl;
+import org.model.Message;
+import org.model.User;
 import org.view.MessagePopUpScreen;
 
 public class MailboxReplyMessageButtonListener implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 		MessagePopUpScreen popup = MessagePopUpScreen.getInstance();
-		popup.setRecipient(MailboxControl.getInstance().getCurMessage().getSender().getUsername());
-		//automatisch empfänger eintragen
+		
+		Message toReply = MailboxControl.getInstance().getCurMessage();
+		
+		if(toReply != null)
+		{
+			User recip = toReply.getSender();
+			if(recip != null)
+			{
+				popup.setRecipient(recip.getUsername());
+			}
+		}
+		
+		popup.setVisible(true);
 
 	}
 

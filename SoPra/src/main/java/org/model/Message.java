@@ -16,8 +16,8 @@ public class Message {
 	private int messageId;
 	@OneToOne
 	private User sender;
-	@ManyToOne
-	private User[] recipient;
+//	@ManyToOne
+//	private User[] recipient;
 	private String content;
 	private String subject;
 	private String date;
@@ -28,12 +28,12 @@ public class Message {
 	public void setSender(User sender) {
 		this.sender = sender;
 	}
-	public User[] getRecipient() {
-		return recipient;
-	}
-	public void setRecipient(User[] recipient) {
-		this.recipient = recipient;
-	}
+//	public User[] getRecipient() {
+//		return recipient;
+//	}
+//	public void setRecipient(User[] recipient) {
+//		this.recipient = recipient;
+//	}
 	public String getContent() {
 		return content;
 	}

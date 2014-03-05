@@ -30,6 +30,10 @@ public class Playlist {
 	private Collection<Song> songs;
 	private String name;
 	
+	public Playlist(){
+		
+	}
+	
 	public Playlist (User u){
 		owner = u;
 		
