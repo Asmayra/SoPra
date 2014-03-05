@@ -23,6 +23,7 @@ import org.control.LoginControl;
 import org.control.listener.FollowButtonListener;
 import org.model.User;
 import org.view.ProfilePostsPanel;
+import org.view.ProfileSongsPanel;
 
 public class ProfileScreen extends JPanel {
 	private User userProfile;
@@ -130,7 +131,7 @@ public class ProfileScreen extends JPanel {
 		playlists = new JPanel();
 		alben = new JPanel();
 		posts = new ProfilePostsPanel(userProfile);
-		songs = new JPanel();
+		songs = new ProfileSongsPanel(userProfile);
 		
 		userContentScrollPlaylists = new JScrollPane(playlists);
 		userContentScrollAlben = new JScrollPane(alben);
