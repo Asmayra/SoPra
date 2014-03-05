@@ -6,6 +6,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import org.control.DatabaseControl;
 import org.model.Ticket;
 import org.model.User;
 
@@ -17,10 +18,11 @@ public class AdminHomeScreen extends JPanel {
 		//**************************************************************
 		Ticket t = new Ticket();
 		User u = new User();
-		u.setUsername("penispumpe");
+		u.setUsername("q");
 		t.setKategory("Viagra onine kaufen");
 		t.setRequester(u);
 		t.setShortInfo("blablablablablabalbalbalbal");	
+	
 		this.add(t.create());
 	}
 

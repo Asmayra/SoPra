@@ -1,5 +1,7 @@
 package org.model;
 
+import java.awt.FlowLayout;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,6 +13,10 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import org.control.LoginControl;
+import org.control.listener.DeleteTicket;
+import org.control.listener.EditTicket;
 
 @Entity
 @Table(name="TICKET_TABLE")
@@ -66,11 +72,18 @@ public class Ticket {
 		JPanel ticketPanel = new JPanel();
 		ticketPanel.setLayout(new BoxLayout(ticketPanel,BoxLayout.Y_AXIS));
 		JLabel reqName = new JLabel("Anfrage von "+this.requester.getUsername()+" : "+this.kategory);
-		JLabel srtInfo = new JLabel(this.shortInfo);
+		JLabel srtInfo = new JLabel("<html><body>"+this.shortInfo+"</body></html>");
 		JButton editBTN= new JButton("Bearbeiten");
+		JButton delBTN = new JButton("Löschen");
+		editBTN.addActionListener(new EditTicket(this,LoginControl.getInstance().getCurrentUser()));
+		delBTN.addActionListener(new DeleteTicket(this));
+		JPanel structure = new JPanel();
+		structure.setLayout(new FlowLayout());
+		structure.add(delBTN);
+		structure.add(editBTN);
 		ticketPanel.add(reqName);
 		ticketPanel.add(srtInfo);
-		ticketPanel.add(editBTN);
+		ticketPanel.add(structure);
 		return ticketPanel;
 	}
 
