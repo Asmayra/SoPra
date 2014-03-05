@@ -1,5 +1,6 @@
 package org.view;
 
+import java.awt.FlowLayout;
 import java.util.List;
 
 import javax.swing.JPanel;
@@ -26,6 +27,7 @@ public class ProfilePlaylistPanel extends JPanel {
 				return column == 4;
 			}
 		};
+		this.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		table = new JTable();
 		table.setModel(model);
 		List<Playlist> playlists = u.getPlaylists();
@@ -42,6 +44,6 @@ public class ProfilePlaylistPanel extends JPanel {
 			Object[] entry = { name, builder, songCount, favor};
 			model.addRow(entry);
 		}
-		add(table);
+		this.add(table);
 	}
 }
