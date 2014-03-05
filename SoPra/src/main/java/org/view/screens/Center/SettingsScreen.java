@@ -4,6 +4,9 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 
 import javax.swing.BoxLayout;
@@ -14,6 +17,7 @@ import javax.swing.JTextField;
 
 import org.control.DatabaseController;
 import org.control.LoginControl;
+import org.control.PasswordControl;
 import org.control.listener.SettingsControlListener;
 import org.model.User;
 
@@ -38,41 +42,26 @@ public class SettingsScreen extends JPanel{
 	}
 	private SettingsScreen(){
 		this.setUpProfileDataFields();
-		
-		//this.benutzer = (User) DatabaseController.getInstance().load(User.class, LoginControl.getInstance().getCurrentUser().getUsername());
-		this.benutzer = (User) DatabaseController.getInstance().load(User.class, "q");
+		this.setPreferredSize(new Dimension(400, 300));
+		this.benutzer = (User) DatabaseController.getInstance().load(User.class, LoginControl.getInstance().getCurrentUser().getUsername());
 		
 		this.insertDataToFields();
 	}
 	
 	private void insertDataToFields(){		
+		Date date = benutzer.getDob();
+		
+        SimpleDateFormat sdfToDate = new SimpleDateFormat("dd.MM.yyyy");
+        
 		((JTextField)this.inputFieldMap.get("Vorname: ")).setText(benutzer.getFirstname());
 		((JTextField)this.inputFieldMap.get("Nachname: ")).setText(benutzer.getLastname());
 		//((JTextField)this.inputFieldMap.get("Email: ")).setText(benutzer.getEmail());
-		//((JTextField)this.inputFieldMap.get("Geburtsdatum: ")).setText(benutzer.getDob());
+		((JTextField)this.inputFieldMap.get("Geburtsdatum: ")).setText(sdfToDate.format(date));
 		((JTextField)this.inputFieldMap.get("Stadt: ")).setText(benutzer.getCity());
 		((JTextField)this.inputFieldMap.get("Land: ")).setText(benutzer.getCountry());
-		((JTextField)this.inputFieldMap.get("altes Passwort: ")).setText(benutzer.getPassword());
-		//((JTextField)this.inputFieldMap.get("neues Passwort: ")).setText(benutzer.getFirstname());
-		//((JTextField)this.inputFieldMap.get("neues Passwort wiederholen: ")).setText(benutzer.getFirstname());
+
 	}
-	
-	public void saveDataToDatabase(){
-		benutzer.setFirstname(((JTextField)this.inputFieldMap.get("Vorname: ")).getText());
-		benutzer.setLastname(((JTextField)this.inputFieldMap.get("Nachname: ")).getText());
-		//benutzer.setEmail((JTextField)this.inputFieldMap.get("Email: ")).getText());
-		//benutzer.setDob(((JTextField)this.inputFieldMap.get("Geburtsdatum: ")).getText());
-		benutzer.setCity(((JTextField)this.inputFieldMap.get("Stadt: ")).getText());
-		benutzer.setCountry(((JTextField)this.inputFieldMap.get("Land: ")).getText());
-		benutzer.setPassword(((JTextField)this.inputFieldMap.get("altes Passwort: ")).getText());
-		//((JTextField)this.inputFieldMap.get("neues Passwort: ")).getText();
-		//((JTextField)this.inputFieldMap.get("neues Passwort wiederholen: ")).getText();
-		try {
-			DatabaseController.getInstance().save(benutzer);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+
 	
 	private void setUpProfileDataFields(){
 		this.profileDataPanel.setLayout(new BoxLayout(this.profileDataPanel, BoxLayout.PAGE_AXIS));
