@@ -2,6 +2,7 @@ package org.control.listener;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.swing.JButton;
 
@@ -23,12 +24,23 @@ public class FollowButtonListener implements ActionListener {
 			LoginControl.getInstance().getCurrentUser().unfollow(profile.getUserProfile());
 			profile.setFollow(false);
 			((JButton) arg0.getSource()).setText("follow");
-			DatabaseControl.getInstance().update(LoginControl.getInstance().getCurrentUser());
+			try {
+				DatabaseControl.getInstance().save(LoginControl.getInstance().getCurrentUser());
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		} else {
 			LoginControl.getInstance().getCurrentUser().follow(profile.getUserProfile());
 			profile.setFollow(true);
 			((JButton) arg0.getSource()).setText("unfollow");
-			DatabaseControl.getInstance().update(LoginControl.getInstance().getCurrentUser());
+			try {
+				DatabaseControl.getInstance().save(LoginControl.getInstance().getCurrentUser());
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 
 	}
