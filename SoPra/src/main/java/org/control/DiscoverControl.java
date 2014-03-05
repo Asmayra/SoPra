@@ -32,9 +32,9 @@ public class DiscoverControl {
 		
 	    DiscoverMiniScreen miniScreen = DiscoverMiniScreen.getInstance();
 	    DiscoverExtendedScreen extScreen = DiscoverExtendedScreen.getInstance();
-	    DiscoverElement discover1 = new DiscoverElement("text1", LoadImageController.loadImageIcon("placeholder.jpg"), "url1");
-	    DiscoverElement discover2 = new DiscoverElement("text2", LoadImageController.loadImageIcon("placeholder.jpg"), "url2");
-	    DiscoverElement discover3 = new DiscoverElement("text3", LoadImageController.loadImageIcon("placeholder.jpg"), "url3");
+	    DiscoverElement discover1 = new DiscoverElement("text1", LoadImageControl.loadImageIcon("placeholder.jpg"), "url1");
+	    DiscoverElement discover2 = new DiscoverElement("text2", LoadImageControl.loadImageIcon("placeholder.jpg"), "url2");
+	    DiscoverElement discover3 = new DiscoverElement("text3", LoadImageControl.loadImageIcon("placeholder.jpg"), "url3");
 	    
 	    miniScreen.setDiscoverOne(discover1);
 	    miniScreen.setDiscoverTwo(discover2);
