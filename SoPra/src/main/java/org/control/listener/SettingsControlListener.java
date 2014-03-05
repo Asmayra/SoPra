@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -50,7 +51,7 @@ public class SettingsControlListener implements ActionListener{
         
 		this.benutzer.setFirstname(this.settingsScreen.getFieldData(Attributfelder.VORNAME));
 		this.benutzer.setLastname(this.settingsScreen.getFieldData(Attributfelder.NACHNAME));
-		//this.benutzer.setEmail(this.settingsScreen.getFieldData(Attributfelder.EMAIL));
+		this.benutzer.setEMail(this.settingsScreen.getFieldData(Attributfelder.EMAIL));
 		this.benutzer.setDob(date);
 		this.benutzer.setCity(this.settingsScreen.getFieldData(Attributfelder.STADT));
 		this.benutzer.setCountry(this.settingsScreen.getFieldData(Attributfelder.LAND));
@@ -80,6 +81,7 @@ public class SettingsControlListener implements ActionListener{
 				return true;
 			} else{
 				System.out.println("passwortwiederholung fehlerhaft");
+				JOptionPane.showMessageDialog(null, "Passwortwiederholung fehlerhaft", "Fehler", JOptionPane.ERROR_MESSAGE);
 				return false;
 			}
 		} else{
