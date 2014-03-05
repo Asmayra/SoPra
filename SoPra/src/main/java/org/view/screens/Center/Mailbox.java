@@ -21,6 +21,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 
 import org.control.MailboxControl;
+import org.control.listener.MailboxDeleteMessageButtonListener;
 import org.view.LoginScreen;
 
 public class Mailbox extends JPanel{
@@ -94,6 +95,7 @@ public class Mailbox extends JPanel{
 		JButton replyButton = new JButton("Antworten");
 		
 		JButton delButton = new JButton("löschen");
+		delButton.addActionListener(new MailboxDeleteMessageButtonListener());
 		
 		
 		buttonPanel.add(newButton);

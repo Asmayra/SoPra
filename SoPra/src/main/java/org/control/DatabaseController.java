@@ -42,6 +42,13 @@ public class DatabaseController {
 		return instance;
 	}
 	
+	
+	public static SessionFactory getSessionFactory() {
+		return sessionFactory;
+	}
+	public static void setSessionFactory(SessionFactory sessionFactory) {
+		DatabaseController.sessionFactory = sessionFactory;
+	}
 	/**
 	 * initializes the Database Connection, creates
 	 */
@@ -81,7 +88,8 @@ public class DatabaseController {
 		try{
 			session = sessionFactory.openSession();
 			session.beginTransaction();
-			session.persist(o);
+			//session.persist(o);
+			session.saveOrUpdate(o);
 			session.getTransaction().commit();
 			session.close();
 		}catch(org.hibernate.exception.ConstraintViolationException e){

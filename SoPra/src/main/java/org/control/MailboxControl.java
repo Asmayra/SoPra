@@ -13,10 +13,12 @@ public class MailboxControl {
 	
 	private static MailboxControl instance = null;
 	private ArrayList<Integer> markedRows;
+	private ArrayList<Message> messages;
 	
  	
 	private MailboxControl() {
 		markedRows = new ArrayList<Integer>();
+		messages = new ArrayList<Message>();
 	}
 	
 	public static MailboxControl getInstance()
@@ -27,20 +29,18 @@ public class MailboxControl {
 		return instance;
 	}
 	
-	private Collection<Message> messages = new LinkedList<Message>();
+	
 	
 	public void updateTable(){
+		
+		messages.clear();
+		
 		Mailbox.getInstance().clearTable();
 		User curUser = LoginControl.getInstance().getCurrentUser();
 		
-		messages = curUser.getMessages();
-		Message tempMessage = new Message();
-		java.util.Iterator<Message> it = messages.iterator();
-		
-			while (it.hasNext() ){
-				tempMessage = it.next();
-				Mailbox.getInstance().addRow(tempMessage.getSender().getUsername(),tempMessage.getSubject(),tempMessage.getDate());
-			}
+		messages.addAll(curUser.getMessages());
+		for(Message m : messages)
+				Mailbox.getInstance().addRow(m.getSender().getUsername(),m.getSubject(),m.getDate());
 	}
 	
 	
@@ -62,6 +62,18 @@ public class MailboxControl {
 	
 	public void deleteMarked()
 	{
+		User curUser = LoginControl.getInstance().getCurrentUser();
+		int i = 0;
+		for(Message m : messages)
+		{
+			if(markedRows.contains(new Integer(i)))
+			{
+				curUser.removeMessage(m);
+			}
+			i ++;
+		}
 		
+		DatabaseController.getInstance().update(curUser);
+		updateTable();
 	}
 }

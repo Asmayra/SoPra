@@ -24,7 +24,7 @@ public class Genre {
 	@ManyToOne
 	private Genre parent;
 	@OneToMany
-	private Collection<Genre> subGenres;
+	private LinkedList<Genre> subGenres;
 
 	public Genre(){
 		subGenres = new LinkedList<Genre>();
@@ -47,7 +47,7 @@ public class Genre {
 	}
 	
 	public void addSubGenre(Genre sub){
-		subGenres.add(sub);
+		subGenres.addLast(sub);
 	}
 
 	public Genre getParent() {
