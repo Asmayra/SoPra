@@ -58,6 +58,12 @@ public class HomeScreen extends JPanel{
 				followedUsers.add(userPostIt.next());
 			}
 		}
+		
+		Iterator<Post> pstIt = LoginControl.getInstance().getCurrentUser().getPosts().iterator();
+		while(pstIt.hasNext()){
+			followedUsers.add(pstIt.next());
+		}
+		
 		//Nun enthält followedUsers alle Posts der user denen er folgt; diese könnten nun sorteirt werden...
 		Iterator<Post> followPostsIt = followedUsers.iterator();
 		while(followPostsIt.hasNext()){
