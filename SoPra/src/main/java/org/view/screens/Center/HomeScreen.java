@@ -34,7 +34,7 @@ public class HomeScreen extends JPanel{
 	}
 	
 	
-	private HomeScreen(){
+	public HomeScreen(){
 		this.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		this.setLayout(new BorderLayout());
 		JLabel title = new JLabel("HOME");

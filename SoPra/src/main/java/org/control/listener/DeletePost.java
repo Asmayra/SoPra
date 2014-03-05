@@ -8,6 +8,8 @@ import org.control.DatabaseControl;
 import org.control.LoginControl;
 import org.model.Post;
 import org.model.User;
+import org.view.MainScreen;
+import org.view.screens.Center.HomeScreen;
 
 public class DeletePost implements ActionListener {
 	//the selected Post
@@ -30,6 +32,7 @@ public class DeletePost implements ActionListener {
 				usr.getPosts().remove(selection);
 				temp.setAutor(null);
 				DatabaseControl.getInstance().update(usr);
+				MainScreen.getInstance().updateCenter(new HomeScreen());
 			}
 		}
 		}else{
