@@ -23,6 +23,10 @@ public class Song {
 	private int playtime;
 	private double vrgRating;
 	private int ratingCount;
+	
+	public Song(){
+		
+	}
 
 	public Song(String u, String s1, String s2, Album a) {
 		interpret = u;

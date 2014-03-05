@@ -8,6 +8,9 @@ public class Album extends Playlist {
 	
 	private String coverart;
 
+	public Album(){
+		super();
+	}
 	public Album(User u) {
 		super(u);
 	}
