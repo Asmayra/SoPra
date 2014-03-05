@@ -6,13 +6,14 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import org.control.LoginControl;
 import org.model.Playlist;
 import org.model.Song;
 import org.model.User;
 
 public class ProfilePlaylistPanel extends JPanel {
 
-	private String[] columns = new String[] { "Name", "Ersteller", "#Lieder", "Länge", "Favor" };
+	private String[] columns = new String[] { "Name", "Ersteller", "#Lieder", "Favor" };
 	private Object[][] context;
 	private DefaultTableModel model;
 	private JTable table;
@@ -25,30 +26,22 @@ public class ProfilePlaylistPanel extends JPanel {
 				return column == 4;
 			}
 		};
-		table.setFillsViewportHeight(true);
 		table = new JTable();
 		table.setModel(model);
-		List<Playlist> songs = u.getPlaylists();
-		for (int i = 0; i < songs.size(); i++) {
-			String Name = songs;
-			String title = songs.get(i).getTitle();
-			boolean favored;
-			if (u.getFavorites().contains(songs.get(i))) {
-				favored = true;
-			} else {
-				favored = false;
+		List<Playlist> playlists = u.getPlaylists();
+		for (int i = 0; i < playlists.size(); i++) {
+			String name = playlists.get(i).getName();
+			String builder = playlists.get(i).getOwner().getUsername();
+			String songCount = ((Integer)playlists.get(i).getSongs().size()).toString();
+			boolean favor;
+			if (LoginControl.getInstance().getCurrentUser().getPlaylists().contains(playlists.get(i))){
+				favor = true;
+			} else{
+				favor = false;
 			}
-			String album;
-			if (songs.get(i).getAlbum() == null) {
-				album = " - ";
-			} else {
-				album = songs.get(i).getAlbum().getName();
-			}
-			String playtime = ((Integer) songs.get(i).getPlaytime()).toString();
-			String comRating = ((Integer) songs.get(i).getVrgRating()).toString();
-			Object[] entry = { interpret, title, album, playtime, comRating, favored };
+			Object[] entry = { name, builder, songCount, favor};
 			model.addRow(entry);
 		}
-
+		add(table);
 	}
 }

@@ -26,7 +26,6 @@ public class ProfileSongsPanel extends JPanel {
 				return column == 5;
 			}
 		};
-		table.setFillsViewportHeight(true);
 		table = new JTable();
 		table.setModel(model);
 		List<Song> songs = u.getOwnSongs();
@@ -50,7 +49,7 @@ public class ProfileSongsPanel extends JPanel {
 			Object[] entry = { interpret, title, album, playtime, comRating, favored };
 			model.addRow(entry);
 		}
-
+		add(table);
 	}
 
 }

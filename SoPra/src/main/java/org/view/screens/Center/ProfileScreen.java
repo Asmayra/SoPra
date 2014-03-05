@@ -104,9 +104,11 @@ public class ProfileScreen extends JPanel {
 
 		buttons = new JPanel();
 		userOverview.add(buttons, BorderLayout.SOUTH);
-
-		message = new JButton("Nachricht senden");
-		buttons.add(message);
+		if (LoginControl.getInstance().getCurrentUser()!=(userProfile)){
+			message = new JButton("Nachricht senden");
+			buttons.add(message);
+		}
+		
 		if (userProfile != LoginControl.getInstance().getCurrentUser()){
 			if (followProfile){
 				follow = new JButton("unfollow");
