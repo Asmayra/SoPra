@@ -15,8 +15,7 @@ public class Song {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int songId;
-	@ManyToOne
-	private User interpret;
+	private String interpret;
 	private String title;
 	private String location;
 	@ManyToOne
@@ -25,7 +24,7 @@ public class Song {
 	private double vrgRating;
 	private int ratingCount;
 
-	public Song(User u, String s1, String s2, Album a) {
+	public Song(String u, String s1, String s2, Album a) {
 		interpret = u;
 		title = s1;
 		location = s2;
@@ -35,7 +34,7 @@ public class Song {
 		setPlaytime();
 	}
 
-	public Song(User u, String s1, String s2) {
+	public Song(String u, String s1, String s2) {
 		interpret = u;
 		title = s1;
 		location = s2;
@@ -45,7 +44,7 @@ public class Song {
 		setPlaytime();
 	}
 
-	public User getInterpret() {
+	public String getInterpret() {
 		return interpret;
 	}
 
