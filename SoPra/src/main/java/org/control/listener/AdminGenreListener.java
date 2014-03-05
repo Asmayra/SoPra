@@ -19,6 +19,11 @@ import org.model.Genre;
 import org.view.ContextMenu;
 import org.view.screens.Center.AdminGenreScreen;
 
+/**
+ * Verwaltet die Genreübersicht
+ * @author Max, Tim M.
+ *
+ */
 public class AdminGenreListener  extends MouseAdapter{
 	
 	private AdminGenreScreen genrescreen;
@@ -31,6 +36,10 @@ public class AdminGenreListener  extends MouseAdapter{
         maybeShowPopup(e);
     }
 
+    /**
+     * Anzeige des Kontextmenus
+     * @param e
+     */
     private void maybeShowPopup(MouseEvent e) {
     	JTree currentTree = (JTree) e.getSource();
     	genrescreen = (AdminGenreScreen) currentTree.getParent();
@@ -60,6 +69,11 @@ public class AdminGenreListener  extends MouseAdapter{
     	
     }
     
+    /**
+     * Actionlistener für das Kontextmenü der Genreübersicht
+     * @author Max,Tim
+     *
+     */
     private class ContextMenuListener implements ActionListener{
 
 		public void actionPerformed(ActionEvent arg0) {
@@ -102,6 +116,11 @@ public class AdminGenreListener  extends MouseAdapter{
     	
     }
     
+    /**
+     * Listener für die (Namens-)Änderungen in der Genreübersicht 
+     * @author Max, Tim
+     *
+     */
     private class TreeListener implements TreeModelListener{
 
 		public void treeNodesChanged(TreeModelEvent e) {

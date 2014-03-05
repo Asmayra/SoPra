@@ -7,7 +7,7 @@ import java.awt.GridBagLayout;
 import javax.swing.JPanel;
 /**
  * A Structure Class for the WestBar
- * @author Philipp
+ * @author Philipp, Max, Tim
  *
  */
 public class WestBar extends JPanel {
