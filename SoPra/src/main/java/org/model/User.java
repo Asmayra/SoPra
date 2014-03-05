@@ -14,6 +14,9 @@ import java.util.Locale;
 
 
 
+
+
+
 import javax.imageio.ImageIO;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -26,7 +29,9 @@ import javax.persistence.Table;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
+import org.control.DatabaseController;
 import org.control.LoadImageController;
+import org.hibernate.Session;
 
 @Entity
 @Table(name = "USER_TABLE")
@@ -188,14 +193,23 @@ public class User {
 		return age.toString();
 	}
 
-	public boolean isFollowing(User user) {
-		if (following.contains(user)) {
+	public boolean isFollowing(User usr) {
+		Session session = DatabaseController.getInstance().getSessionFactory().openSession();
+		session.beginTransaction();
+		User obj = (User)session.get(User.class, this.getUsername());
+		if (obj.following.contains(usr)) {
+			DatabaseController.getInstance().update(obj);
+			session.getTransaction().commit();
+			session.close();
 			return true;
 		}
+		session.getTransaction().commit();
+		session.close();
 		return false;
 	}
 
 	public boolean isIgnoring(User user) {
+		
 		if (ignoring.contains(user)) {
 			return true;
 		}
@@ -210,13 +224,25 @@ public class User {
 		this.imagePath = imagePath;
 	}
 
-	public void unfollow(User user) {
-		following.remove(user);
+	public void unfollow(User usr) {
+		Session session = DatabaseController.getInstance().getSessionFactory().openSession();
+		session.beginTransaction();
+		User obj = (User)session.get(User.class, this.getUsername());
+		obj.following.remove(usr);
+		DatabaseController.getInstance().update(obj);
+		session.getTransaction().commit();
+		session.close();
 		
 	}
 
-	public void follow(User user) {
-		following.add(user);
+	public void follow(User usr) {
+		Session session = DatabaseController.getInstance().getSessionFactory().openSession();
+		session.beginTransaction();
+		User obj = (User)session.get(User.class, this.getUsername());
+		obj.following.add(usr);
+		DatabaseController.getInstance().update(obj);
+		session.getTransaction().commit();
+		session.close();
 		
 	}
 	
