@@ -22,6 +22,8 @@ import javax.swing.table.TableCellRenderer;
 
 import org.control.MailboxControl;
 import org.control.listener.MailboxDeleteMessageButtonListener;
+import org.control.listener.MailboxNewMessageButtonListener;
+import org.control.listener.MailboxReplyMessageButtonListener;
 import org.view.LoginScreen;
 
 public class Mailbox extends JPanel{
@@ -91,8 +93,10 @@ public class Mailbox extends JPanel{
 		
 		JPanel  buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 		JButton newButton = new JButton("Neu");
+		newButton.addActionListener(new MailboxNewMessageButtonListener());
 		
 		JButton replyButton = new JButton("Antworten");
+		replyButton.addActionListener(new MailboxReplyMessageButtonListener());
 		
 		JButton delButton = new JButton("löschen");
 		delButton.addActionListener(new MailboxDeleteMessageButtonListener());

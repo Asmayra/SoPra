@@ -122,9 +122,9 @@ public class LoginScreen extends JFrame {
 		GridLayout labelsLayout = new GridLayout(0,1);
 		labels.setLayout(labelsLayout);
 
-		JLabel loginLabel = new JLabel("Nutzer:");
+		JLabel loginLabel = new JLabel("Nutzer: ");
 		
-		JLabel passwordLabel = new JLabel("Passwort:");
+		JLabel passwordLabel = new JLabel("Passwort: ");
 
 		labels.add(loginLabel);
 		labels.add(passwordLabel);
