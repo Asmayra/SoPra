@@ -71,6 +71,16 @@ public class User {
 	}
 	
 	
+	public List<User> getFollowing() {
+		return following;
+	}
+
+
+	public void setFollowing(List<User> following) {
+		this.following = following;
+	}
+
+
 	public Collection<Post> getPosts() {
 		return posts;
 	}
