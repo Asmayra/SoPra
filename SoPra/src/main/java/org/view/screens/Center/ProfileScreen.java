@@ -1,6 +1,3 @@
-
-//In Bearbeitung bei Sebastian
-
 package org.view.screens.Center;
 
 import java.awt.BorderLayout;
@@ -25,6 +22,14 @@ import org.model.User;
 import org.view.ProfilePostsPanel;
 import org.view.ProfileSongsPanel;
 
+/**
+ * Profil-Screen mit Funktionen "follow/unfollow", "ignore/unignore" und
+ * "Nachricht senden" (nicht beim Aufruf des eigenen Profils). Es kann je nach Inhalt und Rechte des Profils die Songs,
+ * Playlisten, Alben und Posts angezeigt werden.
+ * 
+ * @author Sebastian Roth
+ * 
+ */
 public class ProfileScreen extends JPanel {
 	private User userProfile;
 	private Image prflPicture;
@@ -104,19 +109,17 @@ public class ProfileScreen extends JPanel {
 
 		buttons = new JPanel();
 		userOverview.add(buttons, BorderLayout.SOUTH);
-		if (LoginControl.getInstance().getCurrentUser()!=(userProfile)){
+
+		if (!userProfile.equals(LoginControl.getInstance().getCurrentUser())) {
 			message = new JButton("Nachricht senden");
 			buttons.add(message);
-		}
-		
-		if (userProfile != LoginControl.getInstance().getCurrentUser()){
-			if (followProfile){
+			if (followProfile) {
 				follow = new JButton("unfollow");
 			} else {
 				follow = new JButton("follow");
 			}
 			follow.addActionListener(new FollowButtonListener());
-			if (ignoreProfile){
+			if (ignoreProfile) {
 				ignore = new JButton("unignore");
 			} else {
 				ignore = new JButton("ignore");
@@ -125,16 +128,13 @@ public class ProfileScreen extends JPanel {
 			buttons.add(follow);
 			buttons.add(ignore);
 		}
-		
-		
-
 
 		userContent = new JTabbedPane();
 		playlists = new JPanel();
 		alben = new JPanel();
 		posts = new ProfilePostsPanel(userProfile);
 		songs = new ProfileSongsPanel(userProfile);
-		
+
 		userContentScrollPlaylists = new JScrollPane(playlists);
 		userContentScrollAlben = new JScrollPane(alben);
 		userContentScrollPosts = new JScrollPane(posts);
@@ -145,35 +145,38 @@ public class ProfileScreen extends JPanel {
 		userContentScrollSongs.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		userContent.addTab("Playlists", userContentScrollPlaylists);
 		userContent.addTab("Posts", userContentScrollPosts);
-		if (LoginControl.getInstance().getCurrentUser().getRights().equals("Artist")||LoginControl.getInstance().getCurrentUser().getRights()=="LabelManager"){
+		if (LoginControl.getInstance().getCurrentUser().getRights().equals("Artist")
+				|| LoginControl.getInstance().getCurrentUser().getRights() == "LabelManager") {
 			userContent.addTab("Songs", userContentScrollSongs);
 			userContent.addTab("Alben", userContentScrollAlben);
 		}
 		add(userContent, BorderLayout.CENTER);
 
 	}
-	
-	public boolean getIgnore(){
+
+	/**
+	 * Get-Methode die den Status zurückgibt ob Benutzer dem User dieses 
+	 * @return
+	 */
+	public boolean getIgnore() {
 		return ignoreProfile;
 	}
-	
-	public boolean getFollow(){
+
+	public boolean getFollow() {
 		return followProfile;
 	}
 
 	public void setFollow(boolean b) {
 		followProfile = b;
-		
+
 	}
-	
-	public void setIgnore(boolean b){
+
+	public void setIgnore(boolean b) {
 		ignoreProfile = b;
 	}
 
 	public User getUserProfile() {
 		return userProfile;
 	}
-
-
 
 }
