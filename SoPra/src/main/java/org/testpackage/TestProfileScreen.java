@@ -13,7 +13,7 @@ public class TestProfileScreen {
 	public static void main(String[] args) {
 		User tester = (User) DatabaseControl.getInstance().load(User.class, "MaxMuster");
 		User tested = (User) DatabaseControl.getInstance().load(User.class, "q");
-		LoginControl.getInstance().setCurrentUser(tested);
+//		LoginControl.getInstance().setCurrentUser(tested);
 		JFrame test = new JFrame();
 		JPanel screen = new ProfileScreen(tester);
 		test.setVisible(true);
