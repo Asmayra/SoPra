@@ -39,7 +39,7 @@ public class EastBar extends JLayeredPane{
 		this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 		this.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		
-		this.setPreferredSize(new Dimension(300, 310));
+		this.setPreferredSize(new Dimension(150, 310));
 		
 		//add SearchMask Component
 		//SearchMask.getInstance().setBounds(0, 0, 180, 20);
