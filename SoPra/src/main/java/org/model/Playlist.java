@@ -39,6 +39,13 @@ public class Playlist {
 		return this.owner;
 	}
 	
+	public boolean contains(Song s){
+		if (songs.contains(s)){
+			return true;
+		}
+		return false;
+	}
+	
 	public Collection<Song> getSongs() {
 		return songs;
 	}
