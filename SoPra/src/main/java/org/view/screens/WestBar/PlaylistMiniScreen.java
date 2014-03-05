@@ -15,7 +15,10 @@ import javax.swing.tree.TreePath;
 import org.control.LoginControl;
 import org.control.listener.GenresButtonListener;
 import org.model.User;
-
+/**
+ * 
+ * @author Tim Michels, Max Küper
+ */
 public class PlaylistMiniScreen extends JPanel{
 	
 	private JTabbedPane tabbedPane  = new JTabbedPane();

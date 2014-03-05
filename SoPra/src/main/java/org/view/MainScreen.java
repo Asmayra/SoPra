@@ -1,6 +1,7 @@
 package org.view;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 
 import javax.swing.JComponent;
 import javax.swing.JFrame;
@@ -22,6 +23,9 @@ public class MainScreen extends JFrame {
 	private JPanel center, south, west;
 	private JLayeredPane east;
 	private static MainScreen instance;
+	
+	private final int MIN_WIDTH = 1024;
+	private final int MIN_HEIGHT = 600;
 
 	public JPanel getCenter() {
 		return center;
@@ -63,7 +67,9 @@ public class MainScreen extends JFrame {
 	}
 	
 	private MainScreen() {
-		this.setLayout(new BorderLayout());
+		this.setLayout(new BorderLayout(5, 0));
+		this.setMinimumSize(new Dimension(MIN_WIDTH, MIN_HEIGHT));
+		this.setExtendedState(MAXIMIZED_BOTH); 
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
 
@@ -107,17 +113,18 @@ public class MainScreen extends JFrame {
 		this.add(east, BorderLayout.EAST);
 		this.add(south, BorderLayout.SOUTH);
 		this.add(west, BorderLayout.WEST);
-		this.pack();
+//		this.pack();
 		this.setVisible(true);
 	}
 	
 	public void updateCenter(JPanel screen)
 	{
 		this.remove(center);
-		this.pack();
+//		this.pack();
 		this.center = screen;
 		this.add(center, BorderLayout.CENTER);
-		this.pack();
+//		this.pack();
+		this.repaint();
 		this.setVisible(true);
 	}
 	

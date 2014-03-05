@@ -90,6 +90,8 @@ public class MessagePopUpScreen extends JFrame {
 		messageArea = new JTextArea();
 		messageArea.setEditable(true);
 		messageArea.setPreferredSize(new Dimension(TEXTAREA_WIDTH, TEXTAREA_HEIGHT));
+		messageArea.setLineWrap(true);
+		messageArea.setWrapStyleWord(true);
 		
 		return messageArea;
 		

@@ -186,7 +186,7 @@ public class RegControl {
 										String lastname,
 										String city,
 										String country,
-										String dob,
+										Date dob,
 										String mail		)
 	{		
 		if(USERNAME && (username == null || username.equals("")))

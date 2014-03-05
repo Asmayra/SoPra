@@ -8,7 +8,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 
-
+/**
+ * Zeigt zugehöriges Coverart zum aktuell abgespielten Song an
+ * @author Max Küper, Tim Michels
+ *
+ */
 public class CoverArt extends JPanel{
 	
 	private ImageIcon albumcover; 

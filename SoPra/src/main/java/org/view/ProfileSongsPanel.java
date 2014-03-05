@@ -15,7 +15,7 @@ import org.model.User;
 public class ProfileSongsPanel extends JPanel {
 
 	private String[] columns = new String[] { "Interpret", "Title", "Album", "Länge", "Community Rating", "Favor" };
-	private Object[][] context = new Object[][] {new String[]{"test","test","test","test","test","test"}};
+	private Object[][] context = new Object[][] {};
 	private DefaultTableModel model;
 	private JTable table;
 
@@ -27,8 +27,6 @@ public class ProfileSongsPanel extends JPanel {
 				return column == 5;
 			}
 		};
-		System.out.println(DatabaseControl.getInstance().queryForKeyword(Song.class, "location", "lied"));
-		System.out.println("Test");
 		this.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		table = new JTable();
 		table.setModel(model);
@@ -52,7 +50,6 @@ public class ProfileSongsPanel extends JPanel {
 			String comRating = ((Integer) songs.get(i).getVrgRating()).toString();
 			Object[] entry = { interpret, title, album, playtime, comRating, favored };
 			model.addRow(entry);
-			System.out.println("Test:"+i);
 		}
 		this.add(table);
 	}

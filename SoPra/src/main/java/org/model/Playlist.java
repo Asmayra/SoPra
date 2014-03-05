@@ -5,8 +5,12 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,8 +30,8 @@ public class Playlist {
 	private int playlistId;
 	@ManyToOne
 	private User owner;
-	@ManyToMany
-	private Collection<Song> songs;
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private Set<Song> songs;
 	private String name;
 	
 	public Playlist(){
@@ -51,10 +55,11 @@ public class Playlist {
 	}
 	
 	public Collection<Song> getSongs() {
-		return songs;
+		Collection<Song> coll = new ArrayList<Song>(this.songs);
+		return coll;
 	}
 	public void setSongs(List<Song> songs) {
-		this.songs = songs;
+		this.songs = new TreeSet<Song>(songs);
 	}	
 	public int getPlaylistId() {
 		return playlistId;

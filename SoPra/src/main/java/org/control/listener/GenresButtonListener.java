@@ -6,6 +6,11 @@ import java.awt.event.ActionListener;
 import org.view.MainScreen;
 import org.view.screens.Center.AdminGenreScreen;
 
+/**
+ * 
+ * @author Max, Tim
+ *
+ */
 public class GenresButtonListener implements ActionListener  {
 
 	
