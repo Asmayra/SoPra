@@ -15,6 +15,7 @@ import org.control.SoPra;
 import org.control.listener.HomeScreenButtonListener;
 import org.control.listener.LogOutButtonListener;
 import org.control.listener.MailButtonListener;
+import org.control.listener.SettingsButtonListener;
 
 public class Menu extends JPanel{
 	
@@ -32,14 +33,19 @@ public class Menu extends JPanel{
 		this.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		home.setPreferredSize(new Dimension(BUTTONSIZE,BUTTONSIZE));
 		home.addActionListener(new HomeScreenButtonListener());
+		home.setToolTipText("Home");
 		
 		mail.setPreferredSize(new Dimension(BUTTONSIZE,BUTTONSIZE));
 		mail.addActionListener(new MailButtonListener());
+		mail.setToolTipText("Mail");
 		
 		logOut.setPreferredSize(new Dimension(BUTTONSIZE,BUTTONSIZE));
 		logOut.addActionListener(new LogOutButtonListener());
+		logOut.setToolTipText("Logout");
 		
 		setting.setPreferredSize(new Dimension(BUTTONSIZE,BUTTONSIZE));
+		setting.addActionListener(new SettingsButtonListener());
+		setting.setToolTipText("Settings");
 		
 		setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
@@ -84,29 +90,4 @@ public class Menu extends JPanel{
 		return mail;
 	}
 	
-	public void addSettingButtonListener(ButtonActionListener listener){
-		if(setting.getAncestorListeners().length == 0){
-			setting.addActionListener(listener);
-		}
-	}
-	public void addHomeButtonListener(ButtonActionListener listener){
-		if(home.getAncestorListeners().length == 0){
-			home.addActionListener(listener);
-		}
-	}
-	public void addLogOutButtonListener(ButtonActionListener listener){
-		if(logOut.getAncestorListeners().length == 0){
-			logOut.addActionListener(listener);
-		}
-	}
-	public void addMailButtonListener(ButtonActionListener listener){
-		if(mail.getAncestorListeners().length == 0){
-			mail.addActionListener(listener);
-		}
-	}
-	public void addMyProfileButtonListener(ButtonActionListener listener){
-		if(avatar.getAncestorListeners().length == 0){
-			avatar.addActionListener(listener);
-		}
-	}
 }

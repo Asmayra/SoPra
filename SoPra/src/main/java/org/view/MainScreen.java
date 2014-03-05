@@ -138,6 +138,10 @@ public class MainScreen extends JFrame {
 	public void showAdminGenreScreen(AdminGenreScreen screen) {
 		this.updateCenter(screen);
 	}
+	
+	public void showSettingsScreen(SettingsScreen screen) {
+		this.updateCenter(screen);
+	}
 
 	public void showAdminHomeScreen(AdminHomeScreen screen) {
 		this.updateCenter(screen);
