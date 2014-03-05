@@ -4,7 +4,6 @@ import java.awt.Component;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
@@ -20,9 +19,6 @@ import java.util.Locale;
 
 
 
-
-import java.util.Set;
-import java.util.TreeSet;
 
 import javax.imageio.ImageIO;
 import javax.persistence.CascadeType;
@@ -56,23 +52,20 @@ public class User {
 	private String rights = "StandardUser"; // Admin, Artist, LabelManager
 	private String imagePath;
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	private Set<User> following;
+	private List<User> following;
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	private Set<Playlist> playlists;
+	private List<Playlist> playlists;
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	private Set<User> ignoring;
+	private List<User> ignoring;
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	// Set Eager,because it's loaded at the Homescreen
-	private Set<Post> posts = new TreeSet<Post>();
+	private Collection<Post> posts = new LinkedList<Post>();
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	private Set<Message> messages = new TreeSet<Message>();
+	private Collection<Message> messages = new LinkedList<Message>();
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	private Set<Song> ownSongs;
+	private List<Song> ownSongs;
 	
-	public User(){
-		
-		
-		
+	public User(){	
 	}
 	
 	public void createFavorites(){
@@ -86,13 +79,12 @@ public class User {
 	}
 	
 	public List<User> getFollowing() {
-		List<User> list = new ArrayList<User>();
-		return list;
+		return following;
 	}
 
 
 	public void setFollowing(List<User> following) {
-		this.following = new TreeSet<User>(following);
+		this.following = following;
 	}
 
 
@@ -124,8 +116,7 @@ public class User {
 	}
 	
 	public List<Song> getOwnSongs(){
-		List<Song> list = new ArrayList<Song>();
-		return list;
+		return ownSongs;
 	}
 	
 	/**
@@ -279,19 +270,17 @@ public class User {
 
 
 	public Playlist getFavorites() {
-		List<Playlist> list = new ArrayList<Playlist>(playlists);
-		for (int i=0;i<list.size();i++){
-			if (list.get(i).getName()=="Favorites"){
-				return list.get(i);
+		for (int i=0;i<playlists.size();i++){
+			if (playlists.get(i).getName()=="Favorites"){
+				return playlists.get(i);
 			}
 		}
-		return list.get(0);
+		return playlists.get(0);
 	}
 
 
 	public List<Playlist> getPlaylists() {
-		List<Playlist> list = new ArrayList<Playlist>();
-		return list;
+		return playlists;
 	}
 
 
