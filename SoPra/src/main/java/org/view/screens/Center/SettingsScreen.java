@@ -55,7 +55,7 @@ public class SettingsScreen extends JPanel{
         
 		((JTextField)this.inputFieldMap.get("Vorname: ")).setText(benutzer.getFirstname());
 		((JTextField)this.inputFieldMap.get("Nachname: ")).setText(benutzer.getLastname());
-		//((JTextField)this.inputFieldMap.get("Email: ")).setText(benutzer.getEmail());
+		((JTextField)this.inputFieldMap.get("Email: ")).setText(benutzer.getEMail());
 		((JTextField)this.inputFieldMap.get("Geburtsdatum: ")).setText(sdfToDate.format(date));
 		((JTextField)this.inputFieldMap.get("Stadt: ")).setText(benutzer.getCity());
 		((JTextField)this.inputFieldMap.get("Land: ")).setText(benutzer.getCountry());
