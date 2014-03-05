@@ -13,7 +13,11 @@ import java.util.List;
 
 import javax.swing.JLabel;
 
+import org.control.DatabaseControl;
 import org.control.SearchControl;
+import org.model.User;
+import org.view.MainScreen;
+import org.view.screens.Center.ProfileScreen;
 import org.view.screens.EastBar.EastBar;
 import org.view.screens.EastBar.SearchMask;
 
@@ -24,6 +28,9 @@ public class SearchMaskListener implements KeyListener, ActionListener, MouseLis
 		
 	}
 
+	/**
+	 * update event when char entered in search mask
+	 */
 	public void keyReleased(KeyEvent e) {
 		this.setResults();
 	}
@@ -41,15 +48,21 @@ public class SearchMaskListener implements KeyListener, ActionListener, MouseLis
 	}
 	
 
-
+	/**
+	 * gets called when the delete button next to the search mask is pressed
+	 */
 	public void actionPerformed(ActionEvent e) {
 		SearchMask.getInstance().resetSearchInput();
 		EastBar.getInstance().hideResultsPan();
 		
 	}
 
+	/**
+	 * called when an item in the resultslist is pressed
+	 */
 	public void mouseClicked(MouseEvent e) {
-		System.out.println(((JLabel)e.getSource()).getText());
+		MainScreen.getInstance().updateCenter(new ProfileScreen((User)DatabaseControl.getInstance().load(User.class, ((JLabel)e.getSource()).getText())));
+		//System.out.println(((JLabel)e.getSource()).getText());
 		
 	}
 
