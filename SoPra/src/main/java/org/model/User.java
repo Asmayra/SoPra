@@ -1,5 +1,6 @@
 package org.model;
 
+import java.awt.Component;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -10,6 +11,8 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
+
+
 
 
 
@@ -50,6 +53,8 @@ public class User {
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<User> following;
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private List<Playlist> playlists;
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<User> ignoring;
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	// Set Eager,because it's loaded at the Homescreen
@@ -60,6 +65,9 @@ public class User {
 	private List<Song> ownSongs;
 	
 	public User(){
+		Playlist favorites = new Playlist(this);
+		favorites.setName("Favorites");
+		playlists.add(favorites);
 	}
 	
 	
@@ -241,6 +249,21 @@ public class User {
 	public void ignore(User user) {
 		ignoring.add(user);
 		
+	}
+
+
+	public Playlist getFavorites() {
+		for (int i=0;i<playlists.size();i++){
+			if (playlists.get(i).getName()=="Favorites"){
+				return playlists.get(i);
+			}
+		}
+		return playlists.get(0);
+	}
+
+
+	public List<Playlist> getPlaylists() {
+		return playlists;
 	}
 
 }
