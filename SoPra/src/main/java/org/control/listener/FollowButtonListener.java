@@ -10,17 +10,23 @@ import org.control.LoginControl;
 import org.view.screens.Center.ProfileScreen;
 
 public class FollowButtonListener implements ActionListener {
+	
+	private ProfileScreen profile;
+	
+	public FollowButtonListener(ProfileScreen p){
+		profile = p;
+	}
 
 	public void actionPerformed(ActionEvent arg0) {
 
-		if (((ProfileScreen) ((JButton) arg0.getSource()).getParent()).getFollow()) {
-			LoginControl.getInstance().getCurrentUser().unfollow(((ProfileScreen) ((JButton) arg0.getSource()).getParent()).getUserProfile());
-			((ProfileScreen) ((JButton) arg0.getSource()).getParent()).setFollow(false);
+		if (profile.getFollow()) {
+			LoginControl.getInstance().getCurrentUser().unfollow(profile.getUserProfile());
+			profile.setFollow(false);
 			((JButton) arg0.getSource()).setText("follow");
 			DatabaseControl.getInstance().update(LoginControl.getInstance().getCurrentUser());
 		} else {
-			LoginControl.getInstance().getCurrentUser().follow(((ProfileScreen) ((JButton) arg0.getSource()).getParent()).getUserProfile());
-			((ProfileScreen) ((JButton) arg0.getSource()).getParent()).setFollow(true);
+			LoginControl.getInstance().getCurrentUser().follow(profile.getUserProfile());
+			profile.setFollow(true);
 			((JButton) arg0.getSource()).setText("unfollow");
 			DatabaseControl.getInstance().update(LoginControl.getInstance().getCurrentUser());
 		}

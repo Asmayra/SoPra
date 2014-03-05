@@ -58,6 +58,12 @@ public class ProfileScreen extends JPanel {
 	private JLabel lblAge;
 	private JLabel lblUserName;
 
+	/**
+	 *  Konstruktor erstellt das Profil-Screen-Panel
+	 *  
+	 * @param selectedUser
+	 * 			User dessen Profil-Screen angezeigt wird
+	 */
 	public ProfileScreen(User selectedUser) {
 		userProfile = selectedUser;
 		// task: try catch Block hinzufügen für IOException
@@ -118,7 +124,7 @@ public class ProfileScreen extends JPanel {
 			} else {
 				follow = new JButton("follow");
 			}
-			follow.addActionListener(new FollowButtonListener());
+			follow.addActionListener(new FollowButtonListener(this));
 			if (ignoreProfile) {
 				ignore = new JButton("unignore");
 			} else {
@@ -145,8 +151,7 @@ public class ProfileScreen extends JPanel {
 		userContentScrollSongs.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		userContent.addTab("Playlists", userContentScrollPlaylists);
 		userContent.addTab("Posts", userContentScrollPosts);
-		if (LoginControl.getInstance().getCurrentUser().getRights().equals("Artist")
-				|| LoginControl.getInstance().getCurrentUser().getRights() == "LabelManager") {
+		if (userProfile.getRights().equals("Artist")||userProfile.getRights().equals("LabelManager")) {
 			userContent.addTab("Songs", userContentScrollSongs);
 			userContent.addTab("Alben", userContentScrollAlben);
 		}
@@ -155,8 +160,9 @@ public class ProfileScreen extends JPanel {
 	}
 
 	/**
-	 * Get-Methode die den Status zurückgibt ob Benutzer dem User dieses 
+	 * Get-Methode die den Status zurückgibt ob Benutzer dem User dieses Profils ignoriert oder nicht
 	 * @return
+	 * 		boolean mit true für "ignoriert" und false für "ignoriert nicht"
 	 */
 	public boolean getIgnore() {
 		return ignoreProfile;
