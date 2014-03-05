@@ -5,17 +5,23 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.DefaultCellEditor;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComponent;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
@@ -35,7 +41,15 @@ public class Mailbox extends JPanel{
 	
 	private final int TABLE_WIDTH = 400;
 	private final int TABLE_HEIGHT = 300;
+	
 	private JTable msgTable;
+	
+	private JTextField subjText;
+	private JTextField senderText;
+	private JTextArea contentArea;
+	
+	private JPanel messagePanel;
+	
 	private DefaultTableModel msgTableModel;
 	
 	public static Mailbox instance = null;
@@ -62,6 +76,7 @@ public class Mailbox extends JPanel{
 		this.setLayout(new BorderLayout());
 		this.add(initTable(), BorderLayout.NORTH);
 		this.add(initButtons(), BorderLayout.CENTER);
+		this.add(initMessageView(), BorderLayout.SOUTH);
 		this.setVisible(true);
 		
 		
@@ -70,6 +85,9 @@ public class Mailbox extends JPanel{
 	
 	private JComponent initTable(){
 		msgTable = new JTable();
+		
+		msgTable.addMouseListener(new MouseListener());
+		
 		msgTableModel = new DefaultTableModel(){
 			public boolean isCellEditable(int rowIndex, int columnIndex){
 				if(columnIndex == 3)
@@ -115,6 +133,49 @@ public class Mailbox extends JPanel{
 		buttonPanel.add(replyButton);
 		buttonPanel.add(delButton);
 		return buttonPanel;
+	}
+	
+	public JComponent initMessageView()
+	{
+		messagePanel = new JPanel();
+		messagePanel.setLayout(new BorderLayout());
+		
+		JPanel textFields = new JPanel();
+		textFields.setLayout(new GridLayout(0,1));
+		
+		senderText = new JTextField();
+		senderText.setEditable(false);
+		
+		subjText = new JTextField();
+		subjText.setEditable(false);
+		
+		textFields.add(senderText);
+		textFields.add(subjText);
+		
+		
+		JPanel labels = new JPanel();
+		labels.setLayout(new GridLayout(0,1));
+		
+		JLabel senderLabel = new JLabel("Sender: ");
+		
+		JLabel subjLabel = new JLabel("Betreff: ");
+		
+		labels.add(senderLabel);
+		labels.add(subjLabel);
+		
+		contentArea = new JTextArea();
+		contentArea.setEditable(false);
+		contentArea.setPreferredSize(new Dimension(200, 200));
+		
+		messagePanel.add(labels, BorderLayout.WEST);
+		messagePanel.add(textFields, BorderLayout.CENTER);
+		messagePanel.add(contentArea, BorderLayout.SOUTH);
+		
+		messagePanel.setVisible(false);
+		
+		
+		
+		return messagePanel;
 	}
 	
 	public void clearTable(){
@@ -260,5 +321,21 @@ public class Mailbox extends JPanel{
 		}
 	}
 	
+	
+	class MouseListener extends MouseAdapter
+	{
+		public void mouseClicked(MouseEvent e)
+		{
+			if(msgTable.getSelectedColumn() < 3)
+			{
+				MailboxControl.getInstance().setCurMessage(msgTable.getSelectedRow());
+				messagePanel.setVisible(true);
+				
+				contentArea.setText( MailboxControl.getInstance().getCurMessage().getContent() );
+				senderText.setText( MailboxControl.getInstance().getCurMessage().getSender().getUsername() );
+				subjText.setText( MailboxControl.getInstance().getCurMessage().getSubject() );
+			}
+		}
+	}
 }
 
