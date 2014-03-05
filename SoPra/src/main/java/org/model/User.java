@@ -47,6 +47,7 @@ public class User {
 	private Date dob;
 	private String city;
 	private String country;
+	private String eMail;
 	private String salt;
 	private String rights = "StandardUser"; // Admin, Artist, LabelManager
 	private String imagePath;
@@ -65,9 +66,15 @@ public class User {
 	private List<Song> ownSongs;
 	
 	public User(){
-		Playlist favorites = new Playlist(this);
-		favorites.setName("Favorites");
-		playlists.add(favorites);
+		
+		try{
+			Playlist favorites = new Playlist(this);
+			favorites.setName("Favorites");
+			playlists.add(favorites);
+		} catch (IllegalArgumentException e){
+			e.printStackTrace();
+		}
+		
 	}
 	
 	
@@ -274,6 +281,16 @@ public class User {
 
 	public List<Playlist> getPlaylists() {
 		return playlists;
+	}
+
+
+	public String getEMail() {
+		return eMail;
+	}
+
+
+	public void setEMail(String eMail) {
+		this.eMail = eMail;
 	}
 
 }
