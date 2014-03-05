@@ -147,8 +147,8 @@ public class MailboxControl {
 		return curMessage;
 	}
 	
-	public void setCurMessage(Message curMessage)
+	public void setCurMessage(int curMessageId)
 	{
-		this.curMessage = curMessage;
+		this.curMessage = messages.get(curMessageId);
 	}
 }

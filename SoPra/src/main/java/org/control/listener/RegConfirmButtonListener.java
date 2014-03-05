@@ -2,6 +2,10 @@ package org.control.listener;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 import org.control.RegControl;
 import org.view.RegScreen;
@@ -25,7 +29,12 @@ public class RegConfirmButtonListener implements ActionListener {
 		String lastname = regScreen.getLastname();
 		String city = regScreen.getCity();
 		String country = regScreen.getCountry();
-		String dob = regScreen.getDob();
+		Date dob;
+		try {
+			dob = new SimpleDateFormat("DD.MM.YYYY", Locale.GERMAN).parse(regScreen.getDob());
+		} catch (ParseException e) {
+			dob = null;
+		}
 		String mail = regScreen.getMail();
 		String password = regScreen.getPassword();
 		String passwordConfirm = regScreen.getPasswordConfirm();
@@ -50,7 +59,7 @@ public class RegConfirmButtonListener implements ActionListener {
 		
 		if(success)
 		{
-			control.completeRegistration(username, firstname, lastname, city, country, null, password);
+			control.completeRegistration(username, firstname, lastname, city, country, dob, password);
 			regScreen.dispose();
 		}
 		else

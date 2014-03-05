@@ -17,7 +17,7 @@ public class LoginScreenLoginButtonListener implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 		if (LoginControl.getInstance().checkLogin(login.getLoginText(), login.getPassword())){
-			if(LoginControl.getInstance().getCurrentUser().getRights()=="Admin"){
+			if(LoginControl.getInstance().getCurrentUser().getRights().equals("Admin")){
 				MainScreen.getInstance().setUpAdminLayout();
 			}else{
 				System.out.println("UserLayout aufgesetzt");
