@@ -11,7 +11,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.model.User;
 
-public class DatabaseControllerTest {
+public class DatabaseControlTest {
 	
 	
 	private static User dbTestUser, dbTestUser2;
