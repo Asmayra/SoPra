@@ -11,7 +11,6 @@ import javax.swing.*;
 import javax.swing.plaf.basic.BasicOptionPaneUI.ButtonActionListener;
 
 import org.control.LoadImageControl;
-import org.control.SoPra;
 import org.control.listener.HomeScreenButtonListener;
 import org.control.listener.LogOutButtonListener;
 import org.control.listener.MailButtonListener;

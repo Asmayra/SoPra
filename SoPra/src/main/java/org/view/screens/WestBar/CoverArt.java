@@ -7,7 +7,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import org.control.SoPra;
+
 
 public class CoverArt extends JPanel{
 	
