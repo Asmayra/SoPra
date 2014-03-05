@@ -10,8 +10,7 @@ import java.awt.Image;
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicOptionPaneUI.ButtonActionListener;
 
-import org.control.LoadImageController;
-import org.control.SoPra;
+import org.control.LoadImageControl;
 import org.control.listener.HomeScreenButtonListener;
 import org.control.listener.LogOutButtonListener;
 import org.control.listener.MailButtonListener;
@@ -27,7 +26,7 @@ public class Menu extends JPanel{
 	private JButton mail = new JButton(dummyIcon);
 	private JButton logOut = new JButton(dummyIcon);
 	private JButton setting = new JButton(dummyIcon);
-	private JButton avatar = new JButton(LoadImageController.loadImageIcon("placeholder.jpg"));//benutzerbild x
+	private JButton avatar = new JButton(LoadImageControl.loadImageIcon("placeholder.jpg"));//benutzerbild x
 
 	public Menu() {
 		this.setBorder(BorderFactory.createLineBorder(Color.BLACK));

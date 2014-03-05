@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JTextArea;
 
-import org.control.DatabaseController;
+import org.control.DatabaseControl;
 import org.control.LoginControl;
 import org.model.Post;
 
@@ -31,7 +31,7 @@ public class CreatePost implements ActionListener{
 		Post pst = new Post();
 		LoginControl.getInstance().getCurrentUser().addPosts(pst);
 		pst.setMessage(message.getText());	
-		DatabaseController.getInstance().update(LoginControl.getInstance().getCurrentUser());
+		DatabaseControl.getInstance().update(LoginControl.getInstance().getCurrentUser());
 		frame.setVisible(false);
 		frame.dispose();
 		

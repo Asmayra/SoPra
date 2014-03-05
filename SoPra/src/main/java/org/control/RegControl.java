@@ -91,7 +91,7 @@ public class RegControl {
 		newUser.setSalt(PasswordControl.generateSalt());
 		newUser.setPassword(PasswordControl.encodePassword(password, newUser.getSalt()));
 		try{
-			DatabaseController.getInstance().save(newUser);
+			DatabaseControl.getInstance().save(newUser);
 		}catch(IOException e){
 			System.out.println("Username already taken!");
 			accurate = false;
@@ -222,7 +222,7 @@ public class RegControl {
 	 */
 	public boolean userExists(	String username	)
 	{
-		return DatabaseController.getInstance().load(User.class, username) != null;
+		return DatabaseControl.getInstance().load(User.class, username) != null;
 	}
 
 }

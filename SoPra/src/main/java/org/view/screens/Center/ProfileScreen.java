@@ -18,9 +18,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.ScrollPaneConstants;
 
-import org.control.IgnoreButtonListener;
 import org.control.LoginControl;
 import org.control.listener.FollowButtonListener;
+import org.control.listener.IgnoreButtonListener;
 import org.model.User;
 import org.view.ProfilePostsPanel;
 import org.view.ProfileSongsPanel;

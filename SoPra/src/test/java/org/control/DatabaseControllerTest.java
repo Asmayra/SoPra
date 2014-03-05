@@ -22,18 +22,18 @@ public class DatabaseControllerTest {
 	public void loadTest()
 	{
 		dbTestUser = null;
-		dbTestUser = (User) DatabaseController.getInstance().load(User.class, "dbTestUser");
+		dbTestUser = (User) DatabaseControl.getInstance().load(User.class, "dbTestUser");
 		assertTrue(dbTestUser != null);
 	}
 	
 	@Test
 	public void updateTest()
 	{
-		dbTestUser = (User) DatabaseController.getInstance().load(User.class, "dbTestUser");
+		dbTestUser = (User) DatabaseControl.getInstance().load(User.class, "dbTestUser");
 		dbTestUser.setFirstname("Wurst");
-		DatabaseController.getInstance().update(dbTestUser);
+		DatabaseControl.getInstance().update(dbTestUser);
 		
-		dbTestUser = (User) DatabaseController.getInstance().load(User.class, "dbTestUser");
+		dbTestUser = (User) DatabaseControl.getInstance().load(User.class, "dbTestUser");
 		
 		assertTrue(dbTestUser.getFirstname().equals("Wurst"));
 	}
@@ -41,12 +41,12 @@ public class DatabaseControllerTest {
 	@Test
 	public void updateNonExistingTest()
 	{
-		dbTestUser = (User) DatabaseController.getInstance().load(User.class, "dbTestUser");
+		dbTestUser = (User) DatabaseControl.getInstance().load(User.class, "dbTestUser");
 		dbTestUser.setUsername("dbTestUser2");
-		DatabaseController.getInstance().update(dbTestUser);
+		DatabaseControl.getInstance().update(dbTestUser);
 		
-		dbTestUser = (User) DatabaseController.getInstance().load(User.class, "dbTestUser2");
-		dbTestUser2 = (User) DatabaseController.getInstance().load(User.class, "dbTestUser");
+		dbTestUser = (User) DatabaseControl.getInstance().load(User.class, "dbTestUser2");
+		dbTestUser2 = (User) DatabaseControl.getInstance().load(User.class, "dbTestUser");
 		
 		assertTrue(dbTestUser != null);
 		assertTrue(dbTestUser2 != null);
@@ -58,11 +58,11 @@ public class DatabaseControllerTest {
 		User dbTestUser3 = new User();
 		dbTestUser3.setUsername("dbTestUser3");
 		
-		DatabaseController.getInstance().updatePrimary(User.class, "dbTestUser", dbTestUser3);
+		DatabaseControl.getInstance().updatePrimary(User.class, "dbTestUser", dbTestUser3);
 		
-		dbTestUser = (User) DatabaseController.getInstance().load(User.class, "dbTestUser");
+		dbTestUser = (User) DatabaseControl.getInstance().load(User.class, "dbTestUser");
 		
-		dbTestUser2 = (User) DatabaseController.getInstance().load(User.class, "dbTestUser3");
+		dbTestUser2 = (User) DatabaseControl.getInstance().load(User.class, "dbTestUser3");
 		
 		assertTrue(dbTestUser == null);
 		assertTrue(dbTestUser2 != null);
@@ -71,7 +71,7 @@ public class DatabaseControllerTest {
 	@Test
 	public void searchTest()
 	{
-		assertTrue(!DatabaseController.getInstance().queryForKeyword(User.class, "firstname", "ans").isEmpty());
+		assertTrue(!DatabaseControl.getInstance().queryForKeyword(User.class, "firstname", "ans").isEmpty());
 	}	
 		
 	@Before
@@ -81,7 +81,7 @@ public class DatabaseControllerTest {
 		dbTestUser.setUsername("dbTestUser");
 		dbTestUser.setFirstname("Hans");
 		try {
-			DatabaseController.getInstance().save(dbTestUser);
+			DatabaseControl.getInstance().save(dbTestUser);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			assertTrue(false);
@@ -91,21 +91,21 @@ public class DatabaseControllerTest {
 	@After
 	public void after()
 	{
-		dbTestUser = (User) DatabaseController.getInstance().load(User.class, "dbTestUser");
+		dbTestUser = (User) DatabaseControl.getInstance().load(User.class, "dbTestUser");
 		if(dbTestUser != null)
-			DatabaseController.getInstance().delete(dbTestUser);
+			DatabaseControl.getInstance().delete(dbTestUser);
 		
-		dbTestUser = (User) DatabaseController.getInstance().load(User.class, "dbTestUser2");
+		dbTestUser = (User) DatabaseControl.getInstance().load(User.class, "dbTestUser2");
 		if(dbTestUser != null)
-			DatabaseController.getInstance().delete(dbTestUser);
+			DatabaseControl.getInstance().delete(dbTestUser);
 		
-		dbTestUser = (User) DatabaseController.getInstance().load(User.class, "dbTestUser3");
+		dbTestUser = (User) DatabaseControl.getInstance().load(User.class, "dbTestUser3");
 		if(dbTestUser != null)
-			DatabaseController.getInstance().delete(dbTestUser);
+			DatabaseControl.getInstance().delete(dbTestUser);
 		
-		assertTrue(((User) DatabaseController.getInstance().load(User.class, "dbTestUser") == null));
-		assertTrue(((User) DatabaseController.getInstance().load(User.class, "dbTestUser2") == null));
-		assertTrue(((User) DatabaseController.getInstance().load(User.class, "dbTestUser3") == null));
+		assertTrue(((User) DatabaseControl.getInstance().load(User.class, "dbTestUser") == null));
+		assertTrue(((User) DatabaseControl.getInstance().load(User.class, "dbTestUser2") == null));
+		assertTrue(((User) DatabaseControl.getInstance().load(User.class, "dbTestUser3") == null));
 	}
 
 }

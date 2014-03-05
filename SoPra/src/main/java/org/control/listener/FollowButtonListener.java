@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
-import org.control.DatabaseController;
+import org.control.DatabaseControl;
 import org.control.LoginControl;
 import org.view.screens.Center.ProfileScreen;
 
@@ -17,12 +17,12 @@ public class FollowButtonListener implements ActionListener {
 			LoginControl.getInstance().getCurrentUser().unfollow(((ProfileScreen) ((JButton) arg0.getSource()).getParent()).getUserProfile());
 			((ProfileScreen) ((JButton) arg0.getSource()).getParent()).setFollow(false);
 			((JButton) arg0.getSource()).setText("follow");
-			DatabaseController.getInstance().update(LoginControl.getInstance().getCurrentUser());
+			DatabaseControl.getInstance().update(LoginControl.getInstance().getCurrentUser());
 		} else {
 			LoginControl.getInstance().getCurrentUser().follow(((ProfileScreen) ((JButton) arg0.getSource()).getParent()).getUserProfile());
 			((ProfileScreen) ((JButton) arg0.getSource()).getParent()).setFollow(true);
 			((JButton) arg0.getSource()).setText("unfollow");
-			DatabaseController.getInstance().update(LoginControl.getInstance().getCurrentUser());
+			DatabaseControl.getInstance().update(LoginControl.getInstance().getCurrentUser());
 		}
 
 	}

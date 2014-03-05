@@ -57,7 +57,7 @@ public class MailboxControl {
 		int i = 0;
 		for(String s : recipients)
 		{
-			if( ( recv[i] = (User) DatabaseController.getInstance().load(User.class, s) ) == null ) 
+			if( ( recv[i] = (User) DatabaseControl.getInstance().load(User.class, s) ) == null ) 
 				return false;
 			i++;
 		}
@@ -72,7 +72,7 @@ public class MailboxControl {
 		for(User u : recv)
 		{
 			u.addMessage(newMsg);
-			DatabaseController.getInstance().update(u);
+			DatabaseControl.getInstance().update(u);
 		}
 		
 		return true;
@@ -137,7 +137,7 @@ public class MailboxControl {
 		
 		if(removed)
 		{
-			DatabaseController.getInstance().update(curUser);
+			DatabaseControl.getInstance().update(curUser);
 			updateTable();
 		}
 	}

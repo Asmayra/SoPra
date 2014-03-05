@@ -22,7 +22,7 @@ public class RegControlTest {
 		
 		
 		try{
-			DatabaseController.getInstance().save(newUser);
+			DatabaseControl.getInstance().save(newUser);
 		}catch(IOException e){
 			System.out.println("Username already taken!");
 		}
@@ -54,11 +54,11 @@ public class RegControlTest {
 	
 	@AfterClass
 	public static void deleteTestuser(){
-		User newUser = (User) DatabaseController.getInstance().load(User.class, "RegisterTestUser");
+		User newUser = (User) DatabaseControl.getInstance().load(User.class, "RegisterTestUser");
 		
-		DatabaseController.getInstance().delete(newUser);
+		DatabaseControl.getInstance().delete(newUser);
 		
-		assertTrue(DatabaseController.getInstance().load(User.class, "RegisterTestUser") == null);
+		assertTrue(DatabaseControl.getInstance().load(User.class, "RegisterTestUser") == null);
 	}
 
 }
