@@ -81,7 +81,8 @@ public class DatabaseController {
 		try{
 			session = sessionFactory.openSession();
 			session.beginTransaction();
-			session.persist(o);
+			//session.persist(o);
+			session.saveOrUpdate(o);
 			session.getTransaction().commit();
 			session.close();
 		}catch(org.hibernate.exception.ConstraintViolationException e){
