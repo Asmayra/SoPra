@@ -23,7 +23,6 @@ public class ProfileSongsPanel extends JPanel {
 		model = new DefaultTableModel(songs, columns){
 			 @Override
 			   public boolean isCellEditable(int row, int column) {
-			       //Only the third column
 			       return column == 5;
 			   }
 		};

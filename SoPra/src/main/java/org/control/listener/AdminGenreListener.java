@@ -13,6 +13,7 @@ import javax.swing.event.TreeModelEvent;
 import javax.swing.event.TreeModelListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreePath;
 
 import org.model.Genre;
 import org.view.ContextMenu;
@@ -76,6 +77,7 @@ public class AdminGenreListener  extends MouseAdapter{
 				genreTree.updateUI();
 			}
 			else if(arg0.getActionCommand().equals("Speichern")){
+				Genre testGenre = genrescreen.getRoot();
 				saveToDatabase();		
 			}
 			else if(arg0.getActionCommand().equals("Hinzufügen")){
@@ -90,7 +92,10 @@ public class AdminGenreListener  extends MouseAdapter{
 				
 				DefaultMutableTreeNode newNode = new DefaultMutableTreeNode(newGenre);
 				current.add(newNode);
-				
+				genreTree.expandPath(new TreePath(current.getPath()));
+				//genreTree.setEditable(true);
+				//genreTree.updateUI();
+				//genreTree.startEditingAtPath(new TreePath(newNode.getPath()));
 				genreTree.updateUI();
 			}
 		}
@@ -102,13 +107,14 @@ public class AdminGenreListener  extends MouseAdapter{
 		public void treeNodesChanged(TreeModelEvent e) {
 			JTree genreTree = genrescreen.getGenretree();
 			DefaultMutableTreeNode current = (DefaultMutableTreeNode) genreTree.getLastSelectedPathComponent();
+			int parentRow = genreTree.getRowForPath(genreTree.getSelectionPath().getParentPath());
+			genreTree.expandRow(parentRow);
+			int currentRow = genreTree.getRowForPath(genreTree.getSelectionPath());
 			Genre currentParentGenre = (Genre) ((DefaultMutableTreeNode) current.getParent()).getUserObject();
-			
-			Genre neuesGenre = currentParentGenre.getSubGenres().getLast();
-			
-			neuesGenre.setName((String)current.getUserObject());
-			
+			Genre neuesGenre = currentParentGenre.getSubGenres().get(currentRow-parentRow-1);
+			neuesGenre.setName(current.getUserObject().toString());
 			current.setUserObject(neuesGenre);
+			
 		}
 
 		public void treeNodesInserted(TreeModelEvent e) {

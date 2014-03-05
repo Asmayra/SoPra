@@ -26,6 +26,7 @@ public class AdminGenreScreen extends JPanel {
 	{
 		if(instance == null){
 			Genre emptyroot = new Genre();
+			emptyroot.setName("root");
 			instance = new AdminGenreScreen(emptyroot);
 		}
 		return instance;

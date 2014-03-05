@@ -1,5 +1,6 @@
 package org.model;
 
+import java.awt.Component;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -10,6 +11,8 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
+
+
 
 
 
@@ -47,9 +50,11 @@ public class User {
 	private String salt;
 	private String rights = "StandardUser"; // Admin, Artist, LabelManager
 	private String imagePath;
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<User> following;
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private List<Playlist> playlists;
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<User> ignoring;
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	// Set Eager,because it's loaded at the Homescreen
@@ -60,6 +65,9 @@ public class User {
 	private List<Song> ownSongs;
 	
 	public User(){
+		Playlist favorites = new Playlist(this);
+		favorites.setName("Favorites");
+		playlists.add(favorites);
 	}
 	
 	
@@ -203,17 +211,9 @@ public class User {
 	}
 
 	public boolean isFollowing(User usr) {
-		Session session = DatabaseController.getInstance().getSessionFactory().openSession();
-		session.beginTransaction();
-		User obj = (User)session.get(User.class, this.getUsername());
-		if (obj.following.contains(usr)) {
-			DatabaseController.getInstance().update(obj);
-			session.getTransaction().commit();
-			session.close();
+		if (following.contains(usr)) {
 			return true;
 		}
-		session.getTransaction().commit();
-		session.close();
 		return false;
 	}
 
@@ -234,25 +234,11 @@ public class User {
 	}
 
 	public void unfollow(User usr) {
-		Session session = DatabaseController.getInstance().getSessionFactory().openSession();
-		session.beginTransaction();
-		User obj = (User)session.get(User.class, this.getUsername());
-		obj.following.remove(usr);
-		DatabaseController.getInstance().update(obj);
-		session.getTransaction().commit();
-		session.close();
-		
+		following.remove(usr);	
 	}
 
 	public void follow(User usr) {
-		Session session = DatabaseController.getInstance().getSessionFactory().openSession();
-		session.beginTransaction();
-		User obj = (User)session.get(User.class, this.getUsername());
-		obj.following.add(usr);
-		DatabaseController.getInstance().update(obj);
-		session.getTransaction().commit();
-		session.close();
-		
+		following.add(usr);	
 	}
 	
 	public void unignore(User user) {
@@ -263,6 +249,21 @@ public class User {
 	public void ignore(User user) {
 		ignoring.add(user);
 		
+	}
+
+
+	public Playlist getFavorites() {
+		for (int i=0;i<playlists.size();i++){
+			if (playlists.get(i).getName()=="Favorites"){
+				return playlists.get(i);
+			}
+		}
+		return playlists.get(0);
+	}
+
+
+	public List<Playlist> getPlaylists() {
+		return playlists;
 	}
 
 }
