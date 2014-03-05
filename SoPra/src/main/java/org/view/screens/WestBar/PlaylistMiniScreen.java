@@ -34,7 +34,10 @@ public class PlaylistMiniScreen extends JPanel{
 	
 	private User currentUser;
 	
-	
+	/**
+	 * erstellt eine TabbedPane mit einer Playlistanzeige für den Benutzer und zusätzlich einer Ticketanzeige für den Admin(falls man als solcher angemeldet ist)
+	 * 
+	 */
 	public PlaylistMiniScreen() {
 		LoginControl logcon = LoginControl.getInstance();
 		currentUser = logcon.getCurrentUser();
@@ -95,6 +98,7 @@ public class PlaylistMiniScreen extends JPanel{
 		scrollAdmin = new JScrollPane(admin);	
 
 	}
+	
 	private void createAdminTree() {
 		DefaultMutableTreeNode account = new DefaultMutableTreeNode("Account erweitern");
 		DefaultMutableTreeNode complaint =new DefaultMutableTreeNode("Beschwerden");
@@ -128,6 +132,9 @@ public class PlaylistMiniScreen extends JPanel{
 			other.add(dmtn);
 		}
 	}
+	/**
+	 * erstellt das Panel in dem die Playlists des Nutzers angezeigt wird
+	 */
 	public void createUserPanel(){
 		user.setLayout(new GridBagLayout());
 		
