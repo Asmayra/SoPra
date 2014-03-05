@@ -56,6 +56,8 @@ public class User {
 	private Collection<Post> posts = new LinkedList<Post>();
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Collection<Message> messages = new LinkedList<Message>();
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private List<Song> ownSongs;
 	
 	public User(){
 	}
@@ -83,6 +85,14 @@ public class User {
 				it.remove();
 			}
 		}
+	}
+	
+	public void addOwnSong(Song s){
+		ownSongs.add(s);
+	}
+	
+	public List<Song> getOwnSongs(){
+		return ownSongs;
 	}
 	
 	/**
