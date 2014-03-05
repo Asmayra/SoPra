@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,10 +26,10 @@ public class Genre {
 	@ManyToOne
 	private Genre parent;
 	@OneToMany
-	private Collection<Genre> subGenres;
+	private Set<Genre> subGenres;
 
 	public Genre(){
-		subGenres = new LinkedList<Genre>();
+		subGenres = new TreeSet<Genre>();
 	}
 
 	public String getName() {
@@ -39,11 +41,11 @@ public class Genre {
 	}
 
 	public LinkedList<Genre> getSubGenres() {
-		return (LinkedList<Genre>) subGenres;
+		return new LinkedList<Genre>(this.subGenres);
 	}
 
 	public void setSubGenres(LinkedList<Genre> subGenres) {
-		this.subGenres = subGenres;
+		this.subGenres = new TreeSet<Genre>(subGenres);
 	}
 	
 	public void addSubGenre(Genre sub){
