@@ -166,6 +166,8 @@ public class Mailbox extends JPanel{
 		contentArea = new JTextArea();
 		contentArea.setEditable(false);
 		contentArea.setPreferredSize(new Dimension(200, 200));
+		contentArea.setLineWrap(true);
+		contentArea.setWrapStyleWord(true);
 		
 		messagePanel.add(labels, BorderLayout.WEST);
 		messagePanel.add(textFields, BorderLayout.CENTER);
