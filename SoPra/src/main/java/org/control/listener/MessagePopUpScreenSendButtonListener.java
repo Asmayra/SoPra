@@ -10,12 +10,14 @@ import org.view.MessagePopUpScreen;
 public class MessagePopUpScreenSendButtonListener implements ActionListener {
 
 	public void actionPerformed(ActionEvent arg0) {
-		String[] recipent = MessagePopUpScreen.getInstance().getRecipents();
+		String[] recipent = MessagePopUpScreen.getInstance().getRecipients();
 		String subject = MessagePopUpScreen.getInstance().getSubject();
 		String content = MessagePopUpScreen.getInstance().getMessageText();
 		
-		MailboxControl.getInstance().sendMessage(LoginControl.getInstance().getCurrentUser(), recipent, subject, content);
-		MessagePopUpScreen.getInstance().dispose();
+		if( MailboxControl.getInstance().sendMessage(LoginControl.getInstance().getCurrentUser(), recipent, subject, content) )
+			MessagePopUpScreen.getInstance().dispose();
+		else
+			MessagePopUpScreen.getInstance().displayError();
 	}
 
 }

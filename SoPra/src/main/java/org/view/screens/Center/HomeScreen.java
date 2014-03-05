@@ -50,9 +50,24 @@ public class HomeScreen extends JPanel{
 		scrollBar.setPreferredSize(new Dimension(430,500));
 		scrollBar.setViewportView(currentPosts);
 		currentPosts.setLayout(new BoxLayout(currentPosts,BoxLayout.Y_AXIS));		
-		Iterator<Post> it = LoginControl.getInstance().getCurrentUser().getPosts().iterator(); 
-		while(it.hasNext()){
-			currentPosts.add(it.next().create());	
+		LinkedList<Post> followedUsers = new LinkedList<Post>();//Liste für die Posts der gefolgten benutzer
+		Iterator<User> userIt = LoginControl.getInstance().getCurrentUser().getFollowing().iterator(); 
+		while(userIt.hasNext()){
+			Iterator<Post> userPostIt = userIt.next().getPosts().iterator();
+			while(userPostIt.hasNext()){
+				followedUsers.add(userPostIt.next());
+			}
+		}
+		
+		Iterator<Post> pstIt = LoginControl.getInstance().getCurrentUser().getPosts().iterator();
+		while(pstIt.hasNext()){
+			followedUsers.add(pstIt.next());
+		}
+		
+		//Nun enthält followedUsers alle Posts der user denen er folgt; diese könnten nun sorteirt werden...
+		Iterator<Post> followPostsIt = followedUsers.iterator();
+		while(followPostsIt.hasNext()){
+			currentPosts.add(followPostsIt.next().create());
 		}
 		
 		this.add(scrollBar,BorderLayout.CENTER);	

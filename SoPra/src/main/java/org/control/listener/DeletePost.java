@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.util.Iterator;
 
 import org.control.DatabaseController;
+import org.control.LoginControl;
 import org.model.Post;
 import org.model.User;
 
@@ -21,7 +22,8 @@ public class DeletePost implements ActionListener {
 	
 	public void actionPerformed(ActionEvent arg0) {
 		Iterator<Post> it = selection.getAutor().getPosts().iterator();
-		while(it.hasNext()){
+		if (LoginControl.getInstance().getCurrentUser() == selection.getAutor()){
+				while(it.hasNext()){
 			Post temp = it.next();
 			if(temp.equals(selection)){
 				User usr = temp.getAutor();
@@ -30,6 +32,10 @@ public class DeletePost implements ActionListener {
 				DatabaseController.getInstance().update(usr);
 			}
 		}
+		}else{
+			System.out.println("denied!");
+		}
+	
 	}
 	
 

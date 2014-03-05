@@ -21,6 +21,8 @@ public class MailboxControl {
 	private ArrayList<Integer> markedRows;
 	private ArrayList<Message> messages;
 	
+	private Message curMessage = null;
+	
  	
 	private MailboxControl() {
 		markedRows = new ArrayList<Integer>();
@@ -138,5 +140,15 @@ public class MailboxControl {
 			DatabaseController.getInstance().update(curUser);
 			updateTable();
 		}
+	}
+	
+	public Message getCurMessage()
+	{
+		return curMessage;
+	}
+	
+	public void setCurMessage(Message curMessage)
+	{
+		this.curMessage = curMessage;
 	}
 }

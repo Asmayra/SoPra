@@ -23,9 +23,11 @@ public class MessagePopUpScreen extends JFrame {
 	private static MessagePopUpScreen instance = null;
 	
 	private JPanel contentPane;
-	private JTextField recipentTF, subjectTF;
+	private JTextField recipientText, subjectText;
 	private JTextArea messageArea;
 	private JButton sendButton, cancelButton;
+	
+	private JLabel errorLabel;
 	
 	private final int TEXTAREA_WIDTH = 200;
 	private final int TEXTAREA_HEIGHT = 200;
@@ -69,14 +71,14 @@ public class MessagePopUpScreen extends JFrame {
 		JLabel recipentLabel = new JLabel("Empfänger: ");
 		headerPanel.add(recipentLabel);
 		
-		recipentTF = new JTextField();
-		headerPanel.add(recipentTF);
+		recipientText = new JTextField();
+		headerPanel.add(recipientText);
 		
 		JLabel subjectLabel = new JLabel("Betreff: ");
 		headerPanel.add(subjectLabel);
 		
-		subjectTF = new JTextField();
-		headerPanel.add(subjectTF);
+		subjectText = new JTextField();
+		headerPanel.add(subjectText);
 		
 		return headerPanel;
 		
@@ -99,10 +101,16 @@ public class MessagePopUpScreen extends JFrame {
 		
 		sendButton = new JButton("Senden");
 		sendButton.addActionListener(new MessagePopUpScreenSendButtonListener());
-		buttonPanel.add(sendButton);
+		
 		
 		cancelButton = new JButton("Abbrechen");
 		cancelButton.addActionListener(new CloseFrameListener(this));
+		
+		errorLabel = new JLabel("Nutzer existiert nicht!");
+		errorLabel.setVisible(false);
+		
+		buttonPanel.add(errorLabel);
+		buttonPanel.add(sendButton);
 		buttonPanel.add(cancelButton);
 		
 		
@@ -115,12 +123,22 @@ public class MessagePopUpScreen extends JFrame {
 	}
 	
 	
-	public String[] getRecipents(){
-		return recipentTF.getText().split(",");
+	public String[] getRecipients(){
+		return recipientText.getText().split(",");
 	}
 	
 	public String getSubject(){
-		return subjectTF.getText();
+		return subjectText.getText();
+	}
+	
+	public void displayError()
+	{
+		errorLabel.setVisible(true);
+	}
+	
+	public void setRecipient(String recip)
+	{
+		recipientText.setText(recip);
 	}
 	
 
