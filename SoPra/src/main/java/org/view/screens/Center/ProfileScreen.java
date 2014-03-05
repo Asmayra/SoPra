@@ -145,7 +145,7 @@ public class ProfileScreen extends JPanel {
 		userContentScrollSongs.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		userContent.addTab("Playlists", userContentScrollPlaylists);
 		userContent.addTab("Posts", userContentScrollPosts);
-		if (LoginControl.getInstance().getCurrentUser().getRights()=="Artist"||LoginControl.getInstance().getCurrentUser().getRights()=="LabelManager"){
+		if (LoginControl.getInstance().getCurrentUser().getRights().equals("Artist")||LoginControl.getInstance().getCurrentUser().getRights()=="LabelManager"){
 			userContent.addTab("Songs", userContentScrollSongs);
 			userContent.addTab("Alben", userContentScrollAlben);
 		}
