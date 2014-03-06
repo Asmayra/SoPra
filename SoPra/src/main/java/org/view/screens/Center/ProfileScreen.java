@@ -70,7 +70,7 @@ public class ProfileScreen extends JPanel {
 		// task: try catch Block hinzufügen für IOException
 		try {
 			prflPicture = userProfile.getPicture();
-			prflPicture = prflPicture.getScaledInstance(150, -1, BufferedImage.SCALE_DEFAULT);
+			prflPicture = prflPicture.getScaledInstance(150, 150, BufferedImage.SCALE_DEFAULT);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -117,7 +117,7 @@ public class ProfileScreen extends JPanel {
 		buttons = new JPanel();
 		userOverview.add(buttons, BorderLayout.SOUTH);
 
-		if (!userProfile.equals(LoginControl.getInstance().getCurrentUser())) {
+		if (!(userProfile.getUsername().equals(LoginControl.getInstance().getCurrentUser().getUsername()))) {
 			message = new JButton("Nachricht senden");
 			buttons.add(message);
 			if (followProfile) {
