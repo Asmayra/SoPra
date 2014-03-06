@@ -165,6 +165,22 @@ public class DatabaseControl {
 		session.close();
 		return results;
 	}
+	/**
+	 * Returns the content of a table
+	 * @param tablename name of the table
+	 * @return tablecontent as a list
+	 */
+	public List<?> getTableContent(String tablename){
+		session = sessionFactory.openSession();
+		session.beginTransaction();
+
+		Query q = session.createQuery("FROM "+tablename);
+		List<?> results = q.list();
+	
+		session.getTransaction().commit();
+		session.close();
+		return results;
+	}
 	
 	/**
 	 * Aktualisiert ein persistiertes Objekt mit den neuen Werten aus update. Wenn das Objekt noch nicht persistiert
