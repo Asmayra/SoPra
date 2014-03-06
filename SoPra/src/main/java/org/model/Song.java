@@ -10,7 +10,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "SONG_TABLE")
-public class Song {
+public class Song implements Comparable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -67,6 +67,15 @@ public class Song {
 	public void setAlbum(Album a) {
 		album = a;
 	}
+	
+	//LÖSCHEN: NUR FÜR TESTZWECKE
+	public void setSongId(int id){
+		this.songId=id;
+	}
+	
+	public int getSongId(){
+		return songId;
+	}
 
 	public int getVrgRating() {
 		int r1 = (int) Math.round(vrgRating);
@@ -84,6 +93,12 @@ public class Song {
 
 	private void setPlaytime() {
 		// Berechnung der Playtime der zugehörigen Datei
+	}
+
+	@Override
+	public int compareTo(Object song) {
+		
+		return (this.songId-((Song)song).getSongId());
 	}
 
 }

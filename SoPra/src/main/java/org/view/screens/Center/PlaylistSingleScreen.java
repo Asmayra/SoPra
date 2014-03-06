@@ -12,7 +12,7 @@ import org.model.Song;
 
 
 public class PlaylistSingleScreen extends JPanel{
-	Playlist playlist;
+	private Playlist playlist;
 	private String[] columns = new String[] { "Interpret", "Titel", "Album", "Länge", "Community Rating", "Favor" };
 	private Object[][] context = new Object[][] {};
 	private DefaultTableModel model;
@@ -37,12 +37,14 @@ public class PlaylistSingleScreen extends JPanel{
 		LinkedList<Song> songs = (LinkedList<Song>) playlist.getSongs();
 		for(int i=0;i<songs.size();i++){
 			Song curSong= songs.get(i);
-			String[] songData = new String[]{curSong.getInterpret(),curSong.getTitle(),curSong.getAlbum().getName(),curSong.getPlaytime()+"s",curSong.getVrgRating()+"", "TODO!"};
+			String[] songData = new String[]{curSong.getInterpret(),curSong.getTitle(),"Album","Playtime","Rating", "TODO!"};
 			model.addRow(songData);
 		}
 	}
 
-	
+	public int getPlaylistID(){
+		return playlist.getPlaylistId();
+	}
 	
 	
 }

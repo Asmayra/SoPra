@@ -1,6 +1,6 @@
 package org.control;
 
-import java.util.ArrayList;
+
 import java.util.LinkedList;
 
 import org.model.Playlist;
@@ -35,7 +35,7 @@ public class PlaylistControl {
 		
 		//TEST:
 		PlaylistTest TEST = new PlaylistTest();
-		ArrayList<Playlist> playlistList =  (ArrayList<Playlist>) TEST.playlists;
+		LinkedList<Playlist> playlistList =  (LinkedList<Playlist>) TEST.playlists;
 				
 				
 		Playlist current = playlistList.get(playlistnumber);
