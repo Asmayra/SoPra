@@ -103,10 +103,13 @@ public class Mailbox extends JPanel{
 		msgTableModel.addColumn("Absender");
 		msgTableModel.addColumn("Betreff");
 		msgTableModel.addColumn("Datum");
-		msgTableModel.addColumn("Makiert");
+		msgTableModel.addColumn("");
 		
-		msgTable.getColumn("Makiert").setCellRenderer( new ButtonRenderer());
-		msgTable.getColumn("Makiert").setCellEditor(new ButtonEditor(new JCheckBox()));
+		msgTable.getColumn("").setMaxWidth(10);
+		msgTable.getColumn("").setMinWidth(10);
+		
+		msgTable.getColumn("").setCellRenderer( new ButtonRenderer());
+		msgTable.getColumn("").setCellEditor(new ButtonEditor(new JCheckBox()));
 		
 		
 		JScrollPane tableScrollPane = new JScrollPane(msgTable);
