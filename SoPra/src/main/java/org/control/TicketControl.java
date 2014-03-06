@@ -16,7 +16,7 @@ public class TicketControl {
 	
 	private static TicketControl instance = null;
 	
-	public TicketControl getInstance(){
+	public static TicketControl getInstance(){
 		if(instance == null)
 			instance = new TicketControl();
 			
