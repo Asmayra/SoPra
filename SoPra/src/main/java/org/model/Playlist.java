@@ -24,7 +24,7 @@ import javax.swing.JOptionPane;
 @Entity
 @Table(name = "PLAYLIST_TABLE")
 @Inheritance(strategy = InheritanceType.JOINED)
-public class Playlist {
+public class Playlist implements Comparable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -98,6 +98,12 @@ public class Playlist {
 							"Jede ihrer Playlists braucht einen eigentständigen Namen.\n Bitte wählen sie einen neuen, unbenutzten Namen.");
 		}
 
+	}
+
+	@Override
+	public int compareTo(Object arg0) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

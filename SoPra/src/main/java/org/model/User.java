@@ -33,8 +33,8 @@ import org.hibernate.Session;
 
 @Entity
 @Table(name = "USER_TABLE")
-@org.hibernate.annotations.Entity(dynamicInsert=true)
-public class User implements Comparable{
+@org.hibernate.annotations.Entity(dynamicInsert = true)
+public class User implements Comparable {
 	@Id
 	private String username;
 	private String password;
@@ -50,7 +50,7 @@ public class User implements Comparable{
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Set<User> following = new TreeSet<User>();
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	private Set<Playlist> playlists;
+	private Set<Playlist> playlists = new TreeSet<Playlist>();
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Set<Album> alben;
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -195,7 +195,7 @@ public class User implements Comparable{
 	}
 
 	public BufferedImage getPicture() {
-			return LoadImageControl.loadBufferedImage(this.imagePath);
+		return LoadImageControl.loadBufferedImage(this.imagePath);
 	}
 
 	public String getAge() {
@@ -267,7 +267,7 @@ public class User implements Comparable{
 	public List<Playlist> getPlaylists() {
 		return new ArrayList<Playlist>(this.playlists);
 	}
-	
+
 	public List<Album> getAlben() {
 		return new ArrayList<Album>(this.alben);
 	}
