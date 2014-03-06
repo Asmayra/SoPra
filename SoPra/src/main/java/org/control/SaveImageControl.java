@@ -30,17 +30,19 @@ public class SaveImageControl {
 	 */
 	public static void saveBufferedImage(BufferedImage image, String username, String filename){
 		
-		String extension, filenameWithoutExtension, filepath;
-		filenameWithoutExtension = filename.substring(0, filename.indexOf("."));
-		extension = filename.substring(filename.indexOf(".")+1, filename.length());
+		String extension;
+//		filenameWithoutExtension = filename.substring(0, filename.lastIndexOf("."));
+		extension = filename.substring(filename.lastIndexOf(".")+1, filename.length());
 		
-		filepath = System.getProperty("user.dir")+"\\SoPraMediaDatabase\\"+username+"\\";
-
+		String path = PathControl.getInstance().getRoot() + File.separator
+				 + "Bilder" + File.separator + username + File.separator + filename;
+		
+		File toSave = new File(path);
 		//create folder if needed
-		new File(filepath+filename).mkdirs();
+		toSave.mkdirs();
 
 		try {
-            ImageIO.write(image, extension, new File(filepath + filenameWithoutExtension + "."+extension));
+            ImageIO.write(image, extension, toSave);
         } catch (IOException e) {
             e.printStackTrace();
         }
