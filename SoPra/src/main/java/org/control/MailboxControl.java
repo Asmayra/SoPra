@@ -7,6 +7,7 @@ import java.util.LinkedList;
 
 import org.model.Message;
 import org.model.User;
+import org.view.MessagePopUpScreen;
 import org.view.screens.Center.Mailbox;
 
 /**
@@ -140,6 +141,12 @@ public class MailboxControl {
 			DatabaseControl.getInstance().update(curUser);
 			updateTable();
 		}
+	}
+	
+	public void resetGui(){
+		MessagePopUpScreen.getInstance().setRecipient("");
+		MessagePopUpScreen.getInstance().setSubject("");
+		MessagePopUpScreen.getInstance().setMessage("");
 	}
 	
 	public Message getCurMessage()

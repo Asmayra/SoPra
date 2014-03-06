@@ -40,7 +40,7 @@ public class LoadImageControl {
 			if(imagePath == null || imagePath == ""){
 				image = ImageIO.read(ClassLoader.getSystemClassLoader().getResource("placeholder.jpg"));
 			} else{
-				String filepath = System.getProperty("user.dir")+"\\SoPraMediaDatabase\\"+LoginControl.getInstance().getCurrentUser().getUsername()+"\\";
+				String filepath = System.getProperty("user.dir")+"\\SoPraMediaDatabase\\"+LoginControl.getInstance().getCurrentUser().getUsername()+"\\"+imagePath;
 				image = ImageIO.read(new File(filepath));
 			}
 			

@@ -179,5 +179,12 @@ public class MessagePopUpScreen extends JFrame {
 		recipientText.setText(recip);
 	}
 	
+	public void setSubject(String subject){
+		subjectText.setText(subject);
+	}
+	
+	public void setMessage(String message){
+		messageArea.setText(message);
+	}
 
 }
