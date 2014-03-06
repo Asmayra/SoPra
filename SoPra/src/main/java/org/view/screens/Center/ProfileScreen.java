@@ -1,6 +1,7 @@
 package org.view.screens.Center;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -18,7 +19,9 @@ import javax.swing.ScrollPaneConstants;
 import org.control.LoginControl;
 import org.control.listener.FollowButtonListener;
 import org.control.listener.IgnoreButtonListener;
+import org.control.listener.ProfileMessageButtonListener;
 import org.model.User;
+import org.view.ProfilePlaylistPanel;
 import org.view.ProfilePostsPanel;
 import org.view.ProfileSongsPanel;
 
@@ -45,10 +48,10 @@ public class ProfileScreen extends JPanel {
 	private JScrollPane userContentScrollPosts;
 	private JScrollPane userContentScrollSongs;
 	private JTabbedPane userContent;
-	private JPanel playlists;
+	private JScrollPane playlists;
 	private JPanel alben;
 	private JPanel posts;
-	private JPanel songs;
+	private JScrollPane songs;
 	private JButton message;
 	private JButton ignore;
 	private JButton follow;
@@ -68,13 +71,8 @@ public class ProfileScreen extends JPanel {
 	public ProfileScreen(User selectedUser) {
 		userProfile = selectedUser;
 		// task: try catch Block hinzufügen für IOException
-		try {
 			prflPicture = userProfile.getPicture();
 			prflPicture = prflPicture.getScaledInstance(150, 150, BufferedImage.SCALE_DEFAULT);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		if (LoginControl.getInstance().getCurrentUser().isFollowing(userProfile)) {
 			followProfile = true;
 		} else {
@@ -100,6 +98,7 @@ public class ProfileScreen extends JPanel {
 
 		lblUserName = new JLabel(userProfile.getUsername());
 		lblUserName.setFont(new Font("Tahoma", Font.BOLD, 20));
+		lblUserName.setForeground(Color.pink);
 		userData.add(lblUserName);
 		lblName = new JLabel("Vorname:" + userProfile.getFirstname());
 		userData.add(lblName);
@@ -119,6 +118,7 @@ public class ProfileScreen extends JPanel {
 
 		if (!(userProfile.getUsername().equals(LoginControl.getInstance().getCurrentUser().getUsername()))) {
 			message = new JButton("Nachricht senden");
+			message.addActionListener(new ProfileMessageButtonListener(this.getUserProfile()));
 			buttons.add(message);
 			if (followProfile) {
 				follow = new JButton("unfollow");
@@ -137,23 +137,21 @@ public class ProfileScreen extends JPanel {
 		}
 
 		userContent = new JTabbedPane();
-		playlists = new JPanel();
+		playlists = new ProfilePlaylistPanel(userProfile);
 		alben = new JPanel();
 		posts = new ProfilePostsPanel(userProfile);
 		songs = new ProfileSongsPanel(userProfile);
+		
 
 		userContentScrollPlaylists = new JScrollPane(playlists);
 		userContentScrollAlben = new JScrollPane(alben);
 		userContentScrollPosts = new JScrollPane(posts);
-		userContentScrollSongs = new JScrollPane(songs);
-		userContentScrollPlaylists.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		userContentScrollAlben.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		userContentScrollPosts.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		userContentScrollSongs.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		userContent.addTab("Playlists", userContentScrollPlaylists);
+		userContent.addTab("Playlists", playlists);
 		userContent.addTab("Posts", userContentScrollPosts);
 		if (userProfile.getRights().equals("Artist") || userProfile.getRights().equals("LabelManager")) {
-			userContent.addTab("Songs", userContentScrollSongs);
+			userContent.addTab("Songs", songs);
 			userContent.addTab("Alben", userContentScrollAlben);
 		}
 		add(userContent, BorderLayout.CENTER);

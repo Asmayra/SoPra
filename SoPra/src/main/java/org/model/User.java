@@ -62,17 +62,13 @@ public class User implements Comparable{
 	private Set<Song> ownSongs;
 
 	public User() {
-		System.out.println("test");
+		System.out.println("Schweinebraten!");
 	}
 
 	public void createFavorites() {
-		try {
-			Playlist favorites = new Playlist(this);
-			favorites.setName("Favorites");
-			playlists.add(favorites);
-		} catch (IllegalArgumentException e) {
-			e.printStackTrace();
-		}
+		Playlist favorites = new Playlist(this);
+		favorites.setFavorite();
+		playlists.add(favorites);
 	}
 
 	public List<User> getFollowing() {

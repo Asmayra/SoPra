@@ -16,7 +16,7 @@ public class DeleteTicket implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		selected.setInWorkBy(null);
-		selected.setKategory(null);
+		selected.setCategory(null);
 		selected.setRequester(null);
 		selected.setShortInfo(null);
 		DatabaseControl.getInstance().delete(selected);

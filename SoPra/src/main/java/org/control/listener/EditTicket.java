@@ -28,7 +28,7 @@ public class EditTicket implements ActionListener {
 		selected.setInWorkBy(admin);
 		String[] recipients =  new String[1];
 		recipients[0] =selected.getRequester().getUsername();
-		MailboxControl.getInstance().sendMessage(admin,recipients, selected.getKategory(), "Ihre Anfrage wird bearbeitet");
+		MailboxControl.getInstance().sendMessage(admin,recipients, selected.getCategory(), "Ihre Anfrage wird bearbeitet");
 		try{
 			DatabaseControl.getInstance().save(selected);
 		}catch(Exception e){
