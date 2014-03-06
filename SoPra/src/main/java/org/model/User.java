@@ -197,11 +197,7 @@ public class User {
 	}
 
 	public BufferedImage getPicture() throws IOException {
-		if (this.imagePath == null || this.imagePath == "") {
-			return LoadImageControl.loadBufferedImage("placeholder.jpg");
-		} else {
-			return LoadImageControl.loadBufferedImage(this.imagePath);
-		}
+		return LoadImageControl.loadBufferedImage(this.imagePath);
 	}
 
 	public String getAge() {
