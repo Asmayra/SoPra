@@ -61,8 +61,7 @@ public class SearchMaskListener implements KeyListener, ActionListener, MouseLis
 	 * called when an item in the resultslist is pressed
 	 */
 	public void mouseClicked(MouseEvent e) {
-		MainScreen.getInstance().updateCenter(new ProfileScreen((User)DatabaseControl.getInstance().load(User.class, ((JLabel)e.getSource()).getText())));
-		//System.out.println(((JLabel)e.getSource()).getText());
+		MainScreen.getInstance().updateCenter(new ProfileScreen((User)DatabaseControl.getInstance().load(User.class, ((JLabel)e.getSource()).getClientProperty("id").toString())));
 		
 	}
 

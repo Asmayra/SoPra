@@ -33,7 +33,7 @@ public class SearchControl {
 		//User usr = (User)DatabaseController.getInstance().load(User.class, searchKeyword);
 		List<?> resultList = new ArrayList<String>();
 		
-		resultList = DatabaseControl.getInstance().queryForKeyword(User.class, "username", searchKeyword);
+		resultList = DatabaseControl.getInstance().queryForKeyword(User.class, "firstname", searchKeyword);
 		
 		
 		return resultList;

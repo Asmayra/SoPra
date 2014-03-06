@@ -26,9 +26,9 @@ public class EastBarTest {
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         EastBar eb = EastBar.getInstance();
     
-        
+        /*
         DiscoverMiniScreen miniScreen = DiscoverMiniScreen.getInstance();
-        DiscoverElement discover1 = new DiscoverElement("text1", LoadImageControl.loadImageIcon("placeholder.jpg"), "url1");
+        DiscoverElement discover1 = new DiscoverElement("text1", LoadImageControl.loadImageIcon(""), "url1");
 	    DiscoverElement discover2 = new DiscoverElement("text2", LoadImageControl.loadImageIcon("placeholder.jpg"), "url2");
 	    DiscoverElement discover3 = new DiscoverElement("text3", LoadImageControl.loadImageIcon("placeholder.jpg"), "url3");
         
@@ -44,7 +44,7 @@ public class EastBarTest {
 
         DiscoverElement discover4 = new DiscoverElement("text4", LoadImageControl.loadImageIcon("placeholder.jpg"), "url4");
         miniScreen.setDiscoverTwo(discover4);
-        
+        */
     	
     }
     
