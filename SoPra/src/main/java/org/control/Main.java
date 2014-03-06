@@ -10,6 +10,8 @@ import org.view.LoginScreen;
  *
  */
 public class Main {
+	public static boolean testDB = false;
+	
 	public static void main(String[] args){
 			LoginScreen ls = LoginScreen.getInstance();
 			ls.setVisible(true);
@@ -21,5 +23,6 @@ public class Main {
 			//****************************
 		
 			//****************************		
+			
 	}
 }
