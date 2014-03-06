@@ -5,6 +5,9 @@ import java.awt.event.ActionListener;
 
 import org.control.DatabaseControl;
 import org.model.Ticket;
+import org.view.MainScreen;
+import org.view.screens.Center.AdminHomeScreen;
+import org.view.screens.Center.HomeScreen;
 
 public class DeleteTicket implements ActionListener{
 	Ticket selected;
@@ -20,6 +23,7 @@ public class DeleteTicket implements ActionListener{
 		selected.setRequester(null);
 		selected.setShortInfo(null);
 		DatabaseControl.getInstance().delete(selected);
+		MainScreen.getInstance().updateCenter(new AdminHomeScreen());
 	}
 
 }
