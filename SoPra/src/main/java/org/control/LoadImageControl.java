@@ -21,7 +21,7 @@ public class LoadImageControl {
 	
 	/**
 	 * load ImageIcon from Filesystem
-	 * @param imagePath String to the location of the file on the filesystem
+	 * @param imagePath String to the location of the file on the filesystem, if emtpy placeholder is loaded
 	 * @return loaded ImageIcon
 	 */
 	public static ImageIcon loadImageIcon(String imagePath){
@@ -31,7 +31,7 @@ public class LoadImageControl {
 	
 	/**
 	 * load BufferedImage from Filesystem
-	 * @param imagePath String to the location of the file on the filesystem
+	 * @param imagePath String to the location of the file on the filesystem, if emtpy placeholder is loaded
 	 * @return loaded ImageIcon
 	 */
 	public static BufferedImage loadBufferedImage(String imagePath){
