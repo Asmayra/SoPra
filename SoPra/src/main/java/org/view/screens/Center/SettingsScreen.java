@@ -19,6 +19,8 @@ import org.control.DatabaseControl;
 import org.control.LoginControl;
 import org.control.PasswordControl;
 import org.control.listener.SettingsControlListener;
+import org.control.listener.UploadButtonListener;
+import org.control.listener.UploadPictureListener;
 import org.model.User;
 
 /**
@@ -65,7 +67,8 @@ public class SettingsScreen extends JPanel{
 	
 	private void setUpProfileDataFields(){
 		this.profileDataPanel.setLayout(new BoxLayout(this.profileDataPanel, BoxLayout.PAGE_AXIS));
-		
+		JButton picBTN = new JButton("Profilbild hochladen");
+		picBTN.addActionListener(new UploadPictureListener());
 		final String[] labels = {"Vorname: ", "Nachname: ", "Email: ", "Geburtsdatum: ", "Stadt: ", "Land: ", "altes Passwort: ", "neues Passwort: ", "neues Passwort wiederholen: "};
 	    int labelsLength = labels.length;
 		for (int i=0; i < labelsLength; i++){
@@ -79,6 +82,7 @@ public class SettingsScreen extends JPanel{
 	        l.setLabelFor(textField);
 	        dataRow.add(textField);
 	        this.profileDataPanel.add(dataRow);
+	        this.profileDataPanel.add(picBTN);
 		}
 		
 		JPanel dataRow = new JPanel();
