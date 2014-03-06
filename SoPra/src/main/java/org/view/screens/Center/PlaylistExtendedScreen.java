@@ -5,6 +5,8 @@ import java.util.LinkedList;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
+import org.control.listener.PlaylistTabsListener;
+
 
 public class PlaylistExtendedScreen extends JPanel{
 	
@@ -22,6 +24,7 @@ public class PlaylistExtendedScreen extends JPanel{
 	}
 	
 	public PlaylistExtendedScreen(){
+		tabs.addMouseListener(new PlaylistTabsListener());
 		this.add(tabs);
 	}
 	
