@@ -27,6 +27,8 @@ public class MusicPlayer extends JPanel {
 	private JLabel Label =new JLabel("Placeholder 4 seek bar");
 	private JButton btnSelectFile = new JButton("Select file");
 	private BasicPlayer player = new BasicPlayer();
+	private JProgressBar progressBar = new JProgressBar();
+	
 	
 	private File selected_file=null;
 	
@@ -50,7 +52,8 @@ public class MusicPlayer extends JPanel {
 		add(Btn_Forward,gbc);
 		
 		gbc.gridx=4;
-		add(Label,gbc);
+		add(progressBar,gbc);
+		progressBar.setBounds(34, 377, 384, 14);
 		
 		gbc.gridx=5;
 		add(volume_slider,gbc);
@@ -197,7 +200,7 @@ public class MusicPlayer extends JPanel {
 		public void progress(int bytesread, long elapsed, byte[] pcm, Map properties) {
 			currentTime += elapsed;
 			currentTime /= 1000000;
-			System.out.println(currentTime + "/" + maxTime);
+			updateBar(currentTime , maxTime);
 		}
 
 		@Override
@@ -213,5 +216,10 @@ public class MusicPlayer extends JPanel {
 			
 		}
 		
+	}
+	public void updateBar(long actual_time, long max_time){
+		long temp;
+		temp=(actual_time *100)/max_time;
+		progressBar.setValue(new Long(temp).intValue());
 	}
 }
