@@ -29,8 +29,8 @@ public class MessagePopUpScreen extends JFrame {
 	
 	private JLabel errorLabel;
 	
-	private final int TEXTAREA_WIDTH = 200;
-	private final int TEXTAREA_HEIGHT = 200;
+	private final int TEXTAREA_WIDTH = 450;
+	private final int TEXTAREA_HEIGHT = 450;
 
 
 	private MessagePopUpScreen(){
@@ -66,19 +66,28 @@ public class MessagePopUpScreen extends JFrame {
 	
 	private JComponent initHeaders(){
 		JPanel headerPanel = new JPanel();
-		headerPanel.setLayout(new GridLayout(2,2));
+		headerPanel.setLayout(new BorderLayout());
+		
+		JPanel labelPanel = new JPanel();
+		labelPanel.setLayout(new GridLayout(0,1));
+		
+		JPanel textPanel = new JPanel();
+		textPanel.setLayout(new GridLayout(0,1));
 		
 		JLabel recipentLabel = new JLabel("Empfänger: ");
-		headerPanel.add(recipentLabel);
+		labelPanel.add(recipentLabel);
 		
 		recipientText = new JTextField();
-		headerPanel.add(recipientText);
+		textPanel.add(recipientText);
 		
 		JLabel subjectLabel = new JLabel("Betreff: ");
-		headerPanel.add(subjectLabel);
+		labelPanel.add(subjectLabel);
 		
 		subjectText = new JTextField();
-		headerPanel.add(subjectText);
+		textPanel.add(subjectText);
+		
+		headerPanel.add(labelPanel, BorderLayout.WEST);
+		headerPanel.add(textPanel, BorderLayout.CENTER);
 		
 		return headerPanel;
 		
