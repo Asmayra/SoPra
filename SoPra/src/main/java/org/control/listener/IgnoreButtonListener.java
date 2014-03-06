@@ -9,21 +9,32 @@ import org.control.DatabaseControl;
 import org.control.LoginControl;
 import org.view.screens.Center.ProfileScreen;
 
+/**
+ * Ignore-Button-Funktionalität wird bereitgestellt. Je nach dem ob dem User des
+ * Profils auf dem sich der Button befindet schon vom aktuellen Benutzer
+ * ignoriert wird ändert sich die Button-Funktionalität dementsprechend.
+ * 
+ * @author Sebastian Roth
+ * 
+ */
 public class IgnoreButtonListener implements ActionListener {
+	private ProfileScreen profile;
+
+	public IgnoreButtonListener(ProfileScreen p) {
+		profile = p;
+	}
 
 	public void actionPerformed(ActionEvent arg0) {
-		if (((ProfileScreen) ((JButton) arg0.getSource()).getParent()).getIgnore()) {
-			LoginControl.getInstance().getCurrentUser().unignore(((ProfileScreen) ((JButton) arg0.getSource()).getParent()).getUserProfile());
-			((ProfileScreen) ((JButton) arg0.getSource()).getParent()).setIgnore(false);
+		if (profile.getIgnore()) {
+			LoginControl.getInstance().getCurrentUser().unignore(profile.getUserProfile());
+			profile.setIgnore(false);
 			((JButton) arg0.getSource()).setText("ignore");
-			DatabaseControl.getInstance().update(LoginControl.getInstance().getCurrentUser());
 		} else {
-			LoginControl.getInstance().getCurrentUser().ignore(((ProfileScreen) ((JButton) arg0.getSource()).getParent()).getUserProfile());
-			((ProfileScreen) ((JButton) arg0.getSource()).getParent()).setIgnore(true);
+			LoginControl.getInstance().getCurrentUser().ignore(profile.getUserProfile());
+			profile.setIgnore(true);
 			((JButton) arg0.getSource()).setText("unignore");
-			DatabaseControl.getInstance().update(LoginControl.getInstance().getCurrentUser());
 		}
-		
+
 	}
 
 }
