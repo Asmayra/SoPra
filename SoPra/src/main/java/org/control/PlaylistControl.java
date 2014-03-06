@@ -1,0 +1,47 @@
+package org.control;
+
+import java.util.LinkedList;
+
+import org.model.Playlist;
+import org.model.User;
+import org.view.MainScreen;
+import org.view.screens.Center.PlaylistExtendedScreen;
+import org.view.screens.Center.PlaylistSingleScreen;
+
+public class PlaylistControl {
+	
+	private User currentUser;
+	private static PlaylistControl instance;
+	private PlaylistExtendedScreen playlistScreen = PlaylistExtendedScreen.getInstance();
+	
+	public static PlaylistControl getInstance()
+	{
+		if(instance == null)
+			instance = new PlaylistControl();
+		
+		return instance;
+	}
+
+	
+	public PlaylistControl() {
+		currentUser = LoginControl.getInstance().getCurrentUser();
+	}
+
+
+	public void showPlaylist(int playlistnumber) {
+		LinkedList<Playlist> playlistList = (LinkedList<Playlist>) currentUser.getPlaylists();
+		Playlist current = playlistList.get(playlistnumber);
+		int tabindex = playlistScreen.getIndexOfTab(current.getPlaylistId());
+		if(tabindex==-1){
+			playlistScreen.addPlaylistTab(current.getName(), new PlaylistSingleScreen(current));
+		}
+		playlistScreen.setTabByIndex(tabindex);
+		MainScreen.getInstance().showPlaylistExtendedScreen(playlistScreen);
+	}
+
+
+	public void showAlbum(int albumnumber) {
+		
+	}
+	
+}

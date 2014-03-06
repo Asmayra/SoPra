@@ -14,8 +14,10 @@ import javax.swing.tree.TreePath;
 
 import org.control.LoginControl;
 import org.control.listener.GenresButtonListener;
+import org.control.listener.PlaylistTreeListener;
 import org.control.listener.SubscriptionButtonListener;
 import org.model.User;
+import org.view.screens.Center.PlaylistExtendedScreen;
 /**
  * 
  * @author Tim Michels, Max Küper
@@ -35,13 +37,24 @@ public class PlaylistMiniScreen extends JPanel{
 	private JTree tickets;
 	DefaultMutableTreeNode rootUser = new DefaultMutableTreeNode("root");
 	DefaultMutableTreeNode rootAdmin = new DefaultMutableTreeNode("root");
-	
 	private User currentUser;
 	
 	/**
 	 * erstellt eine TabbedPane mit einer Playlistanzeige für den Benutzer und zusätzlich einer Ticketanzeige für den Admin(falls man als solcher angemeldet ist)
 	 * 
 	 */
+	
+	private static PlaylistMiniScreen instance;
+	
+	public static PlaylistMiniScreen getInstance()
+	{
+		if(instance == null)
+			instance = new PlaylistMiniScreen();
+		
+		return instance;
+	}
+
+	
 	public PlaylistMiniScreen() {
 		LoginControl logcon = LoginControl.getInstance();
 		currentUser = logcon.getCurrentUser();
@@ -143,7 +156,7 @@ public class PlaylistMiniScreen extends JPanel{
 		user.setLayout(new GridBagLayout());
 		
 		playlists = new JTree(rootUser);//getcurrentUser.getuser.getPlaylists();
-		
+		playlists.addMouseListener(new PlaylistTreeListener());
 		//Buttons
 		subscriptions = new JButton("Subscriptions");
 		favorits = new JButton("Favoriten");
@@ -195,4 +208,9 @@ public class PlaylistMiniScreen extends JPanel{
 		
 		scrollUser = new JScrollPane(user);	
 	}
+	
+	public JTree getPlaylists(){
+		return playlists;
+	}
+
 }
