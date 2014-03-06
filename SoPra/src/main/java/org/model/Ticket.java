@@ -31,13 +31,13 @@ public class Ticket {
 	@ManyToOne
 	private User requester;
 	private String shortInfo;
-	private String kategory;
+	private String category;
 	
 	public String getKategory() {
-		return kategory;
+		return category;
 	}
 	public void setKategory(String kategory) {
-		this.kategory = kategory;
+		this.category = kategory;
 	}
 	public String getShortInfo() {
 		return shortInfo;
@@ -71,7 +71,7 @@ public class Ticket {
 	public JPanel create(){
 		JPanel ticketPanel = new JPanel();
 		ticketPanel.setLayout(new BoxLayout(ticketPanel,BoxLayout.Y_AXIS));
-		JLabel reqName = new JLabel("Anfrage von "+this.requester.getUsername()+" : "+this.kategory);
+		JLabel reqName = new JLabel("Anfrage von "+this.requester.getUsername()+" : "+this.category);
 		JLabel srtInfo = new JLabel("<html><body>"+this.shortInfo+"</body></html>");
 		JButton editBTN= new JButton("Bearbeiten");
 		JButton delBTN = new JButton("Löschen");

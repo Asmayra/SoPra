@@ -19,6 +19,7 @@ import org.control.DatabaseControl;
 import org.control.LoginControl;
 import org.control.PasswordControl;
 import org.control.listener.SettingsControlListener;
+import org.control.listener.SettingsScreenCeateTicketButtonListener;
 import org.control.listener.UploadButtonListener;
 import org.control.listener.UploadPictureListener;
 import org.model.User;
@@ -91,7 +92,10 @@ public class SettingsScreen extends JPanel{
 		JButton speichern = new JButton("Speichern");
 		speichern.addActionListener(new SettingsControlListener(this));
 		dataRow.add(speichern);
-		 this.profileDataPanel.add(dataRow);
+		JButton createTicket = new JButton("Ticket erstellen");
+		createTicket.addActionListener(new SettingsScreenCeateTicketButtonListener());
+		dataRow.add(createTicket);
+		this.profileDataPanel.add(dataRow);
 		 
 		this.add(this.profileDataPanel, BorderLayout.NORTH);
 	}
