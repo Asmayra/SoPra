@@ -1,11 +1,14 @@
 package org.view.screens.Southbar;
 
 import javax.swing.*;
+
 import java.awt.*;
 import java.io.File;
+import java.util.Map;
 import java.awt.event.*;
 
 import javax.swing.event.*;
+
 import javazoom.jlgui.basicplayer.*;
 
 /**
@@ -29,6 +32,8 @@ public class MusicPlayer extends JPanel {
 	
 	private double Music_gain = 0.5;
 	public MusicPlayer(){
+		player.addBasicPlayerListener(new TestListener());
+		
 		this.setLayout(new GridBagLayout());
 		gbc.insets=new Insets(2,2,2,2);
 		gbc.gridx=0;
@@ -175,4 +180,38 @@ public class MusicPlayer extends JPanel {
 	/*
 		//
 	}*/
+	
+	class TestListener implements BasicPlayerListener
+	{
+		
+		long currentTime = 0;
+		long maxTime = 0;
+
+		@Override
+		public void opened(Object stream, Map properties) {
+			maxTime = (Long)properties.get("duration") / 1000000;
+			
+		}
+
+		@Override
+		public void progress(int bytesread, long elapsed, byte[] pcm, Map properties) {
+			currentTime += elapsed;
+			currentTime /= 1000000;
+			System.out.println(currentTime + "/" + maxTime);
+		}
+
+		@Override
+		public void setController(BasicController arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void stateUpdated(BasicPlayerEvent e) {
+			currentTime = e.getPosition();
+			currentTime /= 1000000;
+			
+		}
+		
+	}
 }
