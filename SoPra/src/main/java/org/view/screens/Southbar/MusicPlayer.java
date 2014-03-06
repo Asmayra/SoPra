@@ -30,7 +30,7 @@ public class MusicPlayer extends JPanel {
 	private JProgressBar progressBar = new JProgressBar();
 	
 	
-	private File selected_file=null;
+	private static File selected_file=null;
 	
 	private double Music_gain = 0.5;
 	public MusicPlayer(){
@@ -221,5 +221,12 @@ public class MusicPlayer extends JPanel {
 		long temp;
 		temp=(actual_time *100)/max_time;
 		progressBar.setValue(new Long(temp).intValue());
+	}
+	/**
+	 * Sets the song which is played,when the playbutton is pressed
+	 * @param song
+	 */
+	public static void setCurrentSong(File song){
+		selected_file = song;
 	}
 }
