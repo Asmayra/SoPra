@@ -86,6 +86,7 @@ public class RegControl {
 		newUser.setFirstname(firstname);
 		newUser.setLastname(lastname);
 		newUser.setCity(city);
+		newUser.setDob(dob);
 		newUser.setCountry(country);
 		newUser.createFavorites();
 		
