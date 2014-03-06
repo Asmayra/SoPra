@@ -20,6 +20,7 @@ public class PlaylistTreeListener extends MouseAdapter{
 		int parentRow = playlisttree.getRowForPath(playlisttree.getSelectionPath().getParentPath());
 		playlisttree.expandRow(parentRow);
 		int currentRow = playlisttree.getRowForPath(playlisttree.getSelectionPath());
+		System.out.println(parentRow+"  "+currentRow);
 		if(parentRow==0){//Playlist ausgewählt
 			control.showPlaylist(currentRow);
 		}

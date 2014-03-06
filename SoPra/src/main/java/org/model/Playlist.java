@@ -32,9 +32,8 @@ public class Playlist implements Comparable {
 	@ManyToOne
 	private User owner;
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	private Set<Song> songs;
+	private Set<Song> songs = new TreeSet<Song>();
 	private String name;
-
 	public Playlist() {
 
 	}
@@ -64,6 +63,10 @@ public class Playlist implements Comparable {
 		this.songs = new TreeSet<Song>(songs);
 	}
 
+	public void addSong(Song song){
+		songs.add(song);
+	}
+	
 	public int getPlaylistId() {
 		return playlistId;
 	}

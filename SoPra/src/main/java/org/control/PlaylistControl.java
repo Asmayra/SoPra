@@ -1,9 +1,11 @@
 package org.control;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 import org.model.Playlist;
 import org.model.User;
+import org.testpackage.PlaylistTest;
 import org.view.MainScreen;
 import org.view.screens.Center.PlaylistExtendedScreen;
 import org.view.screens.Center.PlaylistSingleScreen;
@@ -29,7 +31,13 @@ public class PlaylistControl {
 
 
 	public void showPlaylist(int playlistnumber) {
-		LinkedList<Playlist> playlistList = (LinkedList<Playlist>) currentUser.getPlaylists();
+		//ArrayList<Playlist> playlistList =  (ArrayList<Playlist>) currentUser.getPlaylists();
+		
+		//TEST:
+		PlaylistTest TEST = new PlaylistTest();
+		ArrayList<Playlist> playlistList =  (ArrayList<Playlist>) TEST.playlists;
+				
+				
 		Playlist current = playlistList.get(playlistnumber);
 		int tabindex = playlistScreen.getIndexOfTab(current.getPlaylistId());
 		if(tabindex==-1){
