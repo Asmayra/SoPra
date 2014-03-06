@@ -107,13 +107,11 @@ public class MailboxControl {
 		if(markedRows.contains(new Integer(row)))
 		{
 			markedRows.remove(new Integer(row));
-			System.out.println("Removed: " + row);
 			return false;
 		}
 		else
 		{
 			markedRows.add(row);
-			System.out.println("Added: " + row);
 			return true;
 		}
 	}

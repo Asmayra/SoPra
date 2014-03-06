@@ -99,6 +99,19 @@ public class DatabaseControl {
 	
 		
 	}
+	
+	/**
+	 * update query with statement
+	 * @param query string with query
+	 */
+	public void saveWithQuery(String query){
+		session = sessionFactory.openSession();
+		session.beginTransaction();
+		session.createQuery(query).executeUpdate();
+		session.getTransaction().commit();
+		session.close();
+		
+	}
 	/**
 	 * loads an Object from the Database. 
 	 * Example: 

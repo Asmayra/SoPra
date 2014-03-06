@@ -10,6 +10,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import org.control.DatabaseControl;
 import org.control.LoginControl;
 import org.control.SaveImageControl;
 
@@ -28,6 +29,11 @@ public class UploadPictureListener implements ActionListener {
 			try {
 				image = (BufferedImage)ImageIO.read(input);
 				SaveImageControl.saveBufferedImage(image, LoginControl.getInstance().getCurrentUser().getUsername());
+				LoginControl.getInstance().getCurrentUser().setImagePath("avatar.jpg");
+				
+				DatabaseControl.getInstance().saveWithQuery("UPDATE User SET imagepath = 'avatar.jpg' WHERE username = "+"'"+LoginControl.getInstance().getCurrentUser().getUsername()+"'");
+				//DatabaseControl.getInstance().update(LoginControl.getInstance().getCurrentUser());
+				//System.out.println("SAVE!");
 			} catch (IOException e) {
 				System.out.println("Loading failed");
 				e.printStackTrace();

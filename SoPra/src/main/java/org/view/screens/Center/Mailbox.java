@@ -229,18 +229,18 @@ public class Mailbox extends JPanel{
 														int row,
 														int column	)
 		{
-//			if(isSelected)
-//			{
-//				setForeground(table.getSelectionForeground());
-//				setBackground(table.getSelectionBackground());
-//			}
-//			else
-//			{
-//				setForeground(table.getForeground());
-//				setBackground(UIManager.getColor("Button.background"));
-//			}
+			if(isSelected)
+			{
+				setForeground(table.getSelectionForeground());
+				setBackground(table.getSelectionBackground());
+			}
+			else
+			{
+				setForeground(table.getForeground());
+				setBackground(UIManager.getColor("Button.background"));
+			}
 			
-//			setText((value == null) ? "" : value.toString());
+			setText((value == null) ? "" : value.toString());
 			return this;
 		}
 	}
@@ -274,19 +274,6 @@ public class Mailbox extends JPanel{
 														int row,
 														int column		)
 		{
-//			if(isSelected)
-//			{
-//				button.setForeground(table.getSelectionForeground());
-//				button.setBackground(table.getSelectionBackground());
-//			}
-//			else
-//			{
-//				button.setForeground(table.getForeground());
-//				button.setBackground(table.getBackground());
-//			}
-			
-//			label = (value == null) ? "" : value.toString();
-//			button.setText(label);
 			isPushed = true;
 			return button;
 		}
@@ -295,22 +282,14 @@ public class Mailbox extends JPanel{
 		{
 			if(isPushed)
 			{
+				isPushed = false;
 				if(MailboxControl.getInstance().markRow(msgTable.getSelectedRow()))
 				{
-					button.setForeground(Color.RED);
-					button.setBackground(Color.RED);
-					
-					button.setText("test");
+					return new String(".");
 				}
-				else
-				{
-					button.setForeground(Color.GREEN);
-					button.setBackground(Color.GREEN);
-				}
-				button.repaint();
 			}
 			
-			isPushed = false;
+			
 			return new String("");
 		}
 		
