@@ -35,7 +35,7 @@ public class PlaylistControl {
 		
 		//TEST:
 		PlaylistTest TEST = new PlaylistTest();
-		ArrayList<Playlist> playlistList =  (ArrayList<Playlist>) TEST.playlists;
+		LinkedList<Playlist> playlistList =  (LinkedList<Playlist>) TEST.playlists;
 				
 				
 		Playlist current = playlistList.get(playlistnumber);

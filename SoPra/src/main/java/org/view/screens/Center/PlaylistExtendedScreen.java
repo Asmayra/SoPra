@@ -42,7 +42,7 @@ public class PlaylistExtendedScreen extends JPanel{
 		if(tabIndex!=-1){
 			tabs.setSelectedIndex(tabIndex);}
 		else{
-			tabs.setSelectedIndex(tabs.getTabCount());
+			tabs.setSelectedIndex(tabs.getTabCount()-1);
 		}
 	}
 	

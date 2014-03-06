@@ -37,7 +37,7 @@ public class PlaylistSingleScreen extends JPanel{
 		LinkedList<Song> songs = (LinkedList<Song>) playlist.getSongs();
 		for(int i=0;i<songs.size();i++){
 			Song curSong= songs.get(i);
-			String[] songData = new String[]{curSong.getInterpret(),curSong.getTitle(),curSong.getAlbum().getName(),curSong.getPlaytime()+"s",curSong.getVrgRating()+"", "TODO!"};
+			String[] songData = new String[]{curSong.getInterpret(),curSong.getTitle(),"Album","Playtime","Rating", "TODO!"};
 			model.addRow(songData);
 		}
 	}
