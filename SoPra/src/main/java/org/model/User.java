@@ -196,8 +196,8 @@ public class User {
 		this.salt = salt;
 	}
 
-	public BufferedImage getPicture() throws IOException {
-		return LoadImageControl.loadBufferedImage(this.imagePath);
+	public BufferedImage getPicture() {
+			return LoadImageControl.loadBufferedImage(this.imagePath);
 	}
 
 	public String getAge() {
