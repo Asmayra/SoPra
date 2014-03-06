@@ -1,32 +1,61 @@
 package org.view.screens.Southbar;
 
 import javax.swing.*;
+import java.awt.*;
 
+import javax.swing.event.*;
+
+/**
+ * A Structure Class for the MusicPlayer
+ * @author Ioann
+ *
+ */
 public class MusicPlayer extends JPanel {
-	JButton Btn_Stop = new JButton();
-	JButton Btn_Start= new JButton();
-	JButton Btn_Forward= new JButton();
-	JButton Btn_Back= new JButton();
-	JProgressBar ProgressBar = new JProgressBar();
+	private JButton Btn_Stop = new JButton("Stop");
+	private JButton Btn_Play= new JButton("Play/Pause");
+	private JButton Btn_Forward= new JButton("Fwd");
+	private JButton Btn_Back= new JButton("Bck");
+	private JSlider volume_slider = new JSlider();
+	private GridBagConstraints gbc = new GridBagConstraints();
+	private JLabel Volume_Label =new JLabel("Volume %");
+	private JLabel Label =new JLabel("Placeholder 4 seek bar");
+	
+	public MusicPlayer(){
+		this.setLayout(new GridBagLayout());
+		gbc.gridx=0;
+		gbc.gridy=0;
+		add(Btn_Stop,gbc);
+		
+		gbc.gridx=1;
+		gbc.gridy=0;
+		add(Btn_Back,gbc);
+		
+		gbc.gridx=2;
+		gbc.gridy=0;
+		add(Btn_Play,gbc);
+		
+		gbc.gridx=3;
+		gbc.gridy=0;
+		add(Btn_Forward,gbc);
+		
+		gbc.gridx=4;
+		gbc.gridy=0;
+		add(Label,gbc);
+		
+		volume_slider.setPaintLabels(true);
+		volume_slider.setPaintTicks(true);
+		volume_slider.setMajorTickSpacing(20);
+		gbc.gridx=5;
+		gbc.gridy=0;
+		add(Btn_Forward,gbc);
+		
+		gbc.gridx=6;
+		gbc.gridy=0;
+		add(Volume_Label,gbc);
+		
+	}
 /*=============================================================================*/
-	public void main(){
-		javax.swing.SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				initialize();
-			}
-		});
-	}
-	public void initialize(){
-		JFrame.setDefaultLookAndFeelDecorated(true);
-		JFrame Player_Frame = new JFrame("Media Player frame");
-		JPanel Player_Panel = new JPanel();
-		//Panel.isVisible();
-		Player_Panel.setLayout(null);
+	/*
 		//
-		JLabel Lable = new JLabel("TestLabel");
-		Player_Panel.add(Lable);
-		
-		
-		Player_Frame.getContentPane().add(Player_Panel);
-	}
+	}*/
 }
