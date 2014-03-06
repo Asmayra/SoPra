@@ -3,6 +3,7 @@ package org.control;
 import static org.junit.Assert.*;
 
 import java.io.IOException;
+import java.util.Date;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -37,9 +38,9 @@ public class RegControlTest {
 	
 	@Test
 	public void checkRegistration(){
-		assertTrue(RegControl.getInstance().checkRegistration("Testuser", "Testname", "Testnachname", "TestStadt", "TestLand", "TestDob", "TestMail"));
-		assertFalse(RegControl.getInstance().checkRegistration(null, "Testname", "Testnachname", "TestStadt", "TestLand", "TestDob", "TestMail"));
-		assertTrue(RegControl.getInstance().checkRegistration("Testuser", "Testname", "Testnachname", null, null, "TestDob", "TestMail"));
+		assertTrue(RegControl.getInstance().checkRegistration("Testuser", "Testname", "Testnachname", "TestStadt", "TestLand", new Date(), "TestMail"));
+		assertFalse(RegControl.getInstance().checkRegistration(null, "Testname", "Testnachname", "TestStadt", "TestLand", new Date(), "TestMail"));
+		assertTrue(RegControl.getInstance().checkRegistration("Testuser", "Testname", "Testnachname", null, null, new Date(), "TestMail"));
 	}
 	
 	

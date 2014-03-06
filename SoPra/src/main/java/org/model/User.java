@@ -226,8 +226,6 @@ public class User {
 				&& birth.get(Calendar.DAY_OF_MONTH) < now.get(Calendar.DAY_OF_MONTH)) {
 			age++;
 		}
-		System.out.println(birth.get(Calendar.YEAR));
-		System.out.println(now.get(Calendar.YEAR));
 		return age.toString();
 	}
 
