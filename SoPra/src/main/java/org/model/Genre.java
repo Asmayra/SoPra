@@ -17,7 +17,7 @@ import javax.persistence.Table;
 
 
 @Entity
-@Table(name="TICKET_TABLE")
+@Table(name="GENRE_TABLE")
 public class Genre {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)	
