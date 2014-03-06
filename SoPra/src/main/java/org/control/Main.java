@@ -1,6 +1,8 @@
 package org.control;
 
+import java.awt.image.BufferedImage;
 import java.io.IOException;
+
 import org.model.Post;
 import org.model.User;
 import org.view.LoginScreen;
@@ -23,6 +25,8 @@ public class Main {
 			//****************************
 		
 			//****************************		
-			
+//			PathControl.getInstance().makeDir("Bilder");
+//			BufferedImage img = LoadImageControl.loadBufferedImage("avatar.jpg");
+//			SaveImageControl.saveBufferedImage(img, "a");
 	}
 }

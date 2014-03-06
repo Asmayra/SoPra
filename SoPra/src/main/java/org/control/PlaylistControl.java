@@ -3,6 +3,7 @@ package org.control;
 
 import java.util.LinkedList;
 
+import org.model.Album;
 import org.model.Playlist;
 import org.model.User;
 import org.testpackage.PlaylistTest;
@@ -49,7 +50,20 @@ public class PlaylistControl {
 
 
 	public void showAlbum(int albumnumber) {
+		//ArrayList<Album> albumList =  (ArrayList<Album>) currentUser.getAlbums();
 		
+		//TEST:
+		PlaylistTest TEST = new PlaylistTest();
+		LinkedList<Album> albumList =  (LinkedList<Album>) TEST.albums;
+						
+						
+		Playlist current = albumList.get(albumnumber);
+		int tabindex = playlistScreen.getIndexOfTab(current.getPlaylistId());
+		if(tabindex==-1){
+			playlistScreen.addPlaylistTab(current.getName(), new PlaylistSingleScreen(current));
+		}
+		playlistScreen.setTabByIndex(tabindex);
+		MainScreen.getInstance().showPlaylistExtendedScreen(playlistScreen);
 	}
 	
 }

@@ -24,8 +24,8 @@ public class MainScreen extends JFrame {
 	private JLayeredPane east;
 	private static MainScreen instance;
 	
-	private final int MIN_WIDTH = 1024;
-	private final int MIN_HEIGHT = 600;
+	private final int MIN_WIDTH =  920;
+	private final int MIN_HEIGHT = 655;
 
 	public JPanel getCenter() {
 		return center;

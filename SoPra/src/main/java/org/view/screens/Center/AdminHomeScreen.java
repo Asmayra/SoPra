@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -16,10 +17,12 @@ import org.model.User;
 
 public class AdminHomeScreen extends JPanel {
 	public AdminHomeScreen(){
+		JPanel structure = new JPanel();
+		structure.setLayout(new BoxLayout(structure,BoxLayout.Y_AXIS));
+		
 		JScrollPane scrollBar = new JScrollPane();
-		scrollBar.setPreferredSize(new Dimension(430,500));
-		scrollBar.setViewportView(this);
-		System.out.println("Admin eingeloggt!");
+		scrollBar.setPreferredSize(new Dimension(430,530));
+		scrollBar.setViewportView(structure);
 		//**************************************************************
 		//Get ALL THE TICKETS
 		List<?> tickets;
@@ -27,8 +30,9 @@ public class AdminHomeScreen extends JPanel {
 		//Print out ALL THE TICKETS
 		Iterator<?> it = tickets.iterator();
 		while(it.hasNext()){
-			this.add(((Ticket)it.next()).create());
+			structure.add(((Ticket)it.next()).create());
 		}
+		this.add(scrollBar);
 		
 	}
 

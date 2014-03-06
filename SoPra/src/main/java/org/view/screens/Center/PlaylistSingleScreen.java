@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.util.LinkedList;
 
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -17,6 +18,7 @@ public class PlaylistSingleScreen extends JPanel{
 	private Object[][] context = new Object[][] {};
 	private DefaultTableModel model;
 	private JTable table;
+	private JScrollPane scroll;
 	
 	
 	public PlaylistSingleScreen(Playlist playlist){
@@ -29,7 +31,8 @@ public class PlaylistSingleScreen extends JPanel{
 		};	
 		addSongsToTable();
 		table= new JTable(model);
-		this.add(table);
+		scroll = new JScrollPane(table);
+		this.add(scroll);
 		this.setPreferredSize(new Dimension(500,500));
 	}
 	

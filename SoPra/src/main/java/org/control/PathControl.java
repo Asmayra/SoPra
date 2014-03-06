@@ -1,16 +1,14 @@
 package org.control;
 
 import java.io.File;
-import java.net.MalformedURLException;
-import java.net.URL;
 
-public class FileIOControl {
+public class PathControl {
 
-	private static FileIOControl instance = null;
+	private static PathControl instance = null;
 	
 	private final String rootPath;
 	
-	private FileIOControl()
+	private PathControl()
 	{
 		
 		File tmp = new File( getClass().getProtectionDomain().getCodeSource().getLocation().getPath() );
@@ -20,18 +18,12 @@ public class FileIOControl {
 			rootPath = tmp.getPath();
 	}
 	
-	public static FileIOControl getInstance()
+	public static PathControl getInstance()
 	{
 		if(instance == null)
-			instance = new FileIOControl();
+			instance = new PathControl();
 		
-		System.out.println(instance.rootPath);
 		return instance;
-	}
-	
-	public boolean makeDir(String newDir)
-	{
-		return new File(rootPath + File.separator + newDir).mkdir();
 	}
 	
 	public String getRoot()
