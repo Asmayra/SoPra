@@ -88,6 +88,7 @@ public class RegControl {
 		newUser.setCity(city);
 		newUser.setDob(dob);
 		newUser.setCountry(country);
+		newUser.createFavorites();
 		
 		newUser.setSalt(PasswordControl.generateSalt());
 		newUser.setPassword(PasswordControl.encodePassword(password, newUser.getSalt()));
