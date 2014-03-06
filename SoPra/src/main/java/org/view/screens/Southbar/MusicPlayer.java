@@ -19,8 +19,8 @@ import javazoom.jlgui.basicplayer.*;
 public class MusicPlayer extends JPanel {
 	private JButton Btn_Stop = new JButton("■");
 	private JButton Btn_Play= new JButton("► ||");
-	private JButton Btn_Forward= new JButton(">›");
-	private JButton Btn_Back= new JButton("<‹");
+	private JButton Btn_Forward= new JButton(">");
+	private JButton Btn_Back= new JButton("<");
 	private JSlider volume_slider = new JSlider();
 	private GridBagConstraints gbc = new GridBagConstraints();
 	private JLabel Volume_Label =new JLabel("50%");
