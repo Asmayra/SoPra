@@ -51,6 +51,8 @@ public class User {
 	private Set<User> following = new TreeSet<User>();
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Set<Playlist> playlists;
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private Set<Album> alben;
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Set<User> ignoring = new TreeSet<User>();
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -264,6 +266,10 @@ public class User {
 
 	public List<Playlist> getPlaylists() {
 		return new ArrayList<Playlist>(this.playlists);
+	}
+	
+	public List<Album> getAlben() {
+		return new ArrayList<Album>(this.alben);
 	}
 
 	public String getEMail() {

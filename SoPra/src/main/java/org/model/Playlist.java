@@ -85,7 +85,7 @@ public class Playlist {
 	}
 
 	public void setFavorite() {
-		this.setName("Favorites");
+		this.name = ("Favorites");
 	}
 
 	public void setName(String name) {
@@ -93,7 +93,9 @@ public class Playlist {
 			testName(name);
 			this.name = name;
 		} catch (IllegalArgumentException e) {
-			JOptionPane.showMessageDialog(null, "Jede ihrer Playlists braucht einen eigentständigen Namen.\n Bitte wählen sie einen neuen, unbenutzten Namen.");
+			JOptionPane
+					.showMessageDialog(null,
+							"Jede ihrer Playlists braucht einen eigentständigen Namen.\n Bitte wählen sie einen neuen, unbenutzten Namen.");
 		}
 
 	}
