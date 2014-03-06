@@ -139,6 +139,8 @@ public class MusicPlayer extends JPanel {
 				}
 			}
 		});/*Btn_Play*/
+		
+		
 		Btn_Stop.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
 				System.out.println(player.getStatus());
@@ -150,9 +152,24 @@ public class MusicPlayer extends JPanel {
 					e1.printStackTrace();
 				}
 				System.out.println(player.getStatus());
+				
 			}
-
-		});
+		});/*Btn_Stop*/
+		
+		Btn_Forward.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		});/*Btn_Forward*/
+		Btn_Back.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		});/*Btn_Back*/
 	}
 /*=============================================================================*/
 	/*

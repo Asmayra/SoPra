@@ -70,6 +70,7 @@
         <mapping class="org.model.User"/>
         <mapping class="org.model.Album"/>
         <mapping class="org.model.Post"/>
+        
 
     </session-factory>
 
