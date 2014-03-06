@@ -33,10 +33,10 @@ public class Ticket {
 	private String shortInfo;
 	private String category;
 	
-	public String getKategory() {
+	public String getCategory() {
 		return category;
 	}
-	public void setKategory(String kategory) {
+	public void setCategory(String kategory) {
 		this.category = kategory;
 	}
 	public String getShortInfo() {
