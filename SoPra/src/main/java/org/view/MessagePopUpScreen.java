@@ -17,6 +17,13 @@ import javax.swing.JTextField;
 import org.control.listener.CloseFrameListener;
 import org.control.listener.MessagePopUpScreenSendButtonListener;
 
+
+/**
+ * PopUp zum versenden von Nachrichten. Ist ein Singleton.
+ * @author Michael Pfennings, Mattias Schoenke
+ *
+ */
+
 public class MessagePopUpScreen extends JFrame {
 	
 	
@@ -33,11 +40,16 @@ public class MessagePopUpScreen extends JFrame {
 	private final int TEXTAREA_HEIGHT = 450;
 
 
+	
+	/**
+	 * Konstruktor von MessagePopUpScreen
+	 */
 	private MessagePopUpScreen(){
 		super("Nachricht versenden");
 		initGui();
 		
 	}
+	
 	
 	
 	public static MessagePopUpScreen getInstance(){
@@ -49,7 +61,9 @@ public class MessagePopUpScreen extends JFrame {
 		return instance;
 	}
 	
-	
+	/**
+	 * Initialisiert die Gui
+	 */
 	
 	private void initGui(){
 		contentPane = new JPanel();
@@ -64,6 +78,10 @@ public class MessagePopUpScreen extends JFrame {
 	}
 	
 	
+	/**
+	 * Erzeugt das headerPanel mit den JTextFields Empfänger und Betreff
+	 * @return das headerPanel
+	 */
 	private JComponent initHeaders(){
 		JPanel headerPanel = new JPanel();
 		headerPanel.setLayout(new BorderLayout());
@@ -93,7 +111,10 @@ public class MessagePopUpScreen extends JFrame {
 		
 	}
 	
-	
+	/**
+	 * Erzeugt die JTextArea.
+	 * @return die MessageArea
+	 */
 	private JComponent initTextArea(){
 		
 		messageArea = new JTextArea();
@@ -106,6 +127,11 @@ public class MessagePopUpScreen extends JFrame {
 		
 	}
 	
+	
+	/**
+	 * Erzeugt das ButtonPanel mit den Buttons Senden und Abbrechen.
+	 * @return das ButtonPanel
+	 */
 	private JComponent initButtons(){
 		JPanel buttonPanel = new JPanel();
 		buttonPanel.setLayout(new FlowLayout());
@@ -128,6 +154,7 @@ public class MessagePopUpScreen extends JFrame {
 		return buttonPanel;
 		
 	}
+	
 	
 	public String getMessageText(){
 		return messageArea.getText();
