@@ -12,7 +12,7 @@ import org.model.Song;
 
 
 public class PlaylistSingleScreen extends JPanel{
-	Playlist playlist;
+	private Playlist playlist;
 	private String[] columns = new String[] { "Interpret", "Titel", "Album", "Länge", "Community Rating", "Favor" };
 	private Object[][] context = new Object[][] {};
 	private DefaultTableModel model;
@@ -42,7 +42,9 @@ public class PlaylistSingleScreen extends JPanel{
 		}
 	}
 
-	
+	public int getPlaylistID(){
+		return playlist.getPlaylistId();
+	}
 	
 	
 }
