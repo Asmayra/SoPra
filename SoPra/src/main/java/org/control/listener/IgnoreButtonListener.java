@@ -29,11 +29,13 @@ public class IgnoreButtonListener implements ActionListener {
 			LoginControl.getInstance().getCurrentUser().unignore(profile.getUserProfile());
 			profile.setIgnore(false);
 			((JButton) arg0.getSource()).setText("ignore");
+			DatabaseControl.getInstance().update(LoginControl.getInstance().getCurrentUser());
 			
 		} else {
 			LoginControl.getInstance().getCurrentUser().ignore(profile.getUserProfile());
 			profile.setIgnore(true);
 			((JButton) arg0.getSource()).setText("unignore");
+			DatabaseControl.getInstance().update(LoginControl.getInstance().getCurrentUser());
 			
 		}
 		DatabaseControl.getInstance().update(LoginControl.getInstance().getCurrentUser());
