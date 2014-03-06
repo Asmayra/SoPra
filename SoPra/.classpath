@@ -23,5 +23,17 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="src/main/resources/lib/basicplayer3.0.jar"/>
+	<classpathentry kind="lib" path="src/main/resources/lib/commons-logging-api.jar"/>
+	<classpathentry kind="lib" path="src/main/resources/lib/jflac-1.2.jar"/>
+	<classpathentry kind="lib" path="src/main/resources/lib/jl1.0.jar"/>
+	<classpathentry kind="lib" path="src/main/resources/lib/jmactritonusspi1.74.jar"/>
+	<classpathentry kind="lib" path="src/main/resources/lib/jogg-0.0.7.jar"/>
+	<classpathentry kind="lib" path="src/main/resources/lib/jorbis-0.0.15.jar"/>
+	<classpathentry kind="lib" path="src/main/resources/lib/jspeex0.9.7.jar"/>
+	<classpathentry kind="lib" path="src/main/resources/lib/kj_dsp1.1.jar"/>
+	<classpathentry kind="lib" path="src/main/resources/lib/mp3spi1.9.4.jar"/>
+	<classpathentry kind="lib" path="src/main/resources/lib/tritonus_share.jar"/>
+	<classpathentry kind="lib" path="src/main/resources/lib/vorbisspi1.0.2.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
