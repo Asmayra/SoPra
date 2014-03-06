@@ -19,7 +19,7 @@ public class AdminHomeScreen extends JPanel {
 		Ticket t = new Ticket();
 		User u = new User();
 		u.setUsername("q");
-		t.setKategory("Viagra onine kaufen");
+		t.setCategory("Viagra onine kaufen");
 		t.setRequester(u);
 		t.setShortInfo("blablablablablabalbalbalbal");	
 	

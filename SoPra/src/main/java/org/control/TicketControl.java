@@ -1,5 +1,10 @@
 package org.control;
 
+import java.io.IOException;
+
+import org.model.Ticket;
+import org.view.TicketScreen;
+
 public class TicketControl {
 	
 	
@@ -18,11 +23,18 @@ public class TicketControl {
 		return instance;
 	}
 	
-	public Boolean createTicket(){
+	public void createTicket(){
 		Ticket newTicket = new Ticket();
+		newTicket.setCategory(TicketScreen.getInstance().getCategory());
+		newTicket.setRequester(LoginControl.getInstance().getCurrentUser());
+		newTicket.setShortInfo(TicketScreen.getInstance().getTicketText());
 		
 		
-		
+		try {
+			DatabaseControl.getInstance().save(newTicket);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
 	}
 	
