@@ -9,7 +9,7 @@ public class SettingsScreenCeateTicketButtonListener implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
+		TicketScreen.getInstance().resetGui();
 		TicketScreen.getInstance().setVisible(true);
 
 	}
