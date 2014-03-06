@@ -109,8 +109,19 @@ public class DatabaseControl {
 		session.beginTransaction();
 		session.createQuery(query).executeUpdate();
 		session.getTransaction().commit();
-		session.close();
-		
+		session.close();	
+	}
+	
+	/**
+	 * insert query with statement
+	 * @param query string with query
+	 */
+	public void insertWithQuery(String query){
+		session = sessionFactory.openSession();
+		session.beginTransaction();
+		session.createQuery(query);
+		session.getTransaction().commit();
+		session.close();	
 	}
 	/**
 	 * loads an Object from the Database. 
