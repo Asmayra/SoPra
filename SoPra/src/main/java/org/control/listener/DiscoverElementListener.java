@@ -3,7 +3,7 @@ package org.control.listener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import org.view.screens.EastBar.DiscoverElement;
+import org.view.DiscoverElement;
 
 public class DiscoverElementListener implements MouseListener{
 

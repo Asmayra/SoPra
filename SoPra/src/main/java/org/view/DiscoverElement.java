@@ -1,4 +1,4 @@
-package org.view.screens.EastBar;
+package org.view;
 
 import java.awt.BorderLayout;
 import java.awt.image.BufferedImage;
