@@ -15,7 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import org.control.LoadImageControl;
-import org.view.screens.EastBar.DiscoverElement;
+import org.view.DiscoverElement;
 import org.view.screens.EastBar.DiscoverMiniScreen;
 import org.view.screens.EastBar.EastBar;
 

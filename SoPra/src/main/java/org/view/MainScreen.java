@@ -69,7 +69,7 @@ public class MainScreen extends JFrame {
 	private MainScreen() {
 		this.setLayout(new BorderLayout(5, 0));
 		this.setMinimumSize(new Dimension(MIN_WIDTH, MIN_HEIGHT));
-		this.setExtendedState(MAXIMIZED_BOTH); 
+		//this.setExtendedState(MAXIMIZED_BOTH); 
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
 
@@ -187,6 +187,10 @@ public class MainScreen extends JFrame {
 	}
 
 	public void showPfofileScreen(ProfileScreen screen) {
+		this.updateCenter(screen);
+	}
+	
+	public void showSubscriptionScreen(SubscriptionScreen screen){
 		this.updateCenter(screen);
 	}
 

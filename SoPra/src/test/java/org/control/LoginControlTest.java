@@ -9,9 +9,16 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.model.User;
 
+/**
+ * JUnitTest für die Klasse LoginControl
+ * @author Michael Pfennings, Mattias Schoenke
+ *
+ */
 public class LoginControlTest {
 	
-	
+	/**
+	 * Erstellt einen LoginTestUser der in den JUnitTest verwendet wird.
+	 */
 	@BeforeClass
 	public static void createTestUser(){
 		User newUser = new User();
@@ -27,7 +34,10 @@ public class LoginControlTest {
 			System.out.println("Username already taken!");
 		}
 	}
-
+	
+	/**
+	 * Testet die Login Funktion.
+	 */
 	@Test
 	public void loginCheckTest() {
 		assertTrue(LoginControl.getInstance().checkLogin("LoginTestUser", "Kennwort"));
@@ -36,7 +46,9 @@ public class LoginControlTest {
 	}
 	
 	
-	
+	/**
+	 * Löscht den LoginTestUser aus der Datenbank.
+	 */
 	
 	@AfterClass
 	public static void deleteTestUser(){

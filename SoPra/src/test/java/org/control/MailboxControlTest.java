@@ -9,8 +9,17 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.model.User;
 
+/**
+ * JUnitTest für die Klasse MailboxControl
+ * @author Michael Pfennings, Mattias Schoenke
+ *
+ */
 public class MailboxControlTest {
-
+	
+	
+	/**
+	 * Testet die Nachrichten senden Funktion
+	 */
 	@Test
 	public void sendMessageTest() {
 				
@@ -35,6 +44,9 @@ public class MailboxControlTest {
 	}
 	
 	
+	/**
+	 * Erstellt 2 mailTestUser die in dem JUnitTest verwendet werden
+	 */
 	@BeforeClass
 	public static void beforeClass()
 	{
@@ -55,6 +67,9 @@ public class MailboxControlTest {
 		}
 	}
 	
+	/**
+	 * Löscht die 2 mailTestUser aus der Datenbank.
+	 */
 	@AfterClass
 	public static void afterClass()
 	{

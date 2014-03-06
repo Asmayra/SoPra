@@ -12,7 +12,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 
 import org.model.Genre;
-import org.view.screens.EastBar.DiscoverElement;
+import org.view.DiscoverElement;
 
 /**
  * @author Tim Michels, Max Küper 

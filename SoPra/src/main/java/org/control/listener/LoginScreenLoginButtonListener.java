@@ -22,6 +22,7 @@ public class LoginScreenLoginButtonListener implements ActionListener {
 			}else{
 				System.out.println("UserLayout aufgesetzt");
 				MainScreen.getInstance().setUpUserLayout();
+				login.resetPassword();
 				
 			}
 			login.dispose();
