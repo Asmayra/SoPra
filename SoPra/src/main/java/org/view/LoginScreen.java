@@ -177,5 +177,13 @@ public class LoginScreen extends JFrame {
 		errorLabel.setVisible(true);
 	}
 	
+	/**
+	 * Leert das Passwort-Feld
+	 */
+	public void resetPassword()
+	{
+		passwordText.setText("");
+	}
+	
 
 }
