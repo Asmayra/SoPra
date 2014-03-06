@@ -16,7 +16,8 @@ import org.model.User;
 
 public class ProfileSongsPanel extends JScrollPane {
 
-	private static String[] columns = new String[] { "Interpret", "Title", "Album", "Länge", "Community Rating", "Favor" };
+	private static String[] columns = new String[] { "Interpret", "Title", "Album", "Länge", "Community Rating",
+			"Favor" };
 	private static Object[][] context = new Object[][] {};
 	private static DefaultTableModel model;
 	private static JTable table;
@@ -25,20 +26,23 @@ public class ProfileSongsPanel extends JScrollPane {
 		super(create(u));
 		setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 	}
-		
-		
-		
-
-		
 
 	private static JTable create(User u) {
 		model = new DefaultTableModel(context, columns) {
+			@Override
+			public Class getColumnClass(int col) {
+				if (col == 5)
+					return Boolean.class;
+				else
+					return String.class;
+			}
+
 			@Override
 			public boolean isCellEditable(int row, int column) {
 				return column == 5;
 			}
 		};
-		//this.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		// this.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		table = new JTable();
 		table.setModel(model);
 		List<Song> songs = u.getOwnSongs();
@@ -64,7 +68,7 @@ public class ProfileSongsPanel extends JScrollPane {
 		}
 		table.setFillsViewportHeight(true);
 		return table;
-		
+
 	}
 
 }

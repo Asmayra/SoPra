@@ -30,6 +30,13 @@ public class ProfilePlaylistPanel extends JScrollPane {
 	private static JTable create(User u) {
 		model = new DefaultTableModel(context, columns) {
 			@Override
+			public Class getColumnClass(int col) {
+				if (col == 3)
+					return Boolean.class;
+				else
+					return String.class;
+			}
+			@Override
 			public boolean isCellEditable(int row, int column) {
 				return column == 3;
 			}
