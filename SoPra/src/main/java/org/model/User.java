@@ -12,7 +12,6 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
-
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -34,7 +33,8 @@ import org.hibernate.Session;
 
 @Entity
 @Table(name = "USER_TABLE")
-public class User {
+@org.hibernate.annotations.Entity(dynamicInsert=true)
+public class User implements Comparable{
 	@Id
 	private String username;
 	private String password;
@@ -276,6 +276,12 @@ public class User {
 
 	public void setEMail(String eMail) {
 		this.eMail = eMail;
+	}
+
+	@Override
+	public int compareTo(Object arg0) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }
