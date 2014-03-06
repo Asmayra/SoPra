@@ -25,6 +25,7 @@ public class DiscoverElement extends JPanel {
 	private JLabel label;
 	private JLabel pictureLabel;
 	private String url;
+	private String objectType; //Song, Album oder User
 	
 	public String getUrl(){
 		return this.url;
@@ -35,13 +36,21 @@ public class DiscoverElement extends JPanel {
 	 * @param pictureIcon JLabel with picture to be shown
 	 * @param url to get to this discover
 	 */
-	public DiscoverElement(String text, ImageIcon pictureIcon, String url) {
+	public DiscoverElement(String text, ImageIcon pictureIcon, String url, String type) {
 		this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 		this.label = new JLabel("<html><body>"+text+"</body></html>");
 		this.pictureLabel = new JLabel(pictureIcon);
 		this.add(this.label);
 		this.add(this.pictureLabel);
 		this.url = url;
-		this.addMouseListener(new DiscoverElementListener());
+		this.objectType=type;
+		
+		this.addMouseListener(DiscoverElementListener.getInstance());
+	}
+	public String getObjectType() {
+		return objectType;
+	}
+	public void setObjectType(String objectType) {
+		this.objectType = objectType;
 	}
 }
