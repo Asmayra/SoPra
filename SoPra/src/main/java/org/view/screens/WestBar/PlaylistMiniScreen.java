@@ -14,6 +14,7 @@ import javax.swing.tree.TreePath;
 
 import org.control.LoginControl;
 import org.control.listener.GenresButtonListener;
+import org.control.listener.SubscriptionButtonListener;
 import org.model.User;
 /**
  * 
@@ -169,6 +170,7 @@ public class PlaylistMiniScreen extends JPanel{
 		c.gridy = 0;
 		c.weightx = 0.0001;
 		c.weighty = 0.0001;
+		subscriptions.addActionListener(new SubscriptionButtonListener());
 		user.add(subscriptions,c);
 		c.gridy++;
 		user.add(favorits,c);

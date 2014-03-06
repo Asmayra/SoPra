@@ -14,6 +14,7 @@ public class Main {
 			LoginScreen ls = LoginScreen.getInstance();
 			ls.setVisible(true);
 			DiscoverControl discControl = new DiscoverControl();
+			SubscriptionControl subControl = new SubscriptionControl();
 			//disover control initialize
 			//DiscoverControl discContr = new DiscoverControl();
 			

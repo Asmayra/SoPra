@@ -11,6 +11,7 @@ import org.view.MessagePopUpScreen;
 public class MailboxReplyMessageButtonListener implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
+		MailboxControl.getInstance().resetGui();
 		MessagePopUpScreen popup = MessagePopUpScreen.getInstance();
 		
 		Message toReply = MailboxControl.getInstance().getCurMessage();
@@ -21,6 +22,7 @@ public class MailboxReplyMessageButtonListener implements ActionListener {
 			if(recip != null)
 			{
 				popup.setRecipient(recip.getUsername());
+				popup.setSubject("RE: " + toReply.getSubject());
 			}
 		}
 		

@@ -21,7 +21,7 @@ public class LoadImageControl {
 	
 	/**
 	 * load ImageIcon from Filesystem
-	 * @param imagePath String to the location of the file on the filesystem
+	 * @param imagePath String to the location of the file on the filesystem, if emtpy placeholder is loaded
 	 * @return loaded ImageIcon
 	 */
 	public static ImageIcon loadImageIcon(String imagePath){
@@ -31,14 +31,19 @@ public class LoadImageControl {
 	
 	/**
 	 * load BufferedImage from Filesystem
-	 * @param imagePath String to the location of the file on the filesystem
+	 * @param imagePath String to the location of the file on the filesystem, if emtpy placeholder is loaded
 	 * @return loaded ImageIcon
 	 */
 	public static BufferedImage loadBufferedImage(String imagePath){
 		BufferedImage image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_RGB);
 		try {
-			image = ImageIO.read(ClassLoader.getSystemClassLoader().getResource(imagePath));
-			//image = ImageIO.read(new File(System.getProperty("user.dir")+"\\src\\main\\resources\\"+imagePath));
+			if(imagePath == null || imagePath == ""){
+				image = ImageIO.read(ClassLoader.getSystemClassLoader().getResource("placeholder.jpg"));
+			} else{
+				String filepath = System.getProperty("user.dir")+"\\SoPraMediaDatabase\\"+LoginControl.getInstance().getCurrentUser().getUsername()+"\\"+imagePath;
+				image = ImageIO.read(new File(filepath));
+			}
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

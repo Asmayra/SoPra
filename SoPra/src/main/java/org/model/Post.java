@@ -77,12 +77,8 @@ public class Post {
 		JPanel pst = new JPanel();
 		pst.setLayout(new FlowLayout());
 		//Scale the Autor's Profile Picture
-		try {
-			prflPicture = this.getAutor().getPicture();
-			prflPic= prflPicture.getScaledInstance(50, -1, BufferedImage.SCALE_DEFAULT);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		prflPicture = this.getAutor().getPicture();
+		prflPic= prflPicture.getScaledInstance(50, -1, BufferedImage.SCALE_DEFAULT);
 		ImageIcon pic =new ImageIcon(prflPic);
 		JLabel autorPic = new JLabel(pic);
 		autorPic.setSize(50,50);	

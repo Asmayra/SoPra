@@ -80,12 +80,11 @@ public class SettingsControlListener implements ActionListener{
 			if(this.settingsScreen.getFieldData(Attributfelder.NEUESPASSWORT).equals(this.settingsScreen.getFieldData(Attributfelder.NEUESPASSWORTWIEDERHOLUNG))){
 				return true;
 			} else{
-				System.out.println("passwortwiederholung fehlerhaft");
 				JOptionPane.showMessageDialog(null, "Passwortwiederholung fehlerhaft", "Fehler", JOptionPane.ERROR_MESSAGE);
 				return false;
 			}
 		} else{
-			System.out.println("altes passwort fehlerhaft");
+			JOptionPane.showMessageDialog(null, "altes Passwort nicht korrekt", "Fehler", JOptionPane.ERROR_MESSAGE);
 			return false;
 		}
 		

@@ -24,8 +24,9 @@ import org.view.ProfileSongsPanel;
 
 /**
  * Profil-Screen mit Funktionen "follow/unfollow", "ignore/unignore" und
- * "Nachricht senden" (nicht beim Aufruf des eigenen Profils). Es kann je nach Inhalt und Rechte des Profils die Songs,
- * Playlisten, Alben und Posts angezeigt werden.
+ * "Nachricht senden" (nicht beim Aufruf des eigenen Profils). Es kann je nach
+ * Inhalt und Rechte des Profils die Songs, Playlisten, Alben und Posts
+ * angezeigt werden.
  * 
  * @author Sebastian Roth
  * 
@@ -59,17 +60,17 @@ public class ProfileScreen extends JPanel {
 	private JLabel lblUserName;
 
 	/**
-	 *  Konstruktor erstellt das Profil-Screen-Panel
-	 *  
+	 * Konstruktor erstellt das Profil-Screen-Panel
+	 * 
 	 * @param selectedUser
-	 * 			User dessen Profil-Screen angezeigt wird
+	 *            User dessen Profil-Screen angezeigt wird
 	 */
 	public ProfileScreen(User selectedUser) {
 		userProfile = selectedUser;
 		// task: try catch Block hinzufügen für IOException
 		try {
 			prflPicture = userProfile.getPicture();
-			prflPicture = prflPicture.getScaledInstance(150, -1, BufferedImage.SCALE_DEFAULT);
+			prflPicture = prflPicture.getScaledInstance(150, 150, BufferedImage.SCALE_DEFAULT);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -116,7 +117,7 @@ public class ProfileScreen extends JPanel {
 		buttons = new JPanel();
 		userOverview.add(buttons, BorderLayout.SOUTH);
 
-		if (!userProfile.equals(LoginControl.getInstance().getCurrentUser())) {
+		if (!(userProfile.getUsername().equals(LoginControl.getInstance().getCurrentUser().getUsername()))) {
 			message = new JButton("Nachricht senden");
 			buttons.add(message);
 			if (followProfile) {
@@ -130,7 +131,7 @@ public class ProfileScreen extends JPanel {
 			} else {
 				ignore = new JButton("ignore");
 			}
-			ignore.addActionListener(new IgnoreButtonListener());
+			ignore.addActionListener(new IgnoreButtonListener(this));
 			buttons.add(follow);
 			buttons.add(ignore);
 		}
@@ -151,7 +152,7 @@ public class ProfileScreen extends JPanel {
 		userContentScrollSongs.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		userContent.addTab("Playlists", userContentScrollPlaylists);
 		userContent.addTab("Posts", userContentScrollPosts);
-		if (userProfile.getRights().equals("Artist")||userProfile.getRights().equals("LabelManager")) {
+		if (userProfile.getRights().equals("Artist") || userProfile.getRights().equals("LabelManager")) {
 			userContent.addTab("Songs", userContentScrollSongs);
 			userContent.addTab("Alben", userContentScrollAlben);
 		}
@@ -160,27 +161,52 @@ public class ProfileScreen extends JPanel {
 	}
 
 	/**
-	 * Get-Methode die den Status zurückgibt ob Benutzer dem User dieses Profils ignoriert oder nicht
-	 * @return
-	 * 		boolean mit true für "ignoriert" und false für "ignoriert nicht"
+	 * Get-Methode die den Status zurückgibt ob Benutzer dem User dieses Profils
+	 * ignoriert oder nicht
+	 * 
+	 * @return boolean mit true für "ignoriert" und false für "ignoriert nicht"
 	 */
 	public boolean getIgnore() {
 		return ignoreProfile;
 	}
 
+	/**
+	 * Get-Methode die den Status zurückgibt ob Benutzer dem User dieses Profils
+	 * folgt oder nicht
+	 * 
+	 * @return boolean mit true für "folgt" und false für "folgt nicht"
+	 */
 	public boolean getFollow() {
 		return followProfile;
 	}
 
+	/**
+	 * Set-Methode um den "Folge"-Status zu setzen
+	 * 
+	 * @param b
+	 *            boolean mit true für "folgt" und false für "folgt nicht"
+	 */
 	public void setFollow(boolean b) {
 		followProfile = b;
 
 	}
 
+	/**
+	 * Set-Methode um den "Ignorier"-Status zu setzen
+	 * 
+	 * @param b
+	 *            boolean mit true für "ignoriert" und false für
+	 *            "ignoriert nicht"
+	 */
 	public void setIgnore(boolean b) {
 		ignoreProfile = b;
 	}
 
+	/**
+	 * Get-Methode die den User des aufgerufenen Profils zurückgibt
+	 * 
+	 * @return User des aufgerufenen Profils
+	 */
 	public User getUserProfile() {
 		return userProfile;
 	}

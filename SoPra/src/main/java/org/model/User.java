@@ -13,14 +13,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 
-
-
-
-
-
-
-
-
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -56,11 +48,11 @@ public class User {
 	private String rights = "StandardUser"; // Admin, Artist, LabelManager
 	private String imagePath;
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	private Set<User> following;
+	private Set<User> following = new TreeSet<User>();
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Set<Playlist> playlists;
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	private Set<User> ignoring;
+	private Set<User> ignoring = new TreeSet<User>();
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	// Set Eager,because it's loaded at the Homescreen
 	private Set<Post> posts = new TreeSet<Post>();
@@ -68,61 +60,59 @@ public class User {
 	private Set<Message> messages = new TreeSet<Message>();
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Set<Song> ownSongs;
-	
-	public User(){	
+
+	public User() {
+		System.out.println("test");
 	}
-	
-	public void createFavorites(){
-		try{
+
+	public void createFavorites() {
+		try {
 			Playlist favorites = new Playlist(this);
 			favorites.setName("Favorites");
 			playlists.add(favorites);
-		} catch (IllegalArgumentException e){
+		} catch (IllegalArgumentException e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public List<User> getFollowing() {
 		return new ArrayList<User>(this.following);
 	}
-
 
 	public void setFollowing(List<User> following) {
 		this.following = new TreeSet<User>(following);
 	}
 
-
 	public Collection<Post> getPosts() {
 		return posts;
 	}
-	
+
 	public Collection<Message> getMessages() {
 		return messages;
 	}
-	
-	
+
 	public void addMessage(Message message) {
 		this.messages.add(message);
 	}
-	
+
 	public void removeMessage(Message message) {
 		java.util.Iterator<Message> it = messages.iterator();
-		
-		while (it.hasNext() ){
-			if (it.next().getMessageId() == message.getMessageId()){
+
+		while (it.hasNext()) {
+			if (it.next().getMessageId() == message.getMessageId()) {
 				it.remove();
 			}
 		}
 	}
-	
-	public void addOwnSong(Song s){
+
+	public void addOwnSong(Song s) {
 		ownSongs.add(s);
 	}
-	
-	public List<Song> getOwnSongs(){
+
+	public List<Song> getOwnSongs() {
 		return new ArrayList<Song>(this.ownSongs);
 	}
-	
+
 	/**
 	 * Adds a Post to the User and sets him as the Autor
 	 * 
@@ -131,9 +121,8 @@ public class User {
 	public void addPosts(Post pst) {
 		pst.setAutor(this);
 		this.posts.add(pst);
-		
-	}
 
+	}
 
 	public String getRights() {
 		return rights;
@@ -207,12 +196,8 @@ public class User {
 		this.salt = salt;
 	}
 
-	public BufferedImage getPicture() throws IOException {
-		if(this.imagePath == null || this.imagePath == ""){
-			return LoadImageControl.loadBufferedImage("placeholder.jpg");
-		} else{
+	public BufferedImage getPicture() {
 			return LoadImageControl.loadBufferedImage(this.imagePath);
-		}
 	}
 
 	public String getAge() {
@@ -226,8 +211,6 @@ public class User {
 				&& birth.get(Calendar.DAY_OF_MONTH) < now.get(Calendar.DAY_OF_MONTH)) {
 			age++;
 		}
-		System.out.println(birth.get(Calendar.YEAR));
-		System.out.println(now.get(Calendar.YEAR));
 		return age.toString();
 	}
 
@@ -239,7 +222,7 @@ public class User {
 	}
 
 	public boolean isIgnoring(User user) {
-		
+
 		if (ignoring.contains(user)) {
 			return true;
 		}
@@ -255,44 +238,41 @@ public class User {
 	}
 
 	public void unfollow(User usr) {
-		following.remove(usr);	
+		following.remove(usr);
 	}
 
 	public void follow(User usr) {
-		following.add(usr);	
+		following.add(usr);
 	}
-	
+
 	public void unignore(User user) {
 		ignoring.remove(user);
-		
+
 	}
 
 	public void ignore(User user) {
 		ignoring.add(user);
-		
+
 	}
 
 	public Playlist getFavorites() {
 		List<Playlist> list = new ArrayList<Playlist>(this.playlists);
-		for (int i=0;i<list.size();i++){
-			if (list.get(i).getName()=="Favorites"){
+		for (int i = 0; i < list.size(); i++) {
+			if (list.get(i).getName() == "Favorites") {
 				return list.get(i);
 			}
 		}
-		//null
+		// null
 		return list.get(0);
 	}
-
 
 	public List<Playlist> getPlaylists() {
 		return new ArrayList<Playlist>(this.playlists);
 	}
 
-
 	public String getEMail() {
 		return eMail;
 	}
-
 
 	public void setEMail(String eMail) {
 		this.eMail = eMail;

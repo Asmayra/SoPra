@@ -11,12 +11,20 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.model.User;
 
+
+/**
+ * JUnitText für die Klasse DatabaseController
+ * @author Michael Pfennings, Mattias Schoenke
+ *
+ */
 public class DatabaseControlTest {
 	
 	
 	private static User dbTestUser, dbTestUser2;
 	
-	
+	/**
+	 * Testet ob ein User aus der Datenbank geladen werden kann.
+	 */
 	
 	@Test
 	public void loadTest()
@@ -26,6 +34,10 @@ public class DatabaseControlTest {
 		assertTrue(dbTestUser != null);
 	}
 	
+	
+	/**
+	 * Testet ob ein User in der Datenbank geändert werden kann.
+	 */
 	@Test
 	public void updateTest()
 	{
@@ -38,6 +50,10 @@ public class DatabaseControlTest {
 		assertTrue(dbTestUser.getFirstname().equals("Wurst"));
 	}
 	
+	
+	/**
+	 * Testet das Verhalten wenn versucht wird einen nicht existierender User aus der Datenbank zu laden.
+	 */
 	@Test
 	public void updateNonExistingTest()
 	{
@@ -52,6 +68,11 @@ public class DatabaseControlTest {
 		assertTrue(dbTestUser2 != null);
 	}
 	
+	
+	
+	/**
+	 * Testet ob der Primary eines Objektes geändert werden kann.
+	 */
 	@Test
 	public void updatePrimaryTest()
 	{
@@ -68,12 +89,20 @@ public class DatabaseControlTest {
 		assertTrue(dbTestUser2 != null);
 	}
 	
+	
+	/**
+	 * Testet die Suchfunktion.
+	 */
 	@Test
 	public void searchTest()
 	{
 		assertTrue(!DatabaseControl.getInstance().queryForKeyword(User.class, "firstname", "ans").isEmpty());
 	}	
-		
+	
+	
+	/**
+	 * Erstellt einen TestUser der in den JUnitTest verwendet wird.
+	 */
 	@Before
 	public void before()
 	{
@@ -88,6 +117,9 @@ public class DatabaseControlTest {
 		}
 	}
 	
+	/**
+	 * Löscht den TestUser aus der Datenbank
+	 */
 	@After
 	public void after()
 	{

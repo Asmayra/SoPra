@@ -9,7 +9,14 @@ import javax.swing.JButton;
 import org.control.DatabaseControl;
 import org.control.LoginControl;
 import org.view.screens.Center.ProfileScreen;
-
+/**
+ * Folgen-Button-Funktionalität wird bereitgestellt. Je nach dem ob dem User des
+ * Profils auf dem sich der Button befindet schon vom aktuellen Benutzer
+ * gefolgt wird ändert sich die Button-Funktionalität dementsprechend.
+ * 
+ * @author Sebastian Roth
+ * 
+ */
 public class FollowButtonListener implements ActionListener {
 	
 	private ProfileScreen profile;
@@ -24,25 +31,13 @@ public class FollowButtonListener implements ActionListener {
 			LoginControl.getInstance().getCurrentUser().unfollow(profile.getUserProfile());
 			profile.setFollow(false);
 			((JButton) arg0.getSource()).setText("follow");
-			try {
-				DatabaseControl.getInstance().save(LoginControl.getInstance().getCurrentUser());
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 			
 		} else {
 			LoginControl.getInstance().getCurrentUser().follow(profile.getUserProfile());
 			profile.setFollow(true);
 			((JButton) arg0.getSource()).setText("unfollow");
-			try {
-				DatabaseControl.getInstance().save(LoginControl.getInstance().getCurrentUser());
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 		}
-
+		DatabaseControl.getInstance().update(LoginControl.getInstance().getCurrentUser());
 	}
 
 }

@@ -17,6 +17,13 @@ import javax.swing.JTextField;
 import org.control.listener.CloseFrameListener;
 import org.control.listener.MessagePopUpScreenSendButtonListener;
 
+
+/**
+ * PopUp zum versenden von Nachrichten. Ist ein Singleton.
+ * @author Michael Pfennings, Mattias Schoenke
+ *
+ */
+
 public class MessagePopUpScreen extends JFrame {
 	
 	
@@ -29,15 +36,20 @@ public class MessagePopUpScreen extends JFrame {
 	
 	private JLabel errorLabel;
 	
-	private final int TEXTAREA_WIDTH = 200;
-	private final int TEXTAREA_HEIGHT = 200;
+	private final int TEXTAREA_WIDTH = 450;
+	private final int TEXTAREA_HEIGHT = 450;
 
 
+	
+	/**
+	 * Konstruktor von MessagePopUpScreen
+	 */
 	private MessagePopUpScreen(){
 		super("Nachricht versenden");
 		initGui();
 		
 	}
+	
 	
 	
 	public static MessagePopUpScreen getInstance(){
@@ -49,7 +61,9 @@ public class MessagePopUpScreen extends JFrame {
 		return instance;
 	}
 	
-	
+	/**
+	 * Initialisiert die Gui
+	 */
 	
 	private void initGui(){
 		contentPane = new JPanel();
@@ -64,27 +78,43 @@ public class MessagePopUpScreen extends JFrame {
 	}
 	
 	
+	/**
+	 * Erzeugt das headerPanel mit den JTextFields Empfänger und Betreff
+	 * @return das headerPanel
+	 */
 	private JComponent initHeaders(){
 		JPanel headerPanel = new JPanel();
-		headerPanel.setLayout(new GridLayout(2,2));
+		headerPanel.setLayout(new BorderLayout());
+		
+		JPanel labelPanel = new JPanel();
+		labelPanel.setLayout(new GridLayout(0,1));
+		
+		JPanel textPanel = new JPanel();
+		textPanel.setLayout(new GridLayout(0,1));
 		
 		JLabel recipentLabel = new JLabel("Empfänger: ");
-		headerPanel.add(recipentLabel);
+		labelPanel.add(recipentLabel);
 		
 		recipientText = new JTextField();
-		headerPanel.add(recipientText);
+		textPanel.add(recipientText);
 		
 		JLabel subjectLabel = new JLabel("Betreff: ");
-		headerPanel.add(subjectLabel);
+		labelPanel.add(subjectLabel);
 		
 		subjectText = new JTextField();
-		headerPanel.add(subjectText);
+		textPanel.add(subjectText);
+		
+		headerPanel.add(labelPanel, BorderLayout.WEST);
+		headerPanel.add(textPanel, BorderLayout.CENTER);
 		
 		return headerPanel;
 		
 	}
 	
-	
+	/**
+	 * Erzeugt die JTextArea.
+	 * @return die MessageArea
+	 */
 	private JComponent initTextArea(){
 		
 		messageArea = new JTextArea();
@@ -97,6 +127,11 @@ public class MessagePopUpScreen extends JFrame {
 		
 	}
 	
+	
+	/**
+	 * Erzeugt das ButtonPanel mit den Buttons Senden und Abbrechen.
+	 * @return das ButtonPanel
+	 */
 	private JComponent initButtons(){
 		JPanel buttonPanel = new JPanel();
 		buttonPanel.setLayout(new FlowLayout());
@@ -119,6 +154,7 @@ public class MessagePopUpScreen extends JFrame {
 		return buttonPanel;
 		
 	}
+	
 	
 	public String getMessageText(){
 		return messageArea.getText();
@@ -143,5 +179,12 @@ public class MessagePopUpScreen extends JFrame {
 		recipientText.setText(recip);
 	}
 	
+	public void setSubject(String subject){
+		subjectText.setText(subject);
+	}
+	
+	public void setMessage(String message){
+		messageArea.setText(message);
+	}
 
 }
