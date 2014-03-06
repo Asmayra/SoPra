@@ -15,6 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import org.control.LoadImageControl;
+import org.control.SaveMusicControl;
 import org.view.DiscoverElement;
 import org.view.screens.EastBar.DiscoverMiniScreen;
 import org.view.screens.EastBar.EastBar;
@@ -25,6 +26,8 @@ public class EastBarTest {
     	JFrame f = new JFrame("EastBar");
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         EastBar eb = EastBar.getInstance();
+        
+        SaveMusicControl.saveSong(new File(""), "q", "test.mp3");
     
         /*
         DiscoverMiniScreen miniScreen = DiscoverMiniScreen.getInstance();

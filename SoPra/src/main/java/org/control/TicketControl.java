@@ -3,6 +3,7 @@ package org.control;
 import java.io.IOException;
 
 import org.model.Ticket;
+import org.model.User;
 import org.view.TicketScreen;
 
 public class TicketControl {
@@ -23,11 +24,14 @@ public class TicketControl {
 		return instance;
 	}
 	
-	public void createTicket(){
+	public boolean createTicket(String category, User currentUser, String ticketText){
 		Ticket newTicket = new Ticket();
-		newTicket.setCategory(TicketScreen.getInstance().getCategory());
-		newTicket.setRequester(LoginControl.getInstance().getCurrentUser());
-		newTicket.setShortInfo(TicketScreen.getInstance().getTicketText());
+		if (category == null || category == ""){
+			return false;
+		}
+		newTicket.setCategory(category);
+		newTicket.setRequester(currentUser);
+		newTicket.setShortInfo(ticketText);
 		
 		
 		try {
@@ -35,7 +39,8 @@ public class TicketControl {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+		return true;
 	}
+	
 	
 }

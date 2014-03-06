@@ -35,6 +35,7 @@ public class TicketScreen extends JFrame {
 	private JComboBox categoryBox; 
 	private JTextArea messageArea;
 	private JButton sendButton, cancelButton;
+	private JLabel errorLabel;
 		
 	private final int TEXTAREA_WIDTH = 450;
 	private final int TEXTAREA_HEIGHT = 450;
@@ -119,18 +120,21 @@ public class TicketScreen extends JFrame {
 	 * @return das ButtonPanel
 	 */
 	private JComponent initButtons(){
+		
 		JPanel buttonPanel = new JPanel();
-		buttonPanel.setLayout(new FlowLayout());
+		buttonPanel.setLayout(new GridLayout(2,2));
 		
 		sendButton = new JButton("Senden");
 		sendButton.addActionListener(new TicketScreenSendButtonListener());
-		
+		buttonPanel.add(sendButton);
 		
 		cancelButton = new JButton("Abbrechen");
 		cancelButton.addActionListener(new CloseFrameListener(this));
-		
-		buttonPanel.add(sendButton);
 		buttonPanel.add(cancelButton);
+		
+		errorLabel = new JLabel("Bitte Kategorie auswählen!");
+		errorLabel.setVisible(false);
+		buttonPanel.add(errorLabel);
 		
 		
 		return buttonPanel;
@@ -148,6 +152,20 @@ public class TicketScreen extends JFrame {
 
 	public void setTicket(String message){
 		messageArea.setText(message);
+	}
+	
+	public void displayErrorLabel(){
+		errorLabel.setVisible(true);
+	}
+	
+	public void hideErrorLabel(){
+		errorLabel.setVisible(false);
+	}
+	
+	public void resetGui(){
+		errorLabel.setVisible(false);
+		categoryBox.setSelectedIndex(0);
+		messageArea.setText("");
 	}
 
 }

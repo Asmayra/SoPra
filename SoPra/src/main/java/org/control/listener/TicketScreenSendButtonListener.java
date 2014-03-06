@@ -3,13 +3,20 @@ package org.control.listener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import org.control.LoginControl;
 import org.control.TicketControl;
+import org.view.TicketScreen;
 
 public class TicketScreenSendButtonListener implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		TicketControl.getInstance().createTicket();
+		TicketScreen tS = TicketScreen.getInstance();
+		
+		if(!(TicketControl.getInstance().createTicket(tS.getCategory(),LoginControl.getInstance().getCurrentUser(),tS.getTicketText()))){
+			TicketScreen.getInstance().displayErrorLabel();
+		}
+			
 	}
 
 }

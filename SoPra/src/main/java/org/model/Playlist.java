@@ -54,8 +54,8 @@ public class Playlist implements Comparable {
 		return false;
 	}
 
-	public Collection<Song> getSongs() {
-		Collection<Song> coll = new ArrayList<Song>(this.songs);
+	public LinkedList<Song> getSongs() {
+		LinkedList<Song> coll = new LinkedList<Song>(this.songs);
 		return coll;
 	}
 
@@ -80,10 +80,8 @@ public class Playlist implements Comparable {
 	}
 
 	private void testName(String name) throws IllegalArgumentException {
-		for (int i = 0; i < owner.getPlaylists().size(); i++) {
-			if (name.equals(owner.getPlaylists().get(i).getName())) {
-				throw new IllegalArgumentException();
-			}
+		if (name.equals("Favorits")) {
+			throw new IllegalArgumentException();
 		}
 	}
 

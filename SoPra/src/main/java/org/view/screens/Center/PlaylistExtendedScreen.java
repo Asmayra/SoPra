@@ -9,7 +9,7 @@ import javax.swing.JTabbedPane;
 public class PlaylistExtendedScreen extends JPanel{
 	
 	private JTabbedPane tabs = new JTabbedPane();
-	private LinkedList<String> playlistIDs = new LinkedList<String>();
+	private LinkedList<Integer> playlistIDs = new LinkedList<Integer>();
 	
 	private static PlaylistExtendedScreen instance;
 	
@@ -27,7 +27,7 @@ public class PlaylistExtendedScreen extends JPanel{
 	
 	public void addPlaylistTab(String playlistname, PlaylistSingleScreen playlist){
 		tabs.addTab(playlistname, playlist);
-		playlistIDs.addLast(playlistname);
+		playlistIDs.addLast(playlist.getPlaylistID());
 	}
 	
 	public void removePlaylistTab(int tabindex){
@@ -42,7 +42,7 @@ public class PlaylistExtendedScreen extends JPanel{
 		if(tabIndex!=-1){
 			tabs.setSelectedIndex(tabIndex);}
 		else{
-			tabs.setSelectedIndex(tabs.getTabCount());
+			tabs.setSelectedIndex(tabs.getTabCount()-1);
 		}
 	}
 	
