@@ -16,6 +16,8 @@ import org.control.LoginControl;
 import org.control.listener.GenresButtonListener;
 import org.control.listener.PlaylistTreeListener;
 import org.control.listener.SubscriptionButtonListener;
+import org.control.listener.UploadButtonListener;
+import org.control.listener.UploadPageButtonListener;
 import org.model.User;
 import org.view.screens.Center.PlaylistExtendedScreen;
 /**
@@ -30,6 +32,7 @@ public class PlaylistMiniScreen extends JPanel{
 	private JButton subscriptions; 
 	private JButton favorits;
 	private JButton genres;
+	private JButton uploads;
 	private JScrollPane scrollUser;
 	private JScrollPane scrollAdmin;
 	private JLabel invisible;
@@ -161,6 +164,7 @@ public class PlaylistMiniScreen extends JPanel{
 		subscriptions = new JButton("Subscriptions");
 		favorits = new JButton("Favoriten");
 		genres = new JButton("Genres");
+		uploads = new JButton("Uploads");
 		subscriptions.setOpaque(false);
 		subscriptions.setContentAreaFilled(false);
 		subscriptions.setBorderPainted(false);
@@ -173,6 +177,10 @@ public class PlaylistMiniScreen extends JPanel{
 		genres.setContentAreaFilled(false);
 		genres.setBorderPainted(false);
 		genres.setBackground(Color.WHITE);
+		uploads.setOpaque(false);
+		uploads.setContentAreaFilled(false);
+		uploads.setBorderPainted(false);
+		uploads.setBackground(Color.WHITE);
 		
 		//Layoutmanager + Anordnung
 		GridBagConstraints c  = new GridBagConstraints();
@@ -192,7 +200,13 @@ public class PlaylistMiniScreen extends JPanel{
 			c.gridy++;
 			genres.addActionListener(new GenresButtonListener());
 			user.add(genres,c);
+		}	
+		else if(currentUser.getRights().equals("Artist")){
+			c.gridy++;
+			uploads.addActionListener(new UploadPageButtonListener());
+			user.add(uploads,c);
 		}
+		
 		c.gridx=0;
 		c.gridy++;
 		c.weightx = 0.1;
