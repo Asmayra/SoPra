@@ -114,4 +114,12 @@ public class Playlist implements Comparable {
 	public void deleteSong(Song song){
 		songs.remove(song);
 	}
+
+	public Playlist copyFriendFavorites(User u, Playlist p) {
+		Playlist copyF = new Playlist(u);
+		copyF.setSongs(p.getSongs());
+		copyF.setName("Favorites from "+p.getOwner().getUsername());
+		return copyF;
+		
+	}
 }

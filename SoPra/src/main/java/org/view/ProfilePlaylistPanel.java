@@ -11,13 +11,15 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.table.DefaultTableModel;
 
 import org.control.LoginControl;
+import org.control.listener.PlaylistTableListener;
+import org.control.listener.SongTableListener;
 import org.model.Playlist;
 import org.model.Song;
 import org.model.User;
 
 public class ProfilePlaylistPanel extends JScrollPane {
 
-	private static String[] columns = new String[] { "Name", "Ersteller", "#Lieder", "Favor" };
+	private static String[] columns = new String[] { "Name", "Ersteller", "#Lieder", "Favor", "ID" };
 	private static Object[][] context;
 	private static DefaultTableModel model;
 	private static JTable table;
@@ -54,9 +56,11 @@ public class ProfilePlaylistPanel extends JScrollPane {
 			} else {
 				favor = false;
 			}
-			Object[] entry = { name, builder, songCount, favor };
+			int id = playlists.get(i).getPlaylistId();
+			Object[] entry = { name, builder, songCount, favor, id };
 			model.addRow(entry);
 		}
+		model.addTableModelListener(new PlaylistTableListener());
 		return table;
 	}
 }
