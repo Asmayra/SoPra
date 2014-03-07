@@ -20,6 +20,10 @@ import org.control.LoginControl;
 import org.control.listener.FollowButtonListener;
 import org.control.listener.IgnoreButtonListener;
 import org.control.listener.ProfileMessageButtonListener;
+import org.control.listener.ProfileScreenBannButtonListener;
+import org.control.listener.ProfileScreenUpgradeArtistButtonListener;
+import org.control.listener.ProfileScreenUpgradeManagerButtonListener;
+import org.control.listener.ProfileScreenUpgrageArtistButtonListener;
 import org.model.User;
 import org.view.ProfilePlaylistPanel;
 import org.view.ProfilePostsPanel;
@@ -55,6 +59,7 @@ public class ProfileScreen extends JPanel {
 	private JButton message;
 	private JButton ignore;
 	private JButton follow;
+	private JButton bann, upgradeArtist, upgradeUser, upgradeManager;
 	private JLabel lblName;
 	private JLabel lblLastName;
 	private JLabel lblCity;
@@ -135,6 +140,22 @@ public class ProfileScreen extends JPanel {
 			buttons.add(follow);
 			buttons.add(ignore);
 		}
+		
+		if (LoginControl.getInstance().getCurrentUser().getRights().equals("Admin")){
+			bann = new JButton("Bannen");
+			bann.addActionListener(new ProfileScreenBannButtonListener());
+			
+			upgradeArtist = new JButton("Zu Artist befördern");
+			upgradeArtist.addActionListener(new ProfileScreenUpgrageArtistButtonListener());
+			
+			upgradeUser = new JButton("Zu User befördern");
+			upgradeArtist.addActionListener(new ProfileScreenUpgradeArtistButtonListener());
+			
+			upgradeManager = new JButton("Zu Manager befördern");
+			upgradeManager.addActionListener(new ProfileScreenUpgradeManagerButtonListener());
+		}
+		
+		
 
 		userContent = new JTabbedPane();
 		playlists = new ProfilePlaylistPanel(userProfile);
