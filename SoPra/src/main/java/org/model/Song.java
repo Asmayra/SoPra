@@ -156,5 +156,9 @@ public class Song implements Comparable{
 	{
 		location = path;
 	}
+	
+	public void setTitle(String title){
+		this.title = title;
+	}
 
 }
