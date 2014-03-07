@@ -129,7 +129,7 @@ public class Song implements Comparable{
 	public void setPlaytime(){
 		AudioFileFormat fileFormat;
 		try {
-			fileFormat = AudioSystem.getAudioFileFormat(new File("song.mp3"));
+			fileFormat = AudioSystem.getAudioFileFormat(new File(location));
 	        Map<?, ?> properties = ((TAudioFileFormat) fileFormat).properties();
 	        String key = "duration";
 	        Long microseconds = (Long) properties.get(key);
