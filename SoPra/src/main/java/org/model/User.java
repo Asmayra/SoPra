@@ -68,7 +68,9 @@ public class User implements Comparable {
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Set<Message> messages = new TreeSet<Message>();
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	private Set<Song> ownSongs = new TreeSet<Song>();
+	private Set<Song> ownSongs;
+	
+	private boolean banned = false;
 
 	public User() {
 		System.out.println("Schweinebraten!");
@@ -272,17 +274,8 @@ public class User implements Comparable {
 				return list.get(i);
 			}
 		}
-		Playlist favorite = new Playlist(this);
-		favorite.setName("Favorites");
-		try {
-			DatabaseControl.getInstance().save(favorite);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		return favorite;
-		
+		// null
+		return list.get(0);
 	}
 
 	public List<Playlist> getPlaylists() {
@@ -320,18 +313,20 @@ public class User implements Comparable {
 	public void addPlaylist(Playlist p){
 		playlists.add(p);
 	}
-
-	public void addPlaylists(Playlist playlist) {
-		this.playlists.add(playlist);
-	}
-
-	public void addAlben(Album album) {
-		this.alben.add(album);
+	
+	public void setBanned(boolean b)
+	{
+		banned = b;
 	}
 	
-	
-	
-	
-	
+	public boolean getBanned()
+	{
+		return banned;
+	}
+
+	public void removePlaylist(Playlist p) {
+		playlists.remove(p);
+		
+	}
 
 }

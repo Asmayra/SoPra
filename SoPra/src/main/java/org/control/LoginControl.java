@@ -60,7 +60,7 @@ public class LoginControl {
 			return false;
 		User loginUser = (User) DatabaseControl.getInstance().load(User.class, username);
 		
-		if (loginUser != null ){
+		if (loginUser != null && !loginUser.getBanned()){
 			String salt = loginUser.getSalt();
 		
 			

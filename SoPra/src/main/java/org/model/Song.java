@@ -6,7 +6,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -19,6 +18,7 @@ import javax.persistence.Table;
 import javax.sound.sampled.AudioFileFormat;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.UnsupportedAudioFileException;
+import javax.persistence.CascadeType;
 
 import org.tritonus.share.sampled.file.TAudioFileFormat;
 /**
@@ -36,15 +36,19 @@ public class Song implements Comparable{
 	private String interpret;
 	private String title;
 	private String location;
+
 	@ManyToMany (cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Set<Playlist> playlists = new TreeSet<Playlist>();
 	@ManyToMany (cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Set<Genre> genre = new TreeSet<Genre>();
+
 	@ManyToOne
 	private Album album;
 	private int playtime;
 	private double vrgRating;
 	private int ratingCount;
+	
+	private boolean banned = false;
 	
 	public Song(){
 		
@@ -78,18 +82,6 @@ public class Song implements Comparable{
 		ratingCount = 0;
 		album = null;
 	}
-	
-
-
-	public Set<Playlist> getPlaylists() {
-		return playlists;
-	}
-
-
-	public void setPlaylists(Set<Playlist> playlists) {
-		this.playlists = playlists;
-	}
-
 
 	public String getInterpret() {
 		return interpret;
@@ -180,5 +172,15 @@ public class Song implements Comparable{
 		this.genre.add(genre);
 	}
 	
+
+	public void setBanned(boolean b)
+	{
+		banned = b;
+	}
 	
+	public boolean getBanned()
+	{
+		return banned;
+	}
+
 }
