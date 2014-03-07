@@ -93,6 +93,7 @@ public class LoginScreen extends JFrame {
 		contentPane.add(initErrorLabel(), BorderLayout.SOUTH);
 		
 		this.add(contentPane);
+		
 	}
 	
 	/**
@@ -116,6 +117,9 @@ public class LoginScreen extends JFrame {
 		textFields.add(loginText);
 		textFields.add(passwordText);
 
+		passwordText.addKeyListener(new LoginScreenLoginButtonListener(this));
+		passwordText.setFocusable(true);
+		
 		eingabe.add(textFields, BorderLayout.CENTER);
 		
 		JPanel labels = new JPanel();
@@ -125,12 +129,16 @@ public class LoginScreen extends JFrame {
 		JLabel loginLabel = new JLabel("Nutzer: ");
 		
 		JLabel passwordLabel = new JLabel("Passwort: ");
-
+		
 		labels.add(loginLabel);
 		labels.add(passwordLabel);
 		
-		eingabe.add(labels, BorderLayout.WEST);
 
+		
+		eingabe.add(labels, BorderLayout.WEST);
+		
+	
+	
 		return eingabe;
 		
 	}
@@ -147,7 +155,6 @@ public class LoginScreen extends JFrame {
 		loginButton.addActionListener(new LoginScreenLoginButtonListener(this));
 		JButton registerButton = new JButton("Registrieren");
 		registerButton.addActionListener(new LoginScreenRegisterButtonListener());
-		
 		buttons.add(loginButton);
 		buttons.add(registerButton);
 		

@@ -16,7 +16,7 @@ public class TicketScreenSendButtonListener implements ActionListener {
 		if(!(TicketControl.getInstance().createTicket(tS.getCategory(),LoginControl.getInstance().getCurrentUser(),tS.getTicketText()))){
 			TicketScreen.getInstance().displayErrorLabel();
 		}
-			
+		TicketScreen.getInstance().dispose();	
 	}
 
 }

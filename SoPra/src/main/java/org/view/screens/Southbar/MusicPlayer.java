@@ -27,8 +27,10 @@ public class MusicPlayer extends JPanel {
 	private JLabel Label =new JLabel("Placeholder 4 seek bar");
 	private JButton btnSelectFile = new JButton("Select file");
 	private BasicPlayer player = new BasicPlayer();
+	private JProgressBar progressBar = new JProgressBar();
 	
-	private File selected_file=null;
+	
+	private static File selected_file=null;
 	
 	private double Music_gain = 0.5;
 	public MusicPlayer(){
@@ -50,7 +52,8 @@ public class MusicPlayer extends JPanel {
 		add(Btn_Forward,gbc);
 		
 		gbc.gridx=4;
-		add(Label,gbc);
+		add(progressBar,gbc);
+		progressBar.setBounds(34, 377, 384, 14);
 		
 		gbc.gridx=5;
 		add(volume_slider,gbc);
@@ -70,14 +73,12 @@ public class MusicPlayer extends JPanel {
 		volume_slider.setMajorTickSpacing(20);
 		volume_slider.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent arg0) {
-				// TODO Auto-generated method stub
 				Music_gain = volume_slider.getValue();
 				Volume_Label.setText(String.valueOf(Music_gain).substring(0, String.valueOf(Music_gain).length()-2) +"%");
 				Music_gain=Music_gain/100;
 				try {
 					player.setGain(Music_gain);
 				} catch (BasicPlayerException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
@@ -92,85 +93,25 @@ public class MusicPlayer extends JPanel {
 		Btn_Play.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0){
 				System.out.println(player.getStatus());
-				if(player.getStatus()== -1){
-					try {
-						player.open(selected_file);
-					} catch (BasicPlayerException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					System.out.println(player.getStatus());
-					try {
-						player.play();
-					} catch (BasicPlayerException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}else{
-					switch(player.getStatus()){
-						case 0:
-							try {
-								player.pause();
-							} catch (BasicPlayerException e2) {
-								// TODO Auto-generated catch block
-								e2.printStackTrace();
-							}
-							break;
-						case 1:
-							try {
-								player.resume();
-							} catch (BasicPlayerException e1) {
-								// TODO Auto-generated catch block
-								e1.printStackTrace();
-							}
-							break;
-						case 2:
-							try {
-								player.play();
-							} catch (BasicPlayerException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-							break;
-						case 3:
-							try {
-								player.play();
-							} catch (BasicPlayerException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-							break;
-					}
-				}
+				playPause();
 			}
 		});/*Btn_Play*/
 		
 		
 		Btn_Stop.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-				System.out.println(player.getStatus());
-				// TODO Auto-generated method stub
-				try {
-					player.stop();
-				} catch (BasicPlayerException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				System.out.println(player.getStatus());
-				
+				stop();
 			}
 		});/*Btn_Stop*/
 		
 		Btn_Forward.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				
 			}
 			
 		});/*Btn_Forward*/
 		Btn_Back.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				
 			}
 			
@@ -197,7 +138,7 @@ public class MusicPlayer extends JPanel {
 		public void progress(int bytesread, long elapsed, byte[] pcm, Map properties) {
 			currentTime += elapsed;
 			currentTime /= 1000000;
-			System.out.println(currentTime + "/" + maxTime);
+			updateBar(currentTime , maxTime);
 		}
 
 		@Override
@@ -210,8 +151,83 @@ public class MusicPlayer extends JPanel {
 		public void stateUpdated(BasicPlayerEvent e) {
 			currentTime = e.getPosition();
 			currentTime /= 1000000;
-			
+			// Notification of BasicPlayer states (opened, playing, end of media, ...)
+			if(e.getCode() == BasicPlayerEvent.EOM){
+			    System.out.println("Song zuende!");
+			    
+			}	
 		}
 		
+	}
+	public void updateBar(long actual_time, long max_time){
+		long temp;
+		temp=(actual_time *100)/max_time;
+		progressBar.setValue(new Long(temp).intValue());
+	}
+	/**
+	 * Sets the song which is played,when the playbutton is pressed
+	 * @param song
+	 */
+	public void playPause(){
+		if(player.getStatus()== -1){
+			try {
+				player.open(selected_file);
+			} catch (BasicPlayerException e) {
+				e.printStackTrace();
+			}
+			System.out.println(player.getStatus());
+			try {
+				player.play();
+			} catch (BasicPlayerException e) {
+				e.printStackTrace();
+			}
+		}else{
+			switch(player.getStatus()){
+				case 0:
+					try {
+						player.pause();
+					} catch (BasicPlayerException e2) {
+						e2.printStackTrace();
+					}
+					break;
+				case 1:
+					try {
+						player.resume();
+					} catch (BasicPlayerException e1) {
+						e1.printStackTrace();
+					}
+					break;
+				case 2:
+					try {
+						player.play();
+					} catch (BasicPlayerException e) {
+						e.printStackTrace();
+					}
+					break;
+				case 3:
+					try {
+						player.play();
+					} catch (BasicPlayerException e) {
+						e.printStackTrace();
+					}
+					break;
+			}
+		}
+	}
+	
+	public void stop(){
+		System.out.println("Vor try/catch");
+		try {
+			System.out.println("In try/catch vor player.stop");
+			player.stop();
+			System.out.println("In try/catch nach player.stop");
+		} catch (BasicPlayerException e1) {
+			e1.printStackTrace();
+		}
+	}
+
+	public void setCurrentSong(File song){
+		stop();
+		selected_file = song;
 	}
 }

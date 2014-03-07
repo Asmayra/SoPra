@@ -5,6 +5,8 @@ import java.util.LinkedList;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
+import org.control.listener.PlaylistTabsListener;
+
 
 public class PlaylistExtendedScreen extends JPanel{
 	
@@ -22,6 +24,7 @@ public class PlaylistExtendedScreen extends JPanel{
 	}
 	
 	public PlaylistExtendedScreen(){
+		tabs.addMouseListener(new PlaylistTabsListener());
 		this.add(tabs);
 	}
 	
@@ -31,8 +34,10 @@ public class PlaylistExtendedScreen extends JPanel{
 	}
 	
 	public void removePlaylistTab(int tabindex){
-		tabs.remove(tabindex);
-		playlistIDs.remove(tabindex);
+		if(tabindex>=0 && tabindex<tabs.getTabCount()){
+			tabs.remove(tabindex);
+			playlistIDs.remove(tabindex);
+			}
 	}
 	public int getIndexOfTab(int playlistID){
 		return playlistIDs.indexOf(playlistID);
