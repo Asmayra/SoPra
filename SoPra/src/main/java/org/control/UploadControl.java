@@ -28,14 +28,14 @@ public class UploadControl {
 	 * @param title Titel des Liedes
 	 * @throws IOException Falls quell Datei nicht existiert, kein mp3 ist oder Ziel Datei bereits existiert
 	 */
-	public static void updaloadMusic(String srcPath, String dstPath, String dstName, String title, User user) throws IOException
+	public static void uploadMusic(String srcPath, String dstPath, String dstName, String title, User user) throws IOException
 	{
 		File src = new File(srcPath);
 		
 		if(!src.exists())
 			throw new IOException("Quell Datei existiert nicht!");
 		
-		if(!src.getName().endsWith(".mp3"))
+		if( !( src.getName().endsWith(".mp3") || src.getName().endsWith(".Mp3") || src.getName().endsWith(".mP3") || src.getName().endsWith(".MP3") ) )
 			throw new IOException("Quell Datei ist kein mp3!");
 		
 		File dst = new File(dstPath);
@@ -66,7 +66,7 @@ public class UploadControl {
 	 * 
 	 * @throws IOException Falls quell Datei nicht existiert, kein jpg ist oder Ziel Datei bereits existiert
 	 */
-	public static void updaloadImage(String srcPath, String dstPath, String dstName) throws IOException
+	public static void uploadImage(String srcPath, String dstPath, String dstName) throws IOException
 	{
 		File src = new File(srcPath);
 		

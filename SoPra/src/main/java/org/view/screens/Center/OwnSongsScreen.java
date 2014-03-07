@@ -1,5 +1,6 @@
 package org.view.screens.Center;
 
+import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 
 import javax.swing.JButton;
@@ -9,8 +10,11 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import org.control.listener.OwnSongsDeleteButtonListener;
-import org.control.listener.OwnSongsSaveButtonListener;
+import org.control.LoginControl;
+import org.control.listener.OwnSongsScreenDeleteButtonListener;
+import org.control.listener.OwnSongsScreenNewButtonListener;
+import org.model.Song;
+import org.model.User;
 import org.view.TicketScreen;
 
 public class OwnSongsScreen extends JPanel {
@@ -18,7 +22,7 @@ public class OwnSongsScreen extends JPanel {
 	private static OwnSongsScreen instance = null;
 	
 	private JTable songTable;
-	private JButton saveButton, deleteButton;
+	private JButton newButton, deleteButton;
 	private DefaultTableModel model;
 	
 	
@@ -39,7 +43,10 @@ public class OwnSongsScreen extends JPanel {
 	
 	
 	private void initGui(){
-		
+		this.setLayout(new BorderLayout());
+		this.add(initTable(),BorderLayout.NORTH);
+		this.add(initButtons(),BorderLayout.CENTER);
+		updateTable();
 	}
 	
 	
@@ -49,7 +56,7 @@ public class OwnSongsScreen extends JPanel {
 		songTable.setModel(model);
 		model.addColumn("Lied");
 		model.addColumn("Länge");
-		model.addColumn("Label");
+//		model.addColumn("Label");
 		
 		JScrollPane jsp = new JScrollPane(songTable);
 		return jsp;
@@ -59,17 +66,42 @@ public class OwnSongsScreen extends JPanel {
 	private JComponent initButtons(){
 		JPanel buttonPanel = new JPanel(new FlowLayout());
 		
-		saveButton = new JButton("Speichern");
-		saveButton.addActionListener(new OwnSongsSaveButtonListener());
-		buttonPanel.add(saveButton);
+		newButton = new JButton("Neu");
+		newButton.addActionListener(new OwnSongsScreenNewButtonListener());
+		buttonPanel.add(newButton);
 		
 		deleteButton = new JButton("Löschen");
-		deleteButton.addActionListener(new OwnSongsDeleteButtonListener());
+		deleteButton.addActionListener(new OwnSongsScreenDeleteButtonListener());
 		buttonPanel.add(deleteButton);
 		
 		
 		return buttonPanel;
 		
+	}
+	
+	public void updateTable(){
+		User currentUser = LoginControl.getInstance().getCurrentUser();
+		
+		model.setRowCount(0);
+		
+		
+		for(Song s :currentUser.getOwnSongs()){
+			String[] newRow = new String[2];
+			newRow[0] = s.getTitle();
+			newRow[1] = (s.getPlaytime() / 60) + ":" + (s.getPlaytime() % 60) ;
+			
+			model.addRow(newRow);
+		}
+		
+		
+	}
+	
+	public int getSelectedRow(){
+		return songTable.getSelectedRow();
+	}
+	
+	public void removeRow(int Row){
+		model.removeRow(Row);
 	}
 	
 	
