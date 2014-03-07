@@ -81,6 +81,14 @@ public class PlaylistControl {
 		}	
 		return file;	
 	}
+	/**
+	 * Setzt die Aktuelle playlist
+	 * @param playlist die neue aktuelle
+	 */
+	public static void setCurrentPlaylist(Playlist playlist){
+		current = playlist;
+		playlistIterator = current.getSongs().iterator();
+	}
 
 
 	
