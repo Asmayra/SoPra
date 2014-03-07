@@ -91,7 +91,7 @@ public class Song implements Comparable{
 		return title;
 	}
 
-	public double getPlaytime() {
+	public int getPlaytime() {
 		return playtime;
 	}
 
