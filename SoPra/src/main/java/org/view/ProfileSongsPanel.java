@@ -6,14 +6,17 @@ import java.util.List;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.table.DefaultTableModel;
 
 import org.control.DatabaseControl;
 import org.control.LoginControl;
+import org.control.listener.FavorSelectionListener;
 import org.model.Playlist;
 import org.model.Song;
 import org.model.User;
+import org.view.screens.Center.ProfileScreen;
 
 public class ProfileSongsPanel extends JScrollPane {
 
@@ -22,13 +25,14 @@ public class ProfileSongsPanel extends JScrollPane {
 	private static Object[][] context = new Object[][] {};
 	private static DefaultTableModel model;
 	private static JTable table;
+	private static ListSelectionModel favor;
 
-	public ProfileSongsPanel(User u) {
-		super(create(u));
+	public ProfileSongsPanel(ProfileScreen p) {
+		super(create(p));
 		setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 	}
 
-	private static JTable create(User u) {
+	private static JTable create(ProfileScreen p) {
 		model = new DefaultTableModel(context, columns) {
 			@Override
 			public Class getColumnClass(int col) {
@@ -46,7 +50,10 @@ public class ProfileSongsPanel extends JScrollPane {
 		// this.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		table = new JTable();
 		table.setModel(model);
-		List<Song> songs = u.getOwnSongs();
+		favor = table.getSelectionModel();
+	    favor.addListSelectionListener(new FavorSelectionListener(p));
+	    table.setSelectionModel(favor);
+		List<Song> songs = p.getUserProfile().getOwnSongs();
 		Playlist favorites = LoginControl.getInstance().getCurrentUser().getFavorites();
 		for (int i = 0; i < songs.size(); i++) {
 			Song curSong= songs.get(i);

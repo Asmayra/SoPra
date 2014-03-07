@@ -38,6 +38,7 @@ public class PlaylistSingleScreen extends JPanel{
 		};	
 		addSongsToTable();
 		table= new JTable(model);
+		table.setShowGrid(false);
 		scroll = new JScrollPane(table);
 		this.add(scroll);
 		this.setPreferredSize(new Dimension(500,500));
