@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -31,9 +32,11 @@ public class Song implements Comparable{
 	private String interpret;
 	private String title;
 	private String location;
+	@ManyToMany
+	private Playlist playlists;
 	@ManyToOne
 	private Album album;
-	private int playtime;
+	private double playtime;
 	private double vrgRating;
 	private int ratingCount;
 	
@@ -71,6 +74,15 @@ public class Song implements Comparable{
 		album = null;
 		setPlaytime();
 	}
+	
+	public Playlist getPlaylists() {
+		return playlists;
+	}
+
+
+	public void setPlaylists(Playlist playlists) {
+		this.playlists = playlists;
+	}
 
 	public String getInterpret() {
 		return interpret;
@@ -80,7 +92,7 @@ public class Song implements Comparable{
 		return title;
 	}
 
-	public int getPlaytime() {
+	public double getPlaytime() {
 		return playtime;
 	}
 
@@ -118,7 +130,7 @@ public class Song implements Comparable{
 	private void setPlaytime(){
 		AudioFileFormat fileFormat;
 		try {
-			fileFormat = AudioSystem.getAudioFileFormat(new File(location));
+			fileFormat = AudioSystem.getAudioFileFormat(new File("song.mp3"));
 	        Map<?, ?> properties = ((TAudioFileFormat) fileFormat).properties();
 	        String key = "duration";
 	        Long microseconds = (Long) properties.get(key);
