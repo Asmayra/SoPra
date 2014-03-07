@@ -21,7 +21,7 @@ public class PlaylistTest {
 	public PlaylistTest(){
 		for(int i=0;i<15;i++){
 			Playlist neueListe= new Playlist();
-			for(int j=0;j<10;j++){
+			for(int j=0;j<40;j++){
 				Song lied = new Song("Interpret"+i+","+j, "Titel", "url"+i);
 				lied.setSongId(j);
 				neueListe.addSong(lied);
