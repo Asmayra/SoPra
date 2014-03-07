@@ -128,5 +128,17 @@ public class UploadControl {
 		out.flush();
 		out.close();
 	}
+	
+	public static void deleteFile(String path) throws IOException
+	{
+		File toDel = new File(path);
+		
+		if( !toDel.exists() )
+			throw new IOException("Datei exsistiert nicht!");
+		
+		
+		if( !toDel.delete() )
+			throw new IOException("Löschen fehlgeschlagen!");
+	}
 
 }
