@@ -86,7 +86,9 @@ public class DatabaseControl {
 	 * Example:
 	 * 			DatabaseController.getInstance().save(user1);
 	 * @param o 
-	 * @throws IOException if riamray Key is already Taken
+	 * @throws IOException if priamary Key is already Taken
+	 * @pre Object with primary key is mapped to save
+	 * @post Object is persisted
 	 */
 	public void save(Object o) throws IOException{
 		try{
@@ -107,6 +109,7 @@ public class DatabaseControl {
 	/**
 	 * update query with statement
 	 * @param query string with query
+	 * @pre Query is valid
 	 */
 	public void saveWithQuery(String query){
 		session = sessionFactory.openSession();
