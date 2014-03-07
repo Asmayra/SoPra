@@ -329,4 +329,14 @@ public class User implements Comparable {
 		
 	}
 
+	public void addPlaylists(Playlist playlist) {
+		this.playlists.add(playlist);
+	}
+
+	public void addAlben(Album album) {
+		this.alben.add(album);
+	}
+	
+	
+
 }
