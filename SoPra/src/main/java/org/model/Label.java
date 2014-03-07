@@ -2,6 +2,7 @@ package org.model;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
@@ -26,11 +27,11 @@ public class Label {
 	private int LabelId;
 	private String name;
 	@OneToMany
-	private Set<User> manager;
+	private Set<User> managers = new HashSet<User>();
+	@OneToMany
+	private Set<User> artists = new HashSet<User>();
 
-	public Label() {
-		// TODO Auto-generated constructor stub
-	}
+	public Label() {	}
 
 	public String getName() {
 		return name;
@@ -40,12 +41,42 @@ public class Label {
 		this.name = name;
 	}
 
-	public Collection<User> getManager() {
-		return new ArrayList<User>(this.manager);
+	public Collection<User> getManagers() {
+		return new ArrayList<User>(this.managers);
+	}
+	
+	public void addManager(User manager)
+	{
+		this.managers.add(manager);
+	}
+	
+	public void removeManager(User manager)
+	{
+		this.managers.remove(manager);
+	}
+	
+	public Collection<User> getArtists()
+	{
+		return new ArrayList<User>(this.artists);
+	}
+	
+	public void addArtist(User artist)
+	{
+		this.artists.add(artist);
+	}
+	
+	public void removeArtist(User artist)
+	{
+		this.artists.remove(artist);
+	}
+	
+	public boolean isManager(User user)
+	{
+		return managers.contains(user);
 	}
 
-	public void setManager(List<User> manager) {
-		this.manager = new TreeSet<User>(manager);
+	public boolean isArtist(User user)
+	{
+		return artists.contains(user);
 	}
-
 }

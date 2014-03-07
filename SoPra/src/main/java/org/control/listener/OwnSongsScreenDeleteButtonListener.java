@@ -26,18 +26,18 @@ public class OwnSongsScreenDeleteButtonListener implements ActionListener {
 //		currentUser.removeAllSongs();
 		OwnSongsScreen.getInstance().removeRow(delRow);
 		
-		Session session = DatabaseControl.getSessionFactory().openSession();
-		
-		session.beginTransaction();
-		
-		session.delete(songList.get(delRow));
-		
-		session.update(currentUser);
-		
-		session.getTransaction().commit();
-		
-		session.close();
-		
+//		Session session = DatabaseControl.getSessionFactory().openSession();
+//		
+//		session.beginTransaction();
+//		
+//		session.delete(songList.get(delRow));
+//		
+//		session.update(currentUser);
+//		
+//		session.getTransaction().commit();
+//		
+//		session.close();
+//		
 	
 //		DatabaseControl.getInstance().update(currentUser);
 //		DatabaseControl.getInstance().update(songList.get(delRow));

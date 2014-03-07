@@ -2,17 +2,22 @@ package org.view.screens.Center;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
 
 import javax.swing.JButton;
 import javax.swing.JComponent;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 import org.control.LoginControl;
 import org.control.listener.OwnSongsScreenDeleteButtonListener;
 import org.control.listener.OwnSongsScreenNewButtonListener;
+import org.control.listener.OwnSongsScreenSaveButtonListener;
+import org.control.listener.OwnSongsScreenTableMouseListener;
 import org.model.Song;
 import org.model.User;
 import org.view.TicketScreen;
@@ -22,8 +27,9 @@ public class OwnSongsScreen extends JPanel {
 	private static OwnSongsScreen instance = null;
 	
 	private JTable songTable;
-	private JButton newButton, deleteButton;
+	private JButton newButton, deleteButton, saveButton;
 	private DefaultTableModel model;
+	private JTextField titelTF, albumTF, genreTF;
 	
 	
 	private OwnSongsScreen()
@@ -46,6 +52,7 @@ public class OwnSongsScreen extends JPanel {
 		this.setLayout(new BorderLayout());
 		this.add(initTable(),BorderLayout.NORTH);
 		this.add(initButtons(),BorderLayout.CENTER);
+		this.add(initEdit(),BorderLayout.SOUTH);
 		updateTable();
 	}
 	
@@ -56,8 +63,8 @@ public class OwnSongsScreen extends JPanel {
 		songTable.setModel(model);
 		model.addColumn("Lied");
 		model.addColumn("Länge");
-//		model.addColumn("Label");
-		
+		model.addColumn("Genre");
+		songTable.addMouseListener(new OwnSongsScreenTableMouseListener());
 		JScrollPane jsp = new JScrollPane(songTable);
 		return jsp;
 		
@@ -79,6 +86,40 @@ public class OwnSongsScreen extends JPanel {
 		
 	}
 	
+	private JComponent initEdit(){
+		JPanel editPanel = new JPanel(new BorderLayout());
+		
+		JPanel labelPanel = new JPanel();
+		labelPanel.setLayout(new GridLayout(3,1));
+		JLabel songTitelLabel = new JLabel("Titel:  ");
+		labelPanel.add(songTitelLabel);
+		
+		JLabel albumLabel = new JLabel("Album:  ");
+		labelPanel.add(albumLabel);
+		
+		JLabel GenreLabel = new JLabel("Genre:  ");
+		editPanel.add(labelPanel, BorderLayout.WEST);
+		
+		JPanel textFieldPanel = new JPanel(new GridLayout(3,1));
+		titelTF = new JTextField();
+		textFieldPanel.add(titelTF);
+		
+		albumTF = new JTextField();
+		textFieldPanel.add(albumTF);
+		
+		genreTF = new JTextField();
+		textFieldPanel.add(genreTF);
+		editPanel.add(textFieldPanel,BorderLayout.CENTER);
+		
+		saveButton = new JButton("Speichern");
+		saveButton.addActionListener(new OwnSongsScreenSaveButtonListener());
+		editPanel.add(saveButton, BorderLayout.SOUTH);
+		
+		return editPanel;
+		
+		
+	}
+	
 	public void updateTable(){
 		User currentUser = LoginControl.getInstance().getCurrentUser();
 		
@@ -86,10 +127,11 @@ public class OwnSongsScreen extends JPanel {
 		
 		
 		for(Song s :currentUser.getOwnSongs()){
-			String[] newRow = new String[2];
+			String[] newRow = new String[4];
 			newRow[0] = s.getTitle();
 			newRow[1] = (s.getPlaytime() / 60) + ":" + (s.getPlaytime() % 60) ;
-			
+			newRow[2] = s.getAlbum().toString();
+			newRow[4] = s.get
 			model.addRow(newRow);
 		}
 		
@@ -103,6 +145,34 @@ public class OwnSongsScreen extends JPanel {
 	public void removeRow(int Row){
 		model.removeRow(Row);
 	}
+	
+	public void setTitleTF(String title){
+		titelTF.setText(title);
+	}
+	
+	public void setAlbumTF(String album){
+		albumTF.setText(album);
+	}
+	
+	public String getTitelTF(){
+		return titelTF.getText();
+	}
+	
+	public String getAlbumTF(){
+		return albumTF.getText();
+				
+	}
+
+
+	public String getGenreTF() {
+		return genreTF.getText();
+	}
+
+
+	public void setGenreTF(String genreTF) {
+		this.genreTF.setText(genreTF);
+	}
+	
 	
 	
 }

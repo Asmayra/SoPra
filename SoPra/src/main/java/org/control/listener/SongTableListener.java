@@ -10,7 +10,7 @@ import org.control.DatabaseControl;
 import org.control.LoginControl;
 import org.model.Song;
 
-public class TableListener implements TableModelListener {
+public class SongTableListener implements TableModelListener {
 	
 
 	@Override

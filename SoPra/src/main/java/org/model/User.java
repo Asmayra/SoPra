@@ -316,6 +316,10 @@ public class User implements Comparable {
 		this.getFavorites().deleteSong(s);
 		
 	}
+	
+	public void addPlaylist(Playlist p){
+		playlists.add(p);
+	}
 
 	public void addPlaylists(Playlist playlist) {
 		this.playlists.add(playlist);

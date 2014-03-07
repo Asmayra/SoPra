@@ -12,7 +12,7 @@ import javax.swing.table.DefaultTableModel;
 
 import org.control.DatabaseControl;
 import org.control.LoginControl;
-import org.control.listener.TableListener;
+import org.control.listener.SongTableListener;
 import org.model.Playlist;
 import org.model.Song;
 import org.model.User;
@@ -86,7 +86,7 @@ public class ProfileSongsPanel extends JScrollPane {
 			model.addRow(entry);
 		}
 		table.setFillsViewportHeight(true);
-		model.addTableModelListener(new TableListener());
+		model.addTableModelListener(new SongTableListener());
 		return table;
 
 	}
