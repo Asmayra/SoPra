@@ -38,10 +38,11 @@ public class Song implements Comparable{
 	private String location;
 	@ManyToMany (cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Set<Playlist> playlists = new TreeSet<Playlist>();
-	
+	@ManyToMany (cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private Set<Genre> genre = new TreeSet<Genre>();
 	@ManyToOne
 	private Album album;
-	private double playtime;
+	private int playtime;
 	private double vrgRating;
 	private int ratingCount;
 	
@@ -169,4 +170,15 @@ public class Song implements Comparable{
 		this.title = title;
 	}
 
+
+	public Set<Genre> getGenre() {
+		return genre;
+	}
+
+
+	public void addGenre(Genre genre) {
+		this.genre.add(genre);
+	}
+	
+	
 }
