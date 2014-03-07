@@ -127,11 +127,11 @@ public class OwnSongsScreen extends JPanel {
 		
 		
 		for(Song s :currentUser.getOwnSongs()){
-			String[] newRow = new String[4];
+			String[] newRow = new String[3];
 			newRow[0] = s.getTitle();
 			newRow[1] = (s.getPlaytime() / 60) + ":" + (s.getPlaytime() % 60) ;
 			newRow[2] = s.getAlbum().toString();
-			newRow[4] = s.get
+			
 			model.addRow(newRow);
 		}
 		
