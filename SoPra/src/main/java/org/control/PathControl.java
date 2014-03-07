@@ -13,9 +13,9 @@ public class PathControl {
 		
 		File tmp = new File( getClass().getProtectionDomain().getCodeSource().getLocation().getPath() );
 		if(!tmp.isDirectory())
-			rootPath = tmp.getParent();
+			rootPath = tmp.getParent().replaceAll("%20", " ");
 		else
-			rootPath = tmp.getPath();
+			rootPath = tmp.getPath().replaceAll("%20", " ");;
 	}
 	
 	public static PathControl getInstance()
