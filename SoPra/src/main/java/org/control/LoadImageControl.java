@@ -40,8 +40,9 @@ public class LoadImageControl {
 			if(imagePath == null || imagePath == ""){
 				image = ImageIO.read(ClassLoader.getSystemClassLoader().getResource("placeholder.jpg"));
 			} else{
-				String filepath = PathControl.getInstance() + File.separator + 
-						LoginControl.getInstance().getCurrentUser().getUsername() + File.separator + imagePath;
+				String filepath = PathControl.getInstance().getRoot() + File.separator
+						+ "Bilder" + File.separator + LoginControl.getInstance().getCurrentUser().getUsername() + File.separator + imagePath;
+				System.out.println(filepath);
 				image = ImageIO.read(new File(filepath));
 			}
 			
