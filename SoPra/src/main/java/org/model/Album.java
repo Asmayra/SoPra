@@ -8,7 +8,7 @@ import javax.persistence.Table;
  *
  */
 @Entity
-@Table(name="ALBUM_TABLE")
+
 public class Album extends Playlist {
 	
 	private String coverart;
