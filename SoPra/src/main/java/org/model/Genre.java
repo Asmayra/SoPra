@@ -29,10 +29,21 @@ public class Genre implements Comparable{
 	private String name;
 	@OneToMany
 	private Set<Genre> subGenres;
+	@ManyToOne
+	private Genre parent;
 
 	public Genre(){
 		subGenres = new TreeSet<Genre>();
 	}
+	
+	public Genre getParent() {
+		return parent;
+	}
+
+	public void setParent(Genre parent) {
+		this.parent = parent;
+	}
+
 
 	public String getName() {
 		return name;
