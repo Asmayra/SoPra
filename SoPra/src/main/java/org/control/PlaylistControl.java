@@ -1,10 +1,13 @@
 package org.control;
 
 
+import java.io.File;
+import java.util.Iterator;
 import java.util.LinkedList;
 
 import org.model.Album;
 import org.model.Playlist;
+import org.model.Song;
 import org.model.User;
 import org.testpackage.PlaylistTest;
 import org.view.MainScreen;
@@ -16,6 +19,8 @@ public class PlaylistControl {
 	private User currentUser;
 	private static PlaylistControl instance;
 	private PlaylistExtendedScreen playlistScreen = PlaylistExtendedScreen.getInstance();
+	private static Playlist current;
+	private static Iterator<Song> playlistIterator;
 	
 	public static PlaylistControl getInstance()
 	{
@@ -33,13 +38,16 @@ public class PlaylistControl {
 
 	public void showPlaylist(int playlistnumber) {
 		//ArrayList<Playlist> playlistList =  (ArrayList<Playlist>) currentUser.getPlaylists();
-		
+			
 		//TEST:
 		PlaylistTest TEST = new PlaylistTest();
 		LinkedList<Playlist> playlistList =  (LinkedList<Playlist>) TEST.playlists;
-				
-				
-		Playlist current = playlistList.get(playlistnumber);
+		//Current Playlist und ihr iterator werden gesetzt		
+		current = playlistList.get(playlistnumber);
+		playlistIterator = current.getSongs().iterator();
+		
+		
+		
 		int tabindex = playlistScreen.getIndexOfTab(current.getPlaylistId());
 		if(tabindex==-1){
 			playlistScreen.addPlaylistTab(current.getName(), new PlaylistSingleScreen(current));
@@ -65,5 +73,15 @@ public class PlaylistControl {
 		playlistScreen.setTabByIndex(tabindex);
 		MainScreen.getInstance().showPlaylistExtendedScreen(playlistScreen);
 	}
+	
+	public static File nextSong(){	
+		File file = null;
+		while(playlistIterator.hasNext()){
+			file = new File(playlistIterator.next().getPath());
+		}	
+		return file;	
+	}
+
+
 	
 }

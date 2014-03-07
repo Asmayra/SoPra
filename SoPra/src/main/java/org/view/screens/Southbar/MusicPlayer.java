@@ -9,6 +9,8 @@ import java.awt.event.*;
 
 import javax.swing.event.*;
 
+import org.control.PlaylistControl;
+
 import javazoom.jlgui.basicplayer.*;
 
 /**
@@ -34,7 +36,7 @@ public class MusicPlayer extends JPanel {
 	
 	private double Music_gain = 0.5;
 	public MusicPlayer(){
-		player.addBasicPlayerListener(new TestListener());
+		player.addBasicPlayerListener(new TestListener(this));
 		
 		this.setLayout(new GridBagLayout());
 		gbc.insets=new Insets(2,2,2,2);
@@ -124,6 +126,11 @@ public class MusicPlayer extends JPanel {
 	
 	class TestListener implements BasicPlayerListener
 	{
+		private MusicPlayer musicplayer;
+		
+		public TestListener(MusicPlayer musicplayer){
+			this.musicplayer=musicplayer;
+		}
 		
 		long currentTime = 0;
 		long maxTime = 0;
@@ -154,7 +161,7 @@ public class MusicPlayer extends JPanel {
 			// Notification of BasicPlayer states (opened, playing, end of media, ...)
 			if(e.getCode() == BasicPlayerEvent.EOM){
 			    System.out.println("Song zuende!");
-			    
+			    musicplayer.setCurrentSong(PlaylistControl.nextSong());			    
 			}	
 		}
 		
