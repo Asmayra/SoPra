@@ -17,6 +17,7 @@ import org.model.Song;
 import org.model.User;
 
 /**
+ * Stellt statische Methoden zum operieren mit der DB 
  * @author Philipp Kather, Mattias Schoenke, Tim Lange
  *
  */
