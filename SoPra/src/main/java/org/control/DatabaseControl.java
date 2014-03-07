@@ -17,6 +17,7 @@ import org.model.Song;
 import org.model.User;
 
 /**
+ * Stellt statische Methoden zum operieren mit der DB 
  * @author Philipp Kather, Mattias Schoenke, Tim Lange
  *
  */
@@ -110,6 +111,7 @@ public class DatabaseControl {
 	 * update query with statement
 	 * @param query string with query
 	 * @pre Query is valid
+	 * @post Query was executed
 	 */
 	public void saveWithQuery(String query){
 		session = sessionFactory.openSession();
@@ -122,6 +124,8 @@ public class DatabaseControl {
 	/**
 	 * insert query with statement
 	 * @param query string with query
+	 * @pre Query is valid
+	 * @post Query was executed
 	 */
 	public void insertWithQuery(String query){
 		session = sessionFactory.openSession();
@@ -132,11 +136,14 @@ public class DatabaseControl {
 	}
 	/**
 	 * loads an Object from the Database. 
-	 * Example: 
+	 * Example: <br>
 	 * 			user1 = (StandartUser) DatabaseController.getInstance().load(StandartUser.class, "User1");
 	 * @param c Class of the Object
 	 * @param id Id of the Object
 	 * @return Object (needs to be casted)
+	 * @pre Class and id  are valid and mapped
+	 * @post The requested Object had been loaded
+	 * 
 	 */
 	public Object load(Class c,Serializable id){
 		session = sessionFactory.openSession();
@@ -153,6 +160,8 @@ public class DatabaseControl {
 	 * @param property column name to be selected from
 	 * @param keyword String with keyword
 	 * @return List with results
+	 * @pre class and property are valid and mapped
+	 * @post The list is loaded from teh database
 	 */
 	public List<?> queryForKeyword(Class c, String property, String keyword){
 		session = sessionFactory.openSession();
@@ -172,6 +181,8 @@ public class DatabaseControl {
 	 * Returns the content of a table
 	 * @param tablename name of the table
 	 * @return tablecontent as a list
+	 * @pre tabelname is valid
+	 * @post List is returned form Database
 	 */
 	public List<?> getTableContent(String tablename){
 		session = sessionFactory.openSession();
@@ -191,6 +202,8 @@ public class DatabaseControl {
 	 * !!!!KANN NICHT PRIMARY KEY ÄNDERN!!!!
 	 * @param update Objekt von dem die neuen Werte gelesen werden
 	 * @return aktualisiertes Objekt
+	 * @pre object is mapped
+	 * @post object is updated
 	 */
 	public Object update(Object update)
 	{
@@ -206,6 +219,8 @@ public class DatabaseControl {
 	 * Löscht das persistente Objekt, das zu diesem Objekt gehört. Gibt keine Fehler wenn man 
 	 * nicht existente Daten löschen will.
 	 * @param delete Objekt dessen persistente Version gelöscht werden soll
+	 * @pre object is mapped and storded in DB
+	 * @post object is deleted
 	 */
 	public void delete(Object delete)
 	{
@@ -222,6 +237,8 @@ public class DatabaseControl {
 	 * @param id Primarykey des zu ändernden Objektes
 	 * @param update Objekt mit allen neuen Werten
 	 * @return Geändertes Objekt
+	 * @pre Klasse und Id soltlen gültig und gespeichert sein
+	 * @post Objekt wurde aktualisiert
 	 */
 	public Object updatePrimary(Class c, Serializable id, Object update)
 	{

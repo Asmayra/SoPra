@@ -15,7 +15,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-
+/**
+ * Entity for Genres
+ * @author Philipp
+ *
+ */
 @Entity
 @Table(name="GENRE_TABLE")
 public class Genre {

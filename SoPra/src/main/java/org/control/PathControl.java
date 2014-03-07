@@ -1,7 +1,11 @@
 package org.control;
 
 import java.io.File;
-
+/**
+ * 
+ * @author Mattias Schoenke
+ *
+ */
 public class PathControl {
 
 	private static PathControl instance = null;
