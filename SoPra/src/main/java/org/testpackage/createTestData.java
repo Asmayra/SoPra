@@ -9,6 +9,7 @@ import java.util.Locale;
 import org.control.DatabaseControl;
 import org.model.Album;
 import org.model.Genre;
+import org.model.Label;
 import org.model.Message;
 import org.model.Playlist;
 import org.model.Song;
@@ -20,8 +21,22 @@ public class createTestData {
 		createTestData test = new createTestData();
 		test.createGenre();
 		test.createUser();
-
+		test.createLabel();
+		
 		System.out.println("done");
+	}
+	
+	public void createLabel(){
+		Label label = new Label();
+		label.setName("testlabel");
+		label.addArtist((User)DatabaseControl.getInstance().load(User.class, "k"));
+		label.addManager((User)DatabaseControl.getInstance().load(User.class, "l"));
+		
+		try {
+			DatabaseControl.getInstance().save(label);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void createGenre() throws IOException{
@@ -31,10 +46,12 @@ public class createTestData {
 		
 		Genre genre2 = new Genre();
 		genre2.setName("Rock with lasers");
+		genre2.setParent(genre1);
 		DatabaseControl.getInstance().save(genre2);
 		
 		Genre genre3 = new Genre();
 		genre3.setName("Rock with guitar");
+		genre3.setParent(genre1);
 		DatabaseControl.getInstance().save(genre3);
 		
 		genre1.addSubGenre(genre2);
