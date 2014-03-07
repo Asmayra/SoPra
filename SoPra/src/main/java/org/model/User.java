@@ -275,8 +275,9 @@ public class User implements Comparable {
 			}
 		}
 		
-		Playlist playlist = new Playlist();
+		Playlist playlist = new Playlist(this);
 		playlist.setName("Favorites");
+		
 		try {
 			DatabaseControl.getInstance().save(playlist);
 		} catch (IOException e) {
