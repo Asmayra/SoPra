@@ -17,8 +17,11 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
 
+import org.control.LoginControl;
 import org.control.PlaylistControl;
 import org.model.Genre;
+import org.model.Playlist;
+import org.model.Song;
 import org.view.ContextMenu;
 import org.view.screens.Center.AdminGenreScreen;
 import org.view.screens.Center.PlaylistSingleScreen;
@@ -58,11 +61,17 @@ public class PlaylistSingleScreenListener  extends MouseAdapter{
     private void maybeShowPopup(MouseEvent e) {
     	screen = (PlaylistSingleScreen) currentTable.getParent().getParent().getParent();
     	//DefaultMutableTreeNode selected = (DefaultMutableTreeNode) genrescreen.getGenretree().getComponentAt(e.getXOnScreen(), e.getYOnScreen());
-    	String[] content = {"Löschen","Hinzufügen zu.."};
+    	String[] content = {"Löschen"};
     	ContextMenuListener delete = new ContextMenuListener();
-    	ContextMenuListener addTo = new ContextMenuListener();
-    	ContextMenuListener[] contentlistener = {delete,addTo};
-    	ContextMenu context = new ContextMenu(content, contentlistener);
+    	ContextMenuListener[] contentlistener = {delete};
+    	String submenuname = "Hinzufügen zu..";
+    	String[] playlistnames = control.getPlaylistNames();
+    	SubContextMenuListener[] sublistener = new SubContextMenuListener[playlistnames.length];
+    	for (int i = 0; i < sublistener.length; i++) {
+			sublistener[i]=new SubContextMenuListener(i);
+		}
+    	
+    	ContextMenu context = new ContextMenu(content, contentlistener, submenuname, playlistnames, sublistener);
     	
         if (e.isPopupTrigger()) {
             context.show(e.getComponent(),e.getX(), e.getY());
@@ -88,6 +97,28 @@ public class PlaylistSingleScreenListener  extends MouseAdapter{
 			else if(arg0.getActionCommand().equals("Hinzufügen zu..")){
 				
 			}
+		}
+    	
+    }
+    
+    /**
+     * Actionlistener für das Kontextmenü der Genreübersicht
+     * @author Max,Tim
+     *
+     */
+    private class SubContextMenuListener implements ActionListener{
+
+    	private int index;
+    	
+    	public SubContextMenuListener(int indexOfPlaylist) {
+			this.index=indexOfPlaylist;
+		}
+    	
+    	
+		public void actionPerformed(ActionEvent arg0) {
+			Playlist destination = LoginControl.getInstance().getCurrentUser().getPlaylists().get(index);
+			Song clicked = screen.getPlaylist().getSongs().get(row);
+			destination.addSong(clicked);
 		}
     	
     }

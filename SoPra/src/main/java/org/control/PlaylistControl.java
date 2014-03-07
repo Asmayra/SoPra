@@ -2,6 +2,7 @@ package org.control;
 
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Set;
@@ -26,6 +27,7 @@ public class PlaylistControl {
 	private PlaylistExtendedScreen playlistScreen = PlaylistExtendedScreen.getInstance();
 	private static Playlist current;
 	private static Iterator<Song> playlistIterator;
+	private String[] playlistNames;
 	
 	public static PlaylistControl getInstance()
 	{
@@ -38,6 +40,7 @@ public class PlaylistControl {
 	
 	public PlaylistControl() {
 		currentUser = LoginControl.getInstance().getCurrentUser();
+		updatePlaylistNames();
 	}
 
 
@@ -79,6 +82,15 @@ public class PlaylistControl {
 		MainScreen.getInstance().showPlaylistExtendedScreen(playlistScreen);
 	}
 	
+	public void showFavorites(){
+		Playlist current = currentUser.getFavorites();
+		int tabindex = playlistScreen.getIndexOfTab(current.getPlaylistId());
+		if(tabindex==-1){
+			playlistScreen.addPlaylistTab("Favoriten", new PlaylistSingleScreen(current));
+		}
+		playlistScreen.setTabByIndex(tabindex);
+		MainScreen.getInstance().showPlaylistExtendedScreen(playlistScreen);
+	}
 	public static File nextSong(){	
 		File file = null;
 		while(playlistIterator.hasNext()){
@@ -103,6 +115,18 @@ public class PlaylistControl {
 		playlist.deleteSong(playlist.getSongs().get(songnr));
 		savePlaylists();
 	}
+	
+	public void updatePlaylistNames(){
+		ArrayList<Playlist> playlists = (ArrayList<Playlist>) LoginControl.getInstance().getCurrentUser().getPlaylists();
+		playlistNames=new String[playlists.size()];
+		for(int i=0;i<playlists.size();i++){
+			playlistNames[i]=playlists.get(i).getName();
+		}
+	}
 
+
+	public String[] getPlaylistNames() {
+		return playlistNames;
+	}
 	
 }
