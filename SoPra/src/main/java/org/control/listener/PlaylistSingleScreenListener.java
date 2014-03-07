@@ -119,6 +119,10 @@ public class PlaylistSingleScreenListener  extends MouseAdapter{
 			Playlist destination = LoginControl.getInstance().getCurrentUser().getPlaylists().get(index);
 			Song clicked = screen.getPlaylist().getSongs().get(row);
 			destination.addSong(clicked);
+			if(destination.equals("Favorites")){
+				currentTable.getModel().setValueAt(true, row, 5);
+			}
+			currentTable.updateUI();
 		}
     	
     }
