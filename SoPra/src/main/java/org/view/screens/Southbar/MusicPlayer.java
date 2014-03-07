@@ -151,7 +151,11 @@ public class MusicPlayer extends JPanel {
 		public void stateUpdated(BasicPlayerEvent e) {
 			currentTime = e.getPosition();
 			currentTime /= 1000000;
-			
+			// Notification of BasicPlayer states (opened, playing, end of media, ...)
+			if(e.getCode() == BasicPlayerEvent.EOM){
+			    System.out.println("Song zuende!");
+			    
+			}	
 		}
 		
 	}
