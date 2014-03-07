@@ -158,6 +158,8 @@ public class MusicPlayer extends MusicPlayerControl{
 
 		@Override
 		public void opened(Object stream, Map properties) {
+			for( Object o : properties.keySet() )
+				System.out.println(o.toString());
 			maxTime = (Long)properties.get("duration") / 1000000;
 		}
 

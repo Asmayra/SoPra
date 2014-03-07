@@ -48,7 +48,7 @@ public class PlaylistSingleScreen extends JPanel{
 	
 	private void addSongsToTable(){
 		LinkedList<Song> songs = (LinkedList<Song>) playlist.getSongs();
-		
+		//model.
 		Playlist favorites = LoginControl.getInstance().getCurrentUser().getFavorites();
 		for(int i=0;i<songs.size();i++){
 			Song curSong= songs.get(i);

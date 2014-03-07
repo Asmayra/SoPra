@@ -13,6 +13,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreePath;
 
 import org.control.LoginControl;
+import org.control.listener.FavoritButtonListener;
 import org.control.listener.GenresButtonListener;
 import org.control.listener.PlaylistTreeListener;
 import org.control.listener.SubscriptionButtonListener;
@@ -194,6 +195,7 @@ public class PlaylistMiniScreen extends JPanel{
 		subscriptions.addActionListener(new SubscriptionButtonListener());
 		user.add(subscriptions,c);
 		c.gridy++;
+		favorits.addActionListener(new FavoritButtonListener());
 		user.add(favorits,c);
 		
 		if(currentUser.getRights().equals("Admin")){
