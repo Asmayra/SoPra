@@ -21,7 +21,7 @@ public class OwnSongsScreenNewButtonListener implements ActionListener {
 		File selected_file = openFile.getSelectedFile();
 		
 		try {
-			UploadControl.uploadMusic(selected_file.getAbsolutePath(), PathControl.getInstance().getRoot() + File.separator + "Musik", selected_file.getName(), selected_file.getName(), LoginControl.getInstance().getCurrentUser());
+			UploadControl.uploadMusic(selected_file.getAbsolutePath(), PathControl.getInstance().getRoot() + File.separator + "Musik", selected_file.getName(), LoginControl.getInstance().getCurrentUser());
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
