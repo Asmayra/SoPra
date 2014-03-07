@@ -9,6 +9,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import org.control.LoginControl;
+import org.control.listener.PlaylistSingleScreenListener;
 import org.model.Playlist;
 import org.model.Song;
 
@@ -39,6 +40,7 @@ public class PlaylistSingleScreen extends JPanel{
 		addSongsToTable();
 		table= new JTable(model);
 		table.setShowGrid(false);
+		table.addMouseListener(new PlaylistSingleScreenListener());
 		scroll = new JScrollPane(table);
 		this.add(scroll);
 		this.setPreferredSize(new Dimension(500,500));
@@ -89,5 +91,12 @@ public class PlaylistSingleScreen extends JPanel{
 		return playlist.getPlaylistId();
 	}
 	
+	public void removeSong(int row){
+		model.removeRow(row);
+	}
+	
+	public Playlist getPlaylist(){
+		return playlist;
+	}
 	
 }

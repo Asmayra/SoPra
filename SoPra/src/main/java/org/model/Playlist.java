@@ -107,4 +107,7 @@ public class Playlist implements Comparable {
 		return 0;
 	}
 
+	public void deleteSong(Song song){
+		songs.remove(song);
+	}
 }

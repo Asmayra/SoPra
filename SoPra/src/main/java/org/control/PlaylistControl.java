@@ -4,6 +4,7 @@ package org.control;
 import java.io.File;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.Set;
 
 import org.model.Album;
 import org.model.Playlist;
@@ -90,6 +91,14 @@ public class PlaylistControl {
 		playlistIterator = current.getSongs().iterator();
 	}
 
+	public void savePlaylists(){
+		//TODO Schreibe aktuelle Userplaylists in die Datenbank
+	}
+	
+	public void removeSong(Playlist playlist,int songnr){
+		playlist.deleteSong(playlist.getSongs().get(songnr));
+		savePlaylists();
+	}
 
 	
 }
