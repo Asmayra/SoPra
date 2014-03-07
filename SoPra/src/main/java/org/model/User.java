@@ -113,6 +113,11 @@ public class User implements Comparable {
 	public void addOwnSong(Song s) {
 		ownSongs.add(s);
 	}
+	
+	public void deleteOwnSown(Song song)
+	{
+		ownSongs.remove(song);
+	}
 
 	public List<Song> getOwnSongs() {
 		return new ArrayList<Song>(this.ownSongs);
