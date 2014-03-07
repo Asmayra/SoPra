@@ -7,6 +7,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import org.model.Song;
+
 
 /**
  * Stellt statische Funktionen zum hochladen(kopieren von A nach B) von Musik und Bildern bereit
@@ -21,9 +23,11 @@ public class UploadControl {
 	 * @param srcPath Pfad der Quell Datei
 	 * @param dstPath Pfad der Ziel Datei
 	 * @param dstName Name der Ziel Datei
+	 * @param interpret Interpret des Liedes
+	 * @param title Titel des Liedes
 	 * @throws IOException Falls quell Datei nicht existiert, kein mp3 ist oder Ziel Datei bereits existiert
 	 */
-	public static void updaloadMusic(String srcPath, String dstPath, String dstName) throws IOException
+	public static void updaloadMusic(String srcPath, String dstPath, String dstName, String interpret, String title) throws IOException
 	{
 		File src = new File(srcPath);
 		
@@ -44,6 +48,9 @@ public class UploadControl {
 			throw new IOException("Ziel Datei existiert bereits!");
 		
 		copy(srcPath, dstPath, dstName);
+		
+		Song newSong = new Song(interpret, title, dst.getAbsolutePath());
+		DatabaseControl.getInstance().save(newSong);
 	}
 	
 	
@@ -52,6 +59,7 @@ public class UploadControl {
 	 * @param srcPath Pfad der Quell Datei
 	 * @param dstPath Pfad der Ziel Datei
 	 * @param dstName Name der Ziel Datei
+	 * 
 	 * @throws IOException Falls quell Datei nicht existiert, kein jpg ist oder Ziel Datei bereits existiert
 	 */
 	public static void updaloadImage(String srcPath, String dstPath, String dstName) throws IOException
@@ -83,6 +91,7 @@ public class UploadControl {
 	 * @param from Pfad von wo die Datei kopiert werden soll
 	 * @param to Pfad zu dem die Dater kopiert werden soll
 	 * @param toName Name der Ziel Datei
+	 * 
 	 * @throws IOException Exceptions beim Kopieren
 	 * @pre Pfade sind gültig, from Datei existiert, to Datei existiert nicht
 	 * @post Datei kopiert
