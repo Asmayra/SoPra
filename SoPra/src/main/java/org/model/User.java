@@ -69,6 +69,8 @@ public class User implements Comparable {
 	private Set<Message> messages = new TreeSet<Message>();
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Set<Song> ownSongs;
+	
+	private boolean banned = false;
 
 	public User() {
 		System.out.println("Schweinebraten!");
@@ -306,6 +308,16 @@ public class User implements Comparable {
 	public void removeFavorite(Song s) {
 		this.getFavorites().deleteSong(s);
 		
+	}
+	
+	public void setBanned(boolean b)
+	{
+		banned = b;
+	}
+	
+	public boolean getBanned()
+	{
+		return banned;
 	}
 
 }

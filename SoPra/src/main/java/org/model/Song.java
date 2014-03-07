@@ -40,6 +40,8 @@ public class Song implements Comparable{
 	private double vrgRating;
 	private int ratingCount;
 	
+	private boolean banned = false;
+	
 	public Song(){
 		
 	}
@@ -161,4 +163,13 @@ public class Song implements Comparable{
 		this.title = title;
 	}
 
+	public void setBanned(boolean b)
+	{
+		banned = b;
+	}
+	
+	public boolean getBanned()
+	{
+		return banned;
+	}
 }
