@@ -24,7 +24,8 @@ public class OwnSongsScreenTableMouseListener implements MouseListener {
 			oss.setAlbumTF(songList.get(row).getAlbum().getName());
 		}
 		else oss.setAlbumTF("");
-	
+		
+		
 	}
 
 	@Override

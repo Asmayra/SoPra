@@ -11,7 +11,10 @@ import javax.persistence.Table;
 
 public class Album extends Playlist {
 	
+	
+
 	private String coverart;
+	private String Name;
 
 	public Album(){
 		super();
@@ -27,5 +30,13 @@ public class Album extends Playlist {
 	public void setCoverart(String coverart) {
 		this.coverart = coverart;
 	}
-
+	
+	public String getName() {
+		return Name;
+	}
+	public void setName(String name) {
+		Name = name;
+	}
+	
+	
 }
