@@ -324,4 +324,9 @@ public class User implements Comparable {
 		return banned;
 	}
 
+	public void removePlaylist(Playlist p) {
+		playlists.remove(p);
+		
+	}
+
 }
