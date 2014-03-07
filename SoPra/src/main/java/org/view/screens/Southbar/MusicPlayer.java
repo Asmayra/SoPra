@@ -15,10 +15,10 @@ import javazoom.jlgui.basicplayer.*;
 
 /**
  * A Structure Class for the MusicPlayer
- * @author Ioann
+ * @author Ioann 
  *
  */
-public class MusicPlayer extends JPanel {
+public class MusicPlayer extends MusicPlayerControl{
 	private JButton Btn_Stop = new JButton("■");
 	private JButton Btn_Play= new JButton("► ||");
 	private JButton Btn_Forward= new JButton(">");
@@ -30,12 +30,14 @@ public class MusicPlayer extends JPanel {
 	private JButton btnSelectFile = new JButton("Select file");
 	private BasicPlayer player = new BasicPlayer();
 	private JProgressBar progressBar = new JProgressBar();
-	
-	
 	private static File selected_file=null;
-	
 	private double Music_gain = 0.5;
+	
+	/*
+	 * Creates Interface for MusicPlayer in Southbar
+	 */
 	public MusicPlayer(){
+		//Makes event listener for our MusicPlayer
 		player.addBasicPlayerListener(new TestListener(this));
 		
 		this.setLayout(new GridBagLayout());
@@ -66,6 +68,7 @@ public class MusicPlayer extends JPanel {
 		gbc.gridx=1;
 		gbc.gridy=1;
 		add(btnSelectFile, gbc);
+		
 		this.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		//this.setMinimumSize(new Dimension(860,600));
 /*=============================================================================================*/
@@ -94,51 +97,68 @@ public class MusicPlayer extends JPanel {
 		});
 		Btn_Play.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0){
-				System.out.println(player.getStatus());
-				playPause();
+				playPause(player, selected_file);
 			}
 		});/*Btn_Play*/
 		
-		
 		Btn_Stop.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-				stop();
+				stop(player);
 			}
 		});/*Btn_Stop*/
 		
 		Btn_Forward.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-				
+				Forward(player);
 			}
 			
 		});/*Btn_Forward*/
 		Btn_Back.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-				
+				Back(player);
 			}
 			
 		});/*Btn_Back*/
 	}
-/*=============================================================================*/
-	/*
-		//
-	}*/
+	/**
+	 * Method that updates ProgressBar of MusicPlayer
+	 * @param actual_time
+	 * @param max_time
+	 */
+	public void updateBar(long actual_time, long max_time){
+		long temp;
+		temp=(actual_time *100)/max_time;
+		progressBar.setValue(new Long(temp).intValue());
+	}
 	
-	class TestListener implements BasicPlayerListener
-	{
+	/**
+	 * Sets the song which is played,when the playbutton is pressed
+	 * @param song
+	 */
+	public void setCurrentSong(File song){
+		stop(player);
+		selected_file = song;
+	}
+/*=============================================================================*/
+	/**
+	 * Listener that gives info over MusicPlayer State
+	 * @author unim95, Sebastian, Philipp.
+	 *
+	 */
+	class TestListener implements BasicPlayerListener{
+		
 		private MusicPlayer musicplayer;
+		long currentTime = 0;
+		long maxTime = 0;
 		
 		public TestListener(MusicPlayer musicplayer){
 			this.musicplayer=musicplayer;
 		}
 		
-		long currentTime = 0;
-		long maxTime = 0;
 
 		@Override
 		public void opened(Object stream, Map properties) {
 			maxTime = (Long)properties.get("duration") / 1000000;
-			
 		}
 
 		@Override
@@ -160,81 +180,11 @@ public class MusicPlayer extends JPanel {
 			currentTime /= 1000000;
 			// Notification of BasicPlayer states (opened, playing, end of media, ...)
 			if(e.getCode() == BasicPlayerEvent.EOM){
-			    System.out.println("Song zuende!");
-			    musicplayer.setCurrentSong(PlaylistControl.nextSong());			    
+				System.out.println("Song zuende!");
+				musicplayer.setCurrentSong(PlaylistControl.nextSong());
 			}	
+			//System.out.println(player)
 		}
 		
-	}
-	public void updateBar(long actual_time, long max_time){
-		long temp;
-		temp=(actual_time *100)/max_time;
-		progressBar.setValue(new Long(temp).intValue());
-	}
-	/**
-	 * Sets the song which is played,when the playbutton is pressed
-	 * @param song
-	 */
-	public void playPause(){
-		if(player.getStatus()== -1){
-			try {
-				player.open(selected_file);
-			} catch (BasicPlayerException e) {
-				e.printStackTrace();
-			}
-			System.out.println(player.getStatus());
-			try {
-				player.play();
-			} catch (BasicPlayerException e) {
-				e.printStackTrace();
-			}
-		}else{
-			switch(player.getStatus()){
-				case 0:
-					try {
-						player.pause();
-					} catch (BasicPlayerException e2) {
-						e2.printStackTrace();
-					}
-					break;
-				case 1:
-					try {
-						player.resume();
-					} catch (BasicPlayerException e1) {
-						e1.printStackTrace();
-					}
-					break;
-				case 2:
-					try {
-						player.play();
-					} catch (BasicPlayerException e) {
-						e.printStackTrace();
-					}
-					break;
-				case 3:
-					try {
-						player.play();
-					} catch (BasicPlayerException e) {
-						e.printStackTrace();
-					}
-					break;
-			}
-		}
-	}
-	
-	public void stop(){
-		System.out.println("Vor try/catch");
-		try {
-			System.out.println("In try/catch vor player.stop");
-			player.stop();
-			System.out.println("In try/catch nach player.stop");
-		} catch (BasicPlayerException e1) {
-			e1.printStackTrace();
-		}
-	}
-
-	public void setCurrentSong(File song){
-		stop();
-		selected_file = song;
 	}
 }
