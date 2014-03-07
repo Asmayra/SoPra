@@ -9,6 +9,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+/**
+ * Entity for Messages
+ * @author Philipp, Michael Pfennings, Mattias Schoenke
+ *
+ */
 @Entity
 @Table(name="MESSAGE_TABLE")
 public class Message {

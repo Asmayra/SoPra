@@ -2,8 +2,13 @@ package org.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
-
+/**
+ * Entity for Albums
+ * @author Philipp
+ *
+ */
 @Entity
+
 public class Album extends Playlist {
 	
 	private String coverart;

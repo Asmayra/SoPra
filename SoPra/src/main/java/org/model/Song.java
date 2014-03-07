@@ -16,7 +16,11 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
 import org.tritonus.share.sampled.file.TAudioFileFormat;
-
+/**
+ * Song Entity
+ * @author Philipp
+ *
+ */
 @Entity
 @Table(name = "SONG_TABLE")
 public class Song implements Comparable{

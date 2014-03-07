@@ -13,6 +13,11 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+/**
+ * Entity for Label
+ * @author Philipp
+ *
+ */
 @Entity
 @Table(name="LABEL_TABLE")
 public class Label {

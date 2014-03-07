@@ -17,7 +17,11 @@ import javax.swing.JPanel;
 import org.control.LoginControl;
 import org.control.listener.DeleteTicket;
 import org.control.listener.EditTicket;
-
+/**
+ * Ticket Entity
+ * @author Philipp
+ *
+ */
 @Entity
 @Table(name="TICKET_TABLE")
 public class Ticket {
