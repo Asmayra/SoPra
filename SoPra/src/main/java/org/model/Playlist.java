@@ -100,7 +100,7 @@ public class Playlist implements Comparable {
 		} catch (IllegalArgumentException e) {
 			JOptionPane
 					.showMessageDialog(null,
-							"Jede ihrer Playlists braucht einen eigentständigen Namen.\n Bitte wählen sie einen neuen, unbenutzten Namen.");
+							"Bitte geben sie Ihrer Playlist einen anderen Namen als \"Favorit\"");
 		}
 
 	}
