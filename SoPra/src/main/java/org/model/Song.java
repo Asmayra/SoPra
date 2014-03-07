@@ -132,5 +132,10 @@ public class Song implements Comparable{
 		
 		return (this.songId-((Song)song).getSongId());
 	}
+	
+	
+	public String getPath(){
+		return location;
+	}
 
 }
