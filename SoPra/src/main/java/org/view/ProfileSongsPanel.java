@@ -12,7 +12,7 @@ import javax.swing.table.DefaultTableModel;
 
 import org.control.DatabaseControl;
 import org.control.LoginControl;
-import org.control.listener.FavorTableModelListener;
+import org.control.listener.TableListener;
 import org.model.Playlist;
 import org.model.Song;
 import org.model.User;
@@ -21,7 +21,7 @@ import org.view.screens.Center.ProfileScreen;
 public class ProfileSongsPanel extends JScrollPane {
 
 	private static String[] columns = new String[] { "Interpret", "Title", "Album", "Länge", "Community Rating",
-			"Favor" };
+			"Favor", "ID" };
 	private static Object[][] context = new Object[][] {};
 	private static DefaultTableModel model;
 	private static JTable table;
@@ -49,7 +49,6 @@ public class ProfileSongsPanel extends JScrollPane {
 		// this.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		table = new JTable();
 		table.setModel(model);
-		model.addTableModelListener(new FavorTableModelListener());
 		List<Song> songs = p.getUserProfile().getOwnSongs();
 		Playlist favorites = LoginControl.getInstance().getCurrentUser().getFavorites();
 		for (int i = 0; i < songs.size(); i++) {
@@ -82,10 +81,12 @@ public class ProfileSongsPanel extends JScrollPane {
 			} else {
 				favored = false;
 			}
-			Object[] entry = { interpret, title, album, playtime, rating, favored };
+				int id = curSong.getSongId();
+			Object[] entry = { interpret, title, album, playtime, rating, favored, id };
 			model.addRow(entry);
 		}
 		table.setFillsViewportHeight(true);
+		model.addTableModelListener(new TableListener());
 		return table;
 
 	}
