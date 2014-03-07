@@ -8,6 +8,7 @@ import java.util.Locale;
 
 import org.control.DatabaseControl;
 import org.model.Album;
+import org.model.Genre;
 import org.model.Message;
 import org.model.Playlist;
 import org.model.Song;
@@ -15,11 +16,30 @@ import org.model.User;
 
 public class createTestData {
 
-	public static void main(String[] args){
+	public static void main(String[] args) throws IOException{
 		createTestData test = new createTestData();
-		test.createUser();
+		test.createGenre();
+		//test.createUser();
 
 		System.out.println("done");
+	}
+	
+	public void createGenre() throws IOException{
+		Genre genre1 = new Genre();
+		genre1.setName("Rock");
+		DatabaseControl.getInstance().save(genre1);
+		
+		Genre genre2 = new Genre();
+		genre2.setName("Rock with lasers");
+		DatabaseControl.getInstance().save(genre2);
+		
+		Genre genre3 = new Genre();
+		genre3.setName("Rock with guitar");
+		DatabaseControl.getInstance().save(genre3);
+		
+		genre1.addSubGenre(genre2);
+		genre1.addSubGenre(genre3);
+		DatabaseControl.getInstance().update(genre1);
 	}
 	
 	public Playlist createPlaylist(User user){

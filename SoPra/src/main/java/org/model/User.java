@@ -58,7 +58,7 @@ public class User implements Comparable {
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Set<Playlist> playlists = new TreeSet<Playlist>();
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	private Set<Album> alben;
+	private Set<Album> alben = new TreeSet<Album>();
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable(name="IGNORE_TABLE")
 	private Set<User> ignoring = new TreeSet<User>();

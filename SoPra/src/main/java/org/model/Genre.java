@@ -22,13 +22,11 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="GENRE_TABLE")
-public class Genre {
+public class Genre implements Comparable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)	
 	private int genreId;
 	private String name;
-	@ManyToOne
-	private Genre parent;
 	@OneToMany
 	private Set<Genre> subGenres;
 
@@ -53,20 +51,18 @@ public class Genre {
 	}
 	
 	public void addSubGenre(Genre sub){
-		((LinkedList)subGenres).addLast(sub);
-	}
-
-	public Genre getParent() {
-		return parent;
-	}
-
-	public void setParent(Genre parent) {
-		this.parent = parent;
+		subGenres.add(sub);
 	}
 	
 	@Override
 	public String toString(){
 		return name;
+	}
+
+	@Override
+	public int compareTo(Object o) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }
