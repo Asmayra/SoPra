@@ -31,7 +31,11 @@ import javax.swing.JLabel;
 import org.control.DatabaseControl;
 import org.control.LoadImageControl;
 import org.hibernate.Session;
-
+/**
+ * User Entity
+ * @author Philipp,Michael Pfennings, Mattias Schoenke
+ * @inv username must be individual and not null 
+ */
 @Entity
 @Table(name = "USER_TABLE")
 @org.hibernate.annotations.Entity(dynamicInsert = true)

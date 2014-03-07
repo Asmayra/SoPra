@@ -20,7 +20,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.swing.JOptionPane;
-
+/**
+ * Entity for Playlists
+ * @author Philipp
+ *
+ */
 @Entity
 @Table(name = "PLAYLIST_TABLE")
 @Inheritance(strategy = InheritanceType.JOINED)

@@ -28,7 +28,7 @@ public class UploadControl {
 	 * @param title Titel des Liedes
 	 * @throws IOException Falls quell Datei nicht existiert, kein mp3 ist oder Ziel Datei bereits existiert
 	 */
-	public static void updaloadMusic(String srcPath, String dstPath, String dstName, String interpret, String title, User user) throws IOException
+	public static void updaloadMusic(String srcPath, String dstPath, String dstName, String title, User user) throws IOException
 	{
 		File src = new File(srcPath);
 		
@@ -50,7 +50,7 @@ public class UploadControl {
 		
 		copy(srcPath, dstPath, dstName);
 		
-		Song newSong = new Song(interpret, title, dst.getAbsolutePath());
+		Song newSong = new Song(user.getUsername(), title, dst.getAbsolutePath());
 		DatabaseControl.getInstance().save(newSong);
 		
 		user.addOwnSong(newSong);
