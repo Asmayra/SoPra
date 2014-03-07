@@ -298,4 +298,14 @@ public class User implements Comparable {
 		return 0;
 	}
 
+	public void addFavorite(Song s) {
+		this.getFavorites().addSong(s);
+		
+	}
+	
+	public void removeFavorite(Song s) {
+		this.getFavorites().deleteSong(s);
+		
+	}
+
 }
