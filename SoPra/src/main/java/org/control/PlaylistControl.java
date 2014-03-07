@@ -13,7 +13,11 @@ import org.testpackage.PlaylistTest;
 import org.view.MainScreen;
 import org.view.screens.Center.PlaylistExtendedScreen;
 import org.view.screens.Center.PlaylistSingleScreen;
-
+/**
+ * 
+ * @author Philipp, Tim, Max
+ *
+ */
 public class PlaylistControl {
 	
 	private User currentUser;
