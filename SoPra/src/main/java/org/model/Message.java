@@ -1,5 +1,10 @@
 package org.model;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
@@ -16,7 +21,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="MESSAGE_TABLE")
-public class Message {
+public class Message implements Comparable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)	
 	private int messageId;
@@ -26,7 +31,7 @@ public class Message {
 //	private User[] recipient;
 	private String content;
 	private String subject;
-	private String date;
+	private Date date;
 	
 	public User getSender() {
 		return sender;
@@ -57,9 +62,21 @@ public class Message {
 		this.subject = subject;
 	}
 	public String getDate() {
-		return date;
+		return date.toString();
 	}
 	public void setDate(String date) {
-		this.date = date;
+		Date dateobject;
+		try {
+			dateobject = new SimpleDateFormat("DD.MM.YYYY", Locale.GERMAN).parse(date);
+		} catch (ParseException e) {
+			dateobject = null;
+			e.printStackTrace();
+		}
+		this.date = dateobject;
+	}
+	@Override
+	public int compareTo(Object o) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }

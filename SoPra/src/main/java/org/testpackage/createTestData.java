@@ -7,6 +7,9 @@ import java.util.Date;
 import java.util.Locale;
 
 import org.control.DatabaseControl;
+import org.model.Album;
+import org.model.Message;
+import org.model.Playlist;
 import org.model.Song;
 import org.model.User;
 
@@ -14,22 +17,91 @@ public class createTestData {
 
 	public static void main(String[] args){
 		createTestData test = new createTestData();
-		//test.createUser();
-		test.createSongs();
+		test.createUser();
+
 		System.out.println("done");
 	}
 	
+	public Playlist createPlaylist(User user){
+		Playlist playlist = new Playlist(user);
+		playlist.addSong(this.createSong());
+		playlist.addSong(this.createSong());
+		
+		try {
+			DatabaseControl.getInstance().save(playlist);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}	
+		
+		return playlist;
+	}
 	
-	public void createSongs(){
+	public Album createAlbum(User user){
+		Album album = new Album(user);
+		album.setCoverart("cover.jpg");
+		album.setName("album");
+		album.addSong(this.createSong());
+		album.addSong(this.createSong());
+		
+		try {
+			DatabaseControl.getInstance().save(album);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return album;
+	}
+	
+	
+	public Song createSong(){
 		Song song = new Song("interpret", "title", "");
 		
 		try {
 			DatabaseControl.getInstance().save(song);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		return song;
+	}
 	
+	public Message createMessage(User usr){
+		Message message = new Message();
+		message.setContent("balalalsjkdsklsjdslfdskl");		
+		message.setDate("01.01.2000");
+		message.setSender(usr);
+		message.setSubject("testsubject");
+		
+		try {
+			DatabaseControl.getInstance().save(message);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return message;
+	}
+	
+	public User createSingleUser(){
+		User standard = new User();
+		standard.setUsername("q");
+		standard.setEMail("muster@gmail.com");
+		standard.setCity("mustercity");
+		standard.setCountry("mustercountry");
+		Date date;
+		try {
+			date = new SimpleDateFormat("DD.MM.YYYY", Locale.GERMAN).parse("01.01.2000");
+		} catch (ParseException e) {
+			date = null;
+			e.printStackTrace();
+		}
+		standard.setDob(date);
+		standard.setFirstname("Max");
+		standard.setLastname("mustermann");
+		standard.setImagePath("avatar.jpg");
+		standard.setPassword("127648922");
+		standard.setSalt("B150M)gWN!");
+		standard.setRights("StandardUser");
+		
+		return standard;
 	}
 	
 	public void createUser(){
@@ -53,6 +125,12 @@ public class createTestData {
 		standard.setSalt("B150M)gWN!");
 		standard.setRights("StandardUser");
 		
+		try {
+			DatabaseControl.getInstance().save(standard);
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		
 		User admin = new User();
 		admin.setUsername("a");
 		admin.setEMail("muster@gmail.com");
@@ -73,6 +151,12 @@ public class createTestData {
 		admin.setSalt("B150M)gWN!");
 		admin.setRights("Admin");
 		
+		try {
+			DatabaseControl.getInstance().save(admin);
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		
 		User artist = new User();
 		artist.setUsername("k");
 		artist.setEMail("muster@gmail.com");
@@ -92,7 +176,22 @@ public class createTestData {
 		artist.setPassword("127648922");
 		artist.setSalt("B150M)gWN!");
 		artist.setRights("Artist");
+
+		try {
+			DatabaseControl.getInstance().save(artist);
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 		
+		artist.addOwnSong(this.createSong());
+		artist.addOwnSong(this.createSong());
+		artist.addFavorite(this.createSong());
+		artist.addFavorite(this.createSong());
+		artist.addPlaylists(this.createPlaylist(artist));
+		artist.addAlben(this.createAlbum(artist));
+		artist.addMessage(this.createMessage(artist));
+		
+		DatabaseControl.getInstance().update(artist);
 		User labelmanager = new User();
 		labelmanager.setUsername("l");
 		labelmanager.setEMail("muster@gmail.com");
@@ -115,9 +214,8 @@ public class createTestData {
 		
 		
 		try {
-			DatabaseControl.getInstance().save(standard);
-			DatabaseControl.getInstance().save(admin);
-			DatabaseControl.getInstance().save(artist);
+			
+
 			DatabaseControl.getInstance().save(labelmanager);
 			
 		} catch (IOException e) {
