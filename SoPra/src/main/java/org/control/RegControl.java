@@ -147,6 +147,7 @@ public class RegControl {
 			error = error + EXISTS_ERROR;
 	}
 	
+	
 	/**
 	 * Leert den error speicher und versteckt das Label
 	 * @param errorLabel  Label auf dem der Error angezeigt wurde

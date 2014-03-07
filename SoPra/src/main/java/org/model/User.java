@@ -310,6 +310,10 @@ public class User implements Comparable {
 		
 	}
 	
+	public void addPlaylist(Playlist p){
+		playlists.add(p);
+	}
+	
 	public void setBanned(boolean b)
 	{
 		banned = b;

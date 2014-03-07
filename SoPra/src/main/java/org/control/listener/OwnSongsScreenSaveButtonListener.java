@@ -32,16 +32,26 @@ public class OwnSongsScreenSaveButtonListener implements ActionListener {
 		}
 		
 		
-//		if (songList.get(row).getAlbum() != null){
-//		tempAlbum.setName(oss.getAlbumTF());
-//		DatabaseControl.getInstance().update(songList.get(row).getAlbum());
-//		try {
-//			DatabaseControl.getInstance().save(songList.get(row).getAlbum());
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		}
+		if (songList.get(row).getAlbum() != null){
+			songList.get(row).getAlbum().setName(oss.getAlbumTF());
+			DatabaseControl.getInstance().update(songList.get(row).getAlbum());
+		try {
+			DatabaseControl.getInstance().save(songList.get(row).getAlbum());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		}
+		else {
+			Album newAlbum = new Album(LoginControl.getInstance().getCurrentUser());
+			newAlbum.setName(oss.getAlbumTF());
+			try {
+				DatabaseControl.getInstance().save(newAlbum);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 
 }
