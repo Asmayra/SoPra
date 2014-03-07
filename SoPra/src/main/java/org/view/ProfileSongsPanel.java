@@ -12,7 +12,6 @@ import javax.swing.table.DefaultTableModel;
 
 import org.control.DatabaseControl;
 import org.control.LoginControl;
-import org.control.listener.FavorSelectionListener;
 import org.model.Playlist;
 import org.model.Song;
 import org.model.User;
@@ -25,7 +24,6 @@ public class ProfileSongsPanel extends JScrollPane {
 	private static Object[][] context = new Object[][] {};
 	private static DefaultTableModel model;
 	private static JTable table;
-	private static ListSelectionModel favor;
 
 	public ProfileSongsPanel(ProfileScreen p) {
 		super(create(p));
@@ -50,9 +48,6 @@ public class ProfileSongsPanel extends JScrollPane {
 		// this.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		table = new JTable();
 		table.setModel(model);
-		favor = table.getSelectionModel();
-	    favor.addListSelectionListener(new FavorSelectionListener(p));
-	    table.setSelectionModel(favor);
 		List<Song> songs = p.getUserProfile().getOwnSongs();
 		Playlist favorites = LoginControl.getInstance().getCurrentUser().getFavorites();
 		for (int i = 0; i < songs.size(); i++) {
