@@ -140,7 +140,7 @@ public class ProfileScreen extends JPanel {
 		playlists = new ProfilePlaylistPanel(userProfile);
 		alben = new JPanel();
 		posts = new ProfilePostsPanel(userProfile);
-		songs = new ProfileSongsPanel(userProfile);
+		songs = new ProfileSongsPanel(this);
 		
 
 		userContentScrollPlaylists = new JScrollPane(playlists);
@@ -207,6 +207,13 @@ public class ProfileScreen extends JPanel {
 	 */
 	public User getUserProfile() {
 		return userProfile;
+	}
+	
+	public void resetSongPanel(){
+		songs = new ProfileSongsPanel(this);
+		userContent.removeTabAt(2);
+		userContent.addTab("Songs", songs);
+		
 	}
 
 }
