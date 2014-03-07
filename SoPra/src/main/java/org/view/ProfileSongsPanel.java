@@ -56,7 +56,7 @@ public class ProfileSongsPanel extends JScrollPane {
 			String interpret="Kein Interpret";
 			String title="Kein Titel";
 			String album="Kein Album";
-			int playtime=0;
+			double playtime=0;
 			double rating=0.0;
 			
 			try{

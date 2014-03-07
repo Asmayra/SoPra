@@ -9,33 +9,39 @@ import org.control.DatabaseControl;
 import org.control.LoginControl;
 import org.model.Playlist;
 import org.model.Song;
+import org.model.User;
 
 public class PlaylistTableListener implements TableModelListener {
-	
 
 	@Override
 	public void tableChanged(TableModelEvent e) {
-		
+
 		int row = e.getFirstRow();
 		TableModel model = (TableModel) e.getSource();
-		boolean data = (boolean) model.getValueAt(row, 3);
+		boolean favor = (boolean) model.getValueAt(row, 3);
 		int id = (int) model.getValueAt(row, 4);
 		String name = (String) model.getValueAt(row, 0);
-		if ((boolean) data) {
-			if(name.equals("Favorites")){
-				if (LoginControl.getInstance().getCurrentUser().getFavorites().getPlaylistId()==id){
-					model.setValueAt(true, row, 3);
-					JOptionPane.showMessageDialog(null, "Sie können ihre eigene Favoriten-Playlist nicht entfernen.");
-				} else {
-					Playlist friendFavorites;
-					friendFavorites.copyFriendFavorites(DatabaseControl.getInstance().load(Playlist.class, id));
-				}
+		User current = LoginControl.getInstance().getCurrentUser();
+		Playlist selected = (Playlist) DatabaseControl.getInstance().load(Playlist.class, id);
+		if ((boolean) favor) {
+			if (name.equals("Favorites")) {
+				current.addPlaylist(Playlist.copyFriendFavorites(current, selected));
+				//DatabaseControl.getInstance().update(current);
+			} else {
+				Playlist copy = new Playlist();
+				copy.setSongs(selected.getSongs());
+				copy.setName(selected.getName());
+				current.addPlaylist(copy);
+				//DatabaseControl.getInstance().update(current);
 			}
 		} else {
-			System.out.println("remove spice");
-			//LoginControl.getInstance().getCurrentUser().removeFavorite((Song) DatabaseControl.getInstance().load(Song.class, id));
-			//DatabaseControl.getInstance().update(LoginControl.getInstance().getCurrentUser());
+			if (current.getFavorites().getPlaylistId() == id) {
+				model.setValueAt(true, row, 3);
+				JOptionPane.showMessageDialog(null, "Sie können ihre eigene Favoriten-Playlist nicht entfernen.");
+			} else {
+				current.removePlaylist(selected);
+				//DatabaseControl.getInstance().update(current);
+			}
 		}
 	}
-
 }

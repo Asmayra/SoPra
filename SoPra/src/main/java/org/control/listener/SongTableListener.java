@@ -18,9 +18,9 @@ public class SongTableListener implements TableModelListener {
 		
 		int row = e.getFirstRow();
 		TableModel model = (TableModel) e.getSource();
-		boolean data = (boolean) model.getValueAt(row, 5);
+		boolean favor = (boolean) model.getValueAt(row, 5);
 		int id = (int) model.getValueAt(row, 6);
-		if ((boolean) data) {
+		if ((boolean) favor) {
 			System.out.println("add spice");
 			LoginControl.getInstance().getCurrentUser().addFavorite((Song) DatabaseControl.getInstance().load(Song.class, id));
 			//DatabaseControl.getInstance().update(LoginControl.getInstance().getCurrentUser());
