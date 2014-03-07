@@ -11,6 +11,7 @@ import javax.swing.table.DefaultTableModel;
 
 import org.control.DatabaseControl;
 import org.control.LoginControl;
+import org.model.Playlist;
 import org.model.Song;
 import org.model.User;
 
@@ -46,24 +47,38 @@ public class ProfileSongsPanel extends JScrollPane {
 		table = new JTable();
 		table.setModel(model);
 		List<Song> songs = u.getOwnSongs();
+		Playlist favorites = LoginControl.getInstance().getCurrentUser().getFavorites();
 		for (int i = 0; i < songs.size(); i++) {
-			String interpret = songs.get(i).getInterpret();
-			String title = songs.get(i).getTitle();
+			Song curSong= songs.get(i);
+			String interpret="Kein Interpret";
+			String title="Kein Titel";
+			String album="Kein Album";
+			int playtime=0;
+			double rating=0.0;
+			
+			try{
+				interpret = curSong.getInterpret();
+			}catch(NullPointerException exc){}
+			try{
+				title = curSong.getTitle();
+			}catch(NullPointerException exc){}
+			try{
+				album = curSong.getAlbum().getName();
+			}catch(NullPointerException exc){}
+			try{
+				playtime = curSong.getPlaytime();
+			}catch(NullPointerException exc){}
+			try{
+				rating = curSong.getVrgRating();
+			}catch(NullPointerException exc){}
+			
 			boolean favored;
-			if (LoginControl.getInstance().getCurrentUser().getFavorites().contains(songs.get(i))) {
+			if (favorites.contains(songs.get(i))) {
 				favored = true;
 			} else {
 				favored = false;
 			}
-			String album;
-			if (songs.get(i).getAlbum() == null) {
-				album = " - ";
-			} else {
-				album = songs.get(i).getAlbum().getName();
-			}
-			String playtime = ((Integer) songs.get(i).getPlaytime()).toString();
-			String comRating = ((Integer) songs.get(i).getVrgRating()).toString();
-			Object[] entry = { interpret, title, album, playtime, comRating, favored };
+			Object[] entry = { interpret, title, album, playtime, rating, favored };
 			model.addRow(entry);
 		}
 		table.setFillsViewportHeight(true);

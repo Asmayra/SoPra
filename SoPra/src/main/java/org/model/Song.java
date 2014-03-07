@@ -1,5 +1,9 @@
 package org.model;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.Map;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -7,6 +11,11 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.sound.sampled.AudioFileFormat;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.UnsupportedAudioFileException;
+
+import org.tritonus.share.sampled.file.TAudioFileFormat;
 
 @Entity
 @Table(name = "SONG_TABLE")
@@ -27,21 +36,32 @@ public class Song implements Comparable{
 	public Song(){
 		
 	}
-
-	public Song(String u, String s1, String s2, Album a) {
-		interpret = u;
-		title = s1;
-		location = s2;
+	
+	
+	public Song(String interpret, String title, String location, Album album) {
+		this.interpret = interpret;
+		this.title = title;
+		this.location = location;
 		vrgRating = 0;
 		ratingCount = 0;
-		album = a;
+		this.album = album;
 		setPlaytime();
 	}
+	
+	public Song(String interpret, String title){
+		this.interpret = interpret;
+		this.title = title;
+		location = null;
+		vrgRating = 0;
+		ratingCount = 0;
+		album = null;
+		playtime = 0;
+	}
 
-	public Song(String u, String s1, String s2) {
-		interpret = u;
-		title = s1;
-		location = s2;
+	public Song(String interpret, String title, String location) {
+		this.interpret = interpret;
+		this.title = title;
+		this.location = location;
 		vrgRating = 0;
 		ratingCount = 0;
 		album = null;
@@ -91,8 +111,20 @@ public class Song implements Comparable{
 		vrgRating = (vrgRating + (double) newrating) / ratingCount;
 	}
 
-	private void setPlaytime() {
-		// Berechnung der Playtime der zugehörigen Datei
+	private void setPlaytime(){
+		AudioFileFormat fileFormat;
+		try {
+			fileFormat = AudioSystem.getAudioFileFormat(new File(location));
+	        Map<?, ?> properties = ((TAudioFileFormat) fileFormat).properties();
+	        String key = "duration";
+	        Long microseconds = (Long) properties.get(key);
+	        int mili = (int) (microseconds / 1000);
+	        int sec = (mili / 1000); 
+	        playtime = sec;
+	        } catch (UnsupportedAudioFileException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Override
