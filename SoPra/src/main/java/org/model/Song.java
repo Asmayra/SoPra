@@ -49,7 +49,6 @@ public class Song implements Comparable{
 		vrgRating = 0;
 		ratingCount = 0;
 		this.album = album;
-		setPlaytime();
 	}
 	
 	public Song(String interpret, String title){
@@ -69,7 +68,6 @@ public class Song implements Comparable{
 		vrgRating = 0;
 		ratingCount = 0;
 		album = null;
-		setPlaytime();
 	}
 
 	public String getInterpret() {
@@ -115,7 +113,7 @@ public class Song implements Comparable{
 		vrgRating = (vrgRating + (double) newrating) / ratingCount;
 	}
 
-	private void setPlaytime(){
+	public void setPlaytime(){
 		AudioFileFormat fileFormat;
 		try {
 			fileFormat = AudioSystem.getAudioFileFormat(new File(location));
@@ -140,6 +138,11 @@ public class Song implements Comparable{
 	
 	public String getPath(){
 		return location;
+	}
+	
+	public void setPath(String path)
+	{
+		location = path;
 	}
 
 }
