@@ -114,7 +114,7 @@ public class User implements Comparable {
 		ownSongs.add(s);
 	}
 	
-	public void deleteOwnSown(Song song)
+	public void removeOwnSong(Song song)
 	{
 		ownSongs.remove(song);
 	}
