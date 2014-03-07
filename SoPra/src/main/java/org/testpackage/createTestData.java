@@ -19,7 +19,7 @@ public class createTestData {
 	public static void main(String[] args) throws IOException{
 		createTestData test = new createTestData();
 		test.createGenre();
-		//test.createUser();
+		test.createUser();
 
 		System.out.println("done");
 	}

@@ -68,7 +68,7 @@ public class User implements Comparable {
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Set<Message> messages = new TreeSet<Message>();
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	private Set<Song> ownSongs;
+	private Set<Song> ownSongs = new TreeSet<Song>();
 	
 	private boolean banned = false;
 
@@ -274,8 +274,17 @@ public class User implements Comparable {
 				return list.get(i);
 			}
 		}
-		// null
-		return list.get(0);
+		
+		Playlist playlist = new Playlist();
+		playlist.setName("Favorites");
+		try {
+			DatabaseControl.getInstance().save(playlist);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return playlist;
+		
 	}
 
 	public List<Playlist> getPlaylists() {
