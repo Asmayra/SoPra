@@ -17,8 +17,10 @@ public class LabelButtonListener implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		List<Label> labelList =  (List<Label>) DatabaseControl.getInstance().getTableContent("Label");
+		User current = LoginControl.getInstance().getCurrentUser();
 		for (Label l : labelList){
-				if (l.getManager().getUsername().equals(LoginControl.getInstance().getCurrentUser().getUsername())){
+				if ( l.getManager().getUsername().equals(current.getUsername()) && current.getLabel() != null
+						&& current.getLabel().getId() == l.getId() ){
 					MainScreen.getInstance().updateCenter(new LabelScreen(l));
 					return;
 				}

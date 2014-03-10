@@ -32,7 +32,7 @@ public class AdminLabelScreen extends JPanel {
 	private JTextField nameTF, managerTF;
 	
 	private AdminLabelScreen(){
-		
+		initGui();
 	}
 	
 	public static AdminLabelScreen getInstance(){
@@ -52,37 +52,41 @@ public class AdminLabelScreen extends JPanel {
 	private JComponent initNewLabel(){
 		JPanel headerPanel = new JPanel(new BorderLayout());
 		
-		JPanel centerHeader = new JPanel(new GridLayout(1,2));
+		JPanel centerHeader = new JPanel(new GridLayout(2,1));
 		JLabel labelName = new JLabel("Labelname: ");
 		centerHeader.add(labelName);
 		JLabel labelManager = new JLabel("Labelmanager: ");
 		centerHeader.add(labelManager);
-		headerPanel.add(centerHeader, BorderLayout.CENTER);
+		headerPanel.add(centerHeader, BorderLayout.WEST);
 		
 		JPanel westPanel = new JPanel(new GridLayout(2,1));
 		nameTF = new JTextField();
 		westPanel.add(nameTF);
 		managerTF = new JTextField();
 		westPanel.add(managerTF);
-		headerPanel.add(westPanel, BorderLayout.WEST);
+		headerPanel.add(westPanel, BorderLayout.CENTER);
 		
 		createNewLabel = new JButton("Neues Label anlegen");
 		createNewLabel.addActionListener(new AdminLabelScreenCreateNewLabelButtonListener());
-		headerPanel.add(createNewLabel);
+		headerPanel.add(createNewLabel, BorderLayout.SOUTH);
 		
 		return headerPanel;
 	}
 	
 	private JComponent initTablePanel(){
 		JPanel tablePanel = new JPanel(new BorderLayout());
-		labelTable = new JTable(model);
+		labelTable = new JTable();
+		
+		model = new DefaultTableModel();
+		
+		labelTable.setModel(model);
 		model.addColumn("Labelname");
 		model.addColumn("Labelmanager");
-		tablePanel.add(labelTable,BorderLayout.NORTH);
+		tablePanel.add(labelTable,BorderLayout.CENTER);
 		
 		deleteLabel = new JButton("Löschen");
 		deleteLabel.addActionListener(new AdminLabelScreenDeleteLabelButtonListener());
-		tablePanel.add(deleteLabel,BorderLayout.CENTER);
+		tablePanel.add(deleteLabel,BorderLayout.SOUTH);
 		
 		return tablePanel;
 	}
@@ -90,11 +94,15 @@ public class AdminLabelScreen extends JPanel {
 	public void updateTable(){
 		List<Label> labelList = (List<Label>) DatabaseControl.getInstance().getTableContent("Label");
 		String[] temp = new String[2];
+		model.setRowCount(0);
 		
 		for (Label l: labelList){
-			temp[0] = l.getName();
-			temp[1] = l.getManager().toString();
-			model.addRow(temp);
+			if( l.getManager() != null && l.getManager().getLabel() != null && l.getManager().getLabel().equals(l) )
+			{
+				temp[0] = l.getName();
+				temp[1] = l.getManager().getUsername();
+				model.addRow(temp);
+			}
 		}
 	}
 	
@@ -103,6 +111,11 @@ public class AdminLabelScreen extends JPanel {
 	
 	public int getSelectedRow(){
 		return labelTable.getSelectedRow();
+	}
+	
+	public String getLabelManager()
+	{
+		return (String) labelTable.getValueAt(labelTable.getSelectedRow(), 1);
 	}
 	
 	public void deleteRow(int row){
