@@ -1,12 +1,5 @@
 package org.view;
 
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.net.URL;
-
-import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -16,8 +9,7 @@ import org.control.listener.DiscoverElementListener;
 
 /**
  * 
- * @author Tim Lange
- *
+ * @author Tim Lange, Tim Michels, Max Küper
  */
 public class DiscoverElement extends JPanel {
 	
@@ -34,6 +26,7 @@ public class DiscoverElement extends JPanel {
 	 * @param text String to be shown as description
 	 * @param pictureIcon JLabel with picture to be shown
 	 * @param url to get to this discover
+	 * @param type Used to get this DiscoverElement into the right Tab on the ExtendedDiscoverScreen types are: "Album", "Song" or "User"
 	 */
 	public DiscoverElement(String text, ImageIcon pictureIcon, String url, String type) {
 		this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
@@ -46,6 +39,8 @@ public class DiscoverElement extends JPanel {
 		
 		this.addMouseListener(DiscoverElementListener.getInstance());
 	}
+	
+	//getter & setter
 	public String getObjectType() {
 		return objectType;
 	}

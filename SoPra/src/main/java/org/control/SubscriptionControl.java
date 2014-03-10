@@ -1,6 +1,7 @@
 package org.control;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 import javax.swing.ImageIcon;
@@ -15,33 +16,44 @@ import org.view.screens.Center.SubscriptionScreen;
  *
  */
 public class SubscriptionControl {
+	SubscriptionScreen subScreen;
+	ArrayList<User> currentSubscriptions;
+	LinkedList<DiscoverElement> subscriptionElements;
+	private static SubscriptionControl instance;
+	
+	public static SubscriptionControl getInstance() {
+		if(instance == null){
+			instance = new SubscriptionControl();
+		}
+		return instance;
+	}
 	
 	public SubscriptionControl(){
 		//aktuelle Subscriptions
-//		LinkedList<User> currentSubscriptions = (LinkedList<User>) LoginControl.getInstance().getCurrentUser().getFollowing();
-		LinkedList<DiscoverElement> subscriptionElements= new LinkedList<DiscoverElement>();
-		SubscriptionScreen subScreen = SubscriptionScreen.getInstance();
-		
-		//Anlegen der GUI-Elemente mittels der User-Liste
-//		for(int i=0;i<currentSubscriptions.size();i++){
-//			User followed = currentSubscriptions.get(i);
-//			try {
-//				DiscoverElement newsub = new DiscoverElement(followed.getUsername(),new ImageIcon(followed.getPicture()),followed.getUsername());
-//				subscriptionElements.add(newsub);
-//			} catch (IOException e) {}
-//		}
+		currentSubscriptions = (ArrayList<User>) LoginControl.getInstance().getCurrentUser().getFollowing();
+		subscriptionElements= new LinkedList<DiscoverElement>();
+		subScreen = SubscriptionScreen.getInstance();
 		
 
-	    //Dummdaten erzeugen
-	    for (int i = 0; i < 12; i++) {
-	    	 DiscoverElement discover = new DiscoverElement("Followed "+(i+1), LoadImageControl.loadImageIcon("", LoginControl.getInstance().getCurrentUser()), "url "+i, "User");
-	    	 subscriptionElements.add(discover);
-	    }
-	    
-	    subScreen.setSubscriptions(subscriptionElements);
-	    subScreen.showSubscriptions();
-	    
+		
+		updateSubscriptions();
 	}
+	/**
+	 * aktualisiert die Subscriptionseite 
+	 */
+	public void updateSubscriptions(){
+		//Anlegen der GUI-Elemente mittels der User-Liste
+		for(int i=0;i<currentSubscriptions.size();i++){
+			User followed = currentSubscriptions.get(i);
+			try {
+				DiscoverElement newsub = new DiscoverElement(followed.getUsername(),new ImageIcon(followed.getPicture()),followed.getUsername(),"");
+				subscriptionElements.add(newsub);
+			} catch (NullPointerException e) {System.err.println(e.getLocalizedMessage());}
+		}
+		subScreen.setSubscriptions(subscriptionElements);
+		subScreen.showSubscriptions();
+	}
+
 
 
 
