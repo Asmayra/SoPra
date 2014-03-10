@@ -32,7 +32,8 @@ public class SearchMaskListener implements KeyListener, ActionListener, MouseLis
 	 * update event when char entered in search mask
 	 */
 	public void keyReleased(KeyEvent e) {
-		this.setResults();
+		if (e.getKeyCode() == KeyEvent.VK_ENTER)
+			this.setResults();
 	}
 
 	public void keyTyped(KeyEvent e) {

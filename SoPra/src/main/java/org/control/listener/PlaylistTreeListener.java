@@ -36,6 +36,7 @@ public class PlaylistTreeListener extends MouseAdapter{
 		if(e.getButton()==MouseEvent.BUTTON1){
 			
 			if(e.getClickCount()==2){
+				//TreePath path = playlisttree.getPathForLocation(e.getX(), e.getY());
 				playlisttree.startEditingAtPath(playlisttree.getSelectionPath());
 			}
 			else{

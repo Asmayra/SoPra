@@ -125,6 +125,9 @@ public class Playlist implements Comparable {
 	
 	@Override
 	public String toString(){
+		if(name==null){
+			return "no name";
+		}
 		return name;
 	}
 }
