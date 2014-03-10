@@ -256,12 +256,12 @@ public class User implements Comparable {
 
 	}
 
-	@SuppressWarnings("unchecked")
 	public Playlist getFavorites() {
 		java.util.Iterator<Playlist> it = playlists.iterator();
 		while (it.hasNext()) {
-			if (it.next().getName().equals("Favorites")) {
-				return it.next();
+			Playlist next = it.next();
+			if (next.getName().equals("Favorites")) {
+				return next;
 			}
 		}
 		Playlist playlist = new Playlist(this);
