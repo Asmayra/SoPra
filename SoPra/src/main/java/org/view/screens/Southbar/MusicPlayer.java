@@ -133,14 +133,12 @@ public class MusicPlayer extends JPanel{
 	 * @param song
 	 */
 	public static void setCurrentSong(File song){
-		/*try {
-			player.stop();//warum?
-		} catch (BasicPlayerException e1) {
-			e1.printStackTrace();
-		}*/
 		selected_file = song;
 	}
-	
+	/**
+	 * Returns the selected File
+	 * @return selected File
+	 */
 	public static File getCurrentSong(){
 		return selected_file;
 	}
