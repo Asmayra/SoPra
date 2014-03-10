@@ -46,11 +46,10 @@ public class PlaylistControl {
 
 
 	public void showPlaylist(int playlistID) {
-		Playlist current = (Playlist) control.load( Playlist.class, playlistID);
-		playlistIterator = current.getSongs().iterator();
-		
-		int tabindex = playlistScreen.getIndexOfTab(current.getPlaylistId());
+		int tabindex = playlistScreen.getIndexOfTab(playlistID);
 		if(tabindex==-1){
+			Playlist current = (Playlist) control.load( Playlist.class, playlistID);
+			playlistIterator = current.getSongs().iterator();
 			playlistScreen.addPlaylistTab(current.getName(), new PlaylistSingleScreen(current));
 		}
 		playlistScreen.setTabByIndex(tabindex);
@@ -59,11 +58,10 @@ public class PlaylistControl {
 
 
 	public void showAlbum(int albumID) {
-		Album current = (Album) control.load( Album.class, albumID);
-		playlistIterator = current.getSongs().iterator();
-		
-		int tabindex = playlistScreen.getIndexOfTab(current.getPlaylistId());
+		int tabindex = playlistScreen.getIndexOfTab(albumID);
 		if(tabindex==-1){
+			Album current = (Album) control.load( Album.class, albumID);
+			playlistIterator = current.getSongs().iterator();
 			playlistScreen.addPlaylistTab(current.getName(), new PlaylistSingleScreen(current));
 		}
 		playlistScreen.setTabByIndex(tabindex);
