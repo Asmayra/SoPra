@@ -89,7 +89,7 @@ public class LabelScreen extends JPanel {
 		buttonPanel.add(deleteArtistButton);
 		
 		deleteManagerButton = new JButton("Artist löschen");
-		deleteManagerButton.addActionListener(new LabelScreenManagerDeleteButtonListener());
+		deleteManagerButton.addActionListener(new LabelScreenManagerDeleteButtonListener(this));
 		buttonPanel.add(deleteManagerButton);
 		return buttonPanel;
 	}
