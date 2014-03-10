@@ -232,8 +232,7 @@ public class User implements Comparable {
 	public boolean isFollowing(User usr) {
 		java.util.Iterator<User> it = following.iterator();
 		while (it.hasNext()) {
-			User next = it.next();
-			if (next.getUsername().equals(usr.getUsername())) {
+			if (it.next().getUsername().equals(usr.getUsername())) {
 				return true;
 			}
 		}
@@ -243,8 +242,7 @@ public class User implements Comparable {
 	public boolean isIgnoring(User usr) {
 		java.util.Iterator<User> it = ignoring.iterator();
 		while (it.hasNext()) {
-			User next = it.next();
-			if (next.getUsername().equals(usr.getUsername())) {
+			if (it.next().getUsername().equals(usr.getUsername())) {
 				return true;
 			}
 		}
