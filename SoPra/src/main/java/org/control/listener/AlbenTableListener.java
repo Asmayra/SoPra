@@ -28,8 +28,8 @@ public class AlbenTableListener implements TableModelListener {
 		if ((boolean) favor) {
 			if (!owner.equals(current.getUsername())) {
 				current.addAlben(selected);
-				PlaylistMiniScreen.getInstance().updateMiniScreen();
 				DatabaseControl.getInstance().update(current);
+				PlaylistMiniScreen.getInstance().updateMiniScreen();
 			}
 
 		} else {
@@ -40,8 +40,8 @@ public class AlbenTableListener implements TableModelListener {
 								"Sie können ihre eignen Alben nicht entfernen.\n Sie haben aber die Möglichkeit ihr Album komplett zu löschen.");
 			} else {
 				current.removeAlbum(selected);
-				PlaylistMiniScreen.getInstance().updateMiniScreen();
 				DatabaseControl.getInstance().update(current);
+				PlaylistMiniScreen.getInstance().updateMiniScreen();
 			}
 		}
 	}

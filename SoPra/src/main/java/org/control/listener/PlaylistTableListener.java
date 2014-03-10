@@ -28,8 +28,8 @@ public class PlaylistTableListener implements TableModelListener {
 			if (name.equals("Favorites")) {
 				if (!(current.getFavorites().getPlaylistId()== id)) {
 					current.addPlaylist(Playlist.copyFriendFavorites(current, selected));
-					PlaylistMiniScreen.getInstance().updateMiniScreen();
 					DatabaseControl.getInstance().update(current);
+					PlaylistMiniScreen.getInstance().updateMiniScreen();
 				}
 				
 			} else {
@@ -37,8 +37,8 @@ public class PlaylistTableListener implements TableModelListener {
 				copy.setSongs(selected.getSongs());
 				copy.setName(selected.getName());
 				current.addPlaylist(copy);
-				PlaylistMiniScreen.getInstance().updateMiniScreen();
 				DatabaseControl.getInstance().update(current);
+				PlaylistMiniScreen.getInstance().updateMiniScreen();
 			}
 		} else {
 			if (current.getFavorites().getPlaylistId() == id) {
@@ -46,8 +46,8 @@ public class PlaylistTableListener implements TableModelListener {
 				JOptionPane.showMessageDialog(null, "Sie können ihre eigene Favoriten-Playlist nicht entfernen.");
 			} else {
 				current.removePlaylist(selected);
-				PlaylistMiniScreen.getInstance().updateMiniScreen();
 				DatabaseControl.getInstance().update(current);
+				PlaylistMiniScreen.getInstance().updateMiniScreen();
 			}
 		}
 	}
