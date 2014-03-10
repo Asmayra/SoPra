@@ -1,36 +1,23 @@
 package org.model;
 
-import java.awt.Component;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
-import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Locale;
 import java.util.Set;
 import java.util.TreeSet;
 
-import javax.imageio.ImageIO;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-
-import org.control.DatabaseControl;
 import org.control.LoadImageControl;
-import org.hibernate.Session;
 /**
  * User Entity
  * @author Philipp,Michael Pfennings, Mattias Schoenke
@@ -268,6 +255,7 @@ public class User implements Comparable {
 
 	}
 
+	@SuppressWarnings("unchecked")
 	public Playlist getFavorites() {
 		List<Playlist> list = new ArrayList<Playlist>(this.playlists);
 		for (int i = 0; i < list.size(); i++) {
