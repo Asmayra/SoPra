@@ -20,10 +20,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.swing.JOptionPane;
+
 /**
  * Entity for Playlists
+ * 
  * @author Philipp
- *
+ * 
  */
 @Entity
 @Table(name = "PLAYLIST_TABLE")
@@ -38,6 +40,7 @@ public class Playlist implements Comparable {
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Set<Song> songs = new TreeSet<Song>();
 	private String name;
+
 	public Playlist() {
 
 	}
@@ -67,10 +70,10 @@ public class Playlist implements Comparable {
 		this.songs = new TreeSet<Song>(songs);
 	}
 
-	public void addSong(Song song){
+	public void addSong(Song song) {
 		songs.add(song);
 	}
-	
+
 	public int getPlaylistId() {
 		return playlistId;
 	}
@@ -98,9 +101,7 @@ public class Playlist implements Comparable {
 			testName(name);
 			this.name = name;
 		} catch (IllegalArgumentException e) {
-			JOptionPane
-					.showMessageDialog(null,
-							"Bitte geben sie Ihrer Playlist einen anderen Namen als \"Favorit\"");
+			JOptionPane.showMessageDialog(null, "Bitte geben sie Ihrer Playlist einen anderen Namen als \"Favorit\"");
 		}
 
 	}
@@ -111,21 +112,34 @@ public class Playlist implements Comparable {
 		return 0;
 	}
 
-	public void deleteSong(Song song){
+	@Override
+	public boolean equals(Object obj) {
+		if (this.hashCode() == obj.hashCode()) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public int hashCode() {
+		return this.getPlaylistId();
+	}
+
+	public void deleteSong(Song song) {
 		songs.remove(song);
 	}
 
 	public static Playlist copyFriendFavorites(User u, Playlist p) {
 		Playlist copyF = new Playlist(u);
 		copyF.setSongs(p.getSongs());
-		copyF.setName("Favorites from "+p.getOwner().getUsername());
+		copyF.setName("Favorites from " + p.getOwner().getUsername());
 		return copyF;
-		
+
 	}
-	
+
 	@Override
-	public String toString(){
-		if(name==null || name.equals("")){
+	public String toString() {
+		if (name == null || name.equals("")) {
 			return "no name";
 		}
 		return name;
