@@ -8,11 +8,21 @@ import org.model.Playlist;
 import org.model.Song;
 import org.model.User;
 
+/**
+ * Klasse stellt Methoden zum finden von Empfehlungen bereit
+ * 
+ * @author Sebastian Roth
+ *
+ */
 public class RecommendationControl {
 
 	private User user = LoginControl.getInstance().getCurrentUser();
 	private static RecommendationControl recControl;
 
+	/**
+	 * @return
+	 * 	
+	 */
 	public static RecommendationControl getInstance() {
 		if (recControl == null) {
 			recControl = new RecommendationControl();

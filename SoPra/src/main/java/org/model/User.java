@@ -309,6 +309,19 @@ public class User implements Comparable {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (this.hashCode() == obj.hashCode()) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public int hashCode() {
+		return  Integer.parseInt(this.getUsername());
+	}
 
 	public void addFavorite(Song s) {
 		this.getFavorites().addSong(s);
