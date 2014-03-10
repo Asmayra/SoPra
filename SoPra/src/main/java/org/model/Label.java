@@ -17,6 +17,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 /**
  * Entity for Label
@@ -30,10 +31,9 @@ public class Label {
 	@GeneratedValue(strategy = GenerationType.AUTO)	
 	private int LabelId;
 	private String name = "";
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private User manager;
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinTable(name="MANAGER_TABLE")
-	private Set<User> managers = new HashSet<User>();
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable(name="ARTIST_TABLE")
 	private Set<User> artists = new HashSet<User>();
 
@@ -45,20 +45,6 @@ public class Label {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public Collection<User> getManagers() {
-		return new ArrayList<User>(this.managers);
-	}
-	
-	public void addManager(User manager)
-	{
-		this.managers.add(manager);
-	}
-	
-	public void removeManager(User manager)
-	{
-		this.managers.remove(manager);
 	}
 	
 	public Collection<User> getArtists()
@@ -76,13 +62,18 @@ public class Label {
 		this.artists.remove(artist);
 	}
 	
-	public boolean isManager(User user)
-	{
-		return managers.contains(user);
-	}
 
 	public boolean isArtist(User user)
 	{
 		return artists.contains(user);
+	}
+	
+	public void setManager(User manager){
+		this.manager=manager;
+	}
+	
+	public User getManager(){
+		return manager;
+		
 	}
 }
