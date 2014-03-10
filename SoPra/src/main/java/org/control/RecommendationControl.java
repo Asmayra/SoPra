@@ -26,13 +26,16 @@ public class RecommendationControl {
 		List<User> following = user.getFollowing();
 		int random2 = 0;
 		while (random2 == 0) {
+			System.out.println("Test1");
 			if (following.size() == 0) {
+				System.out.println("Test2");
 				break;
 			}
 			int random1 = (int) ((Math.random()) * following.size() + 1);
 
 			List<Album> alben = following.get(random1).getAlben();
 			if (alben.size() == 0) {
+				System.out.println("Test2");
 				continue;
 			}
 			random2 = (int) ((Math.random()) * alben.size() + 1);
@@ -99,6 +102,20 @@ public class RecommendationControl {
 		}
 		throw new Exception();
 
+	}
+	
+	public List<User> allRecommendedArtists(){
+		List<User> recUser = null;
+		List<User> following = user.getFollowing();
+		for (int i = 0; i<following.size();i++){
+			List<User> followedFollower = following.get(i).getFollowing();
+			recUser.addAll(followedFollower);
+		}
+		return recUser;
+		
+		
+		
+		
 	}
 
 }
