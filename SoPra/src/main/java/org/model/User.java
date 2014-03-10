@@ -47,21 +47,21 @@ public class User implements Comparable {
 	private String imagePath = "";
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable(name = "FOLLOW_TABLE")
-	private Set<User> following = new TreeSet<User>();
+	private Set<User> following = new HashSet<User>();
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	private Set<Playlist> playlists = new TreeSet<Playlist>();
+	private Set<Playlist> playlists = new HashSet<Playlist>();
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	private Set<Album> alben = new TreeSet<Album>();
+	private Set<Album> alben = new HashSet<Album>();
 	@ManyToMany(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
 	@JoinTable(name = "IGNORE_TABLE")
-	private Set<User> ignoring = new TreeSet<User>();
+	private Set<User> ignoring = new HashSet<User>();
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	// Set Eager,because it's loaded at the Homescreen
-	private Set<Post> posts = new TreeSet<Post>();
+	private Set<Post> posts = new HashSet<Post>();
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	private Set<Message> messages = new TreeSet<Message>();
+	private Set<Message> messages = new HashSet<Message>();
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	private Set<Song> ownSongs = new TreeSet<Song>();
+	private Set<Song> ownSongs = new HashSet<Song>();
 	@OneToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
 	private Label Label;
 	
@@ -93,7 +93,7 @@ public class User implements Comparable {
 	}
 
 	public void setFollowing(List<User> following) {
-		this.following = new TreeSet<User>(following);
+		this.following = new HashSet<User>(following);
 	}
 
 	public Collection<Post> getPosts() {

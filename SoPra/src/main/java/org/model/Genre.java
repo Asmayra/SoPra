@@ -2,6 +2,7 @@ package org.model;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
@@ -35,7 +36,7 @@ public class Genre implements Comparable{
 	private Genre parent;
 
 	public Genre(){
-		subGenres = new TreeSet<Genre>();
+		subGenres = new HashSet<Genre>();
 	}
 	
 	public Genre getParent() {
@@ -60,7 +61,7 @@ public class Genre implements Comparable{
 	}
 
 	public void setSubGenres(LinkedList<Genre> subGenres) {
-		this.subGenres = new TreeSet<Genre>(subGenres);
+		this.subGenres = new HashSet<Genre>(subGenres);
 	}
 	
 	public void addSubGenre(Genre sub){

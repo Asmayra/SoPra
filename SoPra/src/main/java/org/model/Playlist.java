@@ -2,6 +2,7 @@ package org.model;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
@@ -38,7 +39,7 @@ public class Playlist implements Comparable {
 	@ManyToOne
 	private User owner;
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	private Set<Song> songs = new TreeSet<Song>();
+	private Set<Song> songs = new HashSet<Song>();
 	private String name = "";
 
 	public Playlist() {
@@ -67,7 +68,7 @@ public class Playlist implements Comparable {
 	}
 
 	public void setSongs(List<Song> songs) {
-		this.songs = new TreeSet<Song>(songs);
+		this.songs = new HashSet<Song>(songs);
 	}
 
 	public void addSong(Song song) {

@@ -2,6 +2,7 @@ package org.model;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
@@ -38,9 +39,9 @@ public class Song implements Comparable{
 	private String location = "";
 
 	@ManyToMany (cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	private Set<Playlist> playlists = new TreeSet<Playlist>();
+	private Set<Playlist> playlists = new HashSet<Playlist>();
 	@ManyToMany (cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	private Set<Genre> genre = new TreeSet<Genre>();
+	private Set<Genre> genre = new HashSet<Genre>();
 
 	@ManyToOne
 	private Album album;
