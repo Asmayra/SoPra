@@ -148,6 +148,19 @@ public class Song implements Comparable{
 		return (this.songId-((Song)song).getSongId());
 	}
 	
+	@Override
+	public boolean equals(Object obj) {
+		if (this.hashCode() == obj.hashCode()) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public int hashCode() {
+		return this.getSongId();
+	}
+	
 	
 	public String getPath(){
 		return location;
