@@ -113,7 +113,19 @@ public class PlaylistMiniScreen extends JPanel{
 	public void createAdminPanel(){
 		admin.setLayout(new GridBagLayout());	
 		createAdminTree();
-		tickets = new JTree(rootAdmin);//getcurrentUser.getuser.getPlaylists();
+		
+		DefaultTreeModel dtm = new DefaultTreeModel(rootAdmin){
+			@Override
+			public void valueForPathChanged(TreePath path, Object newValue){
+				Object obj = ((DefaultMutableTreeNode)path.getLastPathComponent()).getUserObject();
+				((Playlist)obj).setName(newValue.toString());
+				super.valueForPathChanged(path, obj);
+			}
+		};
+		
+		tickets = new JTree(dtm){
+		};
+		
 		//Layoutmanager + Anordnung
 		GridBagConstraints c = new GridBagConstraints();
 		c.fill = GridBagConstraints.BOTH;
