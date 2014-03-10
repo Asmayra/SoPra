@@ -21,13 +21,11 @@ public class SongTableListener implements TableModelListener {
 		boolean favor = (boolean) model.getValueAt(row, 5);
 		int id = (int) model.getValueAt(row, 6);
 		if ((boolean) favor) {
-			System.out.println("add spice");
 			LoginControl.getInstance().getCurrentUser().addFavorite((Song) DatabaseControl.getInstance().load(Song.class, id));
-			//DatabaseControl.getInstance().update(LoginControl.getInstance().getCurrentUser());
+			DatabaseControl.getInstance().update(LoginControl.getInstance().getCurrentUser());
 		} else {
-			System.out.println("remove spice");
 			LoginControl.getInstance().getCurrentUser().removeFavorite((Song) DatabaseControl.getInstance().load(Song.class, id));
-			//DatabaseControl.getInstance().update(LoginControl.getInstance().getCurrentUser());
+			DatabaseControl.getInstance().update(LoginControl.getInstance().getCurrentUser());
 		}
 	}
 
