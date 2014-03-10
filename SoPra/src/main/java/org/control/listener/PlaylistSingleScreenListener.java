@@ -24,6 +24,7 @@ import org.model.Playlist;
 import org.model.Song;
 import org.view.ContextMenu;
 import org.view.screens.Center.AdminGenreScreen;
+import org.view.screens.Center.PlaylistExtendedScreen;
 import org.view.screens.Center.PlaylistSingleScreen;
 
 /**
@@ -33,6 +34,7 @@ import org.view.screens.Center.PlaylistSingleScreen;
  */
 public class PlaylistSingleScreenListener  extends MouseAdapter{
 	
+	private PlaylistExtendedScreen extScreen = PlaylistExtendedScreen.getInstance();
 	private PlaylistControl control = PlaylistControl.getInstance();
 	private PlaylistSingleScreen screen;
 	JTable currentTable;
@@ -122,6 +124,12 @@ public class PlaylistSingleScreenListener  extends MouseAdapter{
 			if(destination.equals("Favorites")){
 				currentTable.getModel().setValueAt(true, row, 5);
 			}
+			
+			int destTabID = extScreen.getIndexOfTab(destination.getPlaylistId());
+			if(destTabID!=-1){
+				extScreen.setTabScreen(destTabID, new PlaylistSingleScreen(destination));
+			}
+			
 			currentTable.updateUI();
 		}
     	

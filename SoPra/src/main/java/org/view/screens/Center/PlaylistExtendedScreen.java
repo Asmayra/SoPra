@@ -33,6 +33,10 @@ public class PlaylistExtendedScreen extends JPanel{
 		playlistIDs.addLast(playlist.getPlaylistID());
 	}
 	
+	public void setTabScreen(int tabIndex,PlaylistSingleScreen playlist){
+		tabs.setComponentAt(tabIndex, playlist);
+	}
+	
 	public void removePlaylistTab(int tabindex){
 		if(tabindex>=0 && tabindex<tabs.getTabCount()){
 			tabs.remove(tabindex);
