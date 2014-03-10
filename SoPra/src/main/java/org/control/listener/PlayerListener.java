@@ -1,12 +1,15 @@
 package org.control.listener;
 
+import java.io.File;
 import java.util.Map;
 
 import org.control.PlaylistControl;
 import org.view.screens.Southbar.MusicPlayer;
 
 import javazoom.jlgui.basicplayer.BasicController;
+import javazoom.jlgui.basicplayer.BasicPlayer;
 import javazoom.jlgui.basicplayer.BasicPlayerEvent;
+import javazoom.jlgui.basicplayer.BasicPlayerException;
 import javazoom.jlgui.basicplayer.BasicPlayerListener;
 /**
  * Listener that gives info over MusicPlayer State
@@ -16,11 +19,13 @@ import javazoom.jlgui.basicplayer.BasicPlayerListener;
 public class PlayerListener implements BasicPlayerListener {
 	
 	private MusicPlayer musicplayer;
+	private BasicPlayer player;
 	long currentTime = 0;
 	long maxTime = 0;
 	
-	public PlayerListener(MusicPlayer musicplayer){
+	public PlayerListener(MusicPlayer musicplayer,BasicPlayer player){
 		this.musicplayer=musicplayer;
+		this.player = player;
 	}
 	
 
@@ -50,8 +55,17 @@ public class PlayerListener implements BasicPlayerListener {
 		currentTime /= 1000000;
 		// Notification of BasicPlayer states (opened, playing, end of media, ...)
 		if(e.getCode() == BasicPlayerEvent.EOM){
-			System.out.println("Song zuende!");
-			musicplayer.setCurrentSong(PlaylistControl.nextSong());
+			File selected_file = PlaylistControl.getInstance().nextSong();
+			try {
+				player.open(selected_file);
+				player.play();
+			}catch (NullPointerException nullEXC){
+				System.out.println("Playlist zuende");
+				//Falls Endlosmusik: Liste von vorne laden und neu starten!
+			} catch (BasicPlayerException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}	
 		//System.out.println(player)
 	}
