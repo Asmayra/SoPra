@@ -3,6 +3,7 @@ package org.control;
 import java.util.LinkedList;
 
 import org.model.Album;
+import org.model.Song;
 import org.model.User;
 import org.view.DiscoverElement;
 import org.view.screens.Center.DiscoverExtendedScreen;
@@ -28,20 +29,38 @@ public class DiscoverControl {
 
 		try {
 			Album recAlbum = RecommendationControl.getInstance().recommendAlbum();
-			DiscoverElement discover1mini = new DiscoverElement(recAlbum.getName(), LoadImageControl.loadImageIcon(recAlbum.getCoverart(), currUser), recAlbum.getOwner().getUsername(), "Album");
+			DiscoverElement discover1mini = new DiscoverElement(recAlbum.getName(), LoadImageControl.loadImageIcon(
+					recAlbum.getCoverart(), recAlbum.getOwner()), recAlbum.getOwner().getUsername(), "Album");
 			miniScreen.setDiscoverOne(discover1mini);
 		} catch (Exception e) {
 			System.out.println("wurst");
 		}
+		try {
+			User recUser = RecommendationControl.getInstance().recommendArtist();
+			DiscoverElement discover2mini = new DiscoverElement(recUser.getUsername(), LoadImageControl.loadImageIcon(
+					recUser.getImagePath(), recUser), recUser.getUsername(), "User");
+			miniScreen.setDiscoverOne(discover2mini);
+		} catch (Exception e) {
+			System.out.println("salat");
+		}
+		try {
+			Song recSong = RecommendationControl.getInstance().recommendSong();
+			if (recSong.getAlbum() == null) {
+				User usr = (User) DatabaseControl.getInstance().load(User.class, recSong.getInterpret());
+				DiscoverElement discover3mini = new DiscoverElement(recSong.getTitle(), LoadImageControl.loadImageIcon(
+						usr.getImagePath(), usr), usr.getUsername(), "Song");
+				miniScreen.setDiscoverOne(discover3mini);
+			} else {
+				User usr = (User) DatabaseControl.getInstance().load(User.class, recSong.getInterpret());
+				DiscoverElement discover3mini = new DiscoverElement(recSong.getTitle(), LoadImageControl.loadImageIcon(
+						recSong.getAlbum().getCoverart(), usr), usr.getUsername(), "Song");
+				miniScreen.setDiscoverOne(discover3mini);
+			}
+			
+		} catch (Exception e) {
+			System.out.println("Käsekuchen");
+		}
 
-		DiscoverElement discover2mini = new DiscoverElement("text2", LoadImageControl.loadImageIcon("", currUser),
-				"url2", "User");
-		DiscoverElement discover3mini = new DiscoverElement("text3", LoadImageControl.loadImageIcon("", currUser),
-				"url3", "Song");
-
-		
-		miniScreen.setDiscoverTwo(discover2mini);
-		miniScreen.setDiscoverThree(discover3mini);
 
 		for (int i = 0; i < 12; i++) {
 			DiscoverElement discover = new DiscoverElement("Künstler " + (i + 1), LoadImageControl.loadImageIcon("",

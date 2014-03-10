@@ -51,10 +51,7 @@ public class ProfileScreen extends JPanel {
 	private JLabel userPictureL;
 	private JPanel userData;
 	private JPanel buttons;
-	private JScrollPane userContentScrollPlaylists;
-	private JScrollPane userContentScrollAlben;
 	private JScrollPane userContentScrollPosts;
-	private JScrollPane userContentScrollSongs;
 	private JTabbedPane userContent;
 	private JScrollPane playlists;
 	private ProfileAlbenPanel alben;
@@ -194,8 +191,8 @@ public class ProfileScreen extends JPanel {
 		songs = new ProfileSongsPanel(this);
 		
 
-		userContentScrollPlaylists = new JScrollPane(playlists);
-		userContentScrollAlben = new JScrollPane(alben);
+		new JScrollPane(playlists);
+		new JScrollPane(alben);
 		userContentScrollPosts = new JScrollPane(posts);
 		userContentScrollPosts.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		userContent.addTab("Playlists", playlists);
