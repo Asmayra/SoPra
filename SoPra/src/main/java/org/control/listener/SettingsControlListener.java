@@ -15,7 +15,9 @@ import javax.swing.JTextField;
 import org.control.DatabaseControl;
 import org.control.LoginControl;
 import org.control.PasswordControl;
+import org.control.RegControl;
 import org.model.User;
+import org.view.LoginScreen;
 import org.view.screens.Center.SettingsScreen;
 import org.view.screens.Center.SettingsScreen.Attributfelder;
 
@@ -45,10 +47,26 @@ public class SettingsControlListener implements ActionListener{
             SimpleDateFormat sdfToDate = new SimpleDateFormat("dd.MM.yyyy");
             date = sdfToDate.parse(this.settingsScreen.getFieldData(Attributfelder.GEBURTSDATUM));
         } catch (ParseException ex2) {
-            ex2.printStackTrace();
+        	JOptionPane.showMessageDialog(null, "Datum falsches Format", "Fehler", JOptionPane.ERROR_MESSAGE);
+        	ex2.printStackTrace();
             return;
         }
         
+        
+		
+		
+		if(!RegControl.getInstance().checkRegistration(	LoginControl.getInstance().getCurrentUser().getUsername(), 
+														this.settingsScreen.getFieldData(Attributfelder.VORNAME), 
+														this.settingsScreen.getFieldData(Attributfelder.NACHNAME), 
+														this.settingsScreen.getFieldData(Attributfelder.STADT), 
+														this.settingsScreen.getFieldData(Attributfelder.LAND), 
+														date, 
+														this.settingsScreen.getFieldData(Attributfelder.EMAIL)		)	)
+		{
+			JOptionPane.showMessageDialog(null, "Nicht alle Pflichtfehler ausgefüllt", "Fehler", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+		
 		this.benutzer.setFirstname(this.settingsScreen.getFieldData(Attributfelder.VORNAME));
 		this.benutzer.setLastname(this.settingsScreen.getFieldData(Attributfelder.NACHNAME));
 		this.benutzer.setEMail(this.settingsScreen.getFieldData(Attributfelder.EMAIL));
@@ -56,13 +74,16 @@ public class SettingsControlListener implements ActionListener{
 		this.benutzer.setCity(this.settingsScreen.getFieldData(Attributfelder.STADT));
 		this.benutzer.setCountry(this.settingsScreen.getFieldData(Attributfelder.LAND));
 		
-		if(this.settingsScreen.getFieldData(Attributfelder.ALTESPASSWORT).equals("") &&
-				(this.settingsScreen.getFieldData(Attributfelder.NEUESPASSWORT).equals("")) &&
-				(this.settingsScreen.getFieldData(Attributfelder.NEUESPASSWORTWIEDERHOLUNG).equals(""))){
-		} else{
+		if(this.settingsScreen.getFieldData(Attributfelder.ALTESPASSWORT).equals("") ||
+				(this.settingsScreen.getFieldData(Attributfelder.NEUESPASSWORT).equals("")) ||
+				(this.settingsScreen.getFieldData(Attributfelder.NEUESPASSWORTWIEDERHOLUNG).equals("")))
+		{			} 
+		else
+		{
 			if(this.checkPassword() == false){
 				return;
-			} else{
+			} 
+			else{
 				this.benutzer.setPassword(PasswordControl.encodePassword(this.settingsScreen.getFieldData(Attributfelder.NEUESPASSWORT), this.benutzer.getSalt()));
 			}
 		}
