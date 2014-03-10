@@ -45,14 +45,8 @@ public class PlaylistControl {
 	}
 
 
-	public void showPlaylist(int playlistnumber) {
-		//ArrayList<Playlist> playlistList =  (ArrayList<Playlist>) currentUser.getPlaylists();
-			
-		//TEST:
-		PlaylistTest TEST = new PlaylistTest();
-		LinkedList<Playlist> playlistList =  (LinkedList<Playlist>) TEST.playlists;
-		//Current Playlist und ihr iterator werden gesetzt		
-		current = playlistList.get(playlistnumber);
+	public void showPlaylist(int playlistID) {
+		Playlist current = (Playlist) control.load( Playlist.class, playlistID);
 		playlistIterator = current.getSongs().iterator();
 		
 		int tabindex = playlistScreen.getIndexOfTab(current.getPlaylistId());
@@ -64,10 +58,10 @@ public class PlaylistControl {
 	}
 
 
-	public void showAlbum(int albumnumber) {
-		ArrayList<Album> albumList =  (ArrayList<Album>) currentUser.getAlben();
-							
-		Playlist current = albumList.get(albumnumber);
+	public void showAlbum(int albumID) {
+		Album current = (Album) control.load( Album.class, albumID);
+		playlistIterator = current.getSongs().iterator();
+		
 		int tabindex = playlistScreen.getIndexOfTab(current.getPlaylistId());
 		if(tabindex==-1){
 			playlistScreen.addPlaylistTab(current.getName(), new PlaylistSingleScreen(current));

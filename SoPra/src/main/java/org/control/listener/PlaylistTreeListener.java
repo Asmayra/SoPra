@@ -40,14 +40,14 @@ public class PlaylistTreeListener extends MouseAdapter{
 			}
 			else{
 				parentRow = playlisttree.getRowForPath(playlisttree.getSelectionPath().getParentPath());
-				playlisttree.expandRow(parentRow);
-				currentRow = playlisttree.getRowForPath(playlisttree.getSelectionPath());
 				if(parentRow!=-1){
 					if(parentRow==0){//Playlist ausgewählt
-						control.showPlaylist(currentRow);//TODO +1 da sonst die erste Playlist die favoritenliste sein muss
+						Playlist currentPlaylist = (Playlist) ((DefaultMutableTreeNode)playlisttree.getLastSelectedPathComponent()).getUserObject();
+						control.showPlaylist(currentPlaylist.getPlaylistId());//TODO +1 da sonst die erste Playlist die favoritenliste sein muss
 					}
 					else{//Album
-						control.showAlbum(currentRow-parentRow);//TODO s.o.
+						Album currentAlbum = (Album) ((DefaultMutableTreeNode)playlisttree.getLastSelectedPathComponent()).getUserObject();
+						control.showAlbum(currentAlbum.getPlaylistId());//TODO s.o.
 					}
 				}
 			}
