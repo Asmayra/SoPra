@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 
 import javax.swing.JTree;
 import javax.swing.event.TreeModelEvent;
@@ -22,6 +23,7 @@ import org.view.ContextMenu;
 
 public class PlaylistTreeListener extends MouseAdapter{
 
+	private Playlist playlistEdit;
 	PlaylistControl control = PlaylistControl.getInstance();
 	DatabaseControl databaseControl = DatabaseControl.getInstance();
 	JTree playlisttree;
@@ -34,7 +36,7 @@ public class PlaylistTreeListener extends MouseAdapter{
 		playlisttree=(JTree) e.getComponent();
 		
 		if(e.getButton()==MouseEvent.BUTTON1){
-		
+			try{
 			parentRow = playlisttree.getRowForPath(playlisttree.getSelectionPath().getParentPath());
 			if(parentRow!=-1){
 				if(parentRow==0){//Playlist ausgewählt
@@ -45,7 +47,7 @@ public class PlaylistTreeListener extends MouseAdapter{
 					Album currentAlbum = (Album) ((DefaultMutableTreeNode)playlisttree.getLastSelectedPathComponent()).getUserObject();
 					control.showAlbum(currentAlbum.getPlaylistId());//TODO s.o.
 				}
-			}
+			}}catch(NullPointerException npe){}
 		}
 		else{
 			maybeShowPopup(e);
@@ -110,17 +112,26 @@ public class PlaylistTreeListener extends MouseAdapter{
 				}catch(NullPointerException npe){}
 			}
 			else if(arg0.getActionCommand().equals("Bearbeiten")){
+				playlistEdit = (Playlist)((DefaultMutableTreeNode)playlisttree.getLastSelectedPathComponent()).getUserObject();
 				playlisttree.startEditingAtPath(playlisttree.getSelectionPath());
 			}
 			else if(arg0.getActionCommand().equals("Neue Playlist")){
 				//erstellen der Playlist
-				Playlist newPlaylist = new Playlist();
+				Playlist newPlaylist = new Playlist(currentUser);
 				newPlaylist.setName("Neue Playlist");
 				DefaultMutableTreeNode treeNode = new DefaultMutableTreeNode(newPlaylist);
 				((DefaultMutableTreeNode)((DefaultMutableTreeNode)playlisttree.getModel().getRoot()).getFirstChild()).add(treeNode);
 				playlisttree.updateUI();
 				//fügt die Playlist dem Nutzer hinzu
-				currentUser.getPlaylists().add(newPlaylist);
+				currentUser.addPlaylist(newPlaylist);
+				try {
+					databaseControl.save(newPlaylist);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				databaseControl.update(currentUser);
+				
 			}
 		}
     	
@@ -135,14 +146,17 @@ public class PlaylistTreeListener extends MouseAdapter{
 
 		public void treeNodesChanged(TreeModelEvent e) {
 			DefaultMutableTreeNode current = (DefaultMutableTreeNode) playlisttree.getLastSelectedPathComponent();
-			int parentRow = playlisttree.getRowForPath(playlisttree.getSelectionPath().getParentPath());
-			playlisttree.expandRow(parentRow);
-			int currentRow = playlisttree.getRowForPath(playlisttree.getSelectionPath());
-			Playlist currentParentPlaylist = (Playlist) ((DefaultMutableTreeNode) current.getParent()).getUserObject();
-			Playlist neuePlaylist = new Playlist();
-			neuePlaylist.setName(current.getUserObject().toString());
-			current.setUserObject(neuePlaylist);
+//			int parentRow = playlisttree.getRowForPath(playlisttree.getSelectionPath().getParentPath());
+//			playlisttree.expandRow(parentRow);
+//			int currentRow = playlisttree.getRowForPath(playlisttree.getSelectionPath());
+//			Playlist currentParentPlaylist = (Playlist) ((DefaultMutableTreeNode) current.getParent()).getUserObject();
+//			Playlist neuePlaylist = new Playlist();
+//			neuePlaylist.setName(current.getUserObject().toString());
+//			current.setUserObject(neuePlaylist);
 			
+			playlistEdit.setName(current.getUserObject().toString());
+			current.setUserObject(playlistEdit);
+			databaseControl.update(playlistEdit);
 		}
 
 		public void treeNodesInserted(TreeModelEvent e) {

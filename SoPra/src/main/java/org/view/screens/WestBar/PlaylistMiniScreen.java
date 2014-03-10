@@ -255,6 +255,7 @@ public class PlaylistMiniScreen extends JPanel{
 	public void updateMiniScreen(){
 		playlists.removeAll();
 		createTree();
+		playlists.updateUI();
 	}
 
 }
