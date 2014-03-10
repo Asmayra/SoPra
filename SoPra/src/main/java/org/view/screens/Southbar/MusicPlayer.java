@@ -1,4 +1,4 @@
-package org.view.screens.Southbar;
+ package org.view.screens.Southbar;
 
 import javax.swing.*;
 
@@ -34,10 +34,16 @@ public class MusicPlayer extends JPanel{
 	private JLabel Volume_Label =new JLabel("50%");
 	private JLabel Label =new JLabel("Placeholder 4 seek bar");
 
-	private BasicPlayer player = new BasicPlayer();
+	private static BasicPlayer player = new BasicPlayer();
 	private JProgressBar progressBar = new JProgressBar();
 	private static File selected_file;
 	private double Music_gain = 0.5;
+	
+	
+	public static BasicPlayer getPlayer(){
+		return player;
+	}
+	
 	
 	/*
 	 * Creates Interface for MusicPlayer in Southbar

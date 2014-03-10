@@ -8,6 +8,9 @@ import java.util.LinkedList;
 import java.util.ListIterator;
 import java.util.Set;
 
+import javazoom.jlgui.basicplayer.BasicPlayerException;
+
+import org.control.listener.PlayBTNListener;
 import org.model.Album;
 import org.model.Playlist;
 import org.model.Song;
@@ -16,6 +19,7 @@ import org.testpackage.PlaylistTest;
 import org.view.MainScreen;
 import org.view.screens.Center.PlaylistExtendedScreen;
 import org.view.screens.Center.PlaylistSingleScreen;
+import org.view.screens.Southbar.MusicPlayer;
 import org.view.screens.WestBar.SongTicker;
 /**
  * 
@@ -114,6 +118,38 @@ public class PlaylistControl {
 	public static void setCurrentPlaylist(Playlist playlist){
 		current = playlist;
 		playlistIterator = (ListIterator<Song>) current.getSongs().listIterator();
+	}
+	/**
+	 * Sucht ein bestimmtes Lied aus der playlist und setzt es als aktuell.<br>
+	 * Es passt den Iterator an!
+	 * @param singId
+	 */
+	public static void searchForSong(int songId){
+		while(playlistIterator.hasPrevious()){
+			playlistIterator.previous();	//Laufe zurück zum Anfang
+		}
+		boolean found = false;
+		Song result;
+		while(playlistIterator.hasNext()&&!found){
+			result = playlistIterator.next();
+			if(result.getSongId() == songId){
+				found=true;
+				System.out.println("SongFound");
+				File file = new File(result.getPath());
+				MusicPlayer.setCurrentSong(file);
+				SongTicker.setTickertext(result.getInterpret()+" - "+ result.getTitle()+"       ");
+				SongTicker.getInstance().start();
+				try {
+					MusicPlayer.getPlayer().open(file);
+					MusicPlayer.getPlayer().play();
+				} catch (BasicPlayerException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}
+		}
+		
 	}
 
 	public void savePlaylists(){
