@@ -33,9 +33,9 @@ public class Song implements Comparable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int songId;
-	private String interpret;
-	private String title;
-	private String location;
+	private String interpret = "";
+	private String title = "";
+	private String location = "";
 
 	@ManyToMany (cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Set<Playlist> playlists = new TreeSet<Playlist>();
@@ -67,7 +67,7 @@ public class Song implements Comparable{
 	public Song(String interpret, String title){
 		this.interpret = interpret;
 		this.title = title;
-		location = null;
+		location = "";
 		vrgRating = 0;
 		ratingCount = 0;
 		album = null;

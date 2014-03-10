@@ -15,6 +15,7 @@ import org.view.LoginScreen;
  *
  */
 public class Main {
+	public static boolean localDB = false;
 	public static boolean testDB = false;
 	
 	public static void main(String[] args){

@@ -75,8 +75,8 @@ public class PlaylistControl {
 		int tabindex = playlistScreen.getIndexOfTab(favorites.getPlaylistId());
 		if(tabindex==-1){
 			Playlist favos = (Playlist) control.load(Playlist.class, favorites.getPlaylistId());
-			playlistIterator = (ListIterator<Song>) favorites.getSongs().listIterator();
-			playlistScreen.addPlaylistTab("Favoriten", new PlaylistSingleScreen(favorites));
+			playlistIterator = (ListIterator<Song>) favos.getSongs().listIterator();
+			playlistScreen.addPlaylistTab("Favoriten", new PlaylistSingleScreen(favos));
 		}
 		playlistScreen.setTabByIndex(tabindex);
 		MainScreen.getInstance().showPlaylistExtendedScreen(playlistScreen);
@@ -109,10 +109,6 @@ public class PlaylistControl {
 		//TODO Schreibe aktuelle Userplaylists in die Datenbank
 	}
 	
-	public void removeSong(Playlist playlist,int songnr){
-		playlist.deleteSong(playlist.getSongs().get(songnr));
-		savePlaylists();
-	}
 	
 	public void updatePlaylistNames(){
 		ArrayList<Playlist> playlists = (ArrayList<Playlist>) LoginControl.getInstance().getCurrentUser().getPlaylists();

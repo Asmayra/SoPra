@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.Locale;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,6 +15,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.CascadeType;
 /**
  * Entity for Messages
  * @author Philipp, Michael Pfennings, Mattias Schoenke
@@ -25,12 +27,10 @@ public class Message implements Comparable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)	
 	private int messageId;
-	@OneToOne
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private User sender;
-//	@ManyToOne
-//	private User[] recipient;
-	private String content;
-	private String subject;
+	private String content = "";
+	private String subject = "";
 	private Date date;
 	
 	public User getSender() {

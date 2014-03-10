@@ -15,8 +15,10 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
 import org.control.LoadImageControl;
 
 /**
@@ -31,16 +33,16 @@ import org.control.LoadImageControl;
 public class User implements Comparable {
 	@Id
 	private String username;
-	private String password;
-	private String firstname;
-	private String lastname;
+	private String password = "";
+	private String firstname = "";
+	private String lastname = "";
 	private Date dob;
-	private String city;
-	private String country;
-	private String eMail;
-	private String salt;
+	private String city = "";
+	private String country = "";
+	private String eMail = "";
+	private String salt = "";
 	private String rights = "StandardUser"; // Admin, Artist, LabelManager
-	private String imagePath;
+	private String imagePath = "";
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable(name = "FOLLOW_TABLE")
 	private Set<User> following = new TreeSet<User>();
@@ -58,8 +60,31 @@ public class User implements Comparable {
 	private Set<Message> messages = new TreeSet<Message>();
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Set<Song> ownSongs = new TreeSet<Song>();
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinTable(name="ARTISTLABEL_Table")
+	private Set<Label> aLabels = new TreeSet<Label>();
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinTable(name="MANAGERLABEL_Table")
+	private Label mLabel;
 
 	private boolean banned = false;
+
+	
+	public Set<Label> getaLabels() {
+		return aLabels;
+	}
+
+	public void setaLabels(Set<Label> aLabels) {
+		this.aLabels = aLabels;
+	}
+
+	public Label getmLabel() {
+		return mLabel;
+	}
+
+	public void setmLabel(Label mLabel) {
+		this.mLabel = mLabel;
+	}
 
 	public User() {
 		System.out.println("Schweinebraten!");

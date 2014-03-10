@@ -39,7 +39,7 @@ public class Playlist implements Comparable {
 	private User owner;
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Set<Song> songs = new TreeSet<Song>();
-	private String name;
+	private String name = "";
 
 	public Playlist() {
 
