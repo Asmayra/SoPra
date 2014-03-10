@@ -58,8 +58,8 @@ public class User implements Comparable {
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	// Set Eager,because it's loaded at the Homescreen
 	private Set<Post> posts = new TreeSet<Post>();
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	private Set<Message> messages = new TreeSet<Message>();
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private Set<Message> messages = new HashSet<Message>();
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Set<Song> ownSongs = new TreeSet<Song>();
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
