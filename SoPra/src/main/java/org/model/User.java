@@ -45,20 +45,20 @@ public class User implements Comparable {
 	private String salt = "";
 	private String rights = "StandardUser"; // Admin, Artist, LabelManager
 	private String imagePath = "";
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToMany(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
 	@JoinTable(name = "FOLLOW_TABLE")
 	private Set<User> following = new TreeSet<User>();
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Set<Playlist> playlists = new TreeSet<Playlist>();
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Set<Album> alben = new TreeSet<Album>();
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToMany(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
 	@JoinTable(name = "IGNORE_TABLE")
 	private Set<User> ignoring = new TreeSet<User>();
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	// Set Eager,because it's loaded at the Homescreen
 	private Set<Post> posts = new TreeSet<Post>();
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
 	private Set<Message> messages = new TreeSet<Message>();
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Set<Song> ownSongs = new TreeSet<Song>();
