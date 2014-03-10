@@ -16,6 +16,7 @@ import org.testpackage.PlaylistTest;
 import org.view.MainScreen;
 import org.view.screens.Center.PlaylistExtendedScreen;
 import org.view.screens.Center.PlaylistSingleScreen;
+import org.view.screens.WestBar.SongTicker;
 /**
  * 
  * @author Philipp, Tim, Max
@@ -88,7 +89,10 @@ public class PlaylistControl {
 	public static File nextSong(){	
 		File file = null;
 		if(playlistIterator.hasNext()){
-			file = new File(playlistIterator.next().getPath());
+			Song song = playlistIterator.next();
+			file = new File(song.getPath());
+			SongTicker.setTickertext(song.getInterpret()+" - "+ song.getTitle()+"       ");
+			SongTicker.getInstance().start();
 		}	
 		return file;	
 	}

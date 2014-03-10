@@ -15,15 +15,23 @@ import javax.swing.Timer;
  */
 public class SongTicker extends JPanel implements ActionListener{
 	
-	private String tickertext = "";
-	private static final int RATE = 12;
+	private static String tickertext = "";
+	private static final int RATE = 5;
     private Timer timer = new Timer(1000/RATE, this);
     private JLabel label = new JLabel();
-    private int numberofletters;
-    private int maxnumberofletters = 15;
+    private static int numberofletters;
+    private static int maxnumberofletters = 30;
     private int index;
+    private static SongTicker instance = null;
+    
+    public static SongTicker getInstance(){
+    	if(instance == null){
+    		instance = new SongTicker();
+    	}
+    	return instance;
+    }
 
-    public SongTicker() {
+    private SongTicker() {
     	this.numberofletters = Math.min(maxnumberofletters, tickertext.length());
         StringBuilder sb = new StringBuilder(numberofletters);
         for (int i = 0; i < numberofletters; i++) {
@@ -51,9 +59,9 @@ public class SongTicker extends JPanel implements ActionListener{
 		return tickertext;
 	}
 
-	public void setTickertext(String tickertextinput) {
-		this.numberofletters = Math.min(maxnumberofletters, tickertextinput.length());
-		this.tickertext = tickertextinput+"  "+tickertextinput.substring(0, numberofletters);
+	public static void setTickertext(String tickertextinput) {
+		numberofletters = Math.min(maxnumberofletters, tickertextinput.length());
+		tickertext = tickertextinput+"  "+tickertextinput.substring(0, numberofletters);
 	}
 
 	/**
