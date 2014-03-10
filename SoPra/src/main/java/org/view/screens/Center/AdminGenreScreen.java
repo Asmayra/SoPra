@@ -7,11 +7,7 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.swing.JPanel;
-import javax.swing.JTable;
 import javax.swing.JTree;
-import javax.swing.event.TreeSelectionEvent;
-import javax.swing.event.TreeSelectionListener;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
@@ -19,8 +15,6 @@ import javax.swing.tree.TreePath;
 import org.control.DatabaseControl;
 import org.control.listener.AdminGenreListener;
 import org.model.Genre;
-import org.model.Playlist;
-
 /**
  * @author Max Küper, Tim Michels
  */

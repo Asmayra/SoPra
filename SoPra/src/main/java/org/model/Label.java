@@ -31,9 +31,9 @@ public class Label {
 	@GeneratedValue(strategy = GenerationType.AUTO)	
 	private int LabelId;
 	private String name = "";
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
 	private User manager;
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
 	@JoinTable(name="ARTIST_TABLE")
 	private Set<User> artists = new HashSet<User>();
 

@@ -7,7 +7,7 @@ import org.view.MainScreen;
 import org.view.screens.Center.AdminGenreScreen;
 
 /**
- * 
+ * Listener für den Genrebutton im Adminmenü
  * @author Max, Tim
  *
  */

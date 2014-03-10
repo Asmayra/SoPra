@@ -45,11 +45,11 @@ public class createTestData {
 		User usrl = (User) DatabaseControl.getInstance().load(User.class, "l");
 		User usrk = (User) DatabaseControl.getInstance().load(User.class, "k");
 		
+		label.setManager(usrl);
 		label.addArtist(usrk);
-		label.addManager(usrl);
 		
-		usrk.getaLabels().add(label);
-		usrl.setmLabel(label);
+		usrk.setLabel(label);
+		usrl.setLabel(label);
 		
 		try {
 			DatabaseControl.getInstance().save(label);
@@ -135,9 +135,8 @@ public class createTestData {
 		message.setSubject("Lorem ipsum");
 		
 		try {
-			
 			DatabaseControl.getInstance().save(message);
-		} catch (IOException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return message;
@@ -210,13 +209,11 @@ public class createTestData {
 		
 		artist.addMessage(createMessage(standard));
 		DatabaseControl.getInstance().update(artist);
-		
 		///////////////////////////////////////////////////////////
 		
 		User labelmanager = createSingleUser("l", "JustinLabel@gmail.com", "New York", "USA", "23.06.1956", "Justin", "Label", "placeholder.jpg", "l", "LabelManager");
-		Message msg = createMessage(artist);
-		labelmanager.addMessage(msg);
-		//labelmanager.addMessage(createMessage(artist));
+
+		labelmanager.addMessage(createMessage(artist));
 		
 		DatabaseControl.getInstance().update(labelmanager);
 		
@@ -224,7 +221,7 @@ public class createTestData {
 		
 		User artist1 = createSingleUser("k2", "SamanthaArtist@gmail.com", "Tokio", "Japan", "27.12.2008", "Samantha", "Artist", "placeholder.jpg", "k2", "Artist");
 	
-		/*
+		
 		artist1.addOwnSong(this.createSong());
 		artist1.addOwnSong(this.createSong());
 		artist1.addFavorite(this.createSong());
@@ -233,7 +230,7 @@ public class createTestData {
 		artist1.addAlben(this.createAlbum(artist1));
 		artist1.addMessage(createMessage(artist));
 		DatabaseControl.getInstance().update(artist1);
-		*/
+		
 	}
 	
 }

@@ -29,7 +29,7 @@ public class Genre implements Comparable{
 	@GeneratedValue(strategy = GenerationType.AUTO)	
 	private int genreId;
 	private String name = "";
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
 	private Set<Genre> subGenres;
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Genre parent;
@@ -45,6 +45,7 @@ public class Genre implements Comparable{
 	public void setParent(Genre parent) {
 		this.parent = parent;
 	}
+
 
 	public String getName() {
 		return name;
