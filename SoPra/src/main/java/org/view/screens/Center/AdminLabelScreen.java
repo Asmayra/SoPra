@@ -1,6 +1,8 @@
 package org.view.screens.Center;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.util.List;
 
@@ -13,6 +15,7 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 import org.control.DatabaseControl;
+import org.control.listener.AdminLabelScreenAddNewArtistButtonListener;
 import org.control.listener.AdminLabelScreenCreateNewLabelButtonListener;
 import org.control.listener.AdminLabelScreenDeleteLabelButtonListener;
 import org.model.Label;
@@ -26,10 +29,11 @@ public class AdminLabelScreen extends JPanel {
 	
 	private static AdminLabelScreen instance = null;
 	
-	private JButton createNewLabel, deleteLabel;
+	private JButton createNewLabel, deleteLabel, addNewArtist;
 	private JTable labelTable;
 	private DefaultTableModel model;
-	private JTextField nameTF, managerTF;
+	private JTextField nameTF, managerTF, newArtistTF;
+	
 	
 	private AdminLabelScreen(){
 		initGui();
@@ -84,9 +88,20 @@ public class AdminLabelScreen extends JPanel {
 		model.addColumn("Labelmanager");
 		tablePanel.add(labelTable,BorderLayout.CENTER);
 		
+		JPanel buttonPanel = new JPanel(new FlowLayout());
 		deleteLabel = new JButton("Löschen");
 		deleteLabel.addActionListener(new AdminLabelScreenDeleteLabelButtonListener());
-		tablePanel.add(deleteLabel,BorderLayout.SOUTH);
+		buttonPanel.add(deleteLabel);
+		
+		addNewArtist = new JButton("Künstler hinzufügen");
+		addNewArtist.addActionListener(new AdminLabelScreenAddNewArtistButtonListener());
+		buttonPanel.add(addNewArtist);
+		
+		newArtistTF = new JTextField();
+		newArtistTF.setPreferredSize(new Dimension(100,30));
+		buttonPanel.add(newArtistTF);
+		
+		tablePanel.add(buttonPanel,BorderLayout.SOUTH);
 		
 		return tablePanel;
 	}
@@ -97,7 +112,8 @@ public class AdminLabelScreen extends JPanel {
 		model.setRowCount(0);
 		
 		for (Label l: labelList){
-			if( l.getManager() != null && l.getManager().getLabel() != null && l.getManager().getLabel().equals(l) )
+			if( l.getManager() != null && l.getManager().getRights().equals("LabelManager") 
+					&& l.getManager().getLabel() != null && l.getManager().getLabel().equals(l) )
 			{
 				temp[0] = l.getName();
 				temp[1] = l.getManager().getUsername();
@@ -136,6 +152,10 @@ public class AdminLabelScreen extends JPanel {
 
 	public void setManagerTF(String managerTF) {
 		this.managerTF.setText(managerTF);
+	}
+	
+	public String getNewArtistTF(){
+		return newArtistTF.getText();
 	}
 	
 }

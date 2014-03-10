@@ -13,7 +13,6 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import org.control.LoginControl;
-import org.control.listener.LabelScreenApplyButtonListener;
 import org.control.listener.LabelScreenArtistDeleteButtonListener;
 import org.model.Label;
 import org.model.User;
@@ -52,12 +51,7 @@ public class LabelScreen extends JPanel {
 		JLabel labelLabel = new JLabel(currentLabel.getName() + "                  Manager: " + currentLabel.getManager().getUsername());
 		headerPanel.add(labelLabel,  BorderLayout.NORTH);
 		
-		if (LoginControl.getInstance().getCurrentUser().getRights().equals("Artist")){
-			applyButton = new JButton("Bewerben");
-			applyButton.addActionListener(new LabelScreenApplyButtonListener());
-			headerPanel.add(applyButton, BorderLayout.EAST);
-		}
-			
+		
 		return headerPanel;
 	}
 	
