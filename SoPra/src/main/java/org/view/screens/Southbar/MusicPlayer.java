@@ -15,6 +15,7 @@ import org.control.listener.ForwardBTNListener;
 import org.control.listener.PlayBTNListener;
 import org.control.listener.PlayerListener;
 import org.control.listener.StopBTNListener;
+import org.omg.CORBA.Current;
 
 import javazoom.jlgui.basicplayer.*;
 
@@ -44,6 +45,9 @@ public class MusicPlayer extends JPanel{
 	public MusicPlayer(){
 		//Makes event listener for our MusicPlayer
 		player.addBasicPlayerListener(new PlayerListener(this));
+		//Initializes the Current Song as the first Song from favorites
+		MusicPlayer.setCurrentSong(PlaylistControl.nextSong());
+		System.out.println("Aktuelles lied: "+MusicPlayer.getCurrentSong().getName());
 		
 		this.setLayout(new GridBagLayout());
 		gbc.insets=new Insets(2,2,2,2);
@@ -91,18 +95,6 @@ public class MusicPlayer extends JPanel{
 				} catch (BasicPlayerException e) {
 					e.printStackTrace();
 				}
-			}
-		});
-		
-		
-		/**
-		 * !!!!!!!!!!!Muss letztendlich gelöscht werden!!!!!!!!!
-		 */
-		btnSelectFile.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				JFileChooser openFile = new JFileChooser();
-				openFile.showOpenDialog(null); 
-				MusicPlayer.setCurrentSong( openFile.getSelectedFile()); 
 			}
 		});
 		

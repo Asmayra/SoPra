@@ -27,7 +27,7 @@ public class PlaylistControl {
 	private static PlaylistControl instance;
 	private PlaylistExtendedScreen playlistScreen = PlaylistExtendedScreen.getInstance();
 	private static Playlist current = LoginControl.getInstance().getCurrentUser().getFavorites();
-	private static ListIterator<Song> playlistIterator;
+	private static ListIterator<Song> playlistIterator = current.getSongs().listIterator();
 	private String[] playlistNames;
 	private DatabaseControl control = DatabaseControl.getInstance();	
 	
@@ -81,18 +81,25 @@ public class PlaylistControl {
 		playlistScreen.setTabByIndex(tabindex);
 		MainScreen.getInstance().showPlaylistExtendedScreen(playlistScreen);
 	}
+	/**
+	 * Gibt nächstes Lied aus
+	 * @return Song als File
+	 */
 	public static File nextSong(){	
 		File file = null;
-		while(playlistIterator.hasNext()){
+		if(playlistIterator.hasNext()){
 			file = new File(playlistIterator.next().getPath());
 		}	
 		return file;	
 	}
+	/**
+	 * gibt vorheriges Leid aus
+	 * @return Song als File
+	 */
 	public static File prevSong(){	
-		File file = null;
-		
-		while(playlistIterator.hasPrevious()){
-			file = new File(playlistIterator.next().getPath());
+		File file = null;	
+		if(playlistIterator.hasPrevious()){
+			file = new File(playlistIterator.previous().getPath());
 		}	
 		return file;	
 	}
