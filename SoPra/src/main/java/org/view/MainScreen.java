@@ -66,6 +66,14 @@ public class MainScreen extends JFrame {
 		return instance;
 	}
 	
+	/**
+	 * Zerstört den Singleton
+	 */
+	public static void destroy()
+	{
+		instance = null;
+	}
+	
 	private MainScreen() {
 		this.setLayout(new BorderLayout(5, 0));
 		this.setMinimumSize(new Dimension(MIN_WIDTH, MIN_HEIGHT));

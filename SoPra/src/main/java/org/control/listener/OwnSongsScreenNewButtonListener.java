@@ -6,17 +6,21 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import org.control.LoginControl;
 import org.control.PathControl;
 import org.control.UploadControl;
 import org.view.LoginScreen;
+import org.view.screens.Center.OwnSongsScreen;
 
 public class OwnSongsScreenNewButtonListener implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		JFileChooser openFile = new JFileChooser();
+		FileNameExtensionFilter filter = new FileNameExtensionFilter("Songs", "mp3");
+		openFile.setFileFilter(filter);
 		openFile.showOpenDialog(null);
 		File selected_file = openFile.getSelectedFile();
 		
@@ -26,6 +30,8 @@ public class OwnSongsScreenNewButtonListener implements ActionListener {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+		
+		OwnSongsScreen.getInstance().updateTable();
 	}
 
 }

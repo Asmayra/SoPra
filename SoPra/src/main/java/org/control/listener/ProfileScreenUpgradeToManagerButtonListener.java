@@ -7,22 +7,21 @@ import org.control.DatabaseControl;
 import org.control.LoginControl;
 import org.model.User;
 
-public class ProfileScreenBannButtonListener implements ActionListener {
+public class ProfileScreenUpgradeToManagerButtonListener implements
+		ActionListener {
 	
 	private User selectedUser;
 
-	public ProfileScreenBannButtonListener(User selectedUser){
+	public ProfileScreenUpgradeToManagerButtonListener(User selectedUser){
 		this.selectedUser = selectedUser;
 	}
-	
+
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		
-		if (selectedUser.getBanned() == true) 
-			selectedUser.setBanned(false);
-		else selectedUser.setBanned(true);
+	public void actionPerformed(ActionEvent e) {
+		selectedUser.setRights("LabelManager");
 		
 		DatabaseControl.getInstance().update(selectedUser);
+
 	}
 
 }

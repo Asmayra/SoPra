@@ -23,34 +23,19 @@ public class OwnSongsScreenDeleteButtonListener implements ActionListener {
 		
 		currentUser.removeOwnSong(songList.get(delRow));
 		
-//		currentUser.removeAllSongs();
 		OwnSongsScreen.getInstance().removeRow(delRow);
+
+		DatabaseControl.getInstance().update(currentUser);
+		DatabaseControl.getInstance().update(songList.get(delRow));
+		DatabaseControl.getInstance().delete(songList.get(delRow));
 		
-//		Session session = DatabaseControl.getSessionFactory().openSession();
-//		
-//		session.beginTransaction();
-//		
-//		session.delete(songList.get(delRow));
-//		
-//		session.update(currentUser);
-//		
-//		session.getTransaction().commit();
-//		
-//		session.close();
-//		
-	
-//		DatabaseControl.getInstance().update(currentUser);
-//		DatabaseControl.getInstance().update(songList.get(delRow));
-//		DatabaseControl.getInstance().delete(songList.get(delRow));
-//		
-//		try {
-//			Song toDel = songList.get(delRow);
-//			UploadControl.deleteFile( toDel.getPath().substring(0, toDel.getPath().lastIndexOf(".")), 
-//					toDel.getPath().substring(toDel.getPath().lastIndexOf("."), toDel.getPath().length()));
-//		} catch (IOException e1) {
-//			// TODO Auto-generated catch block
-//			e1.printStackTrace();
-//		}
+		try {
+			Song toDel = songList.get(delRow);
+			UploadControl.deleteFile( toDel.getPath() );
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		
 	}
 

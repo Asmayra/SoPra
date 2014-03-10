@@ -31,30 +31,34 @@ public class PlaylistTreeListener extends MouseAdapter{
 	}
 	
 	public void mouseClicked(MouseEvent e) {
+		playlisttree=(JTree) e.getComponent();
 		
 		if(e.getButton()==MouseEvent.BUTTON1){
-			 playlisttree=(JTree) e.getComponent();
+			
+			if(e.getClickCount()==2){
+				playlisttree.startEditingAtPath(playlisttree.getSelectionPath());
+			}
+			else{
 				parentRow = playlisttree.getRowForPath(playlisttree.getSelectionPath().getParentPath());
-				playlisttree.expandRow(parentRow);
-				currentRow = playlisttree.getRowForPath(playlisttree.getSelectionPath());
 				if(parentRow!=-1){
 					if(parentRow==0){//Playlist ausgewählt
-						control.showPlaylist(currentRow);//TODO +1 da sonst die erste Playlist die favoritenliste sein muss
+						Playlist currentPlaylist = (Playlist) ((DefaultMutableTreeNode)playlisttree.getLastSelectedPathComponent()).getUserObject();
+						control.showPlaylist(currentPlaylist.getPlaylistId());//TODO +1 da sonst die erste Playlist die favoritenliste sein muss
 					}
 					else{//Album
-						control.showAlbum(currentRow-parentRow);//TODO s.o.
+						Album currentAlbum = (Album) ((DefaultMutableTreeNode)playlisttree.getLastSelectedPathComponent()).getUserObject();
+						control.showAlbum(currentAlbum.getPlaylistId());//TODO s.o.
 					}
 				}
+			}
 		}
-		else if(e.getButton()==MouseEvent.BUTTON3){
+		else{
 			maybeShowPopup(e);
 		}
         
     }
 	private void maybeShowPopup(MouseEvent e) {
     	JTree currentTree = (JTree) e.getSource();
-//    	playlistscreen = (AdminPlaylistScreen) currentTree.getParent();
-    	//DefaultMutableTreeNode selected = (DefaultMutableTreeNode) playlistscreen.getPlaylisttree().getComponentAt(e.getXOnScreen(), e.getYOnScreen());
     	String[] content = {"Löschen","neue Playlist"};
     	ContextMenuListener delete = new ContextMenuListener();
     	ContextMenuListener add = new ContextMenuListener();
@@ -64,11 +68,8 @@ public class PlaylistTreeListener extends MouseAdapter{
     	TreeListener listener = new TreeListener();
     	currentTree.getModel().addTreeModelListener(listener);
     	
-        if (e.isPopupTrigger()) {
-            context.show(e.getComponent(),e.getX(), e.getY());
-            currentTree.setSelectionPath(currentTree.getPathForLocation(e.getX(), e.getY()));
-        }
-        
+        context.show(e.getComponent(),e.getX(), e.getY());
+        currentTree.setSelectionPath(currentTree.getPathForLocation(e.getX(), e.getY()));
     }
 	
 	 /**
@@ -82,29 +83,32 @@ public class PlaylistTreeListener extends MouseAdapter{
 		
 		public void actionPerformed(ActionEvent arg0) {
 			
-			DefaultMutableTreeNode current = (DefaultMutableTreeNode) playlisttree.getLastSelectedPathComponent();
+			
 			User currentUser = LoginControl.getInstance().getCurrentUser();
 			if(arg0.getActionCommand().equals("Löschen")){
-				if(current.isLeaf()){
-					//überprüfen pb Playlist oder Album gelöschte werden soll				
-					if(parentRow==0){
-						Playlist pL = (Playlist)current.getUserObject();
-						//soll die Playliste vom User löschen
-						control.deletePlaylist(pL.getPlaylistId());//TODO vllt +1
-
+				try{
+					DefaultMutableTreeNode current = (DefaultMutableTreeNode) playlisttree.getLastSelectedPathComponent();
+					if(current.isLeaf()){
+						//überprüfen pb Playlist oder Album gelöschte werden soll				
+						if(parentRow==0){
+							Playlist pL = (Playlist)current.getUserObject();
+							//soll die Playliste vom User löschen
+							control.deletePlaylist(pL.getPlaylistId());//TODO vllt +1
+	
+						}
+						else{
+							Album alb = (Album)current.getUserObject();
+							//soll die Playliste vom User löschen
+							control.deletePlaylist(alb.getPlaylistId());//TODO vllt +1
+						}
+	
+						//soll die Playliste aus dem Baum löschen
+						DefaultMutableTreeNode parent = (DefaultMutableTreeNode) current.getParent();
+						parent.remove(parent.getIndex(current));
+						playlisttree.updateUI();
 					}
-					else{
-						Album alb = (Album)current.getUserObject();
-						//soll die Playliste vom User löschen
-						control.deletePlaylist(alb.getPlaylistId());//TODO vllt +1
-					}
-
-					//soll die Playliste aus dem Baum löschen
-					playlisttree.remove(current.getParent().getIndex(current));
-					
 					playlisttree.updateUI();
-				}
-				playlisttree.updateUI();
+				}catch(NullPointerException npe){}
 			}
 			else if(arg0.getActionCommand().equals("neue Playlist")){
 				//erstellen der Playlist

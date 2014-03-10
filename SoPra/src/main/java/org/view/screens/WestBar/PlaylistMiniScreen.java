@@ -89,7 +89,7 @@ public class PlaylistMiniScreen extends JPanel{
 		DefaultMutableTreeNode album =new DefaultMutableTreeNode("Alben");
 		rootUser.add(playlist);
 		rootUser.add(album);
-		
+		currentUser=LoginControl.getInstance().getCurrentUser();
 		ArrayList<Playlist> userPlaylists = (ArrayList<Playlist>) currentUser.getPlaylists();
 		ArrayList<Album> userAlbums = (ArrayList<Album>) currentUser.getAlben();
 		
@@ -168,8 +168,13 @@ public class PlaylistMiniScreen extends JPanel{
 	public void createUserPanel(){
 		user.setLayout(new GridBagLayout());
 		
-		playlists = new JTree(rootUser);//getcurrentUser.getuser.getPlaylists();
-		playlists.addMouseListener(new PlaylistTreeListener());
+		playlists = new JTree(rootUser){
+			@Override
+			public boolean isPathEditable(TreePath path) {
+				if(this.getRowForPath(path.getParentPath())==0){return true;}
+				return false;
+			}
+		};//getcurrentUser.getuser.getPlaylists();
 		//Buttons
 		subscriptions = new JButton("Subscriptions");
 		favorits = new JButton("Favoriten");
@@ -237,14 +242,18 @@ public class PlaylistMiniScreen extends JPanel{
 		createTree();
 		playlists.expandPath(new TreePath(rootUser.getPath()));
 		playlists.setRootVisible(false);
-		
-		
+		playlists.addMouseListener(new PlaylistTreeListener());
 		
 		scrollUser = new JScrollPane(user);	
 	}
 	
 	public JTree getPlaylists(){
 		return playlists;
+	}
+	
+	public void updateMiniScreen(){
+		playlists.removeAll();
+		createTree();
 	}
 
 }

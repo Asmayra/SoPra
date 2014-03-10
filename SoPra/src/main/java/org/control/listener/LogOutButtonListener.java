@@ -13,7 +13,7 @@ public class LogOutButtonListener implements ActionListener  {
 		LoginScreen login = LoginScreen.getInstance();
 		login.setVisible(true);
 		MainScreen.getInstance().dispose();
-		
+		MainScreen.destroy();
 	}
 
 }
