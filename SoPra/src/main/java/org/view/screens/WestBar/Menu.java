@@ -31,7 +31,7 @@ public class Menu extends JPanel{
 	private JButton mail = new JButton(dummyIcon);
 	private JButton logOut = new JButton(dummyIcon);
 	private JButton setting = new JButton(dummyIcon);
-	private JButton avatar = new JButton(LoadImageControl.loadImageIcon(LoginControl.getInstance().getCurrentUser().getImagePath()));//benutzerbild x
+	private JButton avatar = new JButton(LoadImageControl.loadImageIcon(LoginControl.getInstance().getCurrentUser().getImagePath(), LoginControl.getInstance().getCurrentUser()));//benutzerbild x
 	/**
 	 * erstllt ein JPanel mit Knöpfen und einer kleinen Version des Profilbilds
 	 */

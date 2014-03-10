@@ -7,6 +7,8 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
+import org.model.User;
+
 /**
  * 
  * @author Tim Lange
@@ -26,8 +28,8 @@ public class LoadImageControl {
 	 * @pre Imagepath is valid
 	 * @post Image is returned
 	 */
-	public static ImageIcon loadImageIcon(String imagePath){
-		ImageIcon imageIcon = new ImageIcon(loadBufferedImage(imagePath));
+	public static ImageIcon loadImageIcon(String imagePath, User user){
+		ImageIcon imageIcon = new ImageIcon(loadBufferedImage(imagePath, user));
 		return imageIcon;
 	}
 	
@@ -38,14 +40,14 @@ public class LoadImageControl {
 	 * @pre Imagepath is valid
 	 * @post Image is returned
 	 */
-	public static BufferedImage loadBufferedImage(String imagePath){
+	public static BufferedImage loadBufferedImage(String imagePath, User user){
 		BufferedImage image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_RGB);
 		try {
 			if(imagePath == null || imagePath == ""){
 				image = ImageIO.read(ClassLoader.getSystemClassLoader().getResource("placeholder.jpg"));
 			} else{
 				String filepath = PathControl.getInstance().getRoot() + File.separator
-						+ "Bilder" + File.separator + LoginControl.getInstance().getCurrentUser().getUsername() + File.separator + imagePath;
+						+ "Bilder" + File.separator + user.getUsername() + File.separator + imagePath;
 				System.out.println(filepath);
 				image = ImageIO.read(new File(filepath));
 			}

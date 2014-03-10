@@ -209,7 +209,8 @@ public class User implements Comparable {
 	}
 
 	public BufferedImage getPicture() {
-		return LoadImageControl.loadBufferedImage(this.imagePath);
+		System.out.println("LOADING IMAGE FROM " + imagePath);
+		return LoadImageControl.loadBufferedImage(this.imagePath, this);
 	}
 
 	public String getAge() {

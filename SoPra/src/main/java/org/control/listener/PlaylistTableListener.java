@@ -10,6 +10,7 @@ import org.control.LoginControl;
 import org.model.Playlist;
 import org.model.Song;
 import org.model.User;
+import org.view.screens.WestBar.PlaylistMiniScreen;
 
 public class PlaylistTableListener implements TableModelListener {
 
@@ -26,12 +27,14 @@ public class PlaylistTableListener implements TableModelListener {
 		if ((boolean) favor) {
 			if (name.equals("Favorites")) {
 				current.addPlaylist(Playlist.copyFriendFavorites(current, selected));
+				PlaylistMiniScreen.getInstance().updateMiniScreen();
 				//DatabaseControl.getInstance().update(current);
 			} else {
 				Playlist copy = new Playlist(current);
 				copy.setSongs(selected.getSongs());
 				copy.setName(selected.getName());
 				current.addPlaylist(copy);
+				PlaylistMiniScreen.getInstance().updateMiniScreen();
 				//DatabaseControl.getInstance().update(current);
 			}
 		} else {
@@ -40,6 +43,7 @@ public class PlaylistTableListener implements TableModelListener {
 				JOptionPane.showMessageDialog(null, "Sie können ihre eigene Favoriten-Playlist nicht entfernen.");
 			} else {
 				current.removePlaylist(selected);
+				PlaylistMiniScreen.getInstance().updateMiniScreen();
 				//DatabaseControl.getInstance().update(current);
 			}
 		}
