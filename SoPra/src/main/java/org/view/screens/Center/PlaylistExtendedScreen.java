@@ -47,6 +47,13 @@ public class PlaylistExtendedScreen extends JPanel{
 		return playlistIDs.indexOf(playlistID);
 	}
 	
+	public void setTabName(int tabIndex, String tabName){
+		if(tabIndex!=-1){
+			tabs.setTitleAt(tabIndex, tabName);
+			tabs.updateUI();
+		}
+	}
+	
 	public void setTabByIndex(int tabIndex){
 		if(tabIndex!=-1){
 			tabs.setSelectedIndex(tabIndex);}

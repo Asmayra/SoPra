@@ -1,6 +1,7 @@
 package org.control.listener;
 
 
+import java.awt.List;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -8,6 +9,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.LinkedList;
 
 import javax.swing.JTable;
 import javax.swing.JTree;
@@ -68,10 +71,13 @@ public class PlaylistSingleScreenListener  extends MouseAdapter{
     	ContextMenuListener delete = new ContextMenuListener();
     	ContextMenuListener[] contentlistener = {delete};
     	String submenuname = "Hinzufügen zu..";
-    	String[] playlistnames = control.getPlaylistNames();
+    	ArrayList<Playlist> playlists = (ArrayList<Playlist>) LoginControl.getInstance().getCurrentUser().getPlaylists();
+    	String[] playlistnames = new String[playlists.size()];
     	SubContextMenuListener[] sublistener = new SubContextMenuListener[playlistnames.length];
     	for (int i = 0; i < sublistener.length; i++) {
-			sublistener[i]=new SubContextMenuListener(i);
+    		Playlist curList = playlists.get(i);
+    		playlistnames[i]=curList.getName();
+			sublistener[i]=new SubContextMenuListener(playlists.get(i).getPlaylistId());
 		}
     	
     	ContextMenu context = new ContextMenu(content, contentlistener, submenuname, playlistnames, sublistener);
@@ -117,15 +123,15 @@ public class PlaylistSingleScreenListener  extends MouseAdapter{
      */
     private class SubContextMenuListener implements ActionListener{
 
-    	private int index;
+    	private int playlistID;
     	
-    	public SubContextMenuListener(int indexOfPlaylist) {
-			this.index=indexOfPlaylist;
+    	public SubContextMenuListener(int playlistID) {
+			this.playlistID=playlistID;
 		}
     	
     	
 		public void actionPerformed(ActionEvent arg0) {
-			Playlist destination = LoginControl.getInstance().getCurrentUser().getPlaylists().get(index);
+			Playlist destination = (Playlist) DatabaseControl.getInstance().load(Playlist.class, playlistID);
 			Song clicked = screen.getPlaylist().getSongs().get(row);
 			destination.addSong(clicked);
 			DatabaseControl.getInstance().update(destination);
