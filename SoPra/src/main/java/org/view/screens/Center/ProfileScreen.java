@@ -27,6 +27,7 @@ import org.control.listener.ProfileScreenUpgradeToArtistButtonListener;
 import org.control.listener.ProfileScreenUpgradeToManagerButtonListener;
 import org.control.listener.ProfileScreenUpgradeToUserButtonListener;
 import org.model.User;
+import org.view.ProfileAlbenPanel;
 import org.view.ProfilePlaylistPanel;
 import org.view.ProfilePostsPanel;
 import org.view.ProfileSongsPanel;
@@ -55,7 +56,7 @@ public class ProfileScreen extends JPanel {
 	private JScrollPane userContentScrollSongs;
 	private JTabbedPane userContent;
 	private JScrollPane playlists;
-	private JPanel alben;
+	private ProfileAlbenPanel alben;
 	private JPanel posts;
 	private JScrollPane songs;
 	private JButton message;
@@ -181,7 +182,7 @@ public class ProfileScreen extends JPanel {
 
 		userContent = new JTabbedPane();
 		playlists = new ProfilePlaylistPanel(userProfile);
-		alben = new JPanel();
+		alben = new ProfileAlbenPanel(userProfile);
 		posts = new ProfilePostsPanel(userProfile);
 		songs = new ProfileSongsPanel(this);
 		
