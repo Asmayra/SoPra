@@ -81,7 +81,7 @@ public class LabelScreen extends JPanel {
 		String[] temp = new String[1];
 		ArrayList<User> artistList = (ArrayList<User>) currentLabel.getArtists();
 		for (User a : artistList){
-			temp[1]= a.getUsername();
+			temp[0]= a.getUsername();
 			artistModel.addRow(temp);
 		}
 	}

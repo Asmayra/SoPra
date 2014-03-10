@@ -7,6 +7,8 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicOptionPaneUI.ButtonActionListener;
@@ -14,6 +16,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
 
+import org.control.DatabaseControl;
 import org.control.LoginControl;
 import org.control.listener.CreateLabelButtonListener;
 import org.control.listener.FavoritButtonListener;
@@ -25,6 +28,7 @@ import org.control.listener.UploadButtonListener;
 import org.control.listener.UploadPageButtonListener;
 import org.model.Album;
 import org.model.Playlist;
+import org.model.Ticket;
 import org.model.User;
 import org.view.screens.Center.PlaylistExtendedScreen;
 /**
@@ -151,34 +155,33 @@ public class PlaylistMiniScreen extends JPanel{
 	private void createAdminTree() {
 		DefaultMutableTreeNode account = new DefaultMutableTreeNode("Account erweitern");
 		DefaultMutableTreeNode complaint =new DefaultMutableTreeNode("Beschwerden");
-		DefaultMutableTreeNode password =new DefaultMutableTreeNode("Passwort vergessen");
 		DefaultMutableTreeNode genre =new DefaultMutableTreeNode("Genreanfrage");
 		DefaultMutableTreeNode other =new DefaultMutableTreeNode("Sonstiges");
 		rootAdmin.add(account);
 		rootAdmin.add(complaint);
-		rootAdmin.add(password);
 		rootAdmin.add(genre);
 		rootAdmin.add(other);
 		DefaultMutableTreeNode dmtn = null;
-		for (int i = 0; i < 2; i++) {//über Liste/Array/Vector von Tickets die man vom Nutzer bekommt
-			dmtn = new DefaultMutableTreeNode("Ich will mehr _"+i); // Name des Tickets
-			account.add(dmtn);
-		}
-		for(int i =0;i< 3;i++){//über Liste/Array/Vector von gefolgten Tickets, die man vom Nutzer bekommt 
-			dmtn = new DefaultMutableTreeNode("du bist doof _"+i); // Name des Tickets 
-			complaint.add(dmtn);
-		}
-		for(int i =0;i< 4;i++){//über Liste/Array/Vector von gefolgten Tickets, die man vom Nutzer bekommt 
-			dmtn = new DefaultMutableTreeNode("HILFE!!! _"+i); // Name des Tickets 
-			password.add(dmtn);
-		}
-		for(int i =0;i< 5;i++){//über Liste/Array/Vector von gefolgten Tickets, die man vom Nutzer bekommt 
-			dmtn = new DefaultMutableTreeNode("Tolle neue Musik _"+i); // Name des Tickets 
-			genre.add(dmtn);
-		}
-		for(int i =0;i< 7;i++){//über Liste/Array/Vector von gefolgten Tickets, die man vom Nutzer bekommt 
-			dmtn = new DefaultMutableTreeNode("Ich weiß nicht weiter _"+i); // Name des Tickets 
-			other.add(dmtn);
+		List<?> tickets;
+		tickets=  DatabaseControl.getInstance().getTableContent("Ticket");
+		//Print out ALL THE TICKETS
+		Iterator<?> it = tickets.iterator();
+		while(it.hasNext()){
+			Ticket curTicket = (Ticket) it.next();
+			dmtn = new DefaultMutableTreeNode(curTicket);
+			if(curTicket.getCategory().equals("Account erweitern")){
+				account.add(dmtn);
+			}
+			else if(curTicket.getCategory().equals("Beschwerden")){
+				complaint.add(dmtn);
+			}
+			else if(curTicket.getCategory().equals("Genreanfrage")){
+				genre.add(dmtn);
+			}
+			else if(curTicket.getCategory().equals("Sonstiges")){
+				other.add(dmtn);
+			}
+			
 		}
 	}
 	/**

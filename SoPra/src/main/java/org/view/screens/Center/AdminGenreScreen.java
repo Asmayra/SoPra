@@ -90,7 +90,7 @@ public class AdminGenreScreen extends JPanel {
 	 * @param topGenre
 	 */
 	private void createNodes(DefaultMutableTreeNode top, Genre topGenre){
-		int numberOfTopSubs = topGenre.getSubGenres().size();
+		try{int numberOfTopSubs = topGenre.getSubGenres().size();
 		DefaultMutableTreeNode[] current = new DefaultMutableTreeNode[numberOfTopSubs];
 		for(int i=0; i<numberOfTopSubs;i++){
 			Genre currentGenre = topGenre.getSubGenres().get(i);
@@ -98,6 +98,7 @@ public class AdminGenreScreen extends JPanel {
 			top.add(current[i]);
 			createNodes(current[i], currentGenre);
 		}
+		}catch(NullPointerException npe){}
 	}
 	
 	/**
