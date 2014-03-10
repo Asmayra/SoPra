@@ -142,6 +142,6 @@ public class Playlist implements Comparable {
 		if (name == null || name.equals("")) {
 			return "no name";
 		}
-		return name;
+		return getName();
 	}
 }
