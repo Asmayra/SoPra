@@ -154,13 +154,6 @@ public class PlaylistTreeListener extends MouseAdapter{
 
 		public void treeNodesChanged(TreeModelEvent e) {
 			DefaultMutableTreeNode current = (DefaultMutableTreeNode) playlisttree.getLastSelectedPathComponent();
-//			int parentRow = playlisttree.getRowForPath(playlisttree.getSelectionPath().getParentPath());
-//			playlisttree.expandRow(parentRow);
-//			int currentRow = playlisttree.getRowForPath(playlisttree.getSelectionPath());
-//			Playlist currentParentPlaylist = (Playlist) ((DefaultMutableTreeNode) current.getParent()).getUserObject();
-//			Playlist neuePlaylist = new Playlist();
-//			neuePlaylist.setName(current.getUserObject().toString());
-//			current.setUserObject(neuePlaylist);
 			
 			playlistEdit.setName(current.getUserObject().toString());
 			current.setUserObject(playlistEdit);
