@@ -9,7 +9,9 @@ import java.awt.event.MouseListener;
 
 import javax.swing.JTextField;
 
+import org.control.DiscoverControl;
 import org.control.LoginControl;
+import org.control.SubscriptionControl;
 import org.view.LoginScreen;
 import org.view.MainScreen;
 
@@ -29,12 +31,16 @@ public class LoginScreenLoginButtonListener implements ActionListener, KeyListen
 		if (LoginControl.getInstance().checkLogin(login.getLoginText(), login.getPassword())){
 			if(LoginControl.getInstance().getCurrentUser().getRights().equals("Admin")){
 				MainScreen.getInstance().setUpAdminLayout();
+				
 			}else{
 				System.out.println("UserLayout aufgesetzt");
 				MainScreen.getInstance().setUpUserLayout();
-				login.resetPassword();
+				DiscoverControl discControl = new DiscoverControl();
+				SubscriptionControl subControl = new SubscriptionControl();
+				
 				
 			}
+			login.resetPassword();
 			login.dispose();
 		}
 		
