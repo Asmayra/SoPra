@@ -43,7 +43,7 @@ public class LabelScreen extends JPanel {
 		updateArtistTable();
 		if (LoginControl.getInstance().getCurrentUser().getRights().equals("Manager")){
 			this.add(initManagerButtons(), BorderLayout.SOUTH);
-			updateManagerTable();
+			
 		}
 	}
 	
@@ -64,34 +64,21 @@ public class LabelScreen extends JPanel {
 	
 	
 	private JComponent initTable(){
-		JPanel tablePanel = new JPanel(new BorderLayout());
+		
 		JScrollPane artistScrollPane = new JScrollPane();
 		artistTable = new JTable(artistModel);
 		artistModel.addColumn("Name");
 		artistScrollPane.add(artistTable);
-		tablePanel.add(artistScrollPane, BorderLayout.NORTH);
 		
-		if (LoginControl.getInstance().getCurrentUser().getRights().equals("Manager")){
-			JScrollPane managerScrollPane = new JScrollPane();
-			managerTable = new JTable(managerModel);
-			managerModel.addColumn("Name");
-			managerScrollPane.add(managerTable);
-			tablePanel.add(managerScrollPane, BorderLayout.CENTER);
-		}
 		
-		return tablePanel;
+		return artistScrollPane;
 	}
 	
 	private JComponent initManagerButtons(){
-		JPanel buttonPanel = new JPanel(new FlowLayout());
 		deleteArtistButton = new JButton("Artist Löschen");
 		deleteArtistButton.addActionListener(new LabelScreenArtistDeleteButtonListener(this));
-		buttonPanel.add(deleteArtistButton);
+		return deleteArtistButton;
 		
-		deleteManagerButton = new JButton("Artist löschen");
-		deleteManagerButton.addActionListener(new LabelScreenManagerDeleteButtonListener(this));
-		buttonPanel.add(deleteManagerButton);
-		return buttonPanel;
 	}
 	
 	
@@ -104,30 +91,16 @@ public class LabelScreen extends JPanel {
 		}
 	}
 	
-	private void updateManagerTable(){
-		String[] temp = new String[1];
-		ArrayList<User> artistList = (ArrayList<User>) currentLabel.getManagers();
-		for (User a : artistList){
-			temp[1]= a.getUsername();
-			managerModel.addRow(temp);
-		}
-	}
 	
 	public int getSelectedRowArtistTable(){
 		return artistTable.getSelectedRow();
 	}
 	
-	public int getSelectedRowManagerTable(){
-		return managerTable.getSelectedRow();
-	}
-	
+
 	public void deleteRowArtistTable(int row){
 		artistModel.removeRow(row);
 	}
 	
-	public void deleteRowManagerTable(int row){
-		managerModel.removeRow(row);
-	}
 
 	public Label getCurrentLabel() {
 		return currentLabel;
@@ -135,10 +108,6 @@ public class LabelScreen extends JPanel {
 	
 	public String getRowUserNameArtist(int row){
 		return artistModel.getValueAt(row, 0).toString();
-	}
-	
-	public String getRowUserNameManager(int row){
-		return managerModel.getValueAt(row, 0).toString();
 	}
 	
 	
