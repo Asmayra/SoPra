@@ -46,6 +46,7 @@ public class Genre implements Comparable{
 		this.parent = parent;
 	}
 
+
 	public String getName() {
 		return name;
 	}
