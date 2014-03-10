@@ -119,7 +119,7 @@ public class ProfileScreen extends JPanel {
 		lblAge = new JLabel("Alter:" + userProfile.getAge());
 		userData.add(lblAge);
 		
-		if (LoginControl.getInstance().getCurrentUser().getBanned() == true){
+		if (userProfile.getBanned() == true){
 			lblBanned = new JLabel("Nutzer ist gebannt!");
 			lblBanned.setForeground(Color.RED);
 		}
@@ -153,23 +153,23 @@ public class ProfileScreen extends JPanel {
 			JPanel adminPanel = new JPanel();
 			adminPanel.setLayout(new GridLayout(5,1));
 			bann = new JButton("Nutzer (ent-)bannen");
-			bann.addActionListener(new ProfileScreenBannButtonListener());
+			bann.addActionListener(new ProfileScreenBannButtonListener(selectedUser));
 			adminPanel.add(bann);
 			
 			upgradeToArtist = new JButton("Zu Artist befördern");
-			upgradeToArtist.addActionListener(new ProfileScreenUpgradeToArtistButtonListener());
+			upgradeToArtist.addActionListener(new ProfileScreenUpgradeToArtistButtonListener(selectedUser));
 			adminPanel.add(upgradeToArtist);
 			
 			upgradeToUser = new JButton("Zu User befördern");
-			upgradeToUser.addActionListener(new ProfileScreenUpgradeToUserButtonListener());
+			upgradeToUser.addActionListener(new ProfileScreenUpgradeToUserButtonListener(selectedUser));
 			adminPanel.add(upgradeToUser);
 			
 			upgradeToManager = new JButton("Zu Manager befördern");
-			upgradeToManager.addActionListener(new ProfileScreenUpgradeToManagerButtonListener());
+			upgradeToManager.addActionListener(new ProfileScreenUpgradeToManagerButtonListener(selectedUser));
 			adminPanel.add(upgradeToManager);
 			
 			upgradeToAdmin = new JButton("Zu Admin befördern");
-			upgradeToAdmin.addActionListener(new ProfileScreenUpgradeToAdminButtonListener());
+			upgradeToAdmin.addActionListener(new ProfileScreenUpgradeToAdminButtonListener(selectedUser));
 			adminPanel.add(upgradeToAdmin);
 			
 			

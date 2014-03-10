@@ -8,13 +8,19 @@ import org.control.LoginControl;
 import org.model.User;
 
 public class ProfileScreenUpgradeToArtistButtonListener implements ActionListener {
+	
+	private User selectedUser;
 
+	public ProfileScreenUpgradeToArtistButtonListener(User selectedUser){
+		this.selectedUser = selectedUser;
+	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		User currentUser = LoginControl.getInstance().getCurrentUser();
-		currentUser.setRights("Artist");
 		
-		DatabaseControl.getInstance().update(currentUser);
+		selectedUser.setRights("Artist");
+		
+		DatabaseControl.getInstance().update(selectedUser);
 
 	}
 

@@ -8,16 +8,21 @@ import org.control.LoginControl;
 import org.model.User;
 
 public class ProfileScreenBannButtonListener implements ActionListener {
+	
+	private User selectedUser;
 
+	public ProfileScreenBannButtonListener(User selectedUser){
+		this.selectedUser = selectedUser;
+	}
+	
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
-		User currentUser = LoginControl.getInstance().getCurrentUser();
-		if (currentUser.getBanned() == true) 
-			currentUser.setBanned(false);
-		else currentUser.setBanned(true);
 		
-		DatabaseControl.getInstance().update(currentUser);
+		if (selectedUser.getBanned() == true) 
+			selectedUser.setBanned(false);
+		else selectedUser.setBanned(true);
+		
+		DatabaseControl.getInstance().update(selectedUser);
 	}
 
 }

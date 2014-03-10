@@ -9,13 +9,18 @@ import org.model.User;
 
 public class ProfileScreenUpgradeToManagerButtonListener implements
 		ActionListener {
+	
+	private User selectedUser;
+
+	public ProfileScreenUpgradeToManagerButtonListener(User selectedUser){
+		this.selectedUser = selectedUser;
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		User currentUser = LoginControl.getInstance().getCurrentUser();
-		currentUser.setRights("LabelManager");
+		selectedUser.setRights("LabelManager");
 		
-		DatabaseControl.getInstance().update(currentUser);
+		DatabaseControl.getInstance().update(selectedUser);
 
 	}
 
