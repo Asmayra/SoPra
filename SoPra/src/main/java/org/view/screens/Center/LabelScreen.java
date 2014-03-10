@@ -15,7 +15,6 @@ import javax.swing.table.DefaultTableModel;
 import org.control.LoginControl;
 import org.control.listener.LabelScreenApplyButtonListener;
 import org.control.listener.LabelScreenArtistDeleteButtonListener;
-import org.control.listener.LabelScreenManagerDeleteButtonListener;
 import org.model.Label;
 import org.model.User;
 
