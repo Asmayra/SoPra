@@ -26,7 +26,7 @@ import org.control.LoadImageControl;
 /**
  * User Entity
  * 
- * @author Philipp,Michael Pfennings, Mattias Schoenke
+ * @author Philipp,Michael Pfennings, Mattias Schoenke, Sebastian Roth
  * @inv username must be individual and not null
  */
 @Entity
@@ -79,6 +79,9 @@ public class User implements Comparable {
 		System.out.println("Schweinebraten!");
 	}
 
+	/**
+	 * creates the favorites-playlist of the user
+	 */
 	public void createFavorites() {
 		Playlist favorites = new Playlist(this);
 		favorites.setFavorite();
@@ -115,12 +118,24 @@ public class User implements Comparable {
 		}
 	}
 
+	/**
+	 * adds a song to the own songs of the user
+	 * 
+	 * @param s
+	 *            added song
+	 */
 	public void addOwnSong(Song s) {
 		ownSongs.add(s);
 	}
 
-	public void removeOwnSong(Song song) {
-		ownSongs.remove(song);
+	/**
+	 * removes a song from the own songs of the user
+	 * 
+	 * @param s
+	 *            removed song
+	 */
+	public void removeOwnSong(Song s) {
+		ownSongs.remove(s);
 	}
 
 	public List<Song> getOwnSongs() {
@@ -215,6 +230,11 @@ public class User implements Comparable {
 		return LoadImageControl.loadBufferedImage(this.imagePath, this);
 	}
 
+	/**
+	 * method evaluates the age from the users date of birth
+	 * 
+	 * @return string representation of users age
+	 */
 	public String getAge() {
 		Calendar birth = Calendar.getInstance();
 		Calendar now = Calendar.getInstance();
@@ -229,6 +249,13 @@ public class User implements Comparable {
 		return age.toString();
 	}
 
+	/**
+	 * checks if the user is following another user
+	 * 
+	 * @param usr
+	 *            user who would be followed
+	 * @return true for following and false for not following
+	 */
 	public boolean isFollowing(User usr) {
 		java.util.Iterator<User> it = following.iterator();
 		while (it.hasNext()) {
@@ -239,6 +266,13 @@ public class User implements Comparable {
 		return false;
 	}
 
+	/**
+	 * checks if the user is ignoring another user
+	 * 
+	 * @param usr
+	 *            user who would be ignored
+	 * @return true for ignoring and false for not ignoring
+	 */
 	public boolean isIgnoring(User usr) {
 		java.util.Iterator<User> it = ignoring.iterator();
 		while (it.hasNext()) {
@@ -257,24 +291,62 @@ public class User implements Comparable {
 		this.imagePath = imagePath;
 	}
 
+	/**
+	 * removes a user from the list of followed users
+	 * 
+	 * @param usr
+	 *            removed user
+	 */
 	public void unfollow(User usr) {
-		following.remove(usr);
+		java.util.Iterator<User> it = following.iterator();
+		while (it.hasNext()) {
+			if (it.next().getUsername().equals(usr.getUsername())) {
+				it.remove();
+			}
+		}
 	}
 
+	/**
+	 * adds a user to the list of followed users
+	 * 
+	 * @param usr
+	 *            added user
+	 */
 	public void follow(User usr) {
 		following.add(usr);
 	}
 
-	public void unignore(User user) {
-		ignoring.remove(user);
-
+	/**
+	 * removes a user from the list of ignored users
+	 * 
+	 * @param usr
+	 *            removed user
+	 */
+	public void unignore(User usr) {
+		java.util.Iterator<User> it = ignoring.iterator();
+		while (it.hasNext()) {
+			if (it.next().getUsername().equals(usr.getUsername())) {
+				it.remove();
+			}
+		}
 	}
 
+	/**
+	 * adds a user to the list of ignored users
+	 * 
+	 * @param usr
+	 *            added user
+	 */
 	public void ignore(User user) {
 		ignoring.add(user);
 
 	}
 
+	/**
+	 * returns the favorites-playlist of a user
+	 * 
+	 * @return the favorites-playlist
+	 */
 	public Playlist getFavorites() {
 		java.util.Iterator<Playlist> it = playlists.iterator();
 		while (it.hasNext()) {
