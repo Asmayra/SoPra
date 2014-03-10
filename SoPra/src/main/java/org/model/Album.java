@@ -14,7 +14,8 @@ public class Album extends Playlist {
 	
 
 	private String coverart;
-	private String Name;
+	private String name;
+	private String interpret;
 
 	public Album(){
 		super();
@@ -23,6 +24,13 @@ public class Album extends Playlist {
 		super(u);
 	}
 
+	public String getInterpret(){
+		return interpret;
+	}
+	
+	public void setInterpret(String i){
+		interpret = i;
+	}
 	public String getCoverart() {
 		return coverart;
 	}
@@ -32,10 +40,10 @@ public class Album extends Playlist {
 	}
 	
 	public String getName() {
-		return Name;
+		return name;
 	}
-	public void setName(String name) {
-		Name = name;
+	public void setName(String n) {
+		name = n;
 	}
 	
 	
