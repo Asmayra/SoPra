@@ -54,12 +54,18 @@ public class DatabaseControl {
 	 * initializes the Database Connection, creates
 	 */
 	private void initDatabaseConnection(){
-		Configuration cfg = new Configuration();
-	    if(Main.testDB == true){	
+	Configuration cfg = new Configuration();
+	if(Main.localDB == false){
+		if(Main.testDB == true){	
 	    	cfg.setProperty("hibernate.connection.url", "jdbc:postgresql://ec2-54-197-241-97.compute-1.amazonaws.com:5432/d3u49np6d74s36?user=hplhjlrqhdygcn&password=m_4DPC_jRqEWK_Mf4r2yzMa5cD&ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory");
 	    } else{
 	    	cfg.setProperty("hibernate.connection.url", "jdbc:postgresql://ec2-54-225-103-9.compute-1.amazonaws.com:5432/drc7brahusn8s?user=rejljfjreusarv&password=p7eElB7OATdabSZOWFJZjxpeBX&ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory");
 	    }
+	} else{
+        cfg.setProperty("hibernate.connection.username", "postgres");
+        cfg.setProperty("hibernate.connection.password", "postgres");
+		cfg.setProperty("hibernate.connection.url", "jdbc:postgresql://localhost:5432/postgres");
+	}
 	    
 	    cfg.configure("/Hibernate.cfg.xml");
 	    cfg.setProperty("hibernate.temp.use_jdbc_metadata_defaults","false");

@@ -36,7 +36,7 @@ import org.control.listener.OpenProfile;
  */
 @Entity
 @Table(name="POST_TABLE")
-public class Post {
+public class Post implements Comparable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)	
 	private long postId;
@@ -107,6 +107,11 @@ public class Post {
 		pst.add(content);
 			
 		return pst;
+	}
+	@Override
+	public int compareTo(Object arg0) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 	
 	

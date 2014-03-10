@@ -15,8 +15,10 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
 import org.control.LoadImageControl;
 
 /**
@@ -58,8 +60,31 @@ public class User implements Comparable {
 	private Set<Message> messages = new TreeSet<Message>();
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Set<Song> ownSongs = new TreeSet<Song>();
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinTable(name="ARTISTLABEL_Table")
+	private Set<Label> aLabels = new TreeSet<Label>();
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinTable(name="MANAGERLABEL_Table")
+	private Label mLabel;
 
 	private boolean banned = false;
+
+	
+	public Set<Label> getaLabels() {
+		return aLabels;
+	}
+
+	public void setaLabels(Set<Label> aLabels) {
+		this.aLabels = aLabels;
+	}
+
+	public Label getmLabel() {
+		return mLabel;
+	}
+
+	public void setmLabel(Label mLabel) {
+		this.mLabel = mLabel;
+	}
 
 	public User() {
 		System.out.println("Schweinebraten!");
