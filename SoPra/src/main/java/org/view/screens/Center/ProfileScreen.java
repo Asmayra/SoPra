@@ -123,6 +123,7 @@ public class ProfileScreen extends JPanel {
 		if (userProfile.getBanned() == true){
 			lblBanned = new JLabel("Nutzer ist gebannt!");
 			lblBanned.setForeground(Color.RED);
+			userData.add(lblBanned);
 		}
 			
 		userOverview.add(userData, BorderLayout.CENTER);
