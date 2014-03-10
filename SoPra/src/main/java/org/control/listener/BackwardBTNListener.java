@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 
+import org.control.PlaylistControl;
 import org.view.screens.Southbar.MusicPlayer;
 
 import javazoom.jlgui.basicplayer.BasicPlayer;
@@ -20,7 +21,7 @@ public class BackwardBTNListener implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		File selected_file = MusicPlayer.getCurrentSong();
+		File selected_file = PlaylistControl.getInstance().prevSong();
 		// TODO Auto-generated method stub
 		
 	}
