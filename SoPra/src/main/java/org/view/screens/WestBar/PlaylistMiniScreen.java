@@ -94,9 +94,13 @@ public class PlaylistMiniScreen extends JPanel{
 		ArrayList<Album> userAlbums = (ArrayList<Album>) currentUser.getAlben();
 		
 		DefaultMutableTreeNode dmtn = null;
-		for (int i = 0; i < userPlaylists.size(); i++) {//über Liste/Array/Vector von Playlists die man vom User bekommt
-			dmtn = new DefaultMutableTreeNode(userPlaylists.get(i)); // Name der Playlist 
-			playlist.add(dmtn);
+		java.util.Iterator<Playlist> it = userPlaylists.iterator();
+		while (it.hasNext()) {
+			Playlist next = it.next();
+			if (!next.getName().equals("Favorites")) {
+				dmtn = new DefaultMutableTreeNode(next);
+				playlist.add(dmtn);
+			}
 		}
 		for(int i =0;i< userAlbums.size();i++){//über Liste/Array/Vector von gefolgten Alben, die man vom Nutzer bekommt 
 			dmtn = new DefaultMutableTreeNode(userAlbums.get(i)); // Name des Albums 

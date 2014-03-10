@@ -95,19 +95,22 @@ public class PlaylistTreeListener extends MouseAdapter{
 						if(parentRow==0){
 							Playlist pL = (Playlist)current.getUserObject();
 							//soll die Playliste vom User löschen
-							control.deletePlaylist(pL.getPlaylistId());//TODO vllt +1
-	
+							currentUser.getPlaylists().remove(pL);
+							databaseControl.update(currentUser);
+							databaseControl.delete(pL);
 						}
 						else{
 							Album alb = (Album)current.getUserObject();
 							//soll die Playliste vom User löschen
-							control.deletePlaylist(alb.getPlaylistId());//TODO vllt +1
+							currentUser.getAlben().remove(alb);
+							databaseControl.update(currentUser);
 						}
 	
 						//soll die Playliste aus dem Baum löschen
 						DefaultMutableTreeNode parent = (DefaultMutableTreeNode) current.getParent();
 						parent.remove(parent.getIndex(current));
-						playlisttree.updateUI();
+						playlisttree.updateUI();		
+						
 					}
 					playlisttree.updateUI();
 				}catch(NullPointerException npe){}

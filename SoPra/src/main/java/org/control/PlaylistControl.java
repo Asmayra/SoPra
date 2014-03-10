@@ -126,10 +126,5 @@ public class PlaylistControl {
 	public String[] getPlaylistNames() {
 		return playlistNames;
 	}
-	public void deletePlaylist(int iD){
-		//TODO control.);;//die favoritenliste darf nicht gelöscht werden
-	}
-	public void deleteAlbum(int iD){
-		//TODO control.);;//die favoritenliste darf nicht gelöscht werden
-	}
+
 }
