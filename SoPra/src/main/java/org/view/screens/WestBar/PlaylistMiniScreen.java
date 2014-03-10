@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicOptionPaneUI.ButtonActionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
 
 import org.control.LoginControl;
@@ -173,13 +174,24 @@ public class PlaylistMiniScreen extends JPanel{
 	public void createUserPanel(){
 		user.setLayout(new GridBagLayout());
 		
-		playlists = new JTree(rootUser){
+		
+		DefaultTreeModel dtm = new DefaultTreeModel(rootUser){
+			@Override
+			public void valueForPathChanged(TreePath path, Object newValue){
+				Object obj = ((DefaultMutableTreeNode)path.getLastPathComponent()).getUserObject();
+				((Playlist)obj).setName(newValue.toString());
+				super.valueForPathChanged(path, obj);
+			}
+		};
+		
+		playlists = new JTree(dtm){
 			@Override
 			public boolean isPathEditable(TreePath path) {
 				if(this.getRowForPath(path.getParentPath())==0){return true;}
 				return false;
 			}
-		};//getcurrentUser.getuser.getPlaylists();
+		};
+		
 		//Buttons
 		subscriptions = new JButton("Subscriptions");
 		favorits = new JButton("Favoriten");
