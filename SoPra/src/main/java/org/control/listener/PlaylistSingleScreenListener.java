@@ -17,6 +17,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
 
+import org.control.DatabaseControl;
 import org.control.LoginControl;
 import org.control.PlaylistControl;
 import org.model.Genre;
@@ -91,9 +92,15 @@ public class PlaylistSingleScreenListener  extends MouseAdapter{
 
 		public void actionPerformed(ActionEvent arg0) {
 			if(arg0.getActionCommand().equals("Löschen")){
-						
+				
+				Playlist pL = screen.getPlaylist();
+				int SongID = screen.getSongIDfromRow(row);
+				DatabaseControl dbc = DatabaseControl.getInstance();
+				Song chosen = (Song) dbc.load(Song.class,SongID);
+				pL.deleteSong(chosen);
+				dbc.update(pL);
+				
 				screen.removeSong(row);
-				control.removeSong(screen.getPlaylist(), row);
 				currentTable.updateUI();
 			}
 			else if(arg0.getActionCommand().equals("Hinzufügen zu..")){
@@ -121,6 +128,7 @@ public class PlaylistSingleScreenListener  extends MouseAdapter{
 			Playlist destination = LoginControl.getInstance().getCurrentUser().getPlaylists().get(index);
 			Song clicked = screen.getPlaylist().getSongs().get(row);
 			destination.addSong(clicked);
+			DatabaseControl.getInstance().update(destination);
 			if(destination.equals("Favorites")){
 				currentTable.getModel().setValueAt(true, row, 5);
 			}

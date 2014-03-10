@@ -109,10 +109,6 @@ public class PlaylistControl {
 		//TODO Schreibe aktuelle Userplaylists in die Datenbank
 	}
 	
-	public void removeSong(Playlist playlist,int songnr){
-		playlist.deleteSong(playlist.getSongs().get(songnr));
-		savePlaylists();
-	}
 	
 	public void updatePlaylistNames(){
 		ArrayList<Playlist> playlists = (ArrayList<Playlist>) LoginControl.getInstance().getCurrentUser().getPlaylists();
