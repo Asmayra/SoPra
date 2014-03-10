@@ -12,6 +12,7 @@ import org.control.LoginControl;
 import org.control.PathControl;
 import org.control.UploadControl;
 import org.view.LoginScreen;
+import org.view.screens.Center.OwnSongsScreen;
 
 public class OwnSongsScreenNewButtonListener implements ActionListener {
 
@@ -29,6 +30,8 @@ public class OwnSongsScreenNewButtonListener implements ActionListener {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+		
+		OwnSongsScreen.getInstance().updateTable();
 	}
 
 }

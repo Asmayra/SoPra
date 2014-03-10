@@ -130,7 +130,10 @@ public class OwnSongsScreen extends JPanel {
 			String[] newRow = new String[3];
 			newRow[0] = s.getTitle();
 			newRow[1] = (s.getPlaytime() / 60) + ":" + (s.getPlaytime() % 60) ;
-			newRow[2] = s.getAlbum().toString();
+			if( s.getAlbum()  !=  null )
+				newRow[2] = s.getAlbum().toString();
+			else
+				newRow[2] = "";
 			
 			model.addRow(newRow);
 		}
