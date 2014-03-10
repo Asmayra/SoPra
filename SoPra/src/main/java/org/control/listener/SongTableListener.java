@@ -9,6 +9,7 @@ import javax.swing.table.TableModel;
 import org.control.DatabaseControl;
 import org.control.LoginControl;
 import org.model.Song;
+import org.view.screens.WestBar.PlaylistMiniScreen;
 
 public class SongTableListener implements TableModelListener {
 	
@@ -23,9 +24,11 @@ public class SongTableListener implements TableModelListener {
 		if ((boolean) favor) {
 			LoginControl.getInstance().getCurrentUser().addFavorite((Song) DatabaseControl.getInstance().load(Song.class, id));
 			DatabaseControl.getInstance().update(LoginControl.getInstance().getCurrentUser());
+			PlaylistMiniScreen.getInstance().updateMiniScreen();
 		} else {
 			LoginControl.getInstance().getCurrentUser().removeFavorite((Song) DatabaseControl.getInstance().load(Song.class, id));
 			DatabaseControl.getInstance().update(LoginControl.getInstance().getCurrentUser());
+			PlaylistMiniScreen.getInstance().updateMiniScreen();
 		}
 	}
 
