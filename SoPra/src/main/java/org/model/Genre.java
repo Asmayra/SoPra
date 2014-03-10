@@ -7,7 +7,9 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -27,9 +29,9 @@ public class Genre implements Comparable{
 	@GeneratedValue(strategy = GenerationType.AUTO)	
 	private int genreId;
 	private String name = "";
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Set<Genre> subGenres;
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Genre parent;
 
 	public Genre(){
@@ -43,7 +45,6 @@ public class Genre implements Comparable{
 	public void setParent(Genre parent) {
 		this.parent = parent;
 	}
-
 
 	public String getName() {
 		return name;
