@@ -15,11 +15,12 @@ import org.model.Song;
 
 
 public class PlaylistSingleScreen extends JPanel{
-	private Playlist playlist;
+	private static Playlist playlist;
 	private String[] columns = new String[] { "Interpret", "Titel", "Album", "Länge", "Favor", "SongIDs"};
 	private DefaultTableModel model;
 	private JTable table;
 	private JScrollPane scroll;
+	
 	
 	
 	public PlaylistSingleScreen(Playlist playlist){

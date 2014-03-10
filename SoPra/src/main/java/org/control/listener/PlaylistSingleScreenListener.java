@@ -27,6 +27,7 @@ import org.view.ContextMenu;
 import org.view.screens.Center.AdminGenreScreen;
 import org.view.screens.Center.PlaylistExtendedScreen;
 import org.view.screens.Center.PlaylistSingleScreen;
+import org.view.screens.Southbar.MusicPlayer;
 
 /**
  * Verwaltet die Genreübersicht
@@ -43,6 +44,11 @@ public class PlaylistSingleScreenListener  extends MouseAdapter{
 	
 	public void mousePressed(MouseEvent e) {
 		if(e.getButton()==MouseEvent.BUTTON1){
+			PlaylistControl.setCurrentPlaylist(((PlaylistSingleScreen)e.getComponent().getParent().getParent().getParent()).getPlaylist());
+			currentTable = (JTable) e.getSource();
+			row = currentTable.rowAtPoint(new Point(e.getX(),e.getY()));
+			int songId=(int)currentTable.getModel().getValueAt(row,5);
+			System.out.println(songId);
 			
 		}
 		else{
