@@ -9,12 +9,9 @@ import org.view.screens.Center.AdminGenreScreen;
 
 public class FavoritButtonListener implements ActionListener {
 
-	PlaylistControl control = PlaylistControl.getInstance();
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		control.showFavorites();
-		
-
+		PlaylistControl.getInstance().showFavorites();
 	}
 
 }

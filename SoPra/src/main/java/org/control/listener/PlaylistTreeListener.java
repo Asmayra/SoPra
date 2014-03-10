@@ -59,11 +59,12 @@ public class PlaylistTreeListener extends MouseAdapter{
 	
 	private void maybeShowPopup(MouseEvent e) {
     	JTree currentTree = (JTree) e.getSource();
-    	String[] content = {"Löschen","Bearbeiten","Neue Playlist"};
+    	String[] content = {"Löschen","Bearbeiten","Neue Playlist","Anhören"};
     	ContextMenuListener delete = new ContextMenuListener();
     	ContextMenuListener edit = new ContextMenuListener();
     	ContextMenuListener add = new ContextMenuListener();
-    	ContextMenuListener[] contentlistener = {delete,edit,add};
+    	ContextMenuListener listen = new ContextMenuListener();
+    	ContextMenuListener[] contentlistener = {delete,edit,add,listen};
     	ContextMenu context = new ContextMenu(content, contentlistener);
     	
     	TreeListener listener = new TreeListener();
@@ -114,6 +115,10 @@ public class PlaylistTreeListener extends MouseAdapter{
 			else if(arg0.getActionCommand().equals("Bearbeiten")){
 				playlistEdit = (Playlist)((DefaultMutableTreeNode)playlisttree.getLastSelectedPathComponent()).getUserObject();
 				playlisttree.startEditingAtPath(playlisttree.getSelectionPath());
+			}
+			else if(arg0.getActionCommand().equals("Anhören")){
+				Playlist active = (Playlist)((DefaultMutableTreeNode)playlisttree.getLastSelectedPathComponent()).getUserObject();
+				control.setCurrentPlaylist(active);
 			}
 			else if(arg0.getActionCommand().equals("Neue Playlist")){
 				//erstellen der Playlist

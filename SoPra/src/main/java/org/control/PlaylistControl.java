@@ -23,10 +23,10 @@ import org.view.screens.Center.PlaylistSingleScreen;
  */
 public class PlaylistControl {
 	
-	private User currentUser;
+	private User currentUser = LoginControl.getInstance().getCurrentUser();
 	private static PlaylistControl instance;
 	private PlaylistExtendedScreen playlistScreen = PlaylistExtendedScreen.getInstance();
-	private static Playlist current;
+	private static Playlist current = LoginControl.getInstance().getCurrentUser().getFavorites();
 	private static ListIterator<Song> playlistIterator;
 	private String[] playlistNames;
 	private DatabaseControl control = DatabaseControl.getInstance();	
@@ -41,7 +41,6 @@ public class PlaylistControl {
 
 	
 	public PlaylistControl() {
-		currentUser = LoginControl.getInstance().getCurrentUser();
 		updatePlaylistNames();
 	}
 
@@ -49,9 +48,9 @@ public class PlaylistControl {
 	public void showPlaylist(int playlistID) {
 		int tabindex = playlistScreen.getIndexOfTab(playlistID);
 		if(tabindex==-1){
-			Playlist current = (Playlist) control.load( Playlist.class, playlistID);
-			playlistIterator = (ListIterator<Song>) current.getSongs().listIterator();
-			playlistScreen.addPlaylistTab(current.getName(), new PlaylistSingleScreen(current));
+			Playlist currentPlst = (Playlist) control.load( Playlist.class, playlistID);
+			playlistIterator = (ListIterator<Song>) currentPlst.getSongs().listIterator();
+			playlistScreen.addPlaylistTab(currentPlst.getName(), new PlaylistSingleScreen(currentPlst));
 		}
 		playlistScreen.setTabByIndex(tabindex);
 		MainScreen.getInstance().showPlaylistExtendedScreen(playlistScreen);
@@ -61,19 +60,23 @@ public class PlaylistControl {
 	public void showAlbum(int albumID) {
 		int tabindex = playlistScreen.getIndexOfTab(albumID);
 		if(tabindex==-1){
-			Album current = (Album) control.load( Album.class, albumID);
-			playlistIterator = (ListIterator<Song>) current.getSongs().listIterator();
-			playlistScreen.addPlaylistTab(current.getName(), new PlaylistSingleScreen(current));
+			Album currentAlbm = (Album) control.load( Album.class, albumID);
+			playlistIterator = (ListIterator<Song>) currentAlbm.getSongs().listIterator();
+			playlistScreen.addPlaylistTab(currentAlbm.getName(), new PlaylistSingleScreen(currentAlbm));
 		}
 		playlistScreen.setTabByIndex(tabindex);
 		MainScreen.getInstance().showPlaylistExtendedScreen(playlistScreen);
 	}
 	
 	public void showFavorites(){
-		Playlist current = currentUser.getFavorites();
-		int tabindex = playlistScreen.getIndexOfTab(current.getPlaylistId());
+		currentUser = LoginControl.getInstance().getCurrentUser();
+		Playlist favorites = currentUser.getFavorites();
+		System.out.println(favorites.getPlaylistId());
+		int tabindex = playlistScreen.getIndexOfTab(favorites.getPlaylistId());
 		if(tabindex==-1){
-			playlistScreen.addPlaylistTab("Favoriten", new PlaylistSingleScreen(current));
+			Playlist favos = (Playlist) control.load(Playlist.class, favorites.getPlaylistId());
+			playlistIterator = (ListIterator<Song>) favorites.getSongs().listIterator();
+			playlistScreen.addPlaylistTab("Favoriten", new PlaylistSingleScreen(favorites));
 		}
 		playlistScreen.setTabByIndex(tabindex);
 		MainScreen.getInstance().showPlaylistExtendedScreen(playlistScreen);
