@@ -24,7 +24,7 @@ import org.view.screens.Center.PlaylistExtendedScreen;
 
 public class PlaylistTreeListener extends MouseAdapter{
 
-	private Playlist playlistEdit;
+	private Playlist playlistEdit=null;
 	PlaylistControl control = PlaylistControl.getInstance();
 	DatabaseControl databaseControl = DatabaseControl.getInstance();
 	JTree playlisttree;
@@ -34,10 +34,10 @@ public class PlaylistTreeListener extends MouseAdapter{
 	}
 	
 	public void mouseClicked(MouseEvent e) {
-		try{
-			playlistEdit = (Playlist)((DefaultMutableTreeNode)playlisttree.getLastSelectedPathComponent()).getUserObject();
-		}catch(NullPointerException exc){}
-		catch(ClassCastException exc){}
+//		try{
+//			playlistEdit = (Playlist)((DefaultMutableTreeNode)playlisttree.getLastSelectedPathComponent()).getUserObject();
+//		}catch(NullPointerException exc){}
+//		catch(ClassCastException exc){}
 		playlisttree=(JTree) e.getComponent();
 		
 		if(e.getButton()==MouseEvent.BUTTON1){
@@ -121,12 +121,16 @@ public class PlaylistTreeListener extends MouseAdapter{
 				}catch(NullPointerException npe){}
 			}
 			else if(arg0.getActionCommand().equals("Bearbeiten")){
+				try{
 				playlistEdit = (Playlist)((DefaultMutableTreeNode)playlisttree.getLastSelectedPathComponent()).getUserObject();
 				playlisttree.startEditingAtPath(playlisttree.getSelectionPath());
+				}catch(NullPointerException npe){}
 			}
 			else if(arg0.getActionCommand().equals("Anhören")){
+				try{
 				Playlist active = (Playlist)((DefaultMutableTreeNode)playlisttree.getLastSelectedPathComponent()).getUserObject();
 				control.setCurrentPlaylist(active);
+				}catch(NullPointerException npe){}
 			}
 			else if(arg0.getActionCommand().equals("Neue Playlist")){
 				//erstellen der Playlist
