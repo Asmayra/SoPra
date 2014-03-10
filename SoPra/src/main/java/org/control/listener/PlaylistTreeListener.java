@@ -37,6 +37,7 @@ public class PlaylistTreeListener extends MouseAdapter{
 		try{
 			playlistEdit = (Playlist)((DefaultMutableTreeNode)playlisttree.getLastSelectedPathComponent()).getUserObject();
 		}catch(NullPointerException exc){}
+		catch(ClassCastException exc){}
 		playlisttree=(JTree) e.getComponent();
 		
 		if(e.getButton()==MouseEvent.BUTTON1){
@@ -158,9 +159,9 @@ public class PlaylistTreeListener extends MouseAdapter{
 
 		public void treeNodesChanged(TreeModelEvent e) {
 			DefaultMutableTreeNode current = (DefaultMutableTreeNode) playlisttree.getLastSelectedPathComponent();
-			
-			playlistEdit.setName(current.getUserObject().toString());
-			current.setUserObject(playlistEdit);
+			playlistEdit = (Playlist) current.getUserObject();
+			//playlistEdit.setName(current.getUserObject().toString());
+			//current.setUserObject(playlistEdit);
 			databaseControl.update(playlistEdit);
 			PlaylistExtendedScreen pes = PlaylistExtendedScreen.getInstance();
 			int tabID = pes.getIndexOfTab(playlistEdit.getPlaylistId());
