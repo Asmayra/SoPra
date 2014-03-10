@@ -18,10 +18,12 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import org.control.LoadImageControl;
+
 /**
  * User Entity
+ * 
  * @author Philipp,Michael Pfennings, Mattias Schoenke
- * @inv username must be individual and not null 
+ * @inv username must be individual and not null
  */
 @Entity
 @Table(name = "USER_TABLE")
@@ -40,14 +42,14 @@ public class User implements Comparable {
 	private String rights = "StandardUser"; // Admin, Artist, LabelManager
 	private String imagePath;
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinTable(name="FOLLOW_TABLE")
+	@JoinTable(name = "FOLLOW_TABLE")
 	private Set<User> following = new TreeSet<User>();
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Set<Playlist> playlists = new TreeSet<Playlist>();
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Set<Album> alben = new TreeSet<Album>();
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinTable(name="IGNORE_TABLE")
+	@JoinTable(name = "IGNORE_TABLE")
 	private Set<User> ignoring = new TreeSet<User>();
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	// Set Eager,because it's loaded at the Homescreen
@@ -56,7 +58,7 @@ public class User implements Comparable {
 	private Set<Message> messages = new TreeSet<Message>();
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Set<Song> ownSongs = new TreeSet<Song>();
-	
+
 	private boolean banned = false;
 
 	public User() {
@@ -102,9 +104,8 @@ public class User implements Comparable {
 	public void addOwnSong(Song s) {
 		ownSongs.add(s);
 	}
-	
-	public void removeOwnSong(Song song)
-	{
+
+	public void removeOwnSong(Song song) {
 		ownSongs.remove(song);
 	}
 
@@ -257,17 +258,17 @@ public class User implements Comparable {
 
 	@SuppressWarnings("unchecked")
 	public Playlist getFavorites() {
-		List<Playlist> list = new ArrayList<Playlist>(this.playlists);
-		for (int i = 0; i < list.size(); i++) {
-			if (list.get(i).getName() == "Favorites") {
-				return ((List<Playlist>) playlists).get(i);
+		java.util.Iterator<Playlist> it = playlists.iterator();
+		while (it.hasNext()) {
+			if (it.next().getName().equals("Favorites")) {
+				return it.next();
 			}
 		}
 		Playlist playlist = new Playlist(this);
 		playlist.setFavorite();
 		this.addPlaylist(playlist);
 		return playlist;
-		
+
 	}
 
 	public List<Playlist> getPlaylists() {
@@ -294,31 +295,29 @@ public class User implements Comparable {
 
 	public void addFavorite(Song s) {
 		this.getFavorites().addSong(s);
-		
+
 	}
-	
+
 	public void removeFavorite(Song s) {
 		this.getFavorites().deleteSong(s);
-		
+
 	}
-	
-	public void addPlaylist(Playlist p){
+
+	public void addPlaylist(Playlist p) {
 		playlists.add(p);
 	}
-	
-	public void setBanned(boolean b)
-	{
+
+	public void setBanned(boolean b) {
 		banned = b;
 	}
-	
-	public boolean getBanned()
-	{
+
+	public boolean getBanned() {
 		return banned;
 	}
 
 	public void removePlaylist(Playlist p) {
 		playlists.remove(p);
-		
+
 	}
 
 	public void addPlaylists(Playlist p) {
@@ -331,9 +330,7 @@ public class User implements Comparable {
 
 	public void removeAlbum(Album a) {
 		this.alben.remove(a);
-		
+
 	}
-	
-	
 
 }
