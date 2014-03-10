@@ -42,6 +42,11 @@ public class Label {
 	public String getName() {
 		return name;
 	}
+	
+	public int getId()
+	{
+		return LabelId;
+	}
 
 	public void setName(String name) {
 		this.name = name;
