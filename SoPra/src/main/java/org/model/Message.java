@@ -4,13 +4,17 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Set;
+import java.util.TreeSet;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.JoinTable;
 import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -39,12 +43,7 @@ public class Message implements Comparable{
 	public void setSender(User sender) {
 		this.sender = sender;
 	}
-//	public User[] getRecipient() {
-//		return recipient;
-//	}
-//	public void setRecipient(User[] recipient) {
-//		this.recipient = recipient;
-//	}
+
 	public String getContent() {
 		return content;
 	}

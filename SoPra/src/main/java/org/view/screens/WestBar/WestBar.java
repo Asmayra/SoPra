@@ -14,7 +14,7 @@ public class WestBar extends JPanel {
 	private Menu menu = new Menu();
 	private PlaylistMiniScreen miniscreen = new PlaylistMiniScreen();
 	private CoverArt coverart = new CoverArt();
-	private SongTicker songticker = new SongTicker();
+	private SongTicker songticker = SongTicker.getInstance();
 	
 	public WestBar(){
 		this.setLayout(new GridBagLayout());
