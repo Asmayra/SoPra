@@ -122,4 +122,9 @@ public class Playlist implements Comparable {
 		return copyF;
 		
 	}
+	
+	@Override
+	public String toString(){
+		return name;
+	}
 }
