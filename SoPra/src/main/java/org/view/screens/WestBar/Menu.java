@@ -15,6 +15,7 @@ import org.control.LoginControl;
 import org.control.listener.HomeScreenButtonListener;
 import org.control.listener.LogOutButtonListener;
 import org.control.listener.MailButtonListener;
+import org.control.listener.OpenProfile;
 import org.control.listener.SettingsButtonListener;
 /**
  * erstellt das Menu
@@ -51,6 +52,8 @@ public class Menu extends JPanel{
 		setting.setPreferredSize(new Dimension(BUTTONSIZE,BUTTONSIZE));
 		setting.addActionListener(new SettingsButtonListener());
 		setting.setToolTipText("Settings");
+		
+		avatar.addMouseListener(new OpenProfile(LoginControl.getInstance().getCurrentUser()));
 		
 		setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
