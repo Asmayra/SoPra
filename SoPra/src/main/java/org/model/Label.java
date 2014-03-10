@@ -7,10 +7,13 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -26,9 +29,11 @@ public class Label {
 	@GeneratedValue(strategy = GenerationType.AUTO)	
 	private int LabelId;
 	private String name;
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinTable(name="MANAGER_TABLE")
 	private Set<User> managers = new HashSet<User>();
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinTable(name="ARTIST_TABLE")
 	private Set<User> artists = new HashSet<User>();
 
 	public Label() {	}

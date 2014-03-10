@@ -34,6 +34,7 @@ public class createTestData {
 		
 		try {
 			DatabaseControl.getInstance().save(label);
+			DatabaseControl.getInstance().update(label);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -161,12 +162,25 @@ public class createTestData {
 		standard.setPassword("127648922");
 		standard.setSalt("B150M)gWN!");
 		standard.setRights("StandardUser");
-		
+				
 		try {
 			DatabaseControl.getInstance().save(standard);
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
+		
+		standard.addMessage(createMessage(standard));
+		standard.addMessage(createMessage(standard));
+		standard.addPlaylist(createPlaylist(standard));
+		standard.addPlaylist(createPlaylist(standard));
+		standard.addAlben(createAlbum(standard));
+		
+		
+		DatabaseControl.getInstance().update(standard);
+
+		
+		/////////////////////////////////////////////////////
+
 		
 		User admin = new User();
 		admin.setUsername("a");
@@ -193,6 +207,8 @@ public class createTestData {
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
+		
+		////////////////////////////////////////////////////////
 		
 		User artist = new User();
 		artist.setUsername("k");
@@ -229,6 +245,9 @@ public class createTestData {
 		artist.addMessage(this.createMessage(artist));
 		
 		DatabaseControl.getInstance().update(artist);
+		
+		///////////////////////////////////////////////////////////
+		
 		User labelmanager = new User();
 		labelmanager.setUsername("l");
 		labelmanager.setEMail("muster@gmail.com");
@@ -259,8 +278,43 @@ public class createTestData {
 			e.printStackTrace();
 		}
 		
+		////////////////////////////////////////////////
 		
+		artist = new User();
+		artist.setUsername("k2");
+		artist.setEMail("muster@gmail.com");
+		artist.setCity("mustercity");
+		artist.setCountry("mustercountry");
+
+		try {
+			date = new SimpleDateFormat("DD.MM.YYYY", Locale.GERMAN).parse("01.01.2000");
+		} catch (ParseException e) {
+			date = null;
+			e.printStackTrace();
+		}
+		artist.setDob(date);
+		artist.setFirstname("Max");
+		artist.setLastname("mustermann");
+		artist.setImagePath("avatar.jpg");
+		artist.setPassword("127648922");
+		artist.setSalt("B150M)gWN!");
+		artist.setRights("Artist");
+
+		try {
+			DatabaseControl.getInstance().save(artist);
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 		
+		artist.addOwnSong(this.createSong());
+		artist.addOwnSong(this.createSong());
+		artist.addFavorite(this.createSong());
+		artist.addFavorite(this.createSong());
+		artist.addPlaylists(this.createPlaylist(artist));
+		artist.addAlben(this.createAlbum(artist));
+		artist.addMessage(this.createMessage(artist));
+		
+		DatabaseControl.getInstance().update(artist);
 		
 	}
 	
