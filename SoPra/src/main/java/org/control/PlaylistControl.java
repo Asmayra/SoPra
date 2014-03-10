@@ -75,8 +75,8 @@ public class PlaylistControl {
 		int tabindex = playlistScreen.getIndexOfTab(favorites.getPlaylistId());
 		if(tabindex==-1){
 			Playlist favos = (Playlist) control.load(Playlist.class, favorites.getPlaylistId());
-			playlistIterator = (ListIterator<Song>) favorites.getSongs().listIterator();
-			playlistScreen.addPlaylistTab("Favoriten", new PlaylistSingleScreen(favorites));
+			playlistIterator = (ListIterator<Song>) favos.getSongs().listIterator();
+			playlistScreen.addPlaylistTab("Favoriten", new PlaylistSingleScreen(favos));
 		}
 		playlistScreen.setTabByIndex(tabindex);
 		MainScreen.getInstance().showPlaylistExtendedScreen(playlistScreen);
