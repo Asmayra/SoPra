@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
@@ -17,6 +18,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.control.LoadImageControl;
@@ -60,30 +62,20 @@ public class User implements Comparable {
 	private Set<Message> messages = new TreeSet<Message>();
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Set<Song> ownSongs = new TreeSet<Song>();
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinTable(name="ARTISTLABEL_Table")
-	private Set<Label> aLabels = new TreeSet<Label>();
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinTable(name="MANAGERLABEL_Table")
-	private Label mLabel;
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private Label Label;
+	
 
 	private boolean banned = false;
 
-	
-	public Set<Label> getaLabels() {
-		return aLabels;
+
+
+	public Label getLabel() {
+		return Label;
 	}
 
-	public void setaLabels(Set<Label> aLabels) {
-		this.aLabels = aLabels;
-	}
-
-	public Label getmLabel() {
-		return mLabel;
-	}
-
-	public void setmLabel(Label mLabel) {
-		this.mLabel = mLabel;
+	public void setLabel(Label Label) {
+		this.Label = Label;
 	}
 
 	public User() {
