@@ -29,8 +29,8 @@ public class Message implements Comparable{
 	private User sender;
 //	@ManyToOne
 //	private User[] recipient;
-	private String content;
-	private String subject;
+	private String content = "";
+	private String subject = "";
 	private Date date;
 	
 	public User getSender() {

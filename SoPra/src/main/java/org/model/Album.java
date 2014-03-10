@@ -13,9 +13,9 @@ public class Album extends Playlist {
 	
 	
 
-	private String coverart;
-	private String name;
-	private String interpret;
+	private String coverart = "";
+	private String name = "";
+	private String interpret = "";
 
 	public Album(){
 		super();

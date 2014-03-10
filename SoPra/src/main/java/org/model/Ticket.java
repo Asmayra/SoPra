@@ -31,11 +31,11 @@ public class Ticket {
 	private int ticketId;		//Needs to be saved in tickedpool
 	@ManyToOne
 	private User inWorkBy;	
-	private String name;
+	private String name = "";
 	@ManyToOne
 	private User requester;
-	private String shortInfo;
-	private String category;
+	private String shortInfo = "";
+	private String category = "";
 	
 	public String getCategory() {
 		return category;

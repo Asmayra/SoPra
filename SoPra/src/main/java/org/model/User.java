@@ -31,16 +31,16 @@ import org.control.LoadImageControl;
 public class User implements Comparable {
 	@Id
 	private String username;
-	private String password;
-	private String firstname;
-	private String lastname;
+	private String password = "";
+	private String firstname = "";
+	private String lastname = "";
 	private Date dob;
-	private String city;
-	private String country;
-	private String eMail;
-	private String salt;
+	private String city = "";
+	private String country = "";
+	private String eMail = "";
+	private String salt = "";
 	private String rights = "StandardUser"; // Admin, Artist, LabelManager
-	private String imagePath;
+	private String imagePath = "";
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable(name = "FOLLOW_TABLE")
 	private Set<User> following = new TreeSet<User>();

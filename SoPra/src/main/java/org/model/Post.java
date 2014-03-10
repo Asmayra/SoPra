@@ -42,7 +42,7 @@ public class Post {
 	private long postId;
 	@ManyToOne
 	private User autor;
-	private String message;
+	private String message = "";
 	@Transient
 	private Image prflPicture;
 	@Transient

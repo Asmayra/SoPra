@@ -26,7 +26,7 @@ public class Genre implements Comparable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)	
 	private int genreId;
-	private String name;
+	private String name = "";
 	@OneToMany
 	private Set<Genre> subGenres;
 	@ManyToOne

@@ -28,7 +28,7 @@ public class Label {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)	
 	private int LabelId;
-	private String name;
+	private String name = "";
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable(name="MANAGER_TABLE")
 	private Set<User> managers = new HashSet<User>();
