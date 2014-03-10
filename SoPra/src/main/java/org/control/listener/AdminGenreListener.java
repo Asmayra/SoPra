@@ -7,6 +7,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 
 import javax.swing.JTree;
 import javax.swing.event.TreeModelEvent;
@@ -15,6 +16,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
 
+import org.control.DatabaseControl;
 import org.model.Genre;
 import org.view.ContextMenu;
 import org.view.screens.Center.AdminGenreScreen;
@@ -81,11 +83,13 @@ public class AdminGenreListener  extends MouseAdapter{
 				JTree genreTree = genrescreen.getGenretree();
 				DefaultTreeModel defMod = (DefaultTreeModel) genreTree.getModel();
 				DefaultMutableTreeNode current = (DefaultMutableTreeNode) genrescreen.getGenretree().getLastSelectedPathComponent();
-				Genre currentGenre = (Genre) current.getUserObject();
-				currentGenre.getParent().getSubGenres().remove(currentGenre);
-				
 				if(current.isLeaf()){//Prüfung, ob Lieder mit diesem Genre existieren, muss erfolgen!
+					Genre currentGenre = (Genre) current.getUserObject();
+					Genre parent = (Genre) ((DefaultMutableTreeNode)current.getParent()).getUserObject();
+					parent.getSubGenres().remove(currentGenre);
 					defMod.removeNodeFromParent(current);
+					DatabaseControl.getInstance().update(parent);
+					DatabaseControl.getInstance().delete(currentGenre);
 				}
 				
 				genreTree.updateUI();
@@ -102,15 +106,18 @@ public class AdminGenreListener  extends MouseAdapter{
 				
 				Genre currentGenre = (Genre) current.getUserObject();
 				currentGenre.addSubGenre(newGenre);
-				newGenre.setParent(currentGenre);
 				
 				DefaultMutableTreeNode newNode = new DefaultMutableTreeNode(newGenre);
 				current.add(newNode);
 				genreTree.expandPath(new TreePath(current.getPath()));
-				//genreTree.setEditable(true);
-				//genreTree.updateUI();
-				//genreTree.startEditingAtPath(new TreePath(newNode.getPath()));
 				genreTree.updateUI();
+				try {
+					DatabaseControl.getInstance().save(newGenre);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				DatabaseControl.getInstance().update(currentGenre);
 			}
 		}
     	
@@ -126,14 +133,9 @@ public class AdminGenreListener  extends MouseAdapter{
 		public void treeNodesChanged(TreeModelEvent e) {
 			JTree genreTree = genrescreen.getGenretree();
 			DefaultMutableTreeNode current = (DefaultMutableTreeNode) genreTree.getLastSelectedPathComponent();
-			int parentRow = genreTree.getRowForPath(genreTree.getSelectionPath().getParentPath());
-			genreTree.expandRow(parentRow);
-			int currentRow = genreTree.getRowForPath(genreTree.getSelectionPath());
-			Genre currentParentGenre = (Genre) ((DefaultMutableTreeNode) current.getParent()).getUserObject();
-			Genre neuesGenre = currentParentGenre.getSubGenres().get(currentRow-parentRow-1);
-			neuesGenre.setName(current.getUserObject().toString());
-			current.setUserObject(neuesGenre);
-			
+			Genre curGen = (Genre) current.getUserObject();
+			current.setUserObject(curGen);
+			DatabaseControl.getInstance().update(curGen);
 		}
 
 		public void treeNodesInserted(TreeModelEvent e) {

@@ -49,7 +49,7 @@ public class LabelScreen extends JPanel {
 	
 	private JComponent initHeader(){
 		JPanel headerPanel = new JPanel(new BorderLayout());
-		JLabel labelLabel = new JLabel(currentLabel.getName());
+		JLabel labelLabel = new JLabel(currentLabel.getName() + "                  Manager: " + currentLabel.getManager().getUsername());
 		headerPanel.add(labelLabel,  BorderLayout.NORTH);
 		
 		if (LoginControl.getInstance().getCurrentUser().getRights().equals("Artist")){
@@ -64,13 +64,15 @@ public class LabelScreen extends JPanel {
 	
 	private JComponent initTable(){
 		
-		JScrollPane artistScrollPane = new JScrollPane();
+		artistModel = new DefaultTableModel();
+		
 		artistTable = new JTable(artistModel);
+		
+		
 		artistModel.addColumn("Name");
-		artistScrollPane.add(artistTable);
 		
 		
-		return artistScrollPane;
+		return new JScrollPane(artistTable);
 	}
 	
 	private JComponent initManagerButtons(){

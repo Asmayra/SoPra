@@ -1,5 +1,6 @@
 package org.control;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.model.Album;
@@ -105,17 +106,32 @@ public class RecommendationControl {
 	}
 	
 	public List<User> allRecommendedArtists(){
-		List<User> recUser = null;
+		List<User> recUser = new ArrayList<User>();
 		List<User> following = user.getFollowing();
 		for (int i = 0; i<following.size();i++){
 			List<User> followedFollower = following.get(i).getFollowing();
 			recUser.addAll(followedFollower);
 		}
 		return recUser;
-		
-		
-		
-		
+	}
+	public List<Album> allRecomendedAlben(){
+		List<Album> recAlbum = new ArrayList<Album>();
+		List<User> following = user.getFollowing();
+		for (int i = 0; i<following.size();i++){
+			List<Album> followedAlben = following.get(i).getAlben();
+			recAlbum.addAll(followedAlben);
+		}
+		return recAlbum;
+	}
+	
+	public List<Album> allRecomendedSongs(){
+		List<Song> recSongs = new ArrayList<Song>();
+		List<User> following = user.getFollowing();
+		for (int i = 0; i<following.size();i++){
+			List<Song> followedAlben = following.get(i).getAlben();
+			recAlbum.addAll(followedAlben);
+		}
+		return recAlbum;
 	}
 
 }

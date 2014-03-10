@@ -31,7 +31,6 @@ public class FollowButtonListener implements ActionListener {
 			LoginControl.getInstance().getCurrentUser().unfollow(profile.getUserProfile());
 			profile.setFollow(false);
 			((JButton) arg0.getSource()).setText("follow");
-			DatabaseControl.getInstance().update(LoginControl.getInstance().getCurrentUser());
 			
 		} else {
 			LoginControl.getInstance().getCurrentUser().follow(profile.getUserProfile());

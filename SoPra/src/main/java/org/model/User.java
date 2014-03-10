@@ -52,14 +52,14 @@ public class User implements Comparable {
 	private Set<Playlist> playlists = new TreeSet<Playlist>();
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Set<Album> alben = new TreeSet<Album>();
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToMany(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
 	@JoinTable(name = "IGNORE_TABLE")
 	private Set<User> ignoring = new TreeSet<User>();
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	// Set Eager,because it's loaded at the Homescreen
 	private Set<Post> posts = new TreeSet<Post>();
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	private Set<Message> messages = new HashSet<Message>();
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private Set<Message> messages = new TreeSet<Message>();
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Set<Song> ownSongs = new TreeSet<Song>();
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
