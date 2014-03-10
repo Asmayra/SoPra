@@ -10,6 +10,11 @@ import java.awt.event.*;
 import javax.swing.event.*;
 
 import org.control.PlaylistControl;
+import org.control.listener.BackwardBTNListener;
+import org.control.listener.ForwardBTNListener;
+import org.control.listener.PlayBTNListener;
+import org.control.listener.PlayerListener;
+import org.control.listener.StopBTNListener;
 
 import javazoom.jlgui.basicplayer.*;
 
@@ -18,7 +23,7 @@ import javazoom.jlgui.basicplayer.*;
  * @author Ioann 
  *
  */
-public class MusicPlayer extends MusicPlayerControl{
+public class MusicPlayer extends JPanel{
 	private JButton Btn_Stop = new JButton("■");
 	private JButton Btn_Play= new JButton("► ||");
 	private JButton Btn_Forward= new JButton(">");
@@ -30,7 +35,7 @@ public class MusicPlayer extends MusicPlayerControl{
 	private JButton btnSelectFile = new JButton("Select file");
 	private BasicPlayer player = new BasicPlayer();
 	private JProgressBar progressBar = new JProgressBar();
-	private static File selected_file=null;
+	private static File selected_file;
 	private double Music_gain = 0.5;
 	
 	/*
@@ -38,7 +43,7 @@ public class MusicPlayer extends MusicPlayerControl{
 	 */
 	public MusicPlayer(){
 		//Makes event listener for our MusicPlayer
-		player.addBasicPlayerListener(new TestListener(this));
+		player.addBasicPlayerListener(new PlayerListener(this));
 		
 		this.setLayout(new GridBagLayout());
 		gbc.insets=new Insets(2,2,2,2);
@@ -88,37 +93,29 @@ public class MusicPlayer extends MusicPlayerControl{
 				}
 			}
 		});
+		
+		
+		/**
+		 * !!!!!!!!!!!Muss letztendlich gelöscht werden!!!!!!!!!
+		 */
 		btnSelectFile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				JFileChooser openFile = new JFileChooser();
-				openFile.showOpenDialog(null);
-				selected_file = openFile.getSelectedFile();
+				openFile.showOpenDialog(null); 
+				MusicPlayer.setCurrentSong( openFile.getSelectedFile()); 
 			}
 		});
-		Btn_Play.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent arg0){
-				playPause(player, selected_file);
-			}
-		});/*Btn_Play*/
 		
-		Btn_Stop.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e) {
-				stop(player);
-			}
-		});/*Btn_Stop*/
 		
-		Btn_Forward.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e) {
-				Forward(player);
-			}
-			
-		});/*Btn_Forward*/
-		Btn_Back.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e) {
-				Back(player);
-			}
-			
-		});/*Btn_Back*/
+		Btn_Play.addActionListener(new PlayBTNListener(player)); 
+		
+		Btn_Stop.addActionListener(new StopBTNListener(player));
+		
+		Btn_Forward.addActionListener(new ForwardBTNListener(player));
+		
+		Btn_Back.addActionListener(new BackwardBTNListener(player));
+		
+		
 	}
 	/**
 	 * Method that updates ProgressBar of MusicPlayer
@@ -135,58 +132,17 @@ public class MusicPlayer extends MusicPlayerControl{
 	 * Sets the song which is played,when the playbutton is pressed
 	 * @param song
 	 */
-	public void setCurrentSong(File song){
-		stop(player);
+	public static void setCurrentSong(File song){
+		/*try {
+			player.stop();//warum?
+		} catch (BasicPlayerException e1) {
+			e1.printStackTrace();
+		}*/
 		selected_file = song;
 	}
-/*=============================================================================*/
-	/**
-	 * Listener that gives info over MusicPlayer State
-	 * @author unim95, Sebastian, Philipp.
-	 *
-	 */
-	class TestListener implements BasicPlayerListener{
-		
-		private MusicPlayer musicplayer;
-		long currentTime = 0;
-		long maxTime = 0;
-		
-		public TestListener(MusicPlayer musicplayer){
-			this.musicplayer=musicplayer;
-		}
-		
-
-		@Override
-		public void opened(Object stream, Map properties) {
-			for( Object o : properties.keySet() )
-				System.out.println(o.toString());
-			maxTime = (Long)properties.get("duration") / 1000000;
-		}
-
-		@Override
-		public void progress(int bytesread, long elapsed, byte[] pcm, Map properties) {
-			currentTime += elapsed;
-			currentTime /= 1000000;
-			updateBar(currentTime , maxTime);
-		}
-
-		@Override
-		public void setController(BasicController arg0) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void stateUpdated(BasicPlayerEvent e) {
-			currentTime = e.getPosition();
-			currentTime /= 1000000;
-			// Notification of BasicPlayer states (opened, playing, end of media, ...)
-			if(e.getCode() == BasicPlayerEvent.EOM){
-				System.out.println("Song zuende!");
-				musicplayer.setCurrentSong(PlaylistControl.nextSong());
-			}	
-			//System.out.println(player)
-		}
-		
+	
+	public static File getCurrentSong(){
+		return selected_file;
 	}
+
 }
