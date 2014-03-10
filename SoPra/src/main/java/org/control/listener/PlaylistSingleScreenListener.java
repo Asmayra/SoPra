@@ -51,8 +51,7 @@ public class PlaylistSingleScreenListener  extends MouseAdapter{
 			currentTable = (JTable) e.getSource();
 			row = currentTable.rowAtPoint(new Point(e.getX(),e.getY()));
 			int songId=(int)currentTable.getModel().getValueAt(row,5);
-			System.out.println(songId);
-			
+			PlaylistControl.searchForSong(songId);
 		}
 		else{
 			currentTable = (JTable) e.getSource();
