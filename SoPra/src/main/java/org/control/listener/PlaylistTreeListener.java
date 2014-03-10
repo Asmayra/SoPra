@@ -20,6 +20,7 @@ import org.model.Album;
 import org.model.Playlist;
 import org.model.User;
 import org.view.ContextMenu;
+import org.view.screens.Center.PlaylistExtendedScreen;
 
 public class PlaylistTreeListener extends MouseAdapter{
 
@@ -33,6 +34,9 @@ public class PlaylistTreeListener extends MouseAdapter{
 	}
 	
 	public void mouseClicked(MouseEvent e) {
+		try{
+			playlistEdit = (Playlist)((DefaultMutableTreeNode)playlisttree.getLastSelectedPathComponent()).getUserObject();
+		}catch(NullPointerException exc){}
 		playlisttree=(JTree) e.getComponent();
 		
 		if(e.getButton()==MouseEvent.BUTTON1){
@@ -158,6 +162,10 @@ public class PlaylistTreeListener extends MouseAdapter{
 			playlistEdit.setName(current.getUserObject().toString());
 			current.setUserObject(playlistEdit);
 			databaseControl.update(playlistEdit);
+			PlaylistExtendedScreen pes = PlaylistExtendedScreen.getInstance();
+			int tabID = pes.getIndexOfTab(playlistEdit.getPlaylistId());
+			pes.setTabName(tabID, playlistEdit.getName());
+			
 		}
 
 		public void treeNodesInserted(TreeModelEvent e) {

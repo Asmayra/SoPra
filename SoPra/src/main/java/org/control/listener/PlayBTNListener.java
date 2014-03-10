@@ -17,8 +17,7 @@ public class PlayBTNListener implements ActionListener {
 	
 	
 	public PlayBTNListener(BasicPlayer player){
-		this.player = player;
-		
+		this.player = player;	
 	}
 	
 	

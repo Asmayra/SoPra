@@ -15,11 +15,12 @@ import org.model.Song;
 
 
 public class PlaylistSingleScreen extends JPanel{
-	private Playlist playlist;
-	private String[] columns = new String[] { "Interpret", "Titel", "Album", "Länge", "Community Rating", "Favor" };
+	private static Playlist playlist;
+	private String[] columns = new String[] { "Interpret", "Titel", "Album", "Länge", "Favor", "SongIDs"};
 	private DefaultTableModel model;
 	private JTable table;
 	private JScrollPane scroll;
+	
 	
 	
 	public PlaylistSingleScreen(Playlist playlist){
@@ -27,14 +28,14 @@ public class PlaylistSingleScreen extends JPanel{
 		model = new DefaultTableModel(columns,0){
 			@Override
 			public Class getColumnClass(int col) {
-				if (col == 5)
+				if (col == 4)
 					return Boolean.class;
 				else
 					return String.class;
 			}
 			@Override
 			public boolean isCellEditable(int row, int column){
-				return column==5;
+				return column==4;
 			}
 		};	
 		addSongsToTable();
@@ -55,7 +56,6 @@ public class PlaylistSingleScreen extends JPanel{
 			String title="Kein Titel";
 			String album="Kein Album";
 			int playtime=0;
-			double rating=0.0;
 			
 			try{
 				interpret = curSong.getInterpret();
@@ -69,19 +69,15 @@ public class PlaylistSingleScreen extends JPanel{
 			try{
 				playtime = curSong.getPlaytime();
 			}catch(NullPointerException exc){}
-			try{
-				rating = curSong.getVrgRating();
-			}catch(NullPointerException exc){}
-			
 			boolean favored;
 			if (favorites.contains(songs.get(i))) {
 				favored = true;
 			} else {
 				favored = false;
 			}
+			int songID = curSong.getSongId();
 			
-			
-			Object[] songData = new Object[]{interpret,title,album,playtime,rating,favored};
+			Object[] songData = new Object[]{interpret,title,album,playtime,favored, songID};
 			model.addRow(songData);
 		}
 	}
@@ -96,6 +92,10 @@ public class PlaylistSingleScreen extends JPanel{
 	
 	public Playlist getPlaylist(){
 		return playlist;
+	}
+	
+	public int getSongIDfromRow(int row){
+		return (int) model.getValueAt(row, 5);
 	}
 	
 }

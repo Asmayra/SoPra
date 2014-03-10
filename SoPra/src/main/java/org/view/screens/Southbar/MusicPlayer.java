@@ -15,6 +15,7 @@ import org.control.listener.ForwardBTNListener;
 import org.control.listener.PlayBTNListener;
 import org.control.listener.PlayerListener;
 import org.control.listener.StopBTNListener;
+import org.omg.CORBA.Current;
 
 import javazoom.jlgui.basicplayer.*;
 
@@ -32,7 +33,7 @@ public class MusicPlayer extends JPanel{
 	private GridBagConstraints gbc = new GridBagConstraints();
 	private JLabel Volume_Label =new JLabel("50%");
 	private JLabel Label =new JLabel("Placeholder 4 seek bar");
-	private JButton btnSelectFile = new JButton("Select file");
+
 	private BasicPlayer player = new BasicPlayer();
 	private JProgressBar progressBar = new JProgressBar();
 	private static File selected_file;
@@ -43,7 +44,9 @@ public class MusicPlayer extends JPanel{
 	 */
 	public MusicPlayer(){
 		//Makes event listener for our MusicPlayer
-		player.addBasicPlayerListener(new PlayerListener(this));
+		player.addBasicPlayerListener(new PlayerListener(this,player));
+		//Initializes the Current Song as the first Song from favorites
+		MusicPlayer.setCurrentSong(PlaylistControl.nextSong());
 		
 		this.setLayout(new GridBagLayout());
 		gbc.insets=new Insets(2,2,2,2);
@@ -69,10 +72,7 @@ public class MusicPlayer extends JPanel{
 		
 		gbc.gridx=6;
 		add(Volume_Label,gbc);
-		// TODO Delete this button
-		gbc.gridx=1;
-		gbc.gridy=1;
-		add(btnSelectFile, gbc);
+
 		
 		this.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		//this.setMinimumSize(new Dimension(860,600));
@@ -91,18 +91,6 @@ public class MusicPlayer extends JPanel{
 				} catch (BasicPlayerException e) {
 					e.printStackTrace();
 				}
-			}
-		});
-		
-		
-		/**
-		 * !!!!!!!!!!!Muss letztendlich gelöscht werden!!!!!!!!!
-		 */
-		btnSelectFile.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				JFileChooser openFile = new JFileChooser();
-				openFile.showOpenDialog(null); 
-				MusicPlayer.setCurrentSong( openFile.getSelectedFile()); 
 			}
 		});
 		

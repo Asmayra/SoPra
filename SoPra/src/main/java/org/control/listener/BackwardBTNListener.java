@@ -8,6 +8,7 @@ import org.control.PlaylistControl;
 import org.view.screens.Southbar.MusicPlayer;
 
 import javazoom.jlgui.basicplayer.BasicPlayer;
+import javazoom.jlgui.basicplayer.BasicPlayerException;
 
 public class BackwardBTNListener implements ActionListener {
 
@@ -22,7 +23,16 @@ public class BackwardBTNListener implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		File selected_file = PlaylistControl.getInstance().prevSong();
-		// TODO Auto-generated method stub
+		try {
+			player.open(selected_file);
+			player.play();
+		}catch (NullPointerException nullEXC){
+			System.out.println("Playlist zuende");
+			//Falls Endlosmusik: Liste von vorne laden und neu starten!
+		} catch (BasicPlayerException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		
 	}
 }

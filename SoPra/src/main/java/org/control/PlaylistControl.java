@@ -16,6 +16,7 @@ import org.testpackage.PlaylistTest;
 import org.view.MainScreen;
 import org.view.screens.Center.PlaylistExtendedScreen;
 import org.view.screens.Center.PlaylistSingleScreen;
+import org.view.screens.WestBar.SongTicker;
 /**
  * 
  * @author Philipp, Tim, Max
@@ -27,7 +28,7 @@ public class PlaylistControl {
 	private static PlaylistControl instance;
 	private PlaylistExtendedScreen playlistScreen = PlaylistExtendedScreen.getInstance();
 	private static Playlist current = LoginControl.getInstance().getCurrentUser().getFavorites();
-	private static ListIterator<Song> playlistIterator;
+	private static ListIterator<Song> playlistIterator = current.getSongs().listIterator();
 	private String[] playlistNames;
 	private DatabaseControl control = DatabaseControl.getInstance();	
 	
@@ -81,18 +82,28 @@ public class PlaylistControl {
 		playlistScreen.setTabByIndex(tabindex);
 		MainScreen.getInstance().showPlaylistExtendedScreen(playlistScreen);
 	}
+	/**
+	 * Gibt nächstes Lied aus
+	 * @return Song als File
+	 */
 	public static File nextSong(){	
 		File file = null;
-		while(playlistIterator.hasNext()){
-			file = new File(playlistIterator.next().getPath());
+		if(playlistIterator.hasNext()){
+			Song song = playlistIterator.next();
+			file = new File(song.getPath());
+			SongTicker.setTickertext(song.getInterpret()+" - "+ song.getTitle()+"       ");
+			SongTicker.getInstance().start();
 		}	
 		return file;	
 	}
+	/**
+	 * gibt vorheriges Leid aus
+	 * @return Song als File
+	 */
 	public static File prevSong(){	
-		File file = null;
-		
-		while(playlistIterator.hasPrevious()){
-			file = new File(playlistIterator.next().getPath());
+		File file = null;	
+		if(playlistIterator.hasPrevious()){
+			file = new File(playlistIterator.previous().getPath());
 		}	
 		return file;	
 	}
@@ -109,10 +120,6 @@ public class PlaylistControl {
 		//TODO Schreibe aktuelle Userplaylists in die Datenbank
 	}
 	
-	public void removeSong(Playlist playlist,int songnr){
-		playlist.deleteSong(playlist.getSongs().get(songnr));
-		savePlaylists();
-	}
 	
 	public void updatePlaylistNames(){
 		ArrayList<Playlist> playlists = (ArrayList<Playlist>) LoginControl.getInstance().getCurrentUser().getPlaylists();
