@@ -15,6 +15,7 @@ import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
 
 import org.control.LoginControl;
+import org.control.listener.CreateLabelButtonListener;
 import org.control.listener.FavoritButtonListener;
 import org.control.listener.GenresButtonListener;
 import org.control.listener.LabelButtonListener;
