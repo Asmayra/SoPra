@@ -64,11 +64,8 @@ public class User implements Comparable {
 	private Set<Song> ownSongs = new HashSet<Song>();
 	@OneToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
 	private Label Label;
-	
 
 	private boolean banned = false;
-
-
 
 	public Label getLabel() {
 		return Label;
@@ -233,16 +230,23 @@ public class User implements Comparable {
 	}
 
 	public boolean isFollowing(User usr) {
-		if (following.contains(usr)) {
-			return true;
+		java.util.Iterator<User> it = following.iterator();
+		while (it.hasNext()) {
+			User next = it.next();
+			if (next.getUsername().equals(usr.getUsername())) {
+				return true;
+			}
 		}
 		return false;
 	}
 
-	public boolean isIgnoring(User user) {
-
-		if (ignoring.contains(user)) {
-			return true;
+	public boolean isIgnoring(User usr) {
+		java.util.Iterator<User> it = ignoring.iterator();
+		while (it.hasNext()) {
+			User next = it.next();
+			if (next.getUsername().equals(usr.getUsername())) {
+				return true;
+			}
 		}
 		return false;
 	}
@@ -308,19 +312,6 @@ public class User implements Comparable {
 	public int compareTo(Object arg0) {
 		// TODO Auto-generated method stub
 		return 0;
-	}
-	
-	@Override
-	public boolean equals(Object obj) {
-		if (this.hashCode() == obj.hashCode()) {
-			return true;
-		}
-		return false;
-	}
-
-	@Override
-	public int hashCode() {
-		return  Integer.parseInt(this.getUsername());
 	}
 
 	public void addFavorite(Song s) {

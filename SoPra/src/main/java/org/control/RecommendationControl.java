@@ -80,6 +80,7 @@ public class RecommendationControl {
 		while (random2 == 0) {
 			System.out.println("STest1");
 			if (following.size() == 0) {
+				
 				break;
 			}
 			int random1 = (int) ((Math.random()) * following.size() + 1);
