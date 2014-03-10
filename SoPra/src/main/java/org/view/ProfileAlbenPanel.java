@@ -54,8 +54,10 @@ public class ProfileAlbenPanel extends JScrollPane {
 			String songCount = ((Integer) alben.get(i).getSongs().size()).toString();
 			boolean favor;
 			if (LoginControl.getInstance().getCurrentUser().getAlben().contains(alben.get(i))) {
+				System.out.println("true");
 				favor = true;
 			} else {
+				System.out.println("false");
 				favor = false;
 			}
 			int id = alben.get(i).getPlaylistId();

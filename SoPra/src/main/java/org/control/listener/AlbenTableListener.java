@@ -26,17 +26,22 @@ public class AlbenTableListener implements TableModelListener {
 		String owner = selected.getOwner().getUsername();
 		User current = LoginControl.getInstance().getCurrentUser();
 		if ((boolean) favor) {
+			if (!owner.equals(current.getUsername())) {
 				current.addAlben(selected);
 				PlaylistMiniScreen.getInstance().updateMiniScreen();
-				//DatabaseControl.getInstance().update(current);
+				DatabaseControl.getInstance().update(current);
+			}
+
 		} else {
 			if (owner.equals(current.getUsername())) {
 				model.setValueAt(true, row, 3);
-				JOptionPane.showMessageDialog(null, "Sie können ihre eignen Alben nicht entfernen.\n Sie haben aber die Möglichkeit ihr Album komplett zu löschen.");
+				JOptionPane
+						.showMessageDialog(null,
+								"Sie können ihre eignen Alben nicht entfernen.\n Sie haben aber die Möglichkeit ihr Album komplett zu löschen.");
 			} else {
 				current.removeAlbum(selected);
 				PlaylistMiniScreen.getInstance().updateMiniScreen();
-				//DatabaseControl.getInstance().update(current);
+				DatabaseControl.getInstance().update(current);
 			}
 		}
 	}

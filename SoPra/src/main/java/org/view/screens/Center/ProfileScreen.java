@@ -191,13 +191,12 @@ public class ProfileScreen extends JPanel {
 		userContentScrollPlaylists = new JScrollPane(playlists);
 		userContentScrollAlben = new JScrollPane(alben);
 		userContentScrollPosts = new JScrollPane(posts);
-		userContentScrollAlben.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		userContentScrollPosts.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		userContent.addTab("Playlists", playlists);
 		userContent.addTab("Posts", userContentScrollPosts);
 		if (userProfile.getRights().equals("Artist") || userProfile.getRights().equals("LabelManager")) {
 			userContent.addTab("Songs", songs);
-			userContent.addTab("Alben", userContentScrollAlben);
+			userContent.addTab("Alben", alben);
 		}
 		add(userContent, BorderLayout.CENTER);
 

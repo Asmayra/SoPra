@@ -26,16 +26,19 @@ public class PlaylistTableListener implements TableModelListener {
 		Playlist selected = (Playlist) DatabaseControl.getInstance().load(Playlist.class, id);
 		if ((boolean) favor) {
 			if (name.equals("Favorites")) {
-				current.addPlaylist(Playlist.copyFriendFavorites(current, selected));
-				PlaylistMiniScreen.getInstance().updateMiniScreen();
-				//DatabaseControl.getInstance().update(current);
+				if (!(current.getFavorites().getPlaylistId()== id)) {
+					current.addPlaylist(Playlist.copyFriendFavorites(current, selected));
+					PlaylistMiniScreen.getInstance().updateMiniScreen();
+					DatabaseControl.getInstance().update(current);
+				}
+				
 			} else {
 				Playlist copy = new Playlist(current);
 				copy.setSongs(selected.getSongs());
 				copy.setName(selected.getName());
 				current.addPlaylist(copy);
 				PlaylistMiniScreen.getInstance().updateMiniScreen();
-				//DatabaseControl.getInstance().update(current);
+				DatabaseControl.getInstance().update(current);
 			}
 		} else {
 			if (current.getFavorites().getPlaylistId() == id) {
@@ -44,7 +47,7 @@ public class PlaylistTableListener implements TableModelListener {
 			} else {
 				current.removePlaylist(selected);
 				PlaylistMiniScreen.getInstance().updateMiniScreen();
-				//DatabaseControl.getInstance().update(current);
+				DatabaseControl.getInstance().update(current);
 			}
 		}
 	}
