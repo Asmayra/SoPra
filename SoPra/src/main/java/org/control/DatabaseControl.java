@@ -209,10 +209,10 @@ public class DatabaseControl {
 	{
 		session = sessionFactory.openSession();
 		session.beginTransaction();
-		Object result = session.merge(update);
+		session.saveOrUpdate(update);
 		session.getTransaction().commit();
 		session.close();
-		return result;
+		return update;
 	}
 	
 	/**

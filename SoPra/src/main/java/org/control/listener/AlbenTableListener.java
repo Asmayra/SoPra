@@ -7,11 +7,12 @@ import javax.swing.table.TableModel;
 
 import org.control.DatabaseControl;
 import org.control.LoginControl;
+import org.model.Album;
 import org.model.Playlist;
 import org.model.Song;
 import org.model.User;
 
-public class PlaylistTableListener implements TableModelListener {
+public class AlbenTableListener implements TableModelListener {
 
 	@Override
 	public void tableChanged(TableModelEvent e) {
@@ -20,26 +21,18 @@ public class PlaylistTableListener implements TableModelListener {
 		TableModel model = (TableModel) e.getSource();
 		boolean favor = (boolean) model.getValueAt(row, 3);
 		int id = (int) model.getValueAt(row, 4);
-		String name = (String) model.getValueAt(row, 0);
+		Album selected = (Album) DatabaseControl.getInstance().load(Album.class, id);
+		String owner = selected.getOwner().getUsername();
 		User current = LoginControl.getInstance().getCurrentUser();
-		Playlist selected = (Playlist) DatabaseControl.getInstance().load(Playlist.class, id);
 		if ((boolean) favor) {
-			if (name.equals("Favorites")) {
-				current.addPlaylist(Playlist.copyFriendFavorites(current, selected));
+				current.addAlben(selected);
 				//DatabaseControl.getInstance().update(current);
-			} else {
-				Playlist copy = new Playlist(current);
-				copy.setSongs(selected.getSongs());
-				copy.setName(selected.getName());
-				current.addPlaylist(copy);
-				//DatabaseControl.getInstance().update(current);
-			}
 		} else {
-			if (current.getFavorites().getPlaylistId() == id) {
+			if (owner==current.getUsername()) {
 				model.setValueAt(true, row, 3);
-				JOptionPane.showMessageDialog(null, "Sie können ihre eigene Favoriten-Playlist nicht entfernen.");
+				JOptionPane.showMessageDialog(null, "Sie können ihre eignen Alben nicht entfernen.\n Sie haben aber die Möglichkeit ihr Album komplett zu löschen.");
 			} else {
-				current.removePlaylist(selected);
+				current.removeAlbum(selected);
 				//DatabaseControl.getInstance().update(current);
 			}
 		}

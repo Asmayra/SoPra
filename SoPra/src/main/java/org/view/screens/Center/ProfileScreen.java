@@ -3,6 +3,7 @@ package org.view.screens.Center;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -21,9 +22,10 @@ import org.control.listener.FollowButtonListener;
 import org.control.listener.IgnoreButtonListener;
 import org.control.listener.ProfileMessageButtonListener;
 import org.control.listener.ProfileScreenBannButtonListener;
-import org.control.listener.ProfileScreenUpgradeArtistButtonListener;
-import org.control.listener.ProfileScreenUpgradeManagerButtonListener;
-import org.control.listener.ProfileScreenUpgrageArtistButtonListener;
+import org.control.listener.ProfileScreenUpgradeToAdminButtonListener;
+import org.control.listener.ProfileScreenUpgradeToArtistButtonListener;
+import org.control.listener.ProfileScreenUpgradeToManagerButtonListener;
+import org.control.listener.ProfileScreenUpgradeToUserButtonListener;
 import org.model.User;
 import org.view.ProfilePlaylistPanel;
 import org.view.ProfilePostsPanel;
@@ -59,13 +61,14 @@ public class ProfileScreen extends JPanel {
 	private JButton message;
 	private JButton ignore;
 	private JButton follow;
-	private JButton bann, upgradeArtist, upgradeUser, upgradeManager;
+	private JButton bann, upgradeToArtist, upgradeToUser, upgradeToManager, upgradeToAdmin;
 	private JLabel lblName;
 	private JLabel lblLastName;
 	private JLabel lblCity;
 	private JLabel lblCountry;
 	private JLabel lblAge;
 	private JLabel lblUserName;
+	private JLabel lblBanned;
 
 	/**
 	 * Konstruktor erstellt das Profil-Screen-Panel
@@ -115,7 +118,12 @@ public class ProfileScreen extends JPanel {
 		userData.add(lblCountry);
 		lblAge = new JLabel("Alter:" + userProfile.getAge());
 		userData.add(lblAge);
-
+		
+		if (LoginControl.getInstance().getCurrentUser().getBanned() == true){
+			lblBanned = new JLabel("Nutzer ist gebannt!");
+			lblBanned.setForeground(Color.RED);
+		}
+			
 		userOverview.add(userData, BorderLayout.CENTER);
 
 		buttons = new JPanel();
@@ -142,17 +150,31 @@ public class ProfileScreen extends JPanel {
 		}
 		
 		if (LoginControl.getInstance().getCurrentUser().getRights().equals("Admin")){
-			bann = new JButton("Bannen");
+			JPanel adminPanel = new JPanel();
+			adminPanel.setLayout(new GridLayout(5,1));
+			bann = new JButton("Nutzer (ent-)bannen");
 			bann.addActionListener(new ProfileScreenBannButtonListener());
+			adminPanel.add(bann);
 			
-			upgradeArtist = new JButton("Zu Artist befördern");
-			upgradeArtist.addActionListener(new ProfileScreenUpgrageArtistButtonListener());
+			upgradeToArtist = new JButton("Zu Artist befördern");
+			upgradeToArtist.addActionListener(new ProfileScreenUpgradeToArtistButtonListener());
+			adminPanel.add(upgradeToArtist);
 			
-			upgradeUser = new JButton("Zu User befördern");
-			upgradeArtist.addActionListener(new ProfileScreenUpgradeArtistButtonListener());
+			upgradeToUser = new JButton("Zu User befördern");
+			upgradeToUser.addActionListener(new ProfileScreenUpgradeToUserButtonListener());
+			adminPanel.add(upgradeToUser);
 			
-			upgradeManager = new JButton("Zu Manager befördern");
-			upgradeManager.addActionListener(new ProfileScreenUpgradeManagerButtonListener());
+			upgradeToManager = new JButton("Zu Manager befördern");
+			upgradeToManager.addActionListener(new ProfileScreenUpgradeToManagerButtonListener());
+			adminPanel.add(upgradeToManager);
+			
+			upgradeToAdmin = new JButton("Zu Admin befördern");
+			upgradeToAdmin.addActionListener(new ProfileScreenUpgradeToAdminButtonListener());
+			adminPanel.add(upgradeToAdmin);
+			
+			
+			userOverview.add(adminPanel, BorderLayout.EAST);
+			
 		}
 		
 		

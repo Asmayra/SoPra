@@ -7,17 +7,15 @@ import org.control.DatabaseControl;
 import org.control.LoginControl;
 import org.model.User;
 
-public class ProfileScreenBannButtonListener implements ActionListener {
+public class ProfileScreenUpgradeToUserButtonListener implements ActionListener {
 
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
+	public void actionPerformed(ActionEvent e) {
 		User currentUser = LoginControl.getInstance().getCurrentUser();
-		if (currentUser.getBanned() == true) 
-			currentUser.setBanned(false);
-		else currentUser.setBanned(true);
+		currentUser.setRights("StandardUser");
 		
 		DatabaseControl.getInstance().update(currentUser);
+
 	}
 
 }
