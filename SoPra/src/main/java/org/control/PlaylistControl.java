@@ -28,6 +28,7 @@ public class PlaylistControl {
 	private static Playlist current;
 	private static Iterator<Song> playlistIterator;
 	private String[] playlistNames;
+	private DatabaseControl control = DatabaseControl.getInstance();	
 	
 	public static PlaylistControl getInstance()
 	{
@@ -54,8 +55,6 @@ public class PlaylistControl {
 		current = playlistList.get(playlistnumber);
 		playlistIterator = current.getSongs().iterator();
 		
-		
-		
 		int tabindex = playlistScreen.getIndexOfTab(current.getPlaylistId());
 		if(tabindex==-1){
 			playlistScreen.addPlaylistTab(current.getName(), new PlaylistSingleScreen(current));
@@ -66,13 +65,8 @@ public class PlaylistControl {
 
 
 	public void showAlbum(int albumnumber) {
-		//ArrayList<Album> albumList =  (ArrayList<Album>) currentUser.getAlbums();
-		
-		//TEST:
-		PlaylistTest TEST = new PlaylistTest();
-		LinkedList<Album> albumList =  (LinkedList<Album>) TEST.albums;
-						
-						
+		ArrayList<Album> albumList =  (ArrayList<Album>) currentUser.getAlben();
+							
 		Playlist current = albumList.get(albumnumber);
 		int tabindex = playlistScreen.getIndexOfTab(current.getPlaylistId());
 		if(tabindex==-1){
@@ -128,5 +122,10 @@ public class PlaylistControl {
 	public String[] getPlaylistNames() {
 		return playlistNames;
 	}
-	
+	public void deletePlaylist(int iD){
+		//TODO control.);;//die favoritenliste darf nicht gelöscht werden
+	}
+	public void deleteAlbum(int iD){
+		//TODO control.);;//die favoritenliste darf nicht gelöscht werden
+	}
 }

@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicOptionPaneUI.ButtonActionListener;
@@ -15,10 +16,13 @@ import javax.swing.tree.TreePath;
 import org.control.LoginControl;
 import org.control.listener.FavoritButtonListener;
 import org.control.listener.GenresButtonListener;
+import org.control.listener.LabelButtonListener;
 import org.control.listener.PlaylistTreeListener;
 import org.control.listener.SubscriptionButtonListener;
 import org.control.listener.UploadButtonListener;
 import org.control.listener.UploadPageButtonListener;
+import org.model.Album;
+import org.model.Playlist;
 import org.model.User;
 import org.view.screens.Center.PlaylistExtendedScreen;
 /**
@@ -34,6 +38,7 @@ public class PlaylistMiniScreen extends JPanel{
 	private JButton favorits;
 	private JButton genres;
 	private JButton uploads;
+	private JButton label;
 	private JScrollPane scrollUser;
 	private JScrollPane scrollAdmin;
 	private JLabel invisible;
@@ -84,13 +89,17 @@ public class PlaylistMiniScreen extends JPanel{
 		DefaultMutableTreeNode album =new DefaultMutableTreeNode("Alben");
 		rootUser.add(playlist);
 		rootUser.add(album);
+		
+		ArrayList<Playlist> userPlaylists = (ArrayList<Playlist>) currentUser.getPlaylists();
+		ArrayList<Album> userAlbums = (ArrayList<Album>) currentUser.getAlben();
+		
 		DefaultMutableTreeNode dmtn = null;
-		for (int i = 0; i < 4; i++) {//über Liste/Array/Vector von Playlists die man vom User bekommt
-			dmtn = new DefaultMutableTreeNode("super Playlist "+i); // Name der Playlist 
+		for (int i = 0; i < userPlaylists.size(); i++) {//über Liste/Array/Vector von Playlists die man vom User bekommt
+			dmtn = new DefaultMutableTreeNode(userPlaylists.get(i)); // Name der Playlist 
 			playlist.add(dmtn);
 		}
-		for(int i =0;i< 3;i++){//über Liste/Array/Vector von gefolgten Alben, die man vom Nutzer bekommt 
-			dmtn = new DefaultMutableTreeNode("awesome Album "+i); // Name des Albums 
+		for(int i =0;i< userAlbums.size();i++){//über Liste/Array/Vector von gefolgten Alben, die man vom Nutzer bekommt 
+			dmtn = new DefaultMutableTreeNode(userAlbums.get(i)); // Name des Albums 
 			album.add(dmtn);
 		}
 	}
@@ -166,6 +175,7 @@ public class PlaylistMiniScreen extends JPanel{
 		favorits = new JButton("Favoriten");
 		genres = new JButton("Genres");
 		uploads = new JButton("Uploads");
+		label = new JButton("Label");
 		subscriptions.setOpaque(false);
 		subscriptions.setContentAreaFilled(false);
 		subscriptions.setBorderPainted(false);
@@ -182,7 +192,10 @@ public class PlaylistMiniScreen extends JPanel{
 		uploads.setContentAreaFilled(false);
 		uploads.setBorderPainted(false);
 		uploads.setBackground(Color.WHITE);
-		
+		label.setOpaque(false);
+		label.setContentAreaFilled(false);
+		label.setBorderPainted(false);
+		label.setBackground(Color.WHITE);
 		//Layoutmanager + Anordnung
 		GridBagConstraints c  = new GridBagConstraints();
 		c.fill = GridBagConstraints.BOTH;
@@ -207,6 +220,11 @@ public class PlaylistMiniScreen extends JPanel{
 			c.gridy++;
 			uploads.addActionListener(new UploadPageButtonListener());
 			user.add(uploads,c);
+		}
+		else if(currentUser.getRights().equals("Labelmanager")){
+			c.gridy++;
+			label.addActionListener(new LabelButtonListener());
+			user.add(label,c);
 		}
 		
 		c.gridx=0;
