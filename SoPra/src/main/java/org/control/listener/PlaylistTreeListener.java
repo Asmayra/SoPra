@@ -34,21 +34,16 @@ public class PlaylistTreeListener extends MouseAdapter{
 		playlisttree=(JTree) e.getComponent();
 		
 		if(e.getButton()==MouseEvent.BUTTON1){
-			
-			if(e.getClickCount()==2){
-				playlisttree.startEditingAtPath(playlisttree.getSelectionPath());
-			}
-			else{
-				parentRow = playlisttree.getRowForPath(playlisttree.getSelectionPath().getParentPath());
-				if(parentRow!=-1){
-					if(parentRow==0){//Playlist ausgewählt
-						Playlist currentPlaylist = (Playlist) ((DefaultMutableTreeNode)playlisttree.getLastSelectedPathComponent()).getUserObject();
-						control.showPlaylist(currentPlaylist.getPlaylistId());//TODO +1 da sonst die erste Playlist die favoritenliste sein muss
-					}
-					else{//Album
-						Album currentAlbum = (Album) ((DefaultMutableTreeNode)playlisttree.getLastSelectedPathComponent()).getUserObject();
-						control.showAlbum(currentAlbum.getPlaylistId());//TODO s.o.
-					}
+		
+			parentRow = playlisttree.getRowForPath(playlisttree.getSelectionPath().getParentPath());
+			if(parentRow!=-1){
+				if(parentRow==0){//Playlist ausgewählt
+					Playlist currentPlaylist = (Playlist) ((DefaultMutableTreeNode)playlisttree.getLastSelectedPathComponent()).getUserObject();
+					control.showPlaylist(currentPlaylist.getPlaylistId());//TODO +1 da sonst die erste Playlist die favoritenliste sein muss
+				}
+				else{//Album
+					Album currentAlbum = (Album) ((DefaultMutableTreeNode)playlisttree.getLastSelectedPathComponent()).getUserObject();
+					control.showAlbum(currentAlbum.getPlaylistId());//TODO s.o.
 				}
 			}
 		}
@@ -57,12 +52,16 @@ public class PlaylistTreeListener extends MouseAdapter{
 		}
         
     }
+	
+	
+	
 	private void maybeShowPopup(MouseEvent e) {
     	JTree currentTree = (JTree) e.getSource();
-    	String[] content = {"Löschen","neue Playlist"};
+    	String[] content = {"Löschen","Bearbeiten","Neue Playlist"};
     	ContextMenuListener delete = new ContextMenuListener();
+    	ContextMenuListener edit = new ContextMenuListener();
     	ContextMenuListener add = new ContextMenuListener();
-    	ContextMenuListener[] contentlistener = {delete,add};
+    	ContextMenuListener[] contentlistener = {delete,edit,add};
     	ContextMenu context = new ContextMenu(content, contentlistener);
     	
     	TreeListener listener = new TreeListener();
@@ -110,7 +109,10 @@ public class PlaylistTreeListener extends MouseAdapter{
 					playlisttree.updateUI();
 				}catch(NullPointerException npe){}
 			}
-			else if(arg0.getActionCommand().equals("neue Playlist")){
+			else if(arg0.getActionCommand().equals("Bearbeiten")){
+				playlisttree.startEditingAtPath(playlisttree.getSelectionPath());
+			}
+			else if(arg0.getActionCommand().equals("Neue Playlist")){
 				//erstellen der Playlist
 				Playlist newPlaylist = new Playlist();
 				newPlaylist.setName("Neue Playlist");

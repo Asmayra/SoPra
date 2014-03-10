@@ -5,6 +5,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.ListIterator;
 import java.util.Set;
 
 import org.model.Album;
@@ -26,7 +27,7 @@ public class PlaylistControl {
 	private static PlaylistControl instance;
 	private PlaylistExtendedScreen playlistScreen = PlaylistExtendedScreen.getInstance();
 	private static Playlist current;
-	private static Iterator<Song> playlistIterator;
+	private static ListIterator<Song> playlistIterator;
 	private String[] playlistNames;
 	private DatabaseControl control = DatabaseControl.getInstance();	
 	
@@ -46,11 +47,10 @@ public class PlaylistControl {
 
 
 	public void showPlaylist(int playlistID) {
-		Playlist current = (Playlist) control.load( Playlist.class, playlistID);
-		playlistIterator = current.getSongs().iterator();
-		
-		int tabindex = playlistScreen.getIndexOfTab(current.getPlaylistId());
+		int tabindex = playlistScreen.getIndexOfTab(playlistID);
 		if(tabindex==-1){
+			Playlist current = (Playlist) control.load( Playlist.class, playlistID);
+			playlistIterator = (ListIterator<Song>) current.getSongs().listIterator();
 			playlistScreen.addPlaylistTab(current.getName(), new PlaylistSingleScreen(current));
 		}
 		playlistScreen.setTabByIndex(tabindex);
@@ -59,11 +59,10 @@ public class PlaylistControl {
 
 
 	public void showAlbum(int albumID) {
-		Album current = (Album) control.load( Album.class, albumID);
-		playlistIterator = current.getSongs().iterator();
-		
-		int tabindex = playlistScreen.getIndexOfTab(current.getPlaylistId());
+		int tabindex = playlistScreen.getIndexOfTab(albumID);
 		if(tabindex==-1){
+			Album current = (Album) control.load( Album.class, albumID);
+			playlistIterator = (ListIterator<Song>) current.getSongs().listIterator();
 			playlistScreen.addPlaylistTab(current.getName(), new PlaylistSingleScreen(current));
 		}
 		playlistScreen.setTabByIndex(tabindex);
@@ -86,13 +85,21 @@ public class PlaylistControl {
 		}	
 		return file;	
 	}
+	public static File prevSong(){	
+		File file = null;
+		
+		while(playlistIterator.hasPrevious()){
+			file = new File(playlistIterator.next().getPath());
+		}	
+		return file;	
+	}
 	/**
 	 * Setzt die Aktuelle playlist
 	 * @param playlist die neue aktuelle
 	 */
 	public static void setCurrentPlaylist(Playlist playlist){
 		current = playlist;
-		playlistIterator = current.getSongs().iterator();
+		playlistIterator = (ListIterator<Song>) current.getSongs().listIterator();
 	}
 
 	public void savePlaylists(){
