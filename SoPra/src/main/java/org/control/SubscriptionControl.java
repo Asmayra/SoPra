@@ -34,7 +34,7 @@ public class SubscriptionControl {
 
 	    //Dummdaten erzeugen
 	    for (int i = 0; i < 12; i++) {
-	    	 DiscoverElement discover = new DiscoverElement("Followed "+(i+1), LoadImageControl.loadImageIcon(""), "url "+i, "User");
+	    	 DiscoverElement discover = new DiscoverElement("Followed "+(i+1), LoadImageControl.loadImageIcon("", LoginControl.getInstance().getCurrentUser()), "url "+i, "User");
 	    	 subscriptionElements.add(discover);
 	    }
 	    

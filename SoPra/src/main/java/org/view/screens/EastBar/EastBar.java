@@ -99,7 +99,7 @@ public class EastBar extends JLayeredPane{
 		
 		while(itr.hasNext()){
 			User usr = ((User) itr.next());
-			element = new JLabel(usr.getFirstname());
+			element = new JLabel(usr.getUsername());
 			element.putClientProperty("id", usr.getUsername());
 			element.putClientProperty("class", "User");
 			element.addMouseListener(listen);
