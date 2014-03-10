@@ -48,7 +48,7 @@ public class User implements Comparable {
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable(name = "FOLLOW_TABLE")
 	private Set<User> following = new HashSet<User>();
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToMany(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
 	private Set<Playlist> playlists = new HashSet<Playlist>();
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Set<Album> alben = new HashSet<Album>();
@@ -58,7 +58,7 @@ public class User implements Comparable {
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	// Set Eager,because it's loaded at the Homescreen
 	private Set<Post> posts = new HashSet<Post>();
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
 	private Set<Message> messages = new HashSet<Message>();
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Set<Song> ownSongs = new HashSet<Song>();

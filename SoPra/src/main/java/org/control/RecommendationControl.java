@@ -37,7 +37,7 @@ public class RecommendationControl {
 		List<User> following = user.getFollowing();
 		int random2 = 0;
 		while (random2 == 0) {
-			System.out.println("Test1");
+			System.out.println("ATest1");
 			if (following.size() == 0) {
 				System.out.println("Test2");
 				break;
@@ -78,6 +78,7 @@ public class RecommendationControl {
 		List<User> following = user.getFollowing();
 		int random2 = 0;
 		while (random2 == 0) {
+			System.out.println("STest1");
 			if (following.size() == 0) {
 				break;
 			}
