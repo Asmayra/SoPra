@@ -36,8 +36,6 @@ public class LoginScreenLoginButtonListener implements ActionListener, KeyListen
 				System.out.println("UserLayout aufgesetzt");
 				MainScreen.getInstance().setUpUserLayout();
 				DiscoverControl discControl = new DiscoverControl();
-				SubscriptionControl subControl = new SubscriptionControl();
-				
 				
 			}
 			login.resetPassword();
