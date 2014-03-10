@@ -226,7 +226,7 @@ public class PlaylistMiniScreen extends JPanel{
 			uploads.addActionListener(new UploadPageButtonListener());
 			user.add(uploads,c);
 		}
-		else if(currentUser.getRights().equals("Labelmanager")){
+		else if(currentUser.getRights().equals("LabelManager")){
 			c.gridy++;
 			label.addActionListener(new LabelButtonListener());
 			user.add(label,c);
