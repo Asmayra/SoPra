@@ -272,19 +272,12 @@ public class User implements Comparable {
 		List<Playlist> list = new ArrayList<Playlist>(this.playlists);
 		for (int i = 0; i < list.size(); i++) {
 			if (list.get(i).getName() == "Favorites") {
-				return list.get(i);
+				return ((List<Playlist>) playlists).get(i);
 			}
 		}
-		
 		Playlist playlist = new Playlist(this);
-		playlist.setName("Favorites");
-		
-		try {
-			DatabaseControl.getInstance().save(playlist);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
+		playlist.setFavorite();
+		this.addPlaylist(playlist);
 		return playlist;
 		
 	}
