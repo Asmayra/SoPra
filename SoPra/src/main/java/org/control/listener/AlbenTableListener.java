@@ -11,6 +11,7 @@ import org.model.Album;
 import org.model.Playlist;
 import org.model.Song;
 import org.model.User;
+import org.view.screens.WestBar.PlaylistMiniScreen;
 
 public class AlbenTableListener implements TableModelListener {
 
@@ -26,13 +27,15 @@ public class AlbenTableListener implements TableModelListener {
 		User current = LoginControl.getInstance().getCurrentUser();
 		if ((boolean) favor) {
 				current.addAlben(selected);
+				PlaylistMiniScreen.getInstance().updateMiniScreen();
 				//DatabaseControl.getInstance().update(current);
 		} else {
-			if (owner==current.getUsername()) {
+			if (owner.equals(current.getUsername())) {
 				model.setValueAt(true, row, 3);
 				JOptionPane.showMessageDialog(null, "Sie können ihre eignen Alben nicht entfernen.\n Sie haben aber die Möglichkeit ihr Album komplett zu löschen.");
 			} else {
 				current.removeAlbum(selected);
+				PlaylistMiniScreen.getInstance().updateMiniScreen();
 				//DatabaseControl.getInstance().update(current);
 			}
 		}
