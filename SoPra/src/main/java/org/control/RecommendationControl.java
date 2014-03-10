@@ -124,14 +124,14 @@ public class RecommendationControl {
 		return recAlbum;
 	}
 	
-	public List<Album> allRecomendedSongs(){
+	public List<Song> allRecomendedSongs(){
 		List<Song> recSongs = new ArrayList<Song>();
 		List<User> following = user.getFollowing();
 		for (int i = 0; i<following.size();i++){
-			List<Song> followedAlben = following.get(i).getAlben();
-			recAlbum.addAll(followedAlben);
+			List<Song> followedSongs = following.get(i).getOwnSongs();
+			recSongs.addAll(followedSongs);
 		}
-		return recAlbum;
+		return recSongs;
 	}
 
 }
