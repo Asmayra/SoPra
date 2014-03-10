@@ -71,6 +71,8 @@ public class EastBar extends JLayeredPane{
 			y=0;
 		}
 		this.resultsPan.setBounds(20, 22, 125, y);
+		this.validate();
+		this.repaint();
 	}
 	
 	/**

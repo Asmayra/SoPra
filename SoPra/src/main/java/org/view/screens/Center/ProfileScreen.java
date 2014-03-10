@@ -22,6 +22,7 @@ import org.control.listener.FollowButtonListener;
 import org.control.listener.IgnoreButtonListener;
 import org.control.listener.ProfileMessageButtonListener;
 import org.control.listener.ProfileScreenBannButtonListener;
+import org.control.listener.ProfileScreenInviteToLabelButtonListener;
 import org.control.listener.ProfileScreenUpgradeToAdminButtonListener;
 import org.control.listener.ProfileScreenUpgradeToArtistButtonListener;
 import org.control.listener.ProfileScreenUpgradeToManagerButtonListener;
@@ -38,7 +39,7 @@ import org.view.ProfileSongsPanel;
  * Inhalt und Rechte des Profils die Songs, Playlisten, Alben und Posts
  * angezeigt werden.
  * 
- * @author Sebastian Roth
+ * @author Sebastian Roth, Michael Pfennings
  * 
  */
 public class ProfileScreen extends JPanel {
@@ -62,7 +63,7 @@ public class ProfileScreen extends JPanel {
 	private JButton message;
 	private JButton ignore;
 	private JButton follow;
-	private JButton bann, upgradeToArtist, upgradeToUser, upgradeToManager, upgradeToAdmin;
+	private JButton bann, upgradeToArtist, upgradeToUser, upgradeToManager, upgradeToAdmin, inviteToLabel;
 	private JLabel lblName;
 	private JLabel lblLastName;
 	private JLabel lblCity;
@@ -179,6 +180,11 @@ public class ProfileScreen extends JPanel {
 			
 		}
 		
+		if (LoginControl.getInstance().getCurrentUser().getRights().equals("LabelManager")){
+			inviteToLabel = new JButton("Zu Label einladen");
+			inviteToLabel.addActionListener(new ProfileScreenInviteToLabelButtonListener());
+			userOverview.add(inviteToLabel, BorderLayout.EAST);
+		}
 		
 
 		userContent = new JTabbedPane();
