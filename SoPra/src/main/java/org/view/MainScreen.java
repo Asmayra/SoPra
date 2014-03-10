@@ -69,7 +69,7 @@ public class MainScreen extends JFrame {
 	/**
 	 * Zerstört den Singleton
 	 */
-	public static void detroy()
+	public static void destroy()
 	{
 		instance = null;
 	}
