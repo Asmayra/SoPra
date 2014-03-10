@@ -243,6 +243,7 @@ public class PlaylistMiniScreen extends JPanel{
 		playlists.expandPath(new TreePath(rootUser.getPath()));
 		playlists.setRootVisible(false);
 		playlists.addMouseListener(new PlaylistTreeListener());
+		playlists.setEditable(true);
 		
 		scrollUser = new JScrollPane(user);	
 	}
