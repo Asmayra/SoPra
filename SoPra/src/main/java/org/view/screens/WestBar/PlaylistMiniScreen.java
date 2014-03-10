@@ -39,6 +39,7 @@ public class PlaylistMiniScreen extends JPanel{
 	private JButton genres;
 	private JButton uploads;
 	private JButton label;
+	private JButton createLabel;
 	private JScrollPane scrollUser;
 	private JScrollPane scrollAdmin;
 	private JLabel invisible;
@@ -185,6 +186,7 @@ public class PlaylistMiniScreen extends JPanel{
 		genres = new JButton("Genres");
 		uploads = new JButton("Uploads");
 		label = new JButton("Label");
+		createLabel = new JButton("Label erstellen");
 		subscriptions.setOpaque(false);
 		subscriptions.setContentAreaFilled(false);
 		subscriptions.setBorderPainted(false);
@@ -205,6 +207,10 @@ public class PlaylistMiniScreen extends JPanel{
 		label.setContentAreaFilled(false);
 		label.setBorderPainted(false);
 		label.setBackground(Color.WHITE);
+		createLabel.setOpaque(false);
+		createLabel.setContentAreaFilled(false);
+		createLabel.setBorderPainted(false);
+		createLabel.setBackground(Color.WHITE);
 		//Layoutmanager + Anordnung
 		GridBagConstraints c  = new GridBagConstraints();
 		c.fill = GridBagConstraints.BOTH;
@@ -224,6 +230,9 @@ public class PlaylistMiniScreen extends JPanel{
 			c.gridy++;
 			genres.addActionListener(new GenresButtonListener());
 			user.add(genres,c);
+			c.gridy++;
+			createLabel.addActionListener(new CreateLabelButtonListener());
+			user.add(createLabel,c);
 		}	
 		else if(currentUser.getRights().equals("Artist")){
 			c.gridy++;
