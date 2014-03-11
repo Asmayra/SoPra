@@ -8,11 +8,16 @@ import javax.swing.table.TableModel;
 import org.control.DatabaseControl;
 import org.control.LoginControl;
 import org.model.Album;
-import org.model.Playlist;
-import org.model.Song;
 import org.model.User;
 import org.view.screens.WestBar.PlaylistMiniScreen;
 
+/**
+ * table listener which removes or adds a album to the own album collection of a
+ * user
+ * 
+ * @author Sebastian Roth
+ * 
+ */
 public class AlbenTableListener implements TableModelListener {
 
 	@Override

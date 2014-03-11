@@ -5,8 +5,6 @@ import java.io.IOException;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-import java.util.TreeSet;
-
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -14,7 +12,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.sound.sampled.AudioFileFormat;
 import javax.sound.sampled.AudioSystem;
@@ -22,14 +19,16 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.persistence.CascadeType;
 
 import org.tritonus.share.sampled.file.TAudioFileFormat;
+
 /**
  * Song Entity
- * @author Philipp
- *
+ * 
+ * @author Philipp, Sebastian Roth
+ * 
  */
 @Entity
 @Table(name = "SONG_TABLE")
-public class Song implements Comparable{
+public class Song implements Comparable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -38,39 +37,32 @@ public class Song implements Comparable{
 	private String title = "";
 	private String location = "";
 
-	@ManyToMany (cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Set<Playlist> playlists = new HashSet<Playlist>();
-	@ManyToMany (cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Set<Genre> genre = new HashSet<Genre>();
 
 	@ManyToOne
 	private Album album;
 	private int playtime;
-	private double vrgRating;
-	private int ratingCount;
-	
+
 	private boolean banned = false;
-	
-	public Song(){
-		
+
+	public Song() {
+
 	}
-	
-	
+
 	public Song(String interpret, String title, String location, Album album) {
 		this.interpret = interpret;
 		this.title = title;
 		this.location = location;
-		vrgRating = 0;
-		ratingCount = 0;
 		this.album = album;
 	}
-	
-	public Song(String interpret, String title){
+
+	public Song(String interpret, String title) {
 		this.interpret = interpret;
 		this.title = title;
 		location = "";
-		vrgRating = 0;
-		ratingCount = 0;
 		album = null;
 		playtime = 0;
 	}
@@ -79,8 +71,6 @@ public class Song implements Comparable{
 		this.interpret = interpret;
 		this.title = title;
 		this.location = location;
-		vrgRating = 0;
-		ratingCount = 0;
 		album = null;
 	}
 
@@ -103,41 +93,27 @@ public class Song implements Comparable{
 	public void setAlbum(Album a) {
 		album = a;
 	}
-	
-	//LÖSCHEN: NUR FÜR TESTZWECKE
-	public void setSongId(int id){
-		this.songId=id;
+
+	// LÖSCHEN: NUR FÜR TESTZWECKE
+	public void setSongId(int id) {
+		this.songId = id;
 	}
-	
-	public int getSongId(){
+
+	public int getSongId() {
 		return songId;
 	}
 
-	public int getVrgRating() {
-		int r1 = (int) Math.round(vrgRating);
-		if ((vrgRating-r1)<0.5){
-			return r1;
-		}
-		return (r1+1);
-		
-	}
-
-	public void setVrgRating(int newrating) {
-		ratingCount++;
-		vrgRating = (vrgRating + (double) newrating) / ratingCount;
-	}
-
-	public void setPlaytime(){
+	public void setPlaytime() {
 		AudioFileFormat fileFormat;
 		try {
 			fileFormat = AudioSystem.getAudioFileFormat(new File(location));
-	        Map<?, ?> properties = ((TAudioFileFormat) fileFormat).properties();
-	        String key = "duration";
-	        Long microseconds = (Long) properties.get(key);
-	        int mili = (int) (microseconds / 1000);
-	        int sec = (mili / 1000); 
-	        playtime = sec;
-	        } catch (UnsupportedAudioFileException | IOException e) {
+			Map<?, ?> properties = ((TAudioFileFormat) fileFormat).properties();
+			String key = "duration";
+			Long microseconds = (Long) properties.get(key);
+			int mili = (int) (microseconds / 1000);
+			int sec = (mili / 1000);
+			playtime = sec;
+		} catch (UnsupportedAudioFileException | IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -145,10 +121,10 @@ public class Song implements Comparable{
 
 	@Override
 	public int compareTo(Object song) {
-		
-		return (this.songId-((Song)song).getSongId());
+
+		return (this.songId - ((Song) song).getSongId());
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this.hashCode() == obj.hashCode()) {
@@ -161,39 +137,32 @@ public class Song implements Comparable{
 	public int hashCode() {
 		return this.getSongId();
 	}
-	
-	
-	public String getPath(){
+
+	public String getPath() {
 		return location;
 	}
-	
-	public void setPath(String path)
-	{
+
+	public void setPath(String path) {
 		location = path;
 	}
-	
-	public void setTitle(String title){
+
+	public void setTitle(String title) {
 		this.title = title;
 	}
-
 
 	public Set<Genre> getGenre() {
 		return genre;
 	}
 
-
 	public void addGenre(Genre genre) {
 		this.genre.add(genre);
 	}
-	
 
-	public void setBanned(boolean b)
-	{
+	public void setBanned(boolean b) {
 		banned = b;
 	}
-	
-	public boolean getBanned()
-	{
+
+	public boolean getBanned() {
 		return banned;
 	}
 

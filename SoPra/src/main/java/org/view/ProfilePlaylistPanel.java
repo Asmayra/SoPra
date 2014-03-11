@@ -1,10 +1,7 @@
 package org.view;
 
-import java.awt.Component;
-import java.awt.FlowLayout;
 import java.util.List;
 
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ScrollPaneConstants;
@@ -12,11 +9,15 @@ import javax.swing.table.DefaultTableModel;
 
 import org.control.LoginControl;
 import org.control.listener.PlaylistTableListener;
-import org.control.listener.SongTableListener;
 import org.model.Playlist;
-import org.model.Song;
 import org.model.User;
 
+/**
+ * JScrollPane which shows the playlists of a user on his profile screen
+ * 
+ * @author Sebastian Roth
+ * 
+ */
 public class ProfilePlaylistPanel extends JScrollPane {
 
 	private static String[] columns = new String[] { "Name", "Ersteller", "#Lieder", "Favor", "ID" };
@@ -24,11 +25,23 @@ public class ProfilePlaylistPanel extends JScrollPane {
 	private static DefaultTableModel model;
 	private static JTable table;
 
+	/**
+	 * constructor provides the playlist panel on the profile screen
+	 * 
+	 * @param u
+	 */
 	public ProfilePlaylistPanel(User u) {
 		super(create(u));
 		setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 	}
 
+	/**
+	 * create method creates the needed jtable
+	 * 
+	 * @param u
+	 *            user whose playlists get shown
+	 * @return a jtable with all playlists of the user u
+	 */
 	private static JTable create(User u) {
 		model = new DefaultTableModel(context, columns) {
 			@Override
@@ -38,6 +51,7 @@ public class ProfilePlaylistPanel extends JScrollPane {
 				else
 					return String.class;
 			}
+
 			@Override
 			public boolean isCellEditable(int row, int column) {
 				return column == 3;

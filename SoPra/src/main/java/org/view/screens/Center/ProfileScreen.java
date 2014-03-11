@@ -6,8 +6,6 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
-
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -34,10 +32,9 @@ import org.view.ProfilePostsPanel;
 import org.view.ProfileSongsPanel;
 
 /**
- * Profil-Screen mit Funktionen "follow/unfollow", "ignore/unignore" und
- * "Nachricht senden" (nicht beim Aufruf des eigenen Profils). Es kann je nach
- * Inhalt und Rechte des Profils die Songs, Playlisten, Alben und Posts
- * angezeigt werden.
+ * profil-screen to show a users data, his posts and his music collection with
+ * functions for follow, ignore, send messages and ban provided by dynamic
+ * buttons
  * 
  * @author Sebastian Roth, Michael Pfennings
  * 
@@ -78,8 +75,8 @@ public class ProfileScreen extends JPanel {
 	public ProfileScreen(User selectedUser) {
 		userProfile = selectedUser;
 		// task: try catch Block hinzufügen für IOException
-			prflPicture = userProfile.getPicture();
-			prflPicture = prflPicture.getScaledInstance(150, 150, BufferedImage.SCALE_DEFAULT);
+		prflPicture = userProfile.getPicture();
+		prflPicture = prflPicture.getScaledInstance(150, 150, BufferedImage.SCALE_DEFAULT);
 		if (LoginControl.getInstance().getCurrentUser().isFollowing(userProfile)) {
 			followProfile = true;
 		} else {
@@ -117,13 +114,13 @@ public class ProfileScreen extends JPanel {
 		userData.add(lblCountry);
 		lblAge = new JLabel("Alter:" + userProfile.getAge());
 		userData.add(lblAge);
-		
-		if (userProfile.getBanned() == true){
+
+		if (userProfile.getBanned() == true) {
 			lblBanned = new JLabel("Nutzer ist gebannt!");
 			lblBanned.setForeground(Color.RED);
 			userData.add(lblBanned);
 		}
-			
+
 		userOverview.add(userData, BorderLayout.CENTER);
 
 		buttons = new JPanel();
@@ -148,48 +145,45 @@ public class ProfileScreen extends JPanel {
 			buttons.add(follow);
 			buttons.add(ignore);
 		}
-		
-		if (LoginControl.getInstance().getCurrentUser().getRights().equals("Admin")){
+
+		if (LoginControl.getInstance().getCurrentUser().getRights().equals("Admin")) {
 			JPanel adminPanel = new JPanel();
-			adminPanel.setLayout(new GridLayout(5,1));
+			adminPanel.setLayout(new GridLayout(5, 1));
 			bann = new JButton("Nutzer (ent-)bannen");
 			bann.addActionListener(new ProfileScreenBannButtonListener(selectedUser));
 			adminPanel.add(bann);
-			
+
 			upgradeToArtist = new JButton("Zu Artist befördern");
 			upgradeToArtist.addActionListener(new ProfileScreenUpgradeToArtistButtonListener(selectedUser));
 			adminPanel.add(upgradeToArtist);
-			
+
 			upgradeToUser = new JButton("Zu User befördern");
 			upgradeToUser.addActionListener(new ProfileScreenUpgradeToUserButtonListener(selectedUser));
 			adminPanel.add(upgradeToUser);
-			
+
 			upgradeToManager = new JButton("Zu Manager befördern");
 			upgradeToManager.addActionListener(new ProfileScreenUpgradeToManagerButtonListener(selectedUser));
 			adminPanel.add(upgradeToManager);
-			
+
 			upgradeToAdmin = new JButton("Zu Admin befördern");
 			upgradeToAdmin.addActionListener(new ProfileScreenUpgradeToAdminButtonListener(selectedUser));
 			adminPanel.add(upgradeToAdmin);
-			
-			
+
 			userOverview.add(adminPanel, BorderLayout.EAST);
-			
+
 		}
-		
-		if (LoginControl.getInstance().getCurrentUser().getRights().equals("LabelManager")){
+
+		if (LoginControl.getInstance().getCurrentUser().getRights().equals("LabelManager")) {
 			inviteToLabel = new JButton("Zu Label einladen");
 			inviteToLabel.addActionListener(new ProfileScreenInviteToLabelButtonListener());
 			userOverview.add(inviteToLabel, BorderLayout.EAST);
 		}
-		
 
 		userContent = new JTabbedPane();
 		playlists = new ProfilePlaylistPanel(userProfile);
 		alben = new ProfileAlbenPanel(userProfile);
 		posts = new ProfilePostsPanel(userProfile);
 		songs = new ProfileSongsPanel(this);
-		
 
 		new JScrollPane(playlists);
 		new JScrollPane(alben);
@@ -205,62 +199,35 @@ public class ProfileScreen extends JPanel {
 
 	}
 
-	/**
-	 * Get-Methode die den Status zurückgibt ob Benutzer dem User dieses Profils
-	 * ignoriert oder nicht
-	 * 
-	 * @return boolean mit true für "ignoriert" und false für "ignoriert nicht"
-	 */
 	public boolean getIgnore() {
 		return ignoreProfile;
 	}
 
-	/**
-	 * Get-Methode die den Status zurückgibt ob Benutzer dem User dieses Profils
-	 * folgt oder nicht
-	 * 
-	 * @return boolean mit true für "folgt" und false für "folgt nicht"
-	 */
 	public boolean getFollow() {
 		return followProfile;
 	}
 
-	/**
-	 * Set-Methode um den "Folge"-Status zu setzen
-	 * 
-	 * @param b
-	 *            boolean mit true für "folgt" und false für "folgt nicht"
-	 */
 	public void setFollow(boolean b) {
 		followProfile = b;
 
 	}
 
-	/**
-	 * Set-Methode um den "Ignorier"-Status zu setzen
-	 * 
-	 * @param b
-	 *            boolean mit true für "ignoriert" und false für
-	 *            "ignoriert nicht"
-	 */
 	public void setIgnore(boolean b) {
 		ignoreProfile = b;
 	}
 
 	/**
-	 * Get-Methode die den User des aufgerufenen Profils zurückgibt
+	 * returns the user of the depending user profile
 	 * 
-	 * @return User des aufgerufenen Profils
+	 * @return
 	 */
 	public User getUserProfile() {
 		return userProfile;
 	}
-	
-	public void resetSongPanel(){
-		songs = new ProfileSongsPanel(this);
-		userContent.removeTabAt(2);
-		userContent.addTab("Songs", songs);
-		
+
+	public void resetPanels() {
+		// toDo
+
 	}
 
 }

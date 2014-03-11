@@ -1,13 +1,9 @@
 package org.model;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
-import java.util.TreeSet;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -18,14 +14,13 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.swing.JOptionPane;
 
 /**
  * Entity for Playlists
  * 
- * @author Philipp
+ * @author Philipp, Sebastian Roth
  * 
  */
 @Entity
@@ -87,16 +82,33 @@ public class Playlist implements Comparable {
 		return name;
 	}
 
+	/**
+	 * tests if the name-string is "Favorites"
+	 * 
+	 * @param name
+	 *            tested name
+	 * @throws IllegalArgumentException
+	 *             when the name is Favorites
+	 */
 	private void testName(String name) throws IllegalArgumentException {
 		if (name.equals("Favorits")) {
 			throw new IllegalArgumentException();
 		}
 	}
 
+	/**
+	 * sets the name of a plalist to "Favorites"
+	 */
 	public void setFavorite() {
 		this.name = ("Favorites");
 	}
 
+	/**
+	 * sets the name of the playlist but only if it is not "Favorites"
+	 * 
+	 * @param name
+	 *            name for the playlist
+	 */
 	public void setName(String name) {
 		try {
 			testName(name);
@@ -130,6 +142,15 @@ public class Playlist implements Comparable {
 		songs.remove(song);
 	}
 
+	/**
+	 * creates a new playlist out of the favorites-playlist of another user
+	 * 
+	 * @param u
+	 *            user for whom is the new playlist
+	 * @param p
+	 *            plalist that gets copied
+	 * @return new copied favorites-playlist
+	 */
 	public static Playlist copyFriendFavorites(User u, Playlist p) {
 		Playlist copyF = new Playlist(u);
 		copyF.setSongs(p.getSongs());
