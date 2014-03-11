@@ -8,7 +8,11 @@ import org.model.Ticket;
 import org.view.MainScreen;
 import org.view.screens.Center.AdminHomeScreen;
 import org.view.screens.Center.HomeScreen;
-
+/**
+ * Löscht ein Bestimmtes Ticket
+ * @author Philipp
+ *
+ */
 public class DeleteTicket implements ActionListener{
 	Ticket selected;
 	

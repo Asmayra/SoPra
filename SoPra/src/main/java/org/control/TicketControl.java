@@ -42,7 +42,13 @@ public class TicketControl {
 	{
 		instance = null;
 	}
-	
+	/**
+	 * Erstellt ein TIcket mit folgendne Attributen
+	 * @param category Ticketkategorie
+	 * @param currentUser Benutzer,der das Ticket erstellt hat
+	 * @param ticketText  Kurznachricht, um das ticket näher zu beschrieben
+	 * @return true,falls das ticket erfolgreich erstellt wurde
+	 */
 	public boolean createTicket(String category, User currentUser, String ticketText){
 		Ticket newTicket = new Ticket();
 		if (category == null || category == "" || currentUser == null){
@@ -61,6 +67,10 @@ public class TicketControl {
 		return true;
 	}
 
+	/**
+	 * Zeigt alle Tickets an,die einer Kategorie zugeordnet sind
+	 * @param thema die kathegorie
+	 */
 	public void showTickets(String thema) {
 		ArrayList<Ticket> tickets = (ArrayList<Ticket>) DatabaseControl.getInstance().getTableContent("Ticket");
 		Iterator<Ticket> it = tickets.iterator();
@@ -74,13 +84,20 @@ public class TicketControl {
 		MainScreen.getInstance().updateCenter(new TicketScreenAdmin(ticketsToShow));
 	}
 
+	/**
+	 * Lässt ein bestimtmes ticket auftachen
+	 * @param ticket 
+	 */
 	public void showSingleTicket(Ticket ticket) {
 		LinkedList<Ticket> ticketsToShow = new LinkedList<Ticket>();
 		ticketsToShow.add(ticket);
 		MainScreen.getInstance().updateCenter(new TicketScreenAdmin(ticketsToShow));
 	}
 
-
+	/**
+	 * Zeigt alle übergebenen Tickets
+	 * @param ticketsToShow Liste der übergebenen tickets
+	 */
 	public void showTicketList(LinkedList<Ticket> ticketsToShow) {
 		MainScreen.getInstance().updateCenter(new TicketScreenAdmin(ticketsToShow));
 	}

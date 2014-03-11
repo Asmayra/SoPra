@@ -21,7 +21,11 @@ import org.view.screens.Center.ProfileScreen;
 import org.view.screens.EastBar.EastBar;
 import org.view.screens.EastBar.SearchMask;
 
-
+/**
+ * Listener für die Suchmaske
+ * @author Tim
+ *
+ */
 public class SearchMaskListener implements KeyListener, ActionListener, MouseListener{
 
 	public void keyPressed(KeyEvent e) {
@@ -45,7 +49,6 @@ public class SearchMaskListener implements KeyListener, ActionListener, MouseLis
 	 */
 	private void setResults(){
 		new SearchControl().generateResults(SearchMask.getInstance().getSearchInput());
-		EastBar.getInstance().showResultsPan();
 	}
 	
 
@@ -54,7 +57,6 @@ public class SearchMaskListener implements KeyListener, ActionListener, MouseLis
 	 */
 	public void actionPerformed(ActionEvent e) {
 		SearchMask.getInstance().resetSearchInput();
-		EastBar.getInstance().hideResultsPan();
 		
 	}
 

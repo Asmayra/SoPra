@@ -21,7 +21,11 @@ import org.model.Playlist;
 import org.model.User;
 import org.view.ContextMenu;
 import org.view.screens.Center.PlaylistExtendedScreen;
-
+/**
+ * Listener für sämtliche operationen mit der Playlist
+ * @author Tim, Max
+ *
+ */
 public class PlaylistTreeListener extends MouseAdapter{
 
 	private Playlist playlistEdit=null;
