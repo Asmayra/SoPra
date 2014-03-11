@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.sound.sampled.AudioFileFormat;
 import javax.sound.sampled.AudioSystem;
@@ -39,8 +40,8 @@ public class Song implements Comparable {
 
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Set<Playlist> playlists = new HashSet<Playlist>();
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	private Set<Genre> genre = new HashSet<Genre>();
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private Genre genre;
 
 	@ManyToOne
 	private Album album;
@@ -152,12 +153,12 @@ public class Song implements Comparable {
 		this.title = title;
 	}
 
-	public Set<Genre> getGenre() {
+	public Genre getGenre() {
 		return genre;
 	}
 
-	public void addGenre(Genre genre) {
-		this.genre.add(genre);
+	public void setGenre(Genre genre) {
+		this.genre = genre;
 	}
 
 	public void setBanned(boolean b) {

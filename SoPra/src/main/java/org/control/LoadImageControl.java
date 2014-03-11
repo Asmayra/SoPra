@@ -35,6 +35,26 @@ public class LoadImageControl {
 	}
 	
 	/**
+	 * Lädt ein icon für das Menü auf der Westbar
+	 * @param name Name des Icons das geladen werden soll
+	 * @return ImageIcon für das Menü
+	 * @pre name existiert
+	 * @past true
+	 */
+	public static ImageIcon loadMenuIcon(String name)
+	{
+		BufferedImage image = new BufferedImage(40, 40, BufferedImage.TYPE_INT_RGB);
+		try {
+				image = ImageIO.read(ClassLoader.getSystemClassLoader().getResource("name"));
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return new ImageIcon(image);
+	}
+	
+	/**
 	 * load BufferedImage from Filesystem
 	 * @param imagePath String to the location of the file on the filesystem, if emtpy placeholder is loaded
 	 * @return loaded ImageIcon
@@ -44,7 +64,7 @@ public class LoadImageControl {
 	public static BufferedImage loadBufferedImage(String imagePath, User user){
 		BufferedImage image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_RGB);
 		try {
-			if(imagePath == null || imagePath == "" || imagePath.equals("placeholder.jpg")){
+			if(imagePath == null || imagePath.equals("") || imagePath.equals("placeholder.jpg")){
 				image = ImageIO.read(ClassLoader.getSystemClassLoader().getResource("placeholder.jpg"));
 			} else{
 				String filepath = PathControl.getInstance().getRoot() + File.separator

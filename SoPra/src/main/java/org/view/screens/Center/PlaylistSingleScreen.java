@@ -45,6 +45,7 @@ public class PlaylistSingleScreen extends JPanel{
 		scroll = new JScrollPane(table);
 		this.add(scroll);
 		this.setPreferredSize(new Dimension(500,500));
+		table.removeColumn(table.getColumnModel().getColumn(5));
 	}
 	
 	private void addSongsToTable(){
@@ -79,6 +80,7 @@ public class PlaylistSingleScreen extends JPanel{
 			
 			Object[] songData = new Object[]{interpret,title,album,playtime,favored, songID};
 			model.addRow(songData);
+			
 		}
 	}
 

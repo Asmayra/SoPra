@@ -97,6 +97,8 @@ public class ProfileSongsPanel extends JScrollPane {
 			model.addRow(entry);
 		}
 		table.setFillsViewportHeight(true);
+		table.removeColumn(table.getColumnModel().getColumn(4));
+		table.removeColumn(table.getColumnModel().getColumn(5));
 		table.addMouseListener(new ProfileSongsPanelListner());
 		model.addTableModelListener(new SongTableListener());
 		return table;
