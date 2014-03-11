@@ -48,7 +48,7 @@ public class PlaylistSingleScreen extends JPanel{
 		this.add(scroll);
 		this.setPreferredSize(new Dimension(500,500));
 		table.removeColumn(table.getColumnModel().getColumn(4));
-		table.removeColumn(table.getColumnModel().getColumn(6));
+		table.removeColumn(table.getColumnModel().getColumn(5));
 	}
 	
 	private void addSongsToTable(){
