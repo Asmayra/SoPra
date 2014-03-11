@@ -63,6 +63,14 @@ public class TicketScreen extends JFrame {
 	}
 	
 	/**
+	 * Zerstört den Singleton
+	 */
+	public static void destroy()
+	{
+		instance = null;
+	}
+	
+	/**
 	 * Initialisiert die Gui
 	 */
 	

@@ -45,6 +45,14 @@ public class AdminLabelScreen extends JPanel {
 		return instance;
 	}
 	
+	/**
+	 * Zerstört den Singleton
+	 */
+	public static void destroy()
+	{
+		instance = null;
+	}
+	
 	private void initGui(){
 		this.setLayout(new BorderLayout());
 		this.add(initNewLabel(),BorderLayout.NORTH);

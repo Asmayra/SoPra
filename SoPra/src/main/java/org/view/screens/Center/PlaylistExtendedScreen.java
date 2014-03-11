@@ -23,6 +23,14 @@ public class PlaylistExtendedScreen extends JPanel{
 		return instance;
 	}
 	
+	/**
+	 * Zerstört den Singleton
+	 */
+	public static void destroy()
+	{
+		instance = null;
+	}
+	
 	public PlaylistExtendedScreen(){
 		tabs.addMouseListener(new PlaylistTabsListener());
 		this.add(tabs);

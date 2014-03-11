@@ -28,7 +28,15 @@ public class RecommendationControl {
 			recControl = new RecommendationControl();
 		}
 		return recControl;
-	};
+	}
+	
+	/**
+	 * Zerstört den Singleton
+	 */
+	public static void destroy()
+	{
+		recControl = null;
+	}
 
 	public RecommendationControl() {
 	}

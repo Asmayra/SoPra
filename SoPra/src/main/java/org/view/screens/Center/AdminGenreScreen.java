@@ -60,6 +60,14 @@ public class AdminGenreScreen extends JPanel {
 	}
 	
 	/**
+	 * Zerstört den Singleton
+	 */
+	public static void destroy()
+	{
+		instance = null;
+	}
+	
+	/**
 	 * Konstruktor
 	 * @param root Für Testzwecke noch im Konstruktor übergeben, Wurzel des Genretrees
 	 */

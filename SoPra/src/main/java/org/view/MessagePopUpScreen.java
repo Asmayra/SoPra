@@ -62,6 +62,14 @@ public class MessagePopUpScreen extends JFrame {
 	}
 	
 	/**
+	 * Zerstört den Singleton
+	 */
+	public static void destroy()
+	{
+		instance = null;
+	}
+	
+	/**
 	 * Initialisiert die Gui
 	 */
 	
