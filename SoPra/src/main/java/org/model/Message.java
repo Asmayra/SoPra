@@ -31,7 +31,7 @@ public class Message implements Comparable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)	
 	private int messageId;
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
 	private User sender;
 	private String content = "";
 	private String subject = "";

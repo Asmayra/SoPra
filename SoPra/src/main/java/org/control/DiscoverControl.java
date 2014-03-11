@@ -1,6 +1,7 @@
 package org.control;
 
 import java.util.LinkedList;
+import java.util.List;
 
 import org.model.Album;
 import org.model.Song;
@@ -29,43 +30,46 @@ public class DiscoverControl {
 
 		try {
 			Album recAlbum = RecommendationControl.getInstance().recommendAlbum();
+			System.out.println("Album");
 			DiscoverElement discover1mini = new DiscoverElement(recAlbum.getName(), LoadImageControl.loadImageIcon(
-					recAlbum.getCoverart(), recAlbum.getOwner()), recAlbum.getOwner().getUsername(), "Album");
+					recAlbum.getOwner().getImagePath(), recAlbum.getOwner()), recAlbum.getOwner().getUsername(), "Album");
 			miniScreen.setDiscoverOne(discover1mini);
 		} catch (Exception e) {
-			
+			e.printStackTrace();
 		}
 		try {
 			User recUser = RecommendationControl.getInstance().recommendArtist();
+			System.out.println("Artist");
 			DiscoverElement discover2mini = new DiscoverElement(recUser.getUsername(), LoadImageControl.loadImageIcon(
 					recUser.getImagePath(), recUser), recUser.getUsername(), "User");
 			miniScreen.setDiscoverOne(discover2mini);
 		} catch (Exception e) {
-			
+			e.printStackTrace();
 		}
 		try {
 			Song recSong = RecommendationControl.getInstance().recommendSong();
 			if (recSong.getAlbum() == null) {
 				User usr = (User) DatabaseControl.getInstance().load(User.class, recSong.getInterpret());
-				System.out.println(recSong.getInterpret());
+				System.out.println("Song");
 				DiscoverElement discover3mini = new DiscoverElement(recSong.getTitle(), LoadImageControl.loadImageIcon(
 						usr.getImagePath(), usr), usr.getUsername(), "Song");
 				miniScreen.setDiscoverOne(discover3mini);
 			} else {
 				User usr = (User) DatabaseControl.getInstance().load(User.class, recSong.getInterpret());
 				DiscoverElement discover3mini = new DiscoverElement(recSong.getTitle(), LoadImageControl.loadImageIcon(
-						recSong.getAlbum().getCoverart(), usr), usr.getUsername(), "Song");
+						recSong.getAlbum().getOwner().getImagePath(), usr), usr.getUsername(), "Song");
 				miniScreen.setDiscoverOne(discover3mini);
 			}
 			
 		} catch (Exception e) {
-			
+			e.printStackTrace();
 		}
 
-
-		for (int i = 0; i < 12; i++) {
-			DiscoverElement discover = new DiscoverElement("Künstler " + (i + 1), LoadImageControl.loadImageIcon("",
-					currUser), "url " + i, "User");
+		List<User> arts = (RecommendationControl.getInstance().allRecommendedArtists());
+		for (int i = 0; i < arts.size(); i++) {
+			User art = arts.get(i);
+			DiscoverElement discover = new DiscoverElement(art.getUsername(), LoadImageControl.loadImageIcon(art.getImagePath(),
+					art), art.getUsername(), "User");
 			artists.add(discover);
 		}
 		for (int i = 0; i < 126; i++) {
