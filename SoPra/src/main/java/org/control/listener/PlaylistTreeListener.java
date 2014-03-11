@@ -64,6 +64,7 @@ public class PlaylistTreeListener extends MouseAdapter{
 	
 	private void maybeShowPopup(MouseEvent e) {
     	JTree currentTree = (JTree) e.getSource();
+    	currentTree.setSelectionPath(currentTree.getPathForLocation(e.getX(), e.getY()));
     	String[] content = {"Löschen","Bearbeiten","Neue Playlist","Anhören"};
     	ContextMenuListener delete = new ContextMenuListener();
     	ContextMenuListener edit = new ContextMenuListener();
@@ -76,7 +77,6 @@ public class PlaylistTreeListener extends MouseAdapter{
     	currentTree.getModel().addTreeModelListener(listener);
     	
         context.show(e.getComponent(),e.getX(), e.getY());
-        currentTree.setSelectionPath(currentTree.getPathForLocation(e.getX(), e.getY()));
     }
 	
 	 /**
@@ -100,14 +100,14 @@ public class PlaylistTreeListener extends MouseAdapter{
 						if(parentRow==0){
 							Playlist pL = (Playlist)current.getUserObject();
 							//soll die Playliste vom User löschen
-							currentUser.getPlaylists().remove(pL);
+							currentUser.removePlaylist(pL);
 							databaseControl.update(currentUser);
 							databaseControl.delete(pL);
 						}
 						else{
 							Album alb = (Album)current.getUserObject();
 							//soll die Playliste vom User löschen
-							currentUser.getAlben().remove(alb);
+							currentUser.removeAlbum(alb);
 							databaseControl.update(currentUser);
 						}
 	
@@ -143,12 +143,11 @@ public class PlaylistTreeListener extends MouseAdapter{
 				currentUser.addPlaylist(newPlaylist);
 				try {
 					databaseControl.save(newPlaylist);
+					databaseControl.update(currentUser);
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-				}
-				databaseControl.update(currentUser);
-				
+				}				
 			}
 		}
     	
