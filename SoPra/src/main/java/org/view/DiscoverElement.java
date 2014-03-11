@@ -1,5 +1,7 @@
 package org.view;
 
+import java.awt.Dimension;
+
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -36,7 +38,6 @@ public class DiscoverElement extends JPanel {
 		this.add(this.pictureLabel);
 		this.url = url;
 		this.objectType=type;
-		
 		this.addMouseListener(DiscoverElementListener.getInstance());
 	}
 	
