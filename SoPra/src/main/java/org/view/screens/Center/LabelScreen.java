@@ -39,7 +39,7 @@ public class LabelScreen extends JPanel {
 		this.add(initHeader(),BorderLayout.NORTH);
 		this.add(initTable(),BorderLayout.CENTER);
 		updateArtistTable();
-		if (LoginControl.getInstance().getCurrentUser().getRights().equals("Manager")){
+		if (LoginControl.getInstance().getCurrentUser().getRights().equals("LabelManager")){
 			this.add(initManagerButtons(), BorderLayout.SOUTH);
 			
 		}

@@ -119,7 +119,7 @@ public class ProfileScreen extends JPanel {
 		if( (userProfile.getRights().equals("Artist")  ||  userProfile.getRights().equals("LabelManager")) &&
 				userProfile.getLabel() != null )
 		{
-			lblLabel = new JLabel(userProfile.getLabel().getName());
+			lblLabel = new JLabel("Label: " + userProfile.getLabel().getName());
 			userData.add(lblLabel);
 		}
 
