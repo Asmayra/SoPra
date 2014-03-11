@@ -30,7 +30,6 @@ public class DiscoverControl {
 
 		try {
 			Album recAlbum = RecommendationControl.getInstance().recommendAlbum();
-			System.out.println("Album");
 			DiscoverElement discover1mini = new DiscoverElement(recAlbum.getName(), LoadImageControl.loadImageIcon(
 					recAlbum.getOwner().getImagePath(), recAlbum.getOwner()), recAlbum.getOwner().getUsername(), "Album");
 			miniScreen.setDiscoverOne(discover1mini);
@@ -38,7 +37,6 @@ public class DiscoverControl {
 		}
 		try {
 			User recUser = RecommendationControl.getInstance().recommendArtist();
-			System.out.println("Artist");
 			DiscoverElement discover2mini = new DiscoverElement(recUser.getUsername(), LoadImageControl.loadImageIcon(
 					recUser.getImagePath(), recUser), recUser.getUsername(), "User");
 			miniScreen.setDiscoverTwo(discover2mini);
@@ -48,7 +46,6 @@ public class DiscoverControl {
 			Song recSong = RecommendationControl.getInstance().recommendSong();
 			if (recSong.getAlbum() == null) {
 				User usr = (User) DatabaseControl.getInstance().load(User.class, recSong.getInterpret());
-				System.out.println("Song");
 				DiscoverElement discover3mini = new DiscoverElement(recSong.getTitle(), LoadImageControl.loadImageIcon(
 						usr.getImagePath(), usr), usr.getUsername(), "Song");
 				miniScreen.setDiscoverThree(discover3mini);
@@ -65,7 +62,6 @@ public class DiscoverControl {
 		List<User> arts = RecommendationControl.getInstance().allRecommendedArtists();
 		for (int i = 0; i < arts.size(); i++) {
 			User art = arts.get(i);
-			System.out.println("arts"+i);
 			DiscoverElement discover = new DiscoverElement(art.getUsername(), LoadImageControl.loadImageIcon(art.getImagePath(),
 					art), art.getUsername(), "User");
 			artists.add(discover);
