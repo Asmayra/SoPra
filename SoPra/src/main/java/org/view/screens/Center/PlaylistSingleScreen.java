@@ -48,11 +48,8 @@ public class PlaylistSingleScreen extends JPanel{
 		scroll = new JScrollPane(table);
 		this.add(scroll);
 		this.setPreferredSize(new Dimension(500,500));
-<<<<<<< HEAD
-=======
 		table.removeColumn(table.getColumnModel().getColumn(4));
->>>>>>> branch 'master' of https://github.com/Asmayra/SoPra.git
-		table.removeColumn(table.getColumnModel().getColumn(5));
+
 	}
 	
 	private void addSongsToTable(){
