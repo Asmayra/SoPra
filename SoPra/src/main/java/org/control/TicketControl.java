@@ -1,10 +1,15 @@
 package org.control;
 
 import java.io.IOException;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.Set;
 
 import org.model.Ticket;
 import org.model.User;
+import org.view.MainScreen;
 import org.view.TicketScreen;
+import org.view.screens.Center.TicketScreenAdmin;
 
 /**
  * 
@@ -54,6 +59,27 @@ public class TicketControl {
 		}
 		return true;
 	}
+
+	public void showTickets(String thema) {
+		Set<Ticket> tickets = (Set<Ticket>) DatabaseControl.getInstance().getTableContent("Ticket");
+		Iterator<Ticket> it = tickets.iterator();
+		LinkedList<Ticket> ticketsToShow = new LinkedList<Ticket>();
+		while(it.hasNext()){
+			Ticket current=it.next();
+			if(current.getCategory().equals(thema)){
+				ticketsToShow.add(current);
+			}
+		}
+		MainScreen.getInstance().updateCenter(new TicketScreenAdmin(ticketsToShow));
+	}
+
+	public void showSingleTicket(Ticket ticket) {
+		LinkedList<Ticket> ticketsToShow = new LinkedList<Ticket>();
+		ticketsToShow.add(ticket);
+		MainScreen.getInstance().updateCenter(new TicketScreenAdmin(ticketsToShow));
+	}
+	
+	
 	
 	
 }

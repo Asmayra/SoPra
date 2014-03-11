@@ -24,6 +24,7 @@ import org.control.listener.GenresButtonListener;
 import org.control.listener.LabelButtonListener;
 import org.control.listener.PlaylistTreeListener;
 import org.control.listener.SubscriptionButtonListener;
+import org.control.listener.TicketTreeListener;
 import org.control.listener.UploadButtonListener;
 import org.control.listener.UploadPageButtonListener;
 import org.model.Album;
@@ -136,7 +137,7 @@ public class PlaylistMiniScreen extends JPanel{
 		
 		tickets = new JTree(dtm){
 		};
-		
+		tickets.addMouseListener(new TicketTreeListener());
 		//Layoutmanager + Anordnung
 		GridBagConstraints c = new GridBagConstraints();
 		c.fill = GridBagConstraints.BOTH;
