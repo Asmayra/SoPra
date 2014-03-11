@@ -25,20 +25,9 @@ public class DiscoverElementListener implements MouseListener{
 	}
 
 	public void mouseClicked(MouseEvent e) {
-		System.out.println("ToDo: DiscoverElementListener!"+ ((DiscoverElement) e.getSource()).getUrl());
 		DiscoverElement current = (DiscoverElement) e.getSource();
 		String URL = current.getUrl();
-		String currentType = current.getObjectType();
-		MainScreen main = MainScreen.getInstance();
-		if(currentType.equals("User")){
-			//main.updateCenter(new ProfileScreen((User)DatabaseControl.getInstance().load(User.class, URL)));
-		}
-		else if(currentType.equals("Album")){
-			//main.updateCenter(new PlaylistScreen((Album)DatabaseControl.getInstance().load(Album.class, URL)));
-		}
-		else if(currentType.equals("Song")){
-			//main.updateCenter(new PlaylistScreen((Song)DatabaseControl.getInstance().load(Song.class, URL)));
-		}
+		MainScreen.getInstance().updateCenter(new ProfileScreen((User)DatabaseControl.getInstance().load(User.class, URL)));
 	}
 
 	public void mouseEntered(MouseEvent e) {

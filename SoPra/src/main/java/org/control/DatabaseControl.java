@@ -103,12 +103,12 @@ public class DatabaseControl {
 			session.beginTransaction();
 			//session.persist(o);
 			session.saveOrUpdate(o);
-			session.getTransaction().commit();
-			session.close();
 		}catch(org.hibernate.exception.ConstraintViolationException e){
 			System.out.println("Primarykey taken!");
 			throw new IOException();
 		}
+		session.getTransaction().commit();
+		session.close();
 	
 		
 	}
@@ -120,11 +120,17 @@ public class DatabaseControl {
 	 * @post Query was executed
 	 */
 	public void saveWithQuery(String query){
-		session = sessionFactory.openSession();
-		session.beginTransaction();
-		session.createQuery(query).executeUpdate();
+		try {
+			session = sessionFactory.openSession();
+			session.beginTransaction();
+			session.createQuery(query).executeUpdate();
+
+		} catch (Exception e) {
+			
+		}
 		session.getTransaction().commit();
-		session.close();	
+		session.close();
+	
 	}
 	
 	/**
@@ -134,9 +140,14 @@ public class DatabaseControl {
 	 * @post Query was executed
 	 */
 	public void insertWithQuery(String query){
-		session = sessionFactory.openSession();
-		session.beginTransaction();
-		session.createQuery(query);
+		try {
+			session = sessionFactory.openSession();
+			session.beginTransaction();
+			session.createQuery(query);
+		} catch (Exception e) {
+			
+		}
+
 		session.getTransaction().commit();
 		session.close();	
 	}
@@ -152,9 +163,13 @@ public class DatabaseControl {
 	 * 
 	 */
 	public Object load(Class c,Serializable id){
-		session = sessionFactory.openSession();
-		session.beginTransaction();
-		Object obj = session.get(c, id);
+		Object obj = null;
+		try {
+			session = sessionFactory.openSession();
+			session.beginTransaction();
+			obj = session.get(c, id);
+		} catch (Exception e) {
+		}
 		session.getTransaction().commit();
 		session.close();
 		return obj;
@@ -170,15 +185,21 @@ public class DatabaseControl {
 	 * @post The list is loaded from teh database
 	 */
 	public List<?> queryForKeyword(Class c, String property, String keyword){
-		session = sessionFactory.openSession();
-		session.beginTransaction();
+		List<?> results = null;
+		try {
+			session = sessionFactory.openSession();
+			session.beginTransaction();
 
-		//Query q = session.createQuery("SELECT firstname from User WHERE to_tsvector(username) @@ to_tsquery(:keyword)");;
-		//q.setParameter("keyword", keyword);
-		//List<?> results = q.list();
-		Criteria crit = session.createCriteria(c);
-		crit.add(Restrictions.ilike(property, "%"+keyword+"%"));
-		List<?> results = crit.list();	
+			//Query q = session.createQuery("SELECT firstname from User WHERE to_tsvector(username) @@ to_tsquery(:keyword)");;
+			//q.setParameter("keyword", keyword);
+			//List<?> results = q.list();
+			Criteria crit = session.createCriteria(c);
+			crit.add(Restrictions.ilike(property, "%"+keyword+"%"));
+			results = crit.list();	
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
 		session.getTransaction().commit();
 		session.close();
 		return results;
@@ -191,11 +212,17 @@ public class DatabaseControl {
 	 * @post List is returned form Database
 	 */
 	public List<?> getTableContent(String tablename){
-		session = sessionFactory.openSession();
-		session.beginTransaction();
+		List<?> results = null;
+		try {
+			session = sessionFactory.openSession();
+			session.beginTransaction();
 
-		Query q = session.createQuery("FROM "+tablename);
-		List<?> results = q.list();
+			Query q = session.createQuery("FROM "+tablename);
+			results = q.list();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
 	
 		session.getTransaction().commit();
 		session.close();
@@ -213,9 +240,14 @@ public class DatabaseControl {
 	 */
 	public Object update(Object update)
 	{
-		session = sessionFactory.openSession();
-		session.beginTransaction();
-		session.saveOrUpdate(update);
+		try {
+			session = sessionFactory.openSession();
+			session.beginTransaction();
+			session.saveOrUpdate(update);
+		} catch (Exception e) {
+			
+		}
+
 		session.getTransaction().commit();
 		session.close();
 		return update;
@@ -230,9 +262,14 @@ public class DatabaseControl {
 	 */
 	public void delete(Object delete)
 	{
+		try {
 			session = sessionFactory.openSession();
 			session.beginTransaction();
 			session.delete(delete);
+		} catch (Exception e) {
+			
+		}
+			
 			session.getTransaction().commit();
 			session.close();
 	}
@@ -248,19 +285,24 @@ public class DatabaseControl {
 	 */
 	public Object updatePrimary(Class c, Serializable id, Object update)
 	{
-		session = sessionFactory.openSession();
-		session.beginTransaction();
-		
-		Object toUpdate = session.load(c, id);
-		
-		if(toUpdate == null)
-		{
-			return null;
+		try {
+			session = sessionFactory.openSession();
+			session.beginTransaction();
+			
+			Object toUpdate = session.load(c, id);
+			
+			if(toUpdate == null)
+			{
+				return null;
+			}
+			
+			session.delete(toUpdate);
+			
+			session.persist(update);
+		} catch (Exception e) {
+
 		}
-		
-		session.delete(toUpdate);
-		
-		session.persist(update);
+
 
 		session.getTransaction().commit();
 		session.close();

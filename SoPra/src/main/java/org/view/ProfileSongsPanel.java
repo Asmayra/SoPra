@@ -21,7 +21,7 @@ import org.view.screens.Center.ProfileScreen;
  */
 public class ProfileSongsPanel extends JScrollPane {
 
-	private static String[] columns = new String[] { "Interpret", "Title", "Album", "Länge", "Favor", "ID" };
+	private static String[] columns = new String[] { "Interpret", "Title", "Album", "Länge","", "Favor", "ID" };
 	private static Object[][] context = new Object[][] {};
 	private static DefaultTableModel model;
 	private static JTable table;
@@ -92,7 +92,7 @@ public class ProfileSongsPanel extends JScrollPane {
 				favored = false;
 			}
 			int id = curSong.getSongId();
-			Object[] entry = { interpret, title, album, playtime, favored, id };
+			Object[] entry = { interpret, title, album, playtime,"", favored, id };
 			model.addRow(entry);
 		}
 		table.setFillsViewportHeight(true);

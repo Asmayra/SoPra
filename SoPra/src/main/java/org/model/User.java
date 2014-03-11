@@ -42,10 +42,10 @@ public class User implements Comparable {
 	private String salt = "";
 	private String rights = "StandardUser"; // Admin, Artist, LabelManager
 	private String imagePath = "";
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToMany(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
 	@JoinTable(name = "FOLLOW_TABLE")
 	private Set<User> following = new HashSet<User>();
-	@ManyToMany(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Set<Playlist> playlists = new HashSet<Playlist>();
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Set<Album> alben = new HashSet<Album>();
@@ -55,11 +55,11 @@ public class User implements Comparable {
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	// Set Eager,because it's loaded at the Homescreen
 	private Set<Post> posts = new HashSet<Post>();
-	@OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Set<Message> messages = new HashSet<Message>();
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Set<Song> ownSongs = new HashSet<Song>();
-	@OneToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Label Label;
 
 	private boolean banned = false;
@@ -72,9 +72,7 @@ public class User implements Comparable {
 		this.Label = Label;
 	}
 
-	public User() {
-		System.out.println("Schweinebraten!");
-	}
+	public User() {		}
 
 	/**
 	 * creates the favorites-playlist of the user
@@ -154,6 +152,13 @@ public class User implements Comparable {
 		return rights;
 	}
 
+	/**
+	 * Setzt die Rechte des Nutzers
+	 * @param rights Rechte die der Nutzer erhalten soll
+	 * @pre Neue Rechte sind StandardUser, Artist, LabelManager oder Admin
+	 * @post Rechte neu gesetzt
+	 * @inv Nutzer muss immer gültige Rechte besitzen
+	 */
 	public void setRights(String rights) {
 		this.rights = rights;
 	}
@@ -162,6 +167,13 @@ public class User implements Comparable {
 		return username;
 	}
 
+	/**
+	 * Setzt den Nutzernamen des Nutzers
+	 * @param username Neuer nutzername
+	 * @pre Nutzername ist einzigartig und nicht null/leer
+	 * @post neuer nutzername gesetzt
+	 * @inv Nutzer muss immer einen nicht null/leeren und einzigartigen Nutzernamen besitzen
+	 */
 	public void setUsername(String username) {
 		this.username = username;
 	}
@@ -170,6 +182,13 @@ public class User implements Comparable {
 		return password;
 	}
 
+	/**
+	 * Setzt das Passwort des Nutzers
+	 * @param password neues verschlüsseltes Passwort
+	 * @pre Passwort muss verschlüsselt sein, Passwort darf nicht leer sein
+	 * @post Neues Passwort gesetzt
+	 * @inv Nutzer muss immer ein nicht leeres verschlüsseltes Passwort benutzen
+	 */
 	public void setPassword(String password) {
 		this.password = password;
 	}
