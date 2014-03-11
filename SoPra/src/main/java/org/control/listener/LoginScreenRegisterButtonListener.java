@@ -6,6 +6,11 @@ import java.awt.event.ActionListener;
 import org.view.LoginScreen;
 import org.view.RegScreen;
 
+/**
+ * 
+ * @author Michael Pfennings, Mattias Schoenke
+ *
+ */
 public class LoginScreenRegisterButtonListener implements ActionListener {
 	
 	

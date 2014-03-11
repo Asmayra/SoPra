@@ -65,6 +65,7 @@ public class ProfileScreen extends JPanel {
 	private JLabel lblAge;
 	private JLabel lblUserName;
 	private JLabel lblBanned;
+	private JLabel lblLabel;
 
 	/**
 	 * Konstruktor erstellt das Profil-Screen-Panel
@@ -100,7 +101,7 @@ public class ProfileScreen extends JPanel {
 		userData = new JPanel();
 		userData.setLayout(new BoxLayout(userData, BoxLayout.Y_AXIS));
 
-		lblUserName = new JLabel(userProfile.getUsername());
+		lblUserName = new JLabel(userProfile.getUsername() + "  " + "(" + userProfile.getRights() + ")");
 		lblUserName.setFont(new Font("Tahoma", Font.BOLD, 20));
 		lblUserName.setForeground(Color.pink);
 		userData.add(lblUserName);
@@ -114,6 +115,13 @@ public class ProfileScreen extends JPanel {
 		userData.add(lblCountry);
 		lblAge = new JLabel("Alter:" + userProfile.getAge());
 		userData.add(lblAge);
+		
+		if( (userProfile.getRights().equals("Artist")  ||  userProfile.getRights().equals("LabelManager")) &&
+				userProfile.getLabel() != null )
+		{
+			lblLabel = new JLabel("Label: " + userProfile.getLabel().getName());
+			userData.add(lblLabel);
+		}
 
 		if (userProfile.getBanned() == true) {
 			lblBanned = new JLabel("Nutzer ist gebannt!");

@@ -17,11 +17,17 @@ import org.control.listener.LabelScreenArtistDeleteButtonListener;
 import org.model.Label;
 import org.model.User;
 
+
+/**
+ * 
+ * @author Michael Pfennings, Mattias Schoenke
+ *
+ */
 public class LabelScreen extends JPanel {
 
 	
 	
-	private JButton applyButton, deleteArtistButton, deleteManagerButton;
+	private JButton applyButton, deleteArtistButton;
 	private Label currentLabel;
 	private DefaultTableModel artistModel, managerModel;
 	private JTable artistTable, managerTable;
@@ -39,7 +45,7 @@ public class LabelScreen extends JPanel {
 		this.add(initHeader(),BorderLayout.NORTH);
 		this.add(initTable(),BorderLayout.CENTER);
 		updateArtistTable();
-		if (LoginControl.getInstance().getCurrentUser().getRights().equals("Manager")){
+		if (LoginControl.getInstance().getCurrentUser().getRights().equals("LabelManager")){
 			this.add(initManagerButtons(), BorderLayout.SOUTH);
 			
 		}

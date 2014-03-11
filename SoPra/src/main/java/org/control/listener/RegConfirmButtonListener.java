@@ -10,6 +10,12 @@ import java.util.Locale;
 import org.control.RegControl;
 import org.view.RegScreen;
 
+
+/**
+ * 
+ * @author Michael Pfennings, Mattias Schoenke
+ *
+ */
 public class RegConfirmButtonListener implements ActionListener {
 	
 	private RegScreen regScreen;

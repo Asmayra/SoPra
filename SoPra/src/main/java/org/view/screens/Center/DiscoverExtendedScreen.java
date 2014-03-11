@@ -45,6 +45,14 @@ public class DiscoverExtendedScreen extends JPanel{
 	}
 	
 	/**
+	 * Zerstört den Singleton
+	 */
+	public static void destroy()
+	{
+		instance = null;
+	}
+	
+	/**
 	 * Konstruktor
 	 */
 	public DiscoverExtendedScreen(){

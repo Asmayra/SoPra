@@ -6,6 +6,11 @@ import org.model.Ticket;
 import org.model.User;
 import org.view.TicketScreen;
 
+/**
+ * 
+ * @author Michael Pfennings, Mattias Schoenke
+ *
+ */
 public class TicketControl {
 	
 	
@@ -22,6 +27,14 @@ public class TicketControl {
 			instance = new TicketControl();
 			
 		return instance;
+	}
+	
+	/**
+	 * Zerstört den Singleton
+	 */
+	public static void destroy()
+	{
+		instance = null;
 	}
 	
 	public boolean createTicket(String category, User currentUser, String ticketText){

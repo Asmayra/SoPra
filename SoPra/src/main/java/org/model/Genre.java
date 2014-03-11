@@ -30,23 +30,14 @@ public class Genre implements Comparable{
 	@GeneratedValue(strategy = GenerationType.AUTO)	
 	private int genreId;
 	private String name = "";
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
 	private Set<Genre> subGenres;
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	private Genre parent;
+//	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//	private Genre parent;
 
 	public Genre(){
 		subGenres = new HashSet<Genre>();
 	}
-	
-	public Genre getParent() {
-		return parent;
-	}
-
-	public void setParent(Genre parent) {
-		this.parent = parent;
-	}
-
 
 	public String getName() {
 		return name;
@@ -56,8 +47,8 @@ public class Genre implements Comparable{
 		this.name = name;
 	}
 
-	public LinkedList<Genre> getSubGenres() {
-		return new LinkedList<Genre>(this.subGenres);
+	public Set<Genre> getSubGenres() {
+		return subGenres;
 	}
 
 	public void setSubGenres(LinkedList<Genre> subGenres) {
@@ -77,6 +68,10 @@ public class Genre implements Comparable{
 	public int compareTo(Object o) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+	
+	public void deleteSubgenre(Genre sub){
+		subGenres.remove(sub);
 	}
 
 }

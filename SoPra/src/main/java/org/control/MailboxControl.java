@@ -43,6 +43,14 @@ public class MailboxControl {
 	}
 	
 	/**
+	 * Zerstört den Singleton
+	 */
+	public static void destroy()
+	{
+		instance = null;
+	}
+	
+	/**
 	 * Sendet eine neue Nachricht an die angegebenen Benutzer
 	 * @param sender Sender der Nachricht
 	 * @param recipients Empfänger der Nachricht

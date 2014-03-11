@@ -3,9 +3,16 @@ package org.control.listener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import org.control.SingletonControl;
 import org.view.LoginScreen;
 import org.view.MainScreen;
 
+
+/**
+ * 
+ * @author Michael Pfennings, Mattias Schoenke
+ *
+ */
 public class LogOutButtonListener implements ActionListener  {
 
 	
@@ -13,7 +20,7 @@ public class LogOutButtonListener implements ActionListener  {
 		LoginScreen login = LoginScreen.getInstance();
 		login.setVisible(true);
 		MainScreen.getInstance().dispose();
-		MainScreen.destroy();
+		SingletonControl.destroyAll();
 	}
 
 }

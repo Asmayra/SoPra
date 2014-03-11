@@ -6,6 +6,12 @@ import java.awt.event.ActionListener;
 import org.view.MainScreen;
 import org.view.screens.Center.SettingsScreen;
 
+
+/**
+ * 
+ * @author Michael Pfennings, Mattias Schoenke
+ *
+ */
 public class SettingsButtonListener implements ActionListener{
 
 

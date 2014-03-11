@@ -5,6 +5,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.io.IOException;
 import java.util.List;
+import java.util.Set;
 
 import javax.swing.JPanel;
 import javax.swing.JTree;
@@ -15,6 +16,7 @@ import javax.swing.tree.TreePath;
 import org.control.DatabaseControl;
 import org.control.listener.AdminGenreListener;
 import org.model.Genre;
+import org.model.User;
 /**
  * @author Max Küper, Tim Michels
  */
@@ -33,6 +35,7 @@ public class AdminGenreScreen extends JPanel {
 		if(instance == null){
 			Genre emptyroot = null;
 			genres = (List<Genre>) DatabaseControl.getInstance().getTableContent("Genre");
+			System.out.println(genres.size());
 			if(genres==null || genres.size()==0){
 				emptyroot = new Genre();
 				emptyroot.setName("root");
@@ -45,6 +48,7 @@ public class AdminGenreScreen extends JPanel {
 			}
 			else{
 				for(int i=0;i<genres.size();i++){
+//					DatabaseControl.getInstance().delete(genres.get(i));
 					if(genres.get(i).getName().equals("root")){
 						emptyroot=genres.get(i);
 					}
@@ -53,6 +57,14 @@ public class AdminGenreScreen extends JPanel {
 			instance = new AdminGenreScreen(emptyroot);
 		}
 		return instance;
+	}
+	
+	/**
+	 * Zerstört den Singleton
+	 */
+	public static void destroy()
+	{
+		instance = null;
 	}
 	
 	/**
@@ -90,14 +102,19 @@ public class AdminGenreScreen extends JPanel {
 	 * @param topGenre
 	 */
 	private void createNodes(DefaultMutableTreeNode top, Genre topGenre){
-		try{int numberOfTopSubs = topGenre.getSubGenres().size();
-		DefaultMutableTreeNode[] current = new DefaultMutableTreeNode[numberOfTopSubs];
-		for(int i=0; i<numberOfTopSubs;i++){
-			Genre currentGenre = topGenre.getSubGenres().get(i);
-			current[i] = new DefaultMutableTreeNode(currentGenre);
-			top.add(current[i]);
-			createNodes(current[i], currentGenre);
-		}
+		try{Set<Genre> subgenres = topGenre.getSubGenres();
+			int numberOfTopSubs = topGenre.getSubGenres().size();
+			DefaultMutableTreeNode[] current = new DefaultMutableTreeNode[numberOfTopSubs];
+			
+			java.util.Iterator<Genre> it = subgenres.iterator();
+			int i =0;
+			while (it.hasNext()) {
+				Genre currentGenre = it.next();
+				current[i] = new DefaultMutableTreeNode(currentGenre);
+				top.add(current[i]);
+				createNodes(current[i], currentGenre);
+				i++;
+			}
 		}catch(NullPointerException npe){}
 	}
 	

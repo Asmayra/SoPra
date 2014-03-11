@@ -14,6 +14,12 @@ import org.control.UploadControl;
 import org.view.LoginScreen;
 import org.view.screens.Center.OwnSongsScreen;
 
+
+/**
+ * 
+ * @author Michael Pfennings, Mattias Schoenke
+ *
+ */
 public class OwnSongsScreenNewButtonListener implements ActionListener {
 
 	@Override

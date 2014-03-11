@@ -34,7 +34,7 @@ public class RegScreen extends JFrame{
 	private JLabel errorLabel;
 	
 	private final int MIN_WIDTH = 400;
-	private final int MIN_HEIGHT = 300;
+	private final int MIN_HEIGHT = 325;
 	
 	private static RegScreen instance = null;
 	
@@ -55,6 +55,14 @@ public class RegScreen extends JFrame{
 		}
 		
 		return instance;
+	}
+	
+	/**
+	 * Zerstört den Singleton
+	 */
+	public static void destroy()
+	{
+		instance = null;
 	}
 	
 	/**

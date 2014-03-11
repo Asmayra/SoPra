@@ -6,6 +6,12 @@ import java.awt.event.ActionListener;
 import org.control.RegControl;
 import org.view.RegScreen;
 
+
+/**
+ * 
+ * @author Michael Pfennings, Mattias Schoenke
+ *
+ */
 public class RegCancelButtonListener implements ActionListener {
 	
 	private RegScreen regScreen;
