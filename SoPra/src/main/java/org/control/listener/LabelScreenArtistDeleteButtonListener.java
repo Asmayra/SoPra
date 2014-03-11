@@ -28,8 +28,11 @@ public class LabelScreenArtistDeleteButtonListener implements ActionListener {
 			if (a.getUsername().equals(currentLabelScreen.getRowUserNameArtist(row))){
 				currentLabel.removeArtist(a);
 				DatabaseControl.getInstance().update(currentLabel);
+				a.setLabel(null);
+				DatabaseControl.getInstance().update(a);
 			}
 		}
+		
 		
 		currentLabelScreen.deleteRowArtistTable(row);
 	}

@@ -47,8 +47,8 @@ public class Genre implements Comparable{
 		this.name = name;
 	}
 
-	public LinkedList<Genre> getSubGenres() {
-		return new LinkedList<Genre>(this.subGenres);
+	public Set<Genre> getSubGenres() {
+		return subGenres;
 	}
 
 	public void setSubGenres(LinkedList<Genre> subGenres) {
@@ -68,6 +68,10 @@ public class Genre implements Comparable{
 	public int compareTo(Object o) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+	
+	public void deleteSubgenre(Genre sub){
+		subGenres.remove(sub);
 	}
 
 }

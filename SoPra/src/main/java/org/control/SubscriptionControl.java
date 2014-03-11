@@ -41,18 +41,16 @@ public class SubscriptionControl {
 		currentSubscriptions = (ArrayList<User>) LoginControl.getInstance().getCurrentUser().getFollowing();
 		subscriptionElements = new LinkedList<DiscoverElement>();
 		subScreen = SubscriptionScreen.getInstance();
-		
-
-		
 		updateSubscriptions();
 	}
 	/**
-	 * aktualisiert die Subscriptionseite 
+	 * updates the Subscriptionsite
 	 */
 	public void updateSubscriptions(){
+		subscriptionElements = new LinkedList<DiscoverElement>();
+		System.out.println("load Subscriptions...");
 		currentSubscriptions = (ArrayList<User>) ((User) DatabaseControl.getInstance().load(User.class, LoginControl.getInstance().getCurrentUser().getUsername())).getFollowing();
-		
-		//Anlegen der GUI-Elemente mittels der User-Liste
+		//Setzen der Subscriptionliste
 		for(int i=0;i<currentSubscriptions.size();i++){
 			User followed = currentSubscriptions.get(i);
 			try {
@@ -60,6 +58,7 @@ public class SubscriptionControl {
 				subscriptionElements.add(newsub);
 			} catch (NullPointerException e) {System.err.println(e.getLocalizedMessage());}
 		}
+		//anzeigen der GUI
 		subScreen.setSubscriptions(subscriptionElements);
 		subScreen.showSubscriptions();
 	}
