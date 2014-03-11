@@ -33,6 +33,7 @@ public class AdminGenreScreen extends JPanel {
 		if(instance == null){
 			Genre emptyroot = null;
 			genres = (List<Genre>) DatabaseControl.getInstance().getTableContent("Genre");
+			System.out.println(genres.size());
 			if(genres==null || genres.size()==0){
 				emptyroot = new Genre();
 				emptyroot.setName("root");
@@ -45,6 +46,7 @@ public class AdminGenreScreen extends JPanel {
 			}
 			else{
 				for(int i=0;i<genres.size();i++){
+//					DatabaseControl.getInstance().delete(genres.get(i));
 					if(genres.get(i).getName().equals("root")){
 						emptyroot=genres.get(i);
 					}
