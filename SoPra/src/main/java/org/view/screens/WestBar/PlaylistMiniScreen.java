@@ -121,6 +121,8 @@ public class PlaylistMiniScreen extends JPanel{
 			album.add(dmtn);
 		}
 	}
+	
+	
 	public void createAdminPanel(){
 		admin.setLayout(new GridBagLayout());	
 		createAdminTree();
@@ -163,10 +165,14 @@ public class PlaylistMiniScreen extends JPanel{
 		DefaultMutableTreeNode account = new DefaultMutableTreeNode("Account erweitern");
 		DefaultMutableTreeNode complaint =new DefaultMutableTreeNode("Beschwerde");
 		DefaultMutableTreeNode genre =new DefaultMutableTreeNode("Genreanfrage");
+		DefaultMutableTreeNode label =new DefaultMutableTreeNode("Label erstellen");
+		DefaultMutableTreeNode artist =new DefaultMutableTreeNode("Künstler hinzufügen");
 		DefaultMutableTreeNode other =new DefaultMutableTreeNode("Sonstiges");
 		rootAdmin.add(account);
 		rootAdmin.add(complaint);
 		rootAdmin.add(genre);
+		rootAdmin.add(label);
+		rootAdmin.add(artist);
 		rootAdmin.add(other);
 		DefaultMutableTreeNode dmtn = null;
 		List<?> tickets;
@@ -184,6 +190,12 @@ public class PlaylistMiniScreen extends JPanel{
 			}
 			else if(curTicket.getCategory().equals("Genreanfrage")){
 				genre.add(dmtn);
+			}
+			else if(curTicket.getCategory().equals("Label erstellen")){
+				label.add(dmtn);
+			}
+			else if(curTicket.getCategory().equals("Künstler hinzufügen")){
+				artist.add(dmtn);
 			}
 			else if(curTicket.getCategory().equals("Sonstiges")){
 				other.add(dmtn);

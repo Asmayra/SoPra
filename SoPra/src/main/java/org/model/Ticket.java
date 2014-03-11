@@ -38,7 +38,7 @@ public class Ticket {
 	private String category = "";
 	
 	public String getCategory() {
-		return category; //"Account erweitern", "Beschwerde", "Genreanfrage" oder "Sonstiges"
+		return category; //"Account erweitern", "Beschwerde", "Genreanfrage", "Label erstellen", "Künstler hinzufügen" oder "Sonstiges"
 	}
 	public void setCategory(String kategory) {
 		this.category = kategory;
