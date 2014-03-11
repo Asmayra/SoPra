@@ -26,7 +26,10 @@ public class Main {
 	    catch (Exception e) {
 	    	// handle exception
 	    }
-   	
+	    
+	    //DB initialisieren
+	    DatabaseControl.getInstance();
+	    
 		LoginScreen ls = LoginScreen.getInstance();
 			ls.setVisible(true);
 			//disover control initialize
