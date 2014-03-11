@@ -116,7 +116,7 @@ public class createTestData {
 	
 	
 	public Song createSong(){
-		Song song = new Song("interpret", "title", "");
+		Song song = new Song("k", "title", "");
 		
 		try {
 			DatabaseControl.getInstance().save(song);

@@ -5,6 +5,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.io.IOException;
 import java.util.List;
+import java.util.Set;
 
 import javax.swing.JPanel;
 import javax.swing.JTree;
@@ -15,6 +16,7 @@ import javax.swing.tree.TreePath;
 import org.control.DatabaseControl;
 import org.control.listener.AdminGenreListener;
 import org.model.Genre;
+import org.model.User;
 /**
  * @author Max Küper, Tim Michels
  */
@@ -58,6 +60,14 @@ public class AdminGenreScreen extends JPanel {
 	}
 	
 	/**
+	 * Zerstört den Singleton
+	 */
+	public static void destroy()
+	{
+		instance = null;
+	}
+	
+	/**
 	 * Konstruktor
 	 * @param root Für Testzwecke noch im Konstruktor übergeben, Wurzel des Genretrees
 	 */
@@ -92,14 +102,19 @@ public class AdminGenreScreen extends JPanel {
 	 * @param topGenre
 	 */
 	private void createNodes(DefaultMutableTreeNode top, Genre topGenre){
-		try{int numberOfTopSubs = topGenre.getSubGenres().size();
-		DefaultMutableTreeNode[] current = new DefaultMutableTreeNode[numberOfTopSubs];
-		for(int i=0; i<numberOfTopSubs;i++){
-			Genre currentGenre = topGenre.getSubGenres().get(i);
-			current[i] = new DefaultMutableTreeNode(currentGenre);
-			top.add(current[i]);
-			createNodes(current[i], currentGenre);
-		}
+		try{Set<Genre> subgenres = topGenre.getSubGenres();
+			int numberOfTopSubs = topGenre.getSubGenres().size();
+			DefaultMutableTreeNode[] current = new DefaultMutableTreeNode[numberOfTopSubs];
+			
+			java.util.Iterator<Genre> it = subgenres.iterator();
+			int i =0;
+			while (it.hasNext()) {
+				Genre currentGenre = it.next();
+				current[i] = new DefaultMutableTreeNode(currentGenre);
+				top.add(current[i]);
+				createNodes(current[i], currentGenre);
+				i++;
+			}
 		}catch(NullPointerException npe){}
 	}
 	

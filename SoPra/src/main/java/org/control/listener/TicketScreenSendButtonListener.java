@@ -7,6 +7,12 @@ import org.control.LoginControl;
 import org.control.TicketControl;
 import org.view.TicketScreen;
 
+
+/**
+ * 
+ * @author Michael Pfennings, Mattias Schoenke
+ *
+ */
 public class TicketScreenSendButtonListener implements ActionListener {
 
 	@Override

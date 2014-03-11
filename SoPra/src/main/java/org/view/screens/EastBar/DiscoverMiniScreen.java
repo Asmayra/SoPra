@@ -22,6 +22,15 @@ public class DiscoverMiniScreen extends JPanel {
 		}
 		return miniScreen;
 	}
+	
+	/**
+	 * Zerstört den Singleton
+	 */
+	public static void destroy()
+	{
+		miniScreen = null;
+	}
+	
 	private DiscoverMiniScreen() {
 		this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 		

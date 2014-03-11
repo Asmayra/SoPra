@@ -70,6 +70,13 @@ public class PlaylistMiniScreen extends JPanel{
 		return instance;
 	}
 
+	/**
+	 * Zerstört den Singleton
+	 */
+	public static void destroy()
+	{
+		instance = null;
+	}
 	
 	public PlaylistMiniScreen() {
 		LoginControl logcon = LoginControl.getInstance();

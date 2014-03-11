@@ -5,6 +5,12 @@ import java.awt.event.ActionListener;
 
 import org.view.TicketScreen;
 
+
+/**
+ * 
+ * @author Michael Pfennings, Mattias Schoenke
+ *
+ */
 public class SettingsScreenCeateTicketButtonListener implements ActionListener {
 
 	@Override

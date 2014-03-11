@@ -33,6 +33,14 @@ public class HomeScreen extends JPanel{
 		return instance;
 	}
 	
+	/**
+	 * Zerstört den Singleton
+	 */
+	public static void destroy()
+	{
+		instance = null;
+	}
+	
 	
 	public HomeScreen(){
 		this.setBorder(BorderFactory.createLineBorder(Color.BLACK));

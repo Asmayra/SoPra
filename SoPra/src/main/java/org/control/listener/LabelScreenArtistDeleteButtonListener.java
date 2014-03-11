@@ -8,7 +8,11 @@ import org.control.DatabaseControl;
 import org.model.Label;
 import org.model.User;
 import org.view.screens.Center.LabelScreen;
-
+/**
+ * 
+ * @author Michael Pfennings, Mattias Schoenke
+ *
+ */
 public class LabelScreenArtistDeleteButtonListener implements ActionListener {
 
 	private LabelScreen currentLabelScreen;
@@ -28,8 +32,11 @@ public class LabelScreenArtistDeleteButtonListener implements ActionListener {
 			if (a.getUsername().equals(currentLabelScreen.getRowUserNameArtist(row))){
 				currentLabel.removeArtist(a);
 				DatabaseControl.getInstance().update(currentLabel);
+				a.setLabel(null);
+				DatabaseControl.getInstance().update(a);
 			}
 		}
+		
 		
 		currentLabelScreen.deleteRowArtistTable(row);
 	}

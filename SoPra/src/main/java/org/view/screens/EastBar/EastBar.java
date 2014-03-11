@@ -35,6 +35,14 @@ public class EastBar extends JLayeredPane{
 		return bar;
 	}
 	
+	/**
+	 * Zerstört den Singleton
+	 */
+	public static void destroy()
+	{
+		bar = null;
+	}
+	
 	private EastBar() {
 		this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 		this.setBorder(BorderFactory.createLineBorder(Color.BLACK));

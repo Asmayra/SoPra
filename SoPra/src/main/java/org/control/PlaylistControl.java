@@ -43,6 +43,14 @@ public class PlaylistControl {
 		
 		return instance;
 	}
+	
+	/**
+	 * Zerstört den Singleton
+	 */
+	public static void destroy()
+	{
+		instance = null;
+	}
 
 	
 	public PlaylistControl() {

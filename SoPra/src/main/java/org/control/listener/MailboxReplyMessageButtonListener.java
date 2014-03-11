@@ -8,6 +8,12 @@ import org.model.Message;
 import org.model.User;
 import org.view.MessagePopUpScreen;
 
+
+/**
+ * 
+ * @author Michael Pfennings, Mattias Schoenke
+ *
+ */
 public class MailboxReplyMessageButtonListener implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {

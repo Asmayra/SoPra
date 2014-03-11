@@ -31,6 +31,15 @@ public class SearchMask extends JPanel {
 		}
 		return mask;
 	}
+	
+	/**
+	 * Zerstört den Singleton
+	 */
+	public static void destroy()
+	{
+		mask = null;
+	}
+	
 	private SearchMask(){
 		SearchMaskListener listen = new SearchMaskListener();
 		

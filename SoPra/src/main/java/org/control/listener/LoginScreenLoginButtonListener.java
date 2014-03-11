@@ -15,6 +15,12 @@ import org.control.SubscriptionControl;
 import org.view.LoginScreen;
 import org.view.MainScreen;
 
+
+/**
+ * 
+ * @author Michael Pfennings, Mattias Schoenke
+ *
+ */
 public class LoginScreenLoginButtonListener implements ActionListener, KeyListener{
 
 	private LoginScreen login;

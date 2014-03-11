@@ -7,6 +7,12 @@ import org.control.MailboxControl;
 import org.view.MainScreen;
 import org.view.screens.Center.Mailbox;
 
+
+/**
+ * 
+ * @author Michael Pfennings, Mattias Schoenke
+ *
+ */
 public class MailButtonListener implements ActionListener  {
 
 	public void actionPerformed(ActionEvent e) {
