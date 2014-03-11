@@ -89,7 +89,7 @@ public class Post implements Comparable{
 		//Structure Panel
 		JPanel structure = new JPanel();
 		structure.setLayout(new BoxLayout(structure,BoxLayout.Y_AXIS));
-		JLabel info = new JLabel(" "+autor.getFirstname()+" has great news!");
+		JLabel info = new JLabel(autor.getUsername());
 		info.setFont(new Font("Arial",Font.BOLD,14));	
 		structure.add(info);
 		JLabel text = new JLabel("<html><body>"+message+"</body></html>");
