@@ -41,13 +41,13 @@ public class SubscriptionScreen extends JPanel{
 	 * die Elemente müssen vorher mit setSubscriptions seperat gesetzt werden
 	 */
 	public void showSubscriptions(){
-		//zum updaten wird jedesmal ein neues JPanel erstellt
-		subscripPan = new JPanel();
+		subscripPan.removeAll();
+		subscripPan.updateUI();
 		try{
 			GridBagConstraints c = new GridBagConstraints();
 			c.ipadx=20;
 			c.ipady=20;
-			for(int i=0;i<subscriptions.size();i++){	
+			for(int i=0;i<subscriptions.size();i++){
 				c.gridx=(i%3);
 				c.gridy=(i/3);
 				subscripPan.add(subscriptions.get(i),c);
@@ -61,7 +61,7 @@ public class SubscriptionScreen extends JPanel{
 	 * @param list Liste der Elemente 
 	 */
 	public void setSubscriptions(LinkedList<DiscoverElement> list){
-		this.subscriptions=list;
+		this.subscriptions= new LinkedList<DiscoverElement>(list);
 	}
 
 }
