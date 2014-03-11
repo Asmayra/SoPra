@@ -42,7 +42,7 @@ public class User implements Comparable {
 	private String salt = "";
 	private String rights = "StandardUser"; // Admin, Artist, LabelManager
 	private String imagePath = "";
-	@OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
+	@ManyToMany(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
 	@JoinTable(name = "FOLLOW_TABLE")
 	private Set<User> following = new HashSet<User>();
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
