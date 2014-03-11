@@ -13,7 +13,7 @@ import org.view.screens.Center.ProfileScreen;
 
 /**
  * 
- * @author beide Tims
+ * @author Tim & Tim
  *
  */
 public class DiscoverElementListener implements MouseListener{

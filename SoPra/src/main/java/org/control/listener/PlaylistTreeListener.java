@@ -23,7 +23,7 @@ import org.view.ContextMenu;
 import org.view.screens.Center.PlaylistExtendedScreen;
 /**
  * Listener für sämtliche operationen mit der Playlist
- * @author Tim, Max
+ * @author Tim Michels, Max Küper
  *
  */
 public class PlaylistTreeListener extends MouseAdapter{

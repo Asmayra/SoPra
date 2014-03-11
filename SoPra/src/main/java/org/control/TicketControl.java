@@ -14,7 +14,7 @@ import org.view.screens.Center.TicketScreenAdmin;
 
 /**
  * 
- * @author Michael Pfennings, Mattias Schoenke
+ * @author Michael Pfennings, Mattias Schoenke, Tim Michels
  *
  */
 public class TicketControl {
