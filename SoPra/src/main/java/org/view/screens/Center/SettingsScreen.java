@@ -20,7 +20,6 @@ import org.control.LoginControl;
 import org.control.PasswordControl;
 import org.control.listener.SettingsControlListener;
 import org.control.listener.SettingsScreenCeateTicketButtonListener;
-import org.control.listener.UploadButtonListener;
 import org.control.listener.UploadPictureListener;
 import org.model.User;
 

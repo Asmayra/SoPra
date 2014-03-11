@@ -25,7 +25,6 @@ import org.control.listener.LabelButtonListener;
 import org.control.listener.PlaylistTreeListener;
 import org.control.listener.SubscriptionButtonListener;
 import org.control.listener.TicketTreeListener;
-import org.control.listener.UploadButtonListener;
 import org.control.listener.UploadPageButtonListener;
 import org.model.Album;
 import org.model.Playlist;
