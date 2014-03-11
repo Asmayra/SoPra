@@ -45,7 +45,9 @@ public class Song implements Comparable {
 	@ManyToOne
 	private Album album;
 	private int playtime;
-
+	
+	private final int ratingcount = 0;
+	private final int vrgrating = 0;
 	private boolean banned = false;
 
 	public Song() {
