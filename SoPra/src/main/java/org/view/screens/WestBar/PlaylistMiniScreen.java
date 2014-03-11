@@ -162,7 +162,7 @@ public class PlaylistMiniScreen extends JPanel{
 	
 	private void createAdminTree() {
 		DefaultMutableTreeNode account = new DefaultMutableTreeNode("Account erweitern");
-		DefaultMutableTreeNode complaint =new DefaultMutableTreeNode("Beschwerden");
+		DefaultMutableTreeNode complaint =new DefaultMutableTreeNode("Beschwerde");
 		DefaultMutableTreeNode genre =new DefaultMutableTreeNode("Genreanfrage");
 		DefaultMutableTreeNode other =new DefaultMutableTreeNode("Sonstiges");
 		rootAdmin.add(account);
@@ -180,7 +180,7 @@ public class PlaylistMiniScreen extends JPanel{
 			if(curTicket.getCategory().equals("Account erweitern")){
 				account.add(dmtn);
 			}
-			else if(curTicket.getCategory().equals("Beschwerden")){
+			else if(curTicket.getCategory().equals("Beschwerde")){
 				complaint.add(dmtn);
 			}
 			else if(curTicket.getCategory().equals("Genreanfrage")){
@@ -307,4 +307,7 @@ public class PlaylistMiniScreen extends JPanel{
 		playlists.updateUI();
 	}
 
+	public JTree getTicketTree(){
+		return tickets;
+	}
 }
