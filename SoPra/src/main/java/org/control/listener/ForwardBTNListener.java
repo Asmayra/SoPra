@@ -34,7 +34,6 @@ public class ForwardBTNListener implements ActionListener {
 			System.out.println("Playlist zuende");
 			//Falls Endlosmusik: Liste von vorne laden und neu starten!
 		} catch (BasicPlayerException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		

@@ -19,11 +19,9 @@ public class PlayBTNListener implements ActionListener {
 	private BasicPlayer player;
 	
 	
-	
 	public PlayBTNListener(BasicPlayer player){
 		this.player = player;	
 	}
-	
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -74,5 +72,4 @@ public class PlayBTNListener implements ActionListener {
 		}
 		
 	}
-
 }

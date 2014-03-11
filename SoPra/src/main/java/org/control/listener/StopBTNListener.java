@@ -8,16 +8,16 @@ import javazoom.jlgui.basicplayer.BasicPlayerException;
 
 /**
  * Listener, um das aktuelle Leid zu beenden
- * @author Philipp, Ioan
+ * @author Philipp, Ioann
  *
  */
 public class StopBTNListener implements ActionListener {
 
 	private BasicPlayer player; 
+	
 	public StopBTNListener(BasicPlayer player){
 		this.player = player;
 	}
-	
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -28,5 +28,4 @@ public class StopBTNListener implements ActionListener {
 		}
 		
 	}
-
 }
