@@ -35,6 +35,10 @@ public class PlaylistControl {
 	private String[] playlistNames;
 	private DatabaseControl control = DatabaseControl.getInstance();	
 	
+	/**
+	 * 
+	 * @return Instanz der Control
+	 */
 	public static PlaylistControl getInstance()
 	{
 		if(instance == null)
@@ -51,12 +55,17 @@ public class PlaylistControl {
 		instance = null;
 	}
 
-	
+	/**
+	 * Konstruktor
+	 */
 	public PlaylistControl() {
 		updatePlaylistNames();
 	}
 
-
+	/**
+	 * Setzt MainscreenCenter auf die Playlistansicht mit der übergebenen Playlist(ID)
+	 * @param playlistID
+	 */
 	public void showPlaylist(int playlistID) {
 		int tabindex = playlistScreen.getIndexOfTab(playlistID);
 		if(tabindex==-1){
@@ -69,6 +78,10 @@ public class PlaylistControl {
 	}
 
 
+	/**
+	 * Wie showPlaylist für Alben
+	 * @param albumID
+	 */
 	public void showAlbum(int albumID) {
 		int tabindex = playlistScreen.getIndexOfTab(albumID);
 		if(tabindex==-1){
@@ -80,6 +93,9 @@ public class PlaylistControl {
 		MainScreen.getInstance().showPlaylistExtendedScreen(playlistScreen);
 	}
 	
+	/**
+	 * Zeigt die Favoriten im MainScreenCenter an
+	 */
 	public void showFavorites(){
 		currentUser = LoginControl.getInstance().getCurrentUser();
 		Playlist favorites = currentUser.getFavorites();
@@ -159,12 +175,10 @@ public class PlaylistControl {
 		}
 		
 	}
-
-	public void savePlaylists(){
-		//TODO Schreibe aktuelle Userplaylists in die Datenbank
-	}
 	
-	
+	/**
+	 * Setzt die Playlistnamen neu
+	 */
 	public void updatePlaylistNames(){
 		ArrayList<Playlist> playlists = (ArrayList<Playlist>) LoginControl.getInstance().getCurrentUser().getPlaylists();
 		playlistNames=new String[playlists.size()];
@@ -173,7 +187,10 @@ public class PlaylistControl {
 		}
 	}
 
-
+	/**
+	 * 
+	 * @return Namen aller Playlists
+	 */
 	public String[] getPlaylistNames() {
 		return playlistNames;
 	}

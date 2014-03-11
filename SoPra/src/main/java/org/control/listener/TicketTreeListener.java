@@ -38,7 +38,7 @@ public class TicketTreeListener extends MouseAdapter{
 			String thema = "";
 			try{thema = current.getUserObject().toString();
 				TicketControl control = TicketControl.getInstance();
-				if(thema.equals("Account erweitern")||thema.equals("Beschwerde")||thema.equals("Genreanfrage")||thema.equals("Sonstiges")){
+				if(thema.equals("Account erweitern")||thema.equals("Beschwerde")||thema.equals("Genreanfrage")||thema.equals("Label erstellen")||thema.equals("Künstler hinzufügen")||thema.equals("Sonstiges")){
 					int childCount = current.getChildCount();
 					LinkedList<Ticket> ticketsToShow = new LinkedList<Ticket>();
 					for(int i=0;i<childCount;i++){

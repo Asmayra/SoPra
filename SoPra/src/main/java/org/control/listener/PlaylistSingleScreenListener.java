@@ -137,7 +137,7 @@ public class PlaylistSingleScreenListener  extends MouseAdapter{
     	
 		public void actionPerformed(ActionEvent arg0) {
 			DatabaseControl dbc = DatabaseControl.getInstance();
-			int songID = (int) currentTable.getValueAt(row, 5);
+			int songID = (int) currentTable.getModel().getValueAt(row, 5);
 			Playlist destination = (Playlist) dbc.load(Playlist.class, playlistID);
 			Song clicked = (Song) dbc.load(Song.class, songID);
 			destination.addSong(clicked);

@@ -9,7 +9,16 @@ import javax.swing.JScrollPane;
 
 import org.model.Ticket;
 
+/**
+ * Anzeige der Tickets, die im Tickettab des Admins angezeigt werden
+ * @author Tim
+ *
+ */
 public class TicketScreenAdmin extends JPanel {
+	/**
+	 * Erzeugt den Ticketscreen 
+	 * @param tickets Die anzuzeigenden Tickets
+	 */
 	public TicketScreenAdmin(LinkedList<Ticket> tickets){
 		JPanel structure = new JPanel();
 		structure.setLayout(new BoxLayout(structure,BoxLayout.Y_AXIS));
