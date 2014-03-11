@@ -45,7 +45,6 @@ public class SearchMaskListener implements KeyListener, ActionListener, MouseLis
 	 */
 	private void setResults(){
 		new SearchControl().generateResults(SearchMask.getInstance().getSearchInput());
-		EastBar.getInstance().showResultsPan();
 	}
 	
 
@@ -54,7 +53,6 @@ public class SearchMaskListener implements KeyListener, ActionListener, MouseLis
 	 */
 	public void actionPerformed(ActionEvent e) {
 		SearchMask.getInstance().resetSearchInput();
-		EastBar.getInstance().hideResultsPan();
 		
 	}
 
