@@ -73,7 +73,12 @@ public class RecommendationControl {
 		}
 		throw new Exception();
 	}
-
+	/**
+	 * recommends a random song from users you follow
+	 * @return
+	 * 		recommended Song
+	 * @throws Exception if there are no recommendations
+	 */
 	public Song recommendSong() throws Exception {
 		List<User> following = user.getFollowing();
 		Random rand = new Random();
@@ -95,7 +100,12 @@ public class RecommendationControl {
 		}
 		throw new Exception();
 	}
-
+	/**
+	 * recommends a random followed user from users you follow
+	 * @return
+	 * 		recommended user
+	 * @throws Exception if there are no recommendations
+	 */
 	public User recommendArtist() throws Exception {
 		List<User> following = user.getFollowing();
 		int saveCount = 0;
@@ -124,6 +134,9 @@ public class RecommendationControl {
 
 	}
 
+	/**gives back a list of users followed by users you follow
+	 * @return a list of Users who are recommended to you
+	 */
 	public List<User> allRecommendedArtists() {
 		List<User> recUser = new ArrayList<User>();
 		List<User> following = user.getFollowing();
@@ -134,6 +147,9 @@ public class RecommendationControl {
 		return recUser;
 	}
 
+	/**
+	 * @return list of recommended 
+	 */
 	public List<Album> allRecomendedAlben() {
 		List<Album> recAlbum = new ArrayList<Album>();
 		List<User> following = user.getFollowing();
