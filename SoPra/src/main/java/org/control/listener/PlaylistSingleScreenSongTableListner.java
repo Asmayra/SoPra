@@ -9,11 +9,15 @@ import org.control.LoginControl;
 import org.model.Song;
 import org.view.screens.WestBar.PlaylistMiniScreen;
 
+/**
+ * @author Max
+ *
+ */
 public class PlaylistSingleScreenSongTableListner implements TableModelListener{
 
+	//entfernt bzw fügt die das lied der favorietnliste hinzu
 	@Override
 	public void tableChanged(TableModelEvent e) {
-
 		int row = e.getFirstRow();
 		TableModel model = (TableModel) e.getSource();
 		boolean favor = (boolean) model.getValueAt(row, 4);

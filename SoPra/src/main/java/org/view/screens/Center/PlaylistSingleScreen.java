@@ -30,14 +30,14 @@ public class PlaylistSingleScreen extends JPanel{
 		model = new DefaultTableModel(columns,0){
 			@Override
 			public Class getColumnClass(int col) {
-				if (col == 5)
+				if (col == 4)
 					return Boolean.class;
 				else
 					return String.class;
 			}
 			@Override
 			public boolean isCellEditable(int row, int column){
-				return column==5;
+				return column==4;
 			}
 		};	
 		addSongsToTable();
@@ -48,7 +48,7 @@ public class PlaylistSingleScreen extends JPanel{
 		scroll = new JScrollPane(table);
 		this.add(scroll);
 		this.setPreferredSize(new Dimension(500,500));
-		table.removeColumn(table.getColumnModel().getColumn(4));
+		table.removeColumn(table.getColumnModel().getColumn(5));
 
 	}
 	
