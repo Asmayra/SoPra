@@ -3,8 +3,10 @@ package org.view.screens.Center;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.util.List;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -13,11 +15,13 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
+import org.control.DatabaseControl;
 import org.control.LoginControl;
 import org.control.listener.OwnSongsScreenDeleteButtonListener;
 import org.control.listener.OwnSongsScreenNewButtonListener;
 import org.control.listener.OwnSongsScreenSaveButtonListener;
 import org.control.listener.OwnSongsScreenTableMouseListener;
+import org.model.Genre;
 import org.model.Song;
 import org.model.User;
 import org.view.TicketScreen;
@@ -34,7 +38,8 @@ public class OwnSongsScreen extends JPanel {
 	private JTable songTable;
 	private JButton newButton, deleteButton, saveButton;
 	private DefaultTableModel model;
-	private JTextField titelTF, albumTF, genreTF;
+	private JTextField titelTF, albumTF;
+	private JComboBox genreBox;
 	
 	
 	private OwnSongsScreen()
@@ -72,10 +77,18 @@ public class OwnSongsScreen extends JPanel {
 	
 	private JComponent initTable(){
 		songTable = new JTable();
-		model = new DefaultTableModel();
+		model = new DefaultTableModel(){
+			public boolean isCellEditable(int rowIndex, int columnIndex){
+				if(columnIndex == 4)
+					return true;
+				else
+					return false;
+			}
+		};
 		songTable.setModel(model);
 		model.addColumn("Lied");
 		model.addColumn("Länge");
+		model.addColumn("Album");
 		model.addColumn("Genre");
 		songTable.addMouseListener(new OwnSongsScreenTableMouseListener());
 		JScrollPane jsp = new JScrollPane(songTable);
@@ -120,8 +133,12 @@ public class OwnSongsScreen extends JPanel {
 		albumTF = new JTextField();
 		textFieldPanel.add(albumTF);
 		
-		genreTF = new JTextField();
-		textFieldPanel.add(genreTF);
+		genreBox = new JComboBox(getGenreList());
+		
+		
+		textFieldPanel.add(genreBox);
+		
+		
 		editPanel.add(textFieldPanel,BorderLayout.CENTER);
 		
 		saveButton = new JButton("Speichern");
@@ -140,13 +157,23 @@ public class OwnSongsScreen extends JPanel {
 		
 		
 		for(Song s :currentUser.getOwnSongs()){
-			String[] newRow = new String[3];
+			String[] newRow = new String[4];
 			newRow[0] = s.getTitle();
 			newRow[1] = (s.getPlaytime() / 60) + ":" + (s.getPlaytime() % 60) ;
+			
+			
 			if( s.getAlbum()  !=  null )
 				newRow[2] = s.getAlbum().toString();
 			else
 				newRow[2] = "";
+			
+			if (s.getGenre() != null){
+				newRow[3] = s.getGenre().getName();
+			}
+			else
+				newRow[3] = "";
+			
+			
 			
 			model.addRow(newRow);
 		}
@@ -180,15 +207,28 @@ public class OwnSongsScreen extends JPanel {
 	}
 
 
-	public String getGenreTF() {
-		return genreTF.getText();
+	public String getGenreBox() {
+		return genreBox.getSelectedItem().toString();
 	}
 
-
-	public void setGenreTF(String genreTF) {
-		this.genreTF.setText(genreTF);
+	public void setGenreBox(int row){
+		genreBox.setSelectedIndex(row);
 	}
 	
 	
+	private String[] getGenreList(){
+		List<Genre> listOfGenre = (List<Genre>) DatabaseControl.getInstance().getTableContent("Genre");
+		String[] genreNames = new String[listOfGenre.size()-1]; 
+		int i = 0;
+		
+		for (Genre g:listOfGenre){
+			if (!g.getName().equalsIgnoreCase("root")){
+				genreNames[i]= g.getName();
+				i++;
+			}
+			
+		}
+		return genreNames;
+	}
 	
 }

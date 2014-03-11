@@ -8,6 +8,7 @@ import java.util.List;
 import org.control.DatabaseControl;
 import org.control.LoginControl;
 import org.model.Album;
+import org.model.Genre;
 import org.model.Song;
 import org.model.User;
 import org.view.screens.Center.OwnSongsScreen;
@@ -29,6 +30,14 @@ public class OwnSongsScreenSaveButtonListener implements ActionListener {
 		List<Song> songList = currentUser.getOwnSongs();
 		
 		songList.get(row).setTitle(oss.getTitelTF());
+		
+		List<Genre> currentGenre = (List<Genre>) DatabaseControl.getInstance().getTableContent("Genre");
+		 for (Genre g: currentGenre){
+			 if (g.getName().equals(oss.getGenreBox())){
+				 songList.get(row).setGenre(g);
+			 }
+		 }
+		
 		DatabaseControl.getInstance().update(songList.get(row));
 		try {
 			DatabaseControl.getInstance().save(songList.get(row));

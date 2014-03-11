@@ -25,6 +25,7 @@ public class OwnSongsScreenTableMouseListener implements MouseListener {
 		User currentUser = LoginControl.getInstance().getCurrentUser();
 		List<Song> songList = currentUser.getOwnSongs();
 		
+		oss.setGenreBox(row);
 		oss.setTitleTF(songList.get(row).getTitle());
 		if (songList.get(row).getAlbum() != null){
 			oss.setAlbumTF(songList.get(row).getAlbum().getName());
