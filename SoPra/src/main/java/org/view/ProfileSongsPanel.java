@@ -8,6 +8,7 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.table.DefaultTableModel;
 
 import org.control.LoginControl;
+import org.control.listener.ProfileSongsPanelListner;
 import org.control.listener.SongTableListener;
 import org.model.Playlist;
 import org.model.Song;
@@ -96,6 +97,7 @@ public class ProfileSongsPanel extends JScrollPane {
 			model.addRow(entry);
 		}
 		table.setFillsViewportHeight(true);
+		table.addMouseListener(new ProfileSongsPanelListner());
 		model.addTableModelListener(new SongTableListener());
 		return table;
 
