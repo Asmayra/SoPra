@@ -25,12 +25,11 @@ public class Menu extends JPanel{
 	
 	private JLabel userName;
 	private JToolBar toolbar;
-	private Icon dummyIcon;
 	private int BUTTONSIZE = 20;
-	private JButton home = new JButton(dummyIcon);
-	private JButton mail = new JButton(dummyIcon);
-	private JButton logOut = new JButton(dummyIcon);
-	private JButton setting = new JButton(dummyIcon);
+	private JButton home = new JButton(LoadImageControl.loadMenuIcon("Home.png", BUTTONSIZE));
+	private JButton mail = new JButton(LoadImageControl.loadMenuIcon("Mail.png", BUTTONSIZE));
+	private JButton logOut = new JButton(LoadImageControl.loadMenuIcon("Logout.png", BUTTONSIZE));
+	private JButton setting = new JButton(LoadImageControl.loadMenuIcon("Settings.png", BUTTONSIZE));
 	private JButton avatar = new JButton(LoadImageControl.loadImageIcon(LoginControl.getInstance().getCurrentUser().getImagePath(), LoginControl.getInstance().getCurrentUser()));//benutzerbild x
 	/**
 	 * erstllt ein JPanel mit Knöpfen und einer kleinen Version des Profilbilds

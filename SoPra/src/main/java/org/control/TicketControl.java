@@ -1,6 +1,7 @@
 package org.control;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Set;
@@ -61,7 +62,7 @@ public class TicketControl {
 	}
 
 	public void showTickets(String thema) {
-		Set<Ticket> tickets = (Set<Ticket>) DatabaseControl.getInstance().getTableContent("Ticket");
+		ArrayList<Ticket> tickets = (ArrayList<Ticket>) DatabaseControl.getInstance().getTableContent("Ticket");
 		Iterator<Ticket> it = tickets.iterator();
 		LinkedList<Ticket> ticketsToShow = new LinkedList<Ticket>();
 		while(it.hasNext()){
@@ -76,6 +77,11 @@ public class TicketControl {
 	public void showSingleTicket(Ticket ticket) {
 		LinkedList<Ticket> ticketsToShow = new LinkedList<Ticket>();
 		ticketsToShow.add(ticket);
+		MainScreen.getInstance().updateCenter(new TicketScreenAdmin(ticketsToShow));
+	}
+
+
+	public void showTicketList(LinkedList<Ticket> ticketsToShow) {
 		MainScreen.getInstance().updateCenter(new TicketScreenAdmin(ticketsToShow));
 	}
 	
