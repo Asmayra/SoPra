@@ -10,6 +10,7 @@ import javax.swing.table.DefaultTableModel;
 
 import org.control.LoginControl;
 import org.control.listener.PlaylistSingleScreenListener;
+import org.control.listener.PlaylistSingleScreenSongTableListner;
 import org.control.listener.SongTableListener;
 import org.model.Playlist;
 import org.model.Song;
@@ -17,7 +18,7 @@ import org.model.Song;
 
 public class PlaylistSingleScreen extends JPanel{
 	private static Playlist playlist;
-	private String[] columns = new String[] { "Interpret", "Titel", "Album", "Länge","", "Favor", "SongIDs"};
+	private String[] columns = new String[] { "Interpret", "Titel", "Album", "Länge", "Favor", "SongIDs"};
 	private DefaultTableModel model;
 	private JTable table;
 	private JScrollPane scroll;
@@ -40,15 +41,14 @@ public class PlaylistSingleScreen extends JPanel{
 			}
 		};	
 		addSongsToTable();
-		model.addTableModelListener(new SongTableListener());
+		model.addTableModelListener(new PlaylistSingleScreenSongTableListner());
 		table= new JTable(model);
 		table.setShowGrid(false);
 		table.addMouseListener(new PlaylistSingleScreenListener());
 		scroll = new JScrollPane(table);
 		this.add(scroll);
 		this.setPreferredSize(new Dimension(500,500));
-		table.removeColumn(table.getColumnModel().getColumn(4));
-		table.removeColumn(table.getColumnModel().getColumn(6));
+		table.removeColumn(table.getColumnModel().getColumn(5));
 	}
 	
 	private void addSongsToTable(){
@@ -81,7 +81,7 @@ public class PlaylistSingleScreen extends JPanel{
 			}
 			int songID = curSong.getSongId();
 			
-			Object[] songData = new Object[]{interpret,title,album,playtime,"",favored, songID};
+			Object[] songData = new Object[]{interpret,title,album,playtime,favored, songID};
 			model.addRow(songData);
 			
 		}
@@ -100,7 +100,7 @@ public class PlaylistSingleScreen extends JPanel{
 	}
 	
 	public int getSongIDfromRow(int row){
-		return (int) model.getValueAt(row, 6);
+		return (int) model.getValueAt(row, 5);
 	}
 	
 }
