@@ -70,12 +70,10 @@ public class createTestData {
 		
 		Genre genre2 = new Genre();
 		genre2.setName("Rock with lasers");
-		genre2.setParent(genre1);
 		DatabaseControl.getInstance().save(genre2);
 		
 		Genre genre3 = new Genre();
 		genre3.setName("Rock with guitar");
-		genre3.setParent(genre1);
 		DatabaseControl.getInstance().save(genre3);
 		
 		genre1.addSubGenre(genre2);

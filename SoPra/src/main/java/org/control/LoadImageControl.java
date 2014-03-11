@@ -1,5 +1,6 @@
 package org.control;
 
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -29,7 +30,7 @@ public class LoadImageControl {
 	 * @post Image is returned
 	 */
 	public static ImageIcon loadImageIcon(String imagePath, User user){
-		ImageIcon imageIcon = new ImageIcon(loadBufferedImage(imagePath, user));
+		ImageIcon imageIcon = new ImageIcon(loadBufferedImage(imagePath, user).getScaledInstance(50, 50, Image.SCALE_SMOOTH));
 		return imageIcon;
 	}
 	
@@ -48,7 +49,6 @@ public class LoadImageControl {
 			} else{
 				String filepath = PathControl.getInstance().getRoot() + File.separator
 						+ "Bilder" + File.separator + user.getUsername() + File.separator + imagePath;
-				System.out.println(filepath);
 				image = ImageIO.read(new File(filepath));
 			}
 			
