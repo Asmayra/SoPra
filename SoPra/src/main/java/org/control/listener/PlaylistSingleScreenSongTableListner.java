@@ -11,7 +11,7 @@ import org.view.screens.WestBar.PlaylistMiniScreen;
 
 /**
  * @author Max
- *
+ * entfernt, bzw fügt Lieder der Favoritenliste hinzu, wenn die Markierung gesetzt oder entfernt wird
  */
 public class PlaylistSingleScreenSongTableListner implements TableModelListener{
 
