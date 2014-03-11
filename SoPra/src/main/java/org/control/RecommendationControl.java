@@ -48,7 +48,7 @@ public class RecommendationControl {
 		int random2 = 0;
 		int saveCount = 0;
 		Random rand = new Random();
-		while (random2 == 0 && saveCount < 11) {
+		while (random2 == 0 && saveCount < 20) {
 			if (following.size() == 0) {
 				break;
 			}
@@ -70,7 +70,7 @@ public class RecommendationControl {
 		int saveCount = 0;
 		int random1 = 0;
 		int random2 = 0;
-		while (random2 == 0 && saveCount < 11) {
+		while (random2 == 0 && saveCount < 20) {
 			if (following.size() == 0) {
 				break;
 			}
