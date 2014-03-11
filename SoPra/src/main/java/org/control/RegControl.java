@@ -54,9 +54,9 @@ public class RegControl {
 	/**
 	 * zerstört den SingleTon
 	 */
-	public void destroy()
+	public static void destroy()
 	{
-		RegControl.instance = null;
+		instance = null;
 	}
 	
 	/**

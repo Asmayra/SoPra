@@ -33,7 +33,7 @@ public class DiscoverControl {
 					recAlbum.getCoverart(), recAlbum.getOwner()), recAlbum.getOwner().getUsername(), "Album");
 			miniScreen.setDiscoverOne(discover1mini);
 		} catch (Exception e) {
-			System.out.println("wurst");
+			e.printStackTrace();
 		}
 		try {
 			User recUser = RecommendationControl.getInstance().recommendArtist();
@@ -41,12 +41,13 @@ public class DiscoverControl {
 					recUser.getImagePath(), recUser), recUser.getUsername(), "User");
 			miniScreen.setDiscoverOne(discover2mini);
 		} catch (Exception e) {
-			System.out.println("salat");
+			e.printStackTrace();
 		}
 		try {
 			Song recSong = RecommendationControl.getInstance().recommendSong();
 			if (recSong.getAlbum() == null) {
 				User usr = (User) DatabaseControl.getInstance().load(User.class, recSong.getInterpret());
+				System.out.println(recSong.getInterpret());
 				DiscoverElement discover3mini = new DiscoverElement(recSong.getTitle(), LoadImageControl.loadImageIcon(
 						usr.getImagePath(), usr), usr.getUsername(), "Song");
 				miniScreen.setDiscoverOne(discover3mini);
@@ -58,7 +59,7 @@ public class DiscoverControl {
 			}
 			
 		} catch (Exception e) {
-			System.out.println("Käsekuchen");
+			e.printStackTrace();
 		}
 
 

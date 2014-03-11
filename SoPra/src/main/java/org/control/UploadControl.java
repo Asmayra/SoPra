@@ -133,6 +133,12 @@ public class UploadControl {
 		out.close();
 	}
 	
+	
+	/**
+	 * Entfernt eine Datei vom System
+	 * @param path Pfad der Datei die entfernt werden soll
+	 * @throws IOException falls Datei nicht existiert und entfernen fehlschlägt
+	 */
 	public static void deleteFile(String path) throws IOException
 	{
 		File toDel = new File(path);
