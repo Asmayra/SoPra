@@ -21,8 +21,8 @@ public class RecommendationControl {
 
 	/**
 	 * Sigleton method
-	 * @return
-	 * 		the instance of RecommendationControl
+	 * 
+	 * @return the instance of RecommendationControl
 	 */
 	public static RecommendationControl getInstance() {
 		if (recControl == null) {
@@ -30,12 +30,11 @@ public class RecommendationControl {
 		}
 		return recControl;
 	}
-	
+
 	/**
 	 * destroys the Singleton
 	 */
-	public static void destroy()
-	{
+	public static void destroy() {
 		recControl = null;
 	}
 
@@ -48,9 +47,10 @@ public class RecommendationControl {
 
 	/**
 	 * recommends a random album from users you follow
-	 * @return
-	 * 		recommended album
-	 * @throws Exception if there are no recommendations
+	 * 
+	 * @return recommended album
+	 * @throws Exception
+	 *             if there are no recommendations
 	 */
 	public Album recommendAlbum() throws Exception {
 		List<User> following = user.getFollowing();
@@ -73,11 +73,13 @@ public class RecommendationControl {
 		}
 		throw new Exception();
 	}
+
 	/**
 	 * recommends a random song from users you follow
-	 * @return
-	 * 		recommended Song
-	 * @throws Exception if there are no recommendations
+	 * 
+	 * @return recommended Song
+	 * @throws Exception
+	 *             if there are no recommendations
 	 */
 	public Song recommendSong() throws Exception {
 		List<User> following = user.getFollowing();
@@ -100,11 +102,13 @@ public class RecommendationControl {
 		}
 		throw new Exception();
 	}
+
 	/**
 	 * recommends a random followed user from users you follow
-	 * @return
-	 * 		recommended user
-	 * @throws Exception if there are no recommendations
+	 * 
+	 * @return recommended user
+	 * @throws Exception
+	 *             if there are no recommendations
 	 */
 	public User recommendArtist() throws Exception {
 		List<User> following = user.getFollowing();
@@ -134,7 +138,9 @@ public class RecommendationControl {
 
 	}
 
-	/**gives back a list of users followed by users you follow
+	/**
+	 * gives back a list of users followed by users you follow
+	 * 
 	 * @return a list of Users who are recommended to you
 	 */
 	public List<User> allRecommendedArtists() {
@@ -148,7 +154,9 @@ public class RecommendationControl {
 	}
 
 	/**
-	 * @return list of recommended 
+	 * return a list of albums from users you follow as recommendations
+	 * 
+	 * @return list of recommended albums
 	 */
 	public List<Album> allRecomendedAlben() {
 		List<Album> recAlbum = new ArrayList<Album>();
@@ -160,6 +168,11 @@ public class RecommendationControl {
 		return recAlbum;
 	}
 
+	/**
+	 * returns a list of songs from users you follow
+	 * 
+	 * @return a list of recommended songs
+	 */
 	public List<Song> allRecomendedSongs() {
 		List<Song> recSongs = new ArrayList<Song>();
 		List<User> following = user.getFollowing();

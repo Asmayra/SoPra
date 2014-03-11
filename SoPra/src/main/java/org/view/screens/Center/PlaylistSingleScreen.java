@@ -30,14 +30,14 @@ public class PlaylistSingleScreen extends JPanel{
 		model = new DefaultTableModel(columns,0){
 			@Override
 			public Class getColumnClass(int col) {
-				if (col == 4)
+				if (col == 5)
 					return Boolean.class;
 				else
 					return String.class;
 			}
 			@Override
 			public boolean isCellEditable(int row, int column){
-				return column==4;
+				return column==5;
 			}
 		};	
 		addSongsToTable();
@@ -48,6 +48,10 @@ public class PlaylistSingleScreen extends JPanel{
 		scroll = new JScrollPane(table);
 		this.add(scroll);
 		this.setPreferredSize(new Dimension(500,500));
+<<<<<<< HEAD
+=======
+		table.removeColumn(table.getColumnModel().getColumn(4));
+>>>>>>> branch 'master' of https://github.com/Asmayra/SoPra.git
 		table.removeColumn(table.getColumnModel().getColumn(5));
 	}
 	
