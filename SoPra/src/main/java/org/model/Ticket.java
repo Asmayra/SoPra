@@ -67,6 +67,13 @@ public class Ticket {
 	public void setRequester(User requester) {
 		this.requester = requester;
 	}
+	@Override
+	public String toString(){
+		String result = "";
+		try{
+		result = "Von "+requester.getUsername();}catch(NullPointerException npe){}
+		return  result;
+	}
 	
 	/**
 	 * Generates a Panel for tickets

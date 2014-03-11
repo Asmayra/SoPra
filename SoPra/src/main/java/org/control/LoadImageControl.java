@@ -41,17 +41,17 @@ public class LoadImageControl {
 	 * @pre name existiert
 	 * @past true
 	 */
-	public static ImageIcon loadMenuIcon(String name)
+	public static ImageIcon loadMenuIcon(String name, int size)
 	{
 		BufferedImage image = new BufferedImage(40, 40, BufferedImage.TYPE_INT_RGB);
 		try {
-				image = ImageIO.read(ClassLoader.getSystemClassLoader().getResource("name"));
+				image = ImageIO.read(ClassLoader.getSystemClassLoader().getResource(name));
 			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		
-		return new ImageIcon(image);
+		return new ImageIcon(image.getScaledInstance(size, size, Image.SCALE_SMOOTH));
 	}
 	
 	/**
