@@ -22,6 +22,11 @@ import org.model.Song;
 import org.model.User;
 import org.view.TicketScreen;
 
+/**
+ * 
+ * @author Michael Pfennings, Mattias Schoenke
+ *
+ */
 public class OwnSongsScreen extends JPanel {
 
 	private static OwnSongsScreen instance = null;

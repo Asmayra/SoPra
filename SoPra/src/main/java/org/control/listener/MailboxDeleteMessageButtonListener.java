@@ -5,6 +5,12 @@ import java.awt.event.ActionListener;
 
 import org.control.MailboxControl;
 
+
+/**
+ * 
+ * @author Michael Pfennings, Mattias Schoenke
+ *
+ */
 public class MailboxDeleteMessageButtonListener implements ActionListener {
 
 	public MailboxDeleteMessageButtonListener() {

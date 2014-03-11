@@ -7,6 +7,12 @@ import org.control.DatabaseControl;
 import org.control.LoginControl;
 import org.model.User;
 
+
+/**
+ * 
+ * @author Michael Pfennings, Mattias Schoenke
+ *
+ */
 public class ProfileScreenUpgradeToManagerButtonListener implements
 		ActionListener {
 	

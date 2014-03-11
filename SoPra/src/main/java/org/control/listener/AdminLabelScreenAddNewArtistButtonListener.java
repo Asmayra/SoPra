@@ -9,6 +9,11 @@ import org.control.DatabaseControl;
 import org.model.User;
 import org.view.screens.Center.AdminLabelScreen;
 
+/**
+ * 
+ * @author Michael Pfennings, Mattias Schoenke
+ *
+ */
 public class AdminLabelScreenAddNewArtistButtonListener implements
 		ActionListener {
 

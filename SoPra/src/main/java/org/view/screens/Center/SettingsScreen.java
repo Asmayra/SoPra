@@ -26,7 +26,7 @@ import org.model.User;
 
 /**
  * 
- * @author Tim Lange
+ * @author Tim Lange, Mattias Schoenke
  *
  */
 public class SettingsScreen extends JPanel{

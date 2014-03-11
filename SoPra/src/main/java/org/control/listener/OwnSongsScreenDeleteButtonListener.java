@@ -13,6 +13,12 @@ import org.model.Song;
 import org.model.User;
 import org.view.screens.Center.OwnSongsScreen;
 
+
+/**
+ * 
+ * @author Michael Pfennings, Mattias Schoenke
+ *
+ */
 public class OwnSongsScreenDeleteButtonListener implements ActionListener {
 
 	@Override

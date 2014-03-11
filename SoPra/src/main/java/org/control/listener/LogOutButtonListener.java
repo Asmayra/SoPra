@@ -7,6 +7,12 @@ import org.control.SingletonControl;
 import org.view.LoginScreen;
 import org.view.MainScreen;
 
+
+/**
+ * 
+ * @author Michael Pfennings, Mattias Schoenke
+ *
+ */
 public class LogOutButtonListener implements ActionListener  {
 
 	

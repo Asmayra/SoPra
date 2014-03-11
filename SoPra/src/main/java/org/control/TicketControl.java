@@ -6,6 +6,11 @@ import org.model.Ticket;
 import org.model.User;
 import org.view.TicketScreen;
 
+/**
+ * 
+ * @author Michael Pfennings, Mattias Schoenke
+ *
+ */
 public class TicketControl {
 	
 	

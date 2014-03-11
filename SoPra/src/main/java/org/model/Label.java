@@ -21,7 +21,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 /**
  * Entity for Label
- * @author Philipp
+ * @author Philipp, Michael Pfennings
  *
  */
 @Entity
