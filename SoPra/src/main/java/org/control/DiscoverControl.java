@@ -33,7 +33,7 @@ public class DiscoverControl {
 					recAlbum.getCoverart(), recAlbum.getOwner()), recAlbum.getOwner().getUsername(), "Album");
 			miniScreen.setDiscoverOne(discover1mini);
 		} catch (Exception e) {
-			e.printStackTrace();
+			
 		}
 		try {
 			User recUser = RecommendationControl.getInstance().recommendArtist();
@@ -41,7 +41,7 @@ public class DiscoverControl {
 					recUser.getImagePath(), recUser), recUser.getUsername(), "User");
 			miniScreen.setDiscoverOne(discover2mini);
 		} catch (Exception e) {
-			e.printStackTrace();
+			
 		}
 		try {
 			Song recSong = RecommendationControl.getInstance().recommendSong();
@@ -59,7 +59,7 @@ public class DiscoverControl {
 			}
 			
 		} catch (Exception e) {
-			e.printStackTrace();
+			
 		}
 
 
