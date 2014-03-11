@@ -10,7 +10,11 @@ import org.model.Post;
 import org.model.User;
 import org.view.MainScreen;
 import org.view.screens.Center.HomeScreen;
-
+/**
+ * Klasse um Posts zu löschen
+ * @author Philipp
+ *
+ */
 public class DeletePost implements ActionListener {
 	//the selected Post
 	private Post selection; 

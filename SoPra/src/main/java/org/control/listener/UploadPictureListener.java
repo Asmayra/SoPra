@@ -13,7 +13,12 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import org.control.DatabaseControl;
 import org.control.LoginControl;
 import org.control.SaveImageControl;
-
+/**
+ * Listener, um Bidler hochzuladen
+ * 
+ * @author Tim
+ *
+ */
 public class UploadPictureListener implements ActionListener {
 	
 	

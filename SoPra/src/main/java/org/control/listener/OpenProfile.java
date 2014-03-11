@@ -6,7 +6,11 @@ import java.awt.event.MouseListener;
 import org.model.User;
 import org.view.MainScreen;
 import org.view.screens.Center.ProfileScreen;
-
+/**
+ * Wechselt den Hauptschirm zu dem,des angeklickten users
+ * @author Tim,Max
+ *
+ */
 public class OpenProfile implements MouseListener{
 	User usr;
 	

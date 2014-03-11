@@ -17,7 +17,11 @@ import org.model.Song;
 import org.view.ContextMenu;
 import org.view.screens.Center.PlaylistExtendedScreen;
 import org.view.screens.Center.PlaylistSingleScreen;
-
+/**
+ * Listener für alle Aktionen mit den Profilplaylisten
+ * @author Tim, Max
+ *
+ */
 public class ProfileSongsPanelListner extends MouseAdapter {
 	private PlaylistExtendedScreen extScreen = PlaylistExtendedScreen.getInstance();
 //	private PlaylistControl control = PlaylistControl.getInstance();

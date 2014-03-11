@@ -8,7 +8,11 @@ import org.view.screens.Southbar.MusicPlayer;
 
 import javazoom.jlgui.basicplayer.BasicPlayer;
 import javazoom.jlgui.basicplayer.BasicPlayerException;
-
+/**
+ * Spielt das aktuelel Leid ab(oder stoppt es)
+ * @author Philipp, Ioann 
+ *
+ */
 public class PlayBTNListener implements ActionListener {
 
 	

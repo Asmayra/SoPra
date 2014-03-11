@@ -21,7 +21,11 @@ import org.view.screens.Center.ProfileScreen;
 import org.view.screens.EastBar.EastBar;
 import org.view.screens.EastBar.SearchMask;
 
-
+/**
+ * Listener für die Suchmaske
+ * @author Tim
+ *
+ */
 public class SearchMaskListener implements KeyListener, ActionListener, MouseListener{
 
 	public void keyPressed(KeyEvent e) {

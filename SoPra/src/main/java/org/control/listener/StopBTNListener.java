@@ -6,7 +6,11 @@ import java.awt.event.ActionListener;
 import javazoom.jlgui.basicplayer.BasicPlayer;
 import javazoom.jlgui.basicplayer.BasicPlayerException;
 
-
+/**
+ * Listener, um das aktuelle Leid zu beenden
+ * @author Philipp, Ioan
+ *
+ */
 public class StopBTNListener implements ActionListener {
 
 	private BasicPlayer player; 

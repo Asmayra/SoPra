@@ -45,7 +45,7 @@ public class MusicPlayer extends JPanel{
 	}
 	
 	
-	/*
+	/**
 	 * Creates Interface for MusicPlayer in Southbar
 	 */
 	public MusicPlayer(){
