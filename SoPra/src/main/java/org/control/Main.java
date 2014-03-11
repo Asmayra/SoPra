@@ -26,17 +26,13 @@ public class Main {
 	    catch (Exception e) {
 	    	// handle exception
 	    }
-   	
+	    
+	   
+	    
 		LoginScreen ls = LoginScreen.getInstance();
-			ls.setVisible(true);
-			//disover control initialize
-			//DiscoverControl discContr = new DiscoverControl();
-			
-			//****************************
+		ls.setVisible(true);
 		
-			//****************************		
-//			PathControl.getInstance().makeDir("Bilder");
-//			BufferedImage img = LoadImageControl.loadBufferedImage("avatar.jpg");
-//			SaveImageControl.saveBufferedImage(img, "a");
+		 //DB initialisieren
+	    DatabaseControl.getInstance();
 	}
 }

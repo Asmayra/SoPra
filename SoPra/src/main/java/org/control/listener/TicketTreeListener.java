@@ -1,28 +1,18 @@
 package org.control.listener;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.IOException;
+import java.util.LinkedList;
 
 import javax.swing.JTree;
-import javax.swing.event.TreeModelEvent;
-import javax.swing.event.TreeModelListener;
 import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.DefaultTreeModel;
-import javax.swing.tree.TreePath;
 
 import org.control.DatabaseControl;
-import org.control.LoginControl;
 import org.control.PlaylistControl;
 import org.control.TicketControl;
-import org.model.Album;
 import org.model.Playlist;
 import org.model.Ticket;
-import org.model.User;
-import org.view.ContextMenu;
-import org.view.screens.Center.PlaylistExtendedScreen;
+import org.view.screens.WestBar.PlaylistMiniScreen;
 
 public class TicketTreeListener extends MouseAdapter{
 
@@ -41,15 +31,22 @@ public class TicketTreeListener extends MouseAdapter{
 		
 		if(e.getButton()==MouseEvent.BUTTON1){
 			DefaultMutableTreeNode current = (DefaultMutableTreeNode)playlisttree.getLastSelectedPathComponent();
-			String thema = current.getUserObject().toString();
-			TicketControl control = TicketControl.getInstance();
-			if(thema.equals("Account erweitern")||thema.equals("Beschwerden")||thema.equals("Genreanfrage")||thema.equals("Sonstiges")){
-				control.showTickets(thema);
-			}
-			else{
-				control.showSingleTicket((Ticket)current.getUserObject());
-			}
-			
+			String thema = "";
+			try{thema = current.getUserObject().toString();
+				TicketControl control = TicketControl.getInstance();
+				if(thema.equals("Account erweitern")||thema.equals("Beschwerde")||thema.equals("Genreanfrage")||thema.equals("Sonstiges")){
+					int childCount = current.getChildCount();
+					LinkedList<Ticket> ticketsToShow = new LinkedList<Ticket>();
+					for(int i=0;i<childCount;i++){
+						ticketsToShow.add((Ticket)((DefaultMutableTreeNode)current.getChildAt(i)).getUserObject());
+					}
+					control.showTicketList(ticketsToShow);
+					//control.showTickets(thema);
+				}
+				else{
+					control.showSingleTicket((Ticket)current.getUserObject());
+				}
+			}catch(NullPointerException npe){}
 		}
     }
 }
