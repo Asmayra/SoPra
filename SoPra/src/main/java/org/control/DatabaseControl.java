@@ -59,7 +59,7 @@ public class DatabaseControl {
 		if(Main.testDB == true){	
 	    	cfg.setProperty("hibernate.connection.url", "jdbc:postgresql://ec2-54-197-241-97.compute-1.amazonaws.com:5432/d3u49np6d74s36?user=hplhjlrqhdygcn&password=m_4DPC_jRqEWK_Mf4r2yzMa5cD&ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory");
 	    } else{
-	    	cfg.setProperty("hibernate.connection.url", "jdbc:postgresql://ec2-54-225-103-9.compute-1.amazonaws.com:5432/drc7brahusn8s?user=rejljfjreusarv&password=p7eElB7OATdabSZOWFJZjxpeBX&ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory");
+	    	cfg.setProperty("hibernate.connection.url", "jdbc:postgresql://ec2-54-197-249-167.compute-1.amazonaws.com:5432/dde1u0mihtfht2?user=txfplvhtkpsvvr&password=Aeep6wbtNq9j-sbH75XvoHban4&ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory");
 	    }
 	} else{
         cfg.setProperty("hibernate.connection.username", "postgres");
