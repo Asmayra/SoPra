@@ -51,6 +51,10 @@ public class Playlist implements Comparable {
 	public User getOwner() {
 		return this.owner;
 	}
+	
+	public void setOwner(User user) {
+		owner = user;	
+	}
 
 	public boolean contains(Song s) {
 		if (songs.contains(s)) {
