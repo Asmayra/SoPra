@@ -117,22 +117,21 @@ public class ProfileSongsPanelListner extends MouseAdapter {
 		}
     	
     	
+
 		public void actionPerformed(ActionEvent arg0) {
 			DatabaseControl dbc = DatabaseControl.getInstance();
-			int songID = (int) currentTable.getValueAt(row, 5);
+			int songID = (int) currentTable.getModel().getValueAt(row, 6);
 			Playlist destination = (Playlist) dbc.load(Playlist.class, playlistID);
 			Song clicked = (Song) dbc.load(Song.class, songID);
 			destination.addSong(clicked);
 			dbc.update(destination);
 			if(destination.equals("Favorites")){
-				currentTable.getModel().setValueAt(true, row, 5);
+				currentTable.getModel().setValueAt(true, row, 4);
 			}
-			
 			int destTabID = extScreen.getIndexOfTab(destination.getPlaylistId());
 			if(destTabID!=-1){
 				extScreen.setTabScreen(destTabID, new PlaylistSingleScreen(destination));
 			}
-			
 			currentTable.updateUI();
 		}
     	
