@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import org.control.LoginControl;
@@ -32,9 +33,9 @@ public class OwnSongsScreenNewButtonListener implements ActionListener {
 		
 		try {
 			UploadControl.uploadMusic(selected_file.getAbsolutePath(), PathControl.getInstance().getRoot() + File.separator + "Musik", selected_file.getName(), LoginControl.getInstance().getCurrentUser());
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+		} catch (IOException ex) {
+			JOptionPane.showMessageDialog(null, ex.getMessage(), "Fehler", JOptionPane.ERROR_MESSAGE);
+			return;
 		}
 		
 		OwnSongsScreen.getInstance().updateTable();
