@@ -19,7 +19,7 @@ import org.model.User;
 
 
 /**
- * 
+ * Zeigt eine Übersicht eines Labels an. Der LabelManager erhält zusätzliche Funktionen.
  * @author Michael Pfennings, Mattias Schoenke
  *
  */
@@ -32,6 +32,11 @@ public class LabelScreen extends JPanel {
 	private DefaultTableModel artistModel, managerModel;
 	private JTable artistTable, managerTable;
 	
+	
+	/**
+	 * Konstruktor des LabelScreens
+	 * @param currentLabel das Label das angezeigt werden soll
+	 */
 	public LabelScreen(Label currentLabel){
 		this.currentLabel = currentLabel;
 		initGui();
@@ -39,7 +44,10 @@ public class LabelScreen extends JPanel {
 	
 	
 	
-	
+	/**
+	 * Initialisiert das Gui. Ist der User ein LabelManager kriegt er zusätzliche Optionen angezeigt.
+	 * 
+	 */
 	private void initGui(){
 		this.setLayout(new BorderLayout());
 		this.add(initHeader(),BorderLayout.NORTH);
@@ -51,7 +59,10 @@ public class LabelScreen extends JPanel {
 		}
 	}
 	
-	
+	/**
+	 * Erzeugt den Header, indem der Labelname und der Name des LabelManager anzeigt wird.
+	 * @return das headerPanel
+	 */
 	private JComponent initHeader(){
 		JPanel headerPanel = new JPanel(new BorderLayout());
 		JLabel labelLabel = new JLabel(currentLabel.getName() + "                  Manager: " + currentLabel.getManager().getUsername());
@@ -62,6 +73,10 @@ public class LabelScreen extends JPanel {
 	}
 	
 	
+	/**
+	 * Erzeugt die Tabelle in der alle Künstler, die in dem aktuellen Label sind, angezeigt werden.
+	 * @return
+	 */
 	private JComponent initTable(){
 		
 		artistModel = new DefaultTableModel();
@@ -75,6 +90,10 @@ public class LabelScreen extends JPanel {
 		return new JScrollPane(artistTable);
 	}
 	
+	/**
+	 * Erzeugt das ButtonPanel mit dem Button Artist löschen
+	 * @return das buttonPanel
+	 */
 	private JComponent initManagerButtons(){
 		deleteArtistButton = new JButton("Artist Löschen");
 		deleteArtistButton.addActionListener(new LabelScreenArtistDeleteButtonListener(this));
@@ -82,7 +101,9 @@ public class LabelScreen extends JPanel {
 		
 	}
 	
-	
+	/**
+	 * Updatet die Tabelleneinträge
+	 */
 	private void updateArtistTable(){
 		String[] temp = new String[1];
 		ArrayList<User> artistList = (ArrayList<User>) currentLabel.getArtists();
