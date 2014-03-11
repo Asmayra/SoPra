@@ -63,7 +63,7 @@ public class DatabaseControl {
 	    }
 	} else{
         cfg.setProperty("hibernate.connection.username", "postgres");
-        cfg.setProperty("hibernate.connection.password", "postgres");
+        cfg.setProperty("hibernate.connection.password", "password");
 		cfg.setProperty("hibernate.connection.url", "jdbc:postgresql://localhost:5432/postgres");
 	}
 	    

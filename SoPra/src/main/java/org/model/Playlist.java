@@ -1,9 +1,11 @@
 package org.model;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -58,7 +60,11 @@ public class Playlist implements Comparable {
 	}
 
 	public LinkedList<Song> getSongs() {
-		LinkedList<Song> coll = new LinkedList<Song>(this.songs);
+		LinkedList<Song> coll = new LinkedList<Song>();
+		Iterator<Song> it = songs.iterator();
+		while(it.hasNext()){
+			coll.add(it.next());
+		}
 		return coll;
 	}
 
@@ -161,7 +167,7 @@ public class Playlist implements Comparable {
 
 	@Override
 	public String toString() {
-		if (name == null || name.equals("")) {
+		if (getName() == null || getName().equals("")) {
 			return "no name";
 		}
 		return getName();
