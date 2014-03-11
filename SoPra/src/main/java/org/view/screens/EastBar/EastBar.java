@@ -25,7 +25,6 @@ public class EastBar extends JLayeredPane{
 
 	private static EastBar bar;
 	private JButton moreButton = new JButton("mehr");
-	private JPanel resultsPan = new JPanel();
 	
 	public static EastBar getInstance(){
 		if(bar == null){
@@ -62,60 +61,7 @@ public class EastBar extends JLayeredPane{
 		this.add(moreButton, new Integer(0));
 		moreButton.addActionListener(new MoreDiscoverButtonListener());
 
-		//setup resultspan for search results
-		this.resultsPan.setLayout(new BoxLayout(resultsPan, BoxLayout.PAGE_AXIS));
-		this.resultsPan.setBackground(Color.gray);
-		this.resultsPanHeight(0);
-		this.resultsPan.setVisible(true);
-		this.add(this.resultsPan, new Integer(2));
 	}
 	
-	/**
-	 * set resultspanel height to fit it to the results length
-	 * @param y pixels
-	 */
-	public void resultsPanHeight(int y){
-		if(y<0){
-			y=0;
-		}
-		this.resultsPan.setBounds(20, 22, 125, y);
-		this.validate();
-		this.repaint();
-	}
 	
-	/**
-	 * hide the results Pan for search results
-	 */
-	public void hideResultsPan(){
-		this.resultsPan.setVisible(false);
-	}
-	
-	/**
-	 * show the results Pan for search results
-	 */
-	public void showResultsPan(){
-		this.resultsPan.setVisible(true);
-	}
-	
-	/**
-	 * set the results shown in the resultspan
-	 */
-	public void setResults(List<?> resultList) {
-		resultsPan.removeAll();
-		SearchMaskListener listen = new SearchMaskListener();
-		
-		Iterator<?> itr = resultList.iterator();
-		JLabel element;
-		
-		while(itr.hasNext()){
-			User usr = ((User) itr.next());
-			element = new JLabel(usr.getUsername());
-			element.putClientProperty("id", usr.getUsername());
-			element.putClientProperty("class", "User");
-			element.addMouseListener(listen);
-			resultsPan.add(element);
-		}
-		resultsPan.validate();
-		resultsPan.repaint();
-	}
 }

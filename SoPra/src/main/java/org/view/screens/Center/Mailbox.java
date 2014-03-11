@@ -79,6 +79,9 @@ public class Mailbox extends JPanel{
 		instance = null;
 	}
 	
+	/**
+	 * Initialisiert die Gui
+	 */
 	
 	private void initGui(){
 		this.setLayout(new BorderLayout());
@@ -90,6 +93,10 @@ public class Mailbox extends JPanel{
 		
 	}
 	
+	/**
+	 * Erzeugt die Tabelle in der die empfangenen Nachrichten angezeigt werden.
+	 * @return die JScrollPane in der die Tabelle ist
+	 */
 	
 	private JComponent initTable(){
 		msgTable = new JTable();
@@ -127,6 +134,10 @@ public class Mailbox extends JPanel{
 		
 	}
 	
+	/**
+	 * Erzeugt das ButtonPanel mit den Buttons Neu, Antworten und löschen.
+	 * @return das buttonPanel
+	 */
 	private JComponent initButtons(){
 		
 		JPanel  buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
@@ -146,6 +157,11 @@ public class Mailbox extends JPanel{
 		return buttonPanel;
 	}
 	
+	
+	/**
+	 * Erzeugt das MessagePanel in der die ausgewählte Nachricht angezeigt wird.
+	 * @return das messagePanel
+	 */
 	public JComponent initMessageView()
 	{
 		messagePanel = new JPanel();
@@ -191,6 +207,11 @@ public class Mailbox extends JPanel{
 		return messagePanel;
 	}
 	
+	
+	/**
+	 * leert die Tabelle
+	 * @post Tabelle wurde geleert
+	 */
 	public void clearTable(){
 		msgTableModel.setRowCount(0);
 	}
@@ -200,6 +221,8 @@ public class Mailbox extends JPanel{
 	 * @param sender Sender der Nachricht
 	 * @param subject Betreff der Nachricht
 	 * @param date Datum der Nachricht
+	 * @pre kein Parameter null
+	 * @post neue Zeile wurde hinzugefügt
 	 */
 	public void addRow(String sender, String subject, String date){
 		String[] newRow = new String[3];
@@ -221,7 +244,9 @@ public class Mailbox extends JPanel{
 	}
 
 	
-	
+	/**
+	 * Fügt der letzten Spalte in der Tabelle CheckBoxen hinzu
+	 */
 	@SuppressWarnings("serial")
 	class ButtonRenderer extends JButton implements TableCellRenderer {
 		
