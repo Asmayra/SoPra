@@ -29,14 +29,14 @@ public class PlaylistSingleScreen extends JPanel{
 		model = new DefaultTableModel(columns,0){
 			@Override
 			public Class getColumnClass(int col) {
-				if (col == 4)
+				if (col == 5)
 					return Boolean.class;
 				else
 					return String.class;
 			}
 			@Override
 			public boolean isCellEditable(int row, int column){
-				return column==4;
+				return column==5;
 			}
 		};	
 		addSongsToTable();
