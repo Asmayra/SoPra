@@ -28,6 +28,14 @@ public class SubscriptionControl {
 		return instance;
 	}
 	
+	/**
+	 * Zerstört den Singleton
+	 */
+	public static void destroy()
+	{
+		instance = null;
+	}
+	
 	public SubscriptionControl(){
 		//aktuelle Subscriptions
 		currentSubscriptions = (ArrayList<User>) LoginControl.getInstance().getCurrentUser().getFollowing();

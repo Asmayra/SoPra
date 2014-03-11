@@ -24,6 +24,14 @@ public class TicketControl {
 		return instance;
 	}
 	
+	/**
+	 * Zerstört den Singleton
+	 */
+	public static void destroy()
+	{
+		instance = null;
+	}
+	
 	public boolean createTicket(String category, User currentUser, String ticketText){
 		Ticket newTicket = new Ticket();
 		if (category == null || category == ""){

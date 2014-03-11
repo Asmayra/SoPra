@@ -29,6 +29,14 @@ public class SubscriptionScreen extends JPanel{
 		return instance;
 	}
 	
+	/**
+	 * Zerstört den Singleton
+	 */
+	public static void destroy()
+	{
+		instance = null;
+	}
+	
 	public SubscriptionScreen(){
 		this.setPreferredSize(new Dimension(500,500));
 		subscripPan.setLayout(new GridBagLayout());

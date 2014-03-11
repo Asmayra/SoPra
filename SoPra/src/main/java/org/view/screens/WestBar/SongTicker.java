@@ -30,6 +30,14 @@ public class SongTicker extends JPanel implements ActionListener{
     	}
     	return instance;
     }
+    
+    /**
+	 * Zerstört den Singleton
+	 */
+	public static void destroy()
+	{
+		instance = null;
+	}
 
     private SongTicker() {
     	this.numberofletters = Math.min(maxnumberofletters, tickertext.length());
