@@ -21,7 +21,7 @@ import org.control.listener.AdminLabelScreenDeleteLabelButtonListener;
 import org.model.Label;
 
 /**
- * 
+ * Zeigt eine Übersicht aller Label mit dem zugehörigem LabelManager an und bietet Administierungsfunktionen. Ist ein Singleton.
  * @author Michael Pfennings, Matthias Schoenke
  *
  */
@@ -35,6 +35,9 @@ public class AdminLabelScreen extends JPanel {
 	private JTextField nameTF, managerTF, newArtistTF;
 	
 	
+	/**
+	 * Konstruktor
+	 */
 	private AdminLabelScreen(){
 		initGui();
 	}
@@ -53,6 +56,10 @@ public class AdminLabelScreen extends JPanel {
 		instance = null;
 	}
 	
+	
+	/**
+	 * Initialisiert die Gui
+	 */
 	private void initGui(){
 		this.setLayout(new BorderLayout());
 		this.add(initNewLabel(),BorderLayout.NORTH);
@@ -61,6 +68,11 @@ public class AdminLabelScreen extends JPanel {
 		
 	}
 	
+	
+	/**
+	 * Erzeugt das headerPanel
+	 * @return
+	 */
 	private JComponent initNewLabel(){
 		JPanel headerPanel = new JPanel(new BorderLayout());
 		
