@@ -11,13 +11,15 @@ import javax.swing.JTable;
 
 import org.control.DatabaseControl;
 import org.control.LoginControl;
-import org.control.PlaylistControl;
 import org.model.Playlist;
 import org.model.Song;
 import org.view.ContextMenu;
 import org.view.screens.Center.PlaylistExtendedScreen;
 import org.view.screens.Center.PlaylistSingleScreen;
-
+/**
+ * @author Max
+ * creates a contextMenu, also Mouselistener for this contextMenu
+ */
 public class ProfileSongsPanelListner extends MouseAdapter {
 	private PlaylistExtendedScreen extScreen = PlaylistExtendedScreen.getInstance();
 //	private PlaylistControl control = PlaylistControl.getInstance();
@@ -50,7 +52,7 @@ public class ProfileSongsPanelListner extends MouseAdapter {
 
     /**
      * Anzeige des Kontextmenus
-     * @param e
+     * @param e mouseEvent
      */
     private void maybeShowPopup(MouseEvent e) {
 //    	screen = (...) currentTable.getParent().getParent().getParent();
@@ -77,7 +79,7 @@ public class ProfileSongsPanelListner extends MouseAdapter {
     
     
     /**
-     * Actionlistener für das Kontextmenü der Genreübersicht
+     * Actionlistener für das Kontextmenü des SongPanels
      * @author Max,Tim
      *
      */
@@ -104,7 +106,7 @@ public class ProfileSongsPanelListner extends MouseAdapter {
     }
     
     /**
-     * Actionlistener für das Kontextmenü der Genreübersicht
+     * Actionlistener für das Kontextmenü die einzelnen Playlisten
      * @author Max,Tim
      *
      */
