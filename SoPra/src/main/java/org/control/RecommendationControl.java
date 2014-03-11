@@ -20,8 +20,9 @@ public class RecommendationControl {
 	private static RecommendationControl recControl;
 
 	/**
+	 * Sigleton method
 	 * @return
-	 * 
+	 * 		the instance of RecommendationControl
 	 */
 	public static RecommendationControl getInstance() {
 		if (recControl == null) {
@@ -31,17 +32,26 @@ public class RecommendationControl {
 	}
 	
 	/**
-	 * zerstört den SingleTon
+	 * destroys the Singleton
 	 */
 	public static void destroy()
 	{
 		recControl = null;
 	}
 
+	/**
+	 * standard constructor
+	 */
 	private RecommendationControl() {
 		user = LoginControl.getInstance().getCurrentUser();
 	}
 
+	/**
+	 * recommends a random album from users you follow
+	 * @return
+	 * 		recommended album
+	 * @throws Exception if there are no recommendations
+	 */
 	public Album recommendAlbum() throws Exception {
 		List<User> following = user.getFollowing();
 		int random1 = 0;
