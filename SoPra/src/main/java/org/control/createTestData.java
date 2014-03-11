@@ -1,4 +1,4 @@
-package org.testpackage;
+package org.control;
 
 import java.io.IOException;
 import java.text.ParseException;
@@ -6,8 +6,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-import org.control.DatabaseControl;
-import org.control.PasswordControl;
 import org.model.Album;
 import org.model.Genre;
 import org.model.Label;
