@@ -1,9 +1,13 @@
 package org.control;
 
+import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.util.LinkedList;
 import java.util.List;
 
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -39,31 +43,28 @@ public class DiscoverControl {
 
 		try {
 			Album recAlbum = RecommendationControl.getInstance().recommendAlbum();
-			discover1mini = new DiscoverElement(recAlbum.getName(), LoadImageControl.loadImageIcon(recAlbum.getOwner()
-					.getImagePath(), recAlbum.getOwner()), recAlbum.getOwner().getUsername(), "Album");
+			Image pic = recAlbum.getOwner().getPicture().getScaledInstance(100, 100, BufferedImage.SCALE_DEFAULT);
+			ImageIcon pi = new ImageIcon(pic);
+			discover1mini = new DiscoverElement(recAlbum.getName(), pi, recAlbum.getOwner().getUsername(), "Album");
 			miniScreen.setDiscoverOne(discover1mini);
 		} catch (Exception e) {
 		}
 		try {
+
 			User recUser = RecommendationControl.getInstance().recommendArtist();
-			discover2mini = new DiscoverElement(recUser.getUsername(), LoadImageControl.loadImageIcon(
-					recUser.getImagePath(), recUser), recUser.getUsername(), "User");
+			Image pic = recUser.getPicture().getScaledInstance(100, 100, BufferedImage.SCALE_DEFAULT);
+			ImageIcon pi = new ImageIcon(pic);
+			discover2mini = new DiscoverElement(recUser.getUsername(), pi, recUser.getUsername(), "User");
 			miniScreen.setDiscoverTwo(discover2mini);
 		} catch (Exception e) {
 		}
 		try {
 			Song recSong = RecommendationControl.getInstance().recommendSong();
-			if (recSong.getAlbum() == null) {
-				User usr = (User) DatabaseControl.getInstance().load(User.class, recSong.getInterpret());
-				discover3mini = new DiscoverElement(recSong.getTitle(), LoadImageControl.loadImageIcon(
-						usr.getImagePath(), usr), usr.getUsername(), "Song");
-				miniScreen.setDiscoverThree(discover3mini);
-			} else {
-				User usr = (User) DatabaseControl.getInstance().load(User.class, recSong.getInterpret());
-				discover3mini = new DiscoverElement(recSong.getTitle(), LoadImageControl.loadImageIcon(recSong
-						.getAlbum().getOwner().getImagePath(), usr), usr.getUsername(), "Song");
-				miniScreen.setDiscoverThree(discover3mini);
-			}
+			User usr = (User) DatabaseControl.getInstance().load(User.class, recSong.getInterpret());
+			Image pic = usr.getPicture().getScaledInstance(100, 100, BufferedImage.SCALE_DEFAULT);
+			ImageIcon pi = new ImageIcon(pic);
+			discover3mini = new DiscoverElement(recSong.getTitle(), pi, usr.getUsername(), "Song");
+			miniScreen.setDiscoverThree(discover3mini);
 
 		} catch (Exception e) {
 		}
@@ -85,23 +86,26 @@ public class DiscoverControl {
 		List<User> arts = RecommendationControl.getInstance().allRecommendedArtists();
 		for (int i = 0; i < arts.size(); i++) {
 			User art = arts.get(i);
-			DiscoverElement discover = new DiscoverElement(art.getUsername(), LoadImageControl.loadImageIcon(
-					art.getImagePath(), art), art.getUsername(), "User");
+			Image pic = art.getPicture().getScaledInstance(150, 150, BufferedImage.SCALE_DEFAULT);
+			ImageIcon pi = new ImageIcon(pic);
+			DiscoverElement discover = new DiscoverElement(art.getUsername(), pi, art.getUsername(), "User");
 			artists.add(discover);
 		}
 		List<Song> sons = RecommendationControl.getInstance().allRecomendedSongs();
 		for (int i = 0; i < sons.size(); i++) {
 			Song son = sons.get(i);
 			User artist = (User) DatabaseControl.getInstance().load(User.class, son.getInterpret());
-			DiscoverElement discover = new DiscoverElement(son.getTitle(), LoadImageControl.loadImageIcon(
-					artist.getImagePath(), artist), artist.getUsername(), "Song");
+			Image pic = artist.getPicture().getScaledInstance(150, 150, BufferedImage.SCALE_DEFAULT);
+			ImageIcon pi = new ImageIcon(pic);
+			DiscoverElement discover = new DiscoverElement(son.getTitle(), pi, artist.getUsername(), "Song");
 			songs.add(discover);
 		}
 		List<Album> albs = RecommendationControl.getInstance().allRecomendedAlben();
 		for (int i = 0; i < albs.size(); i++) {
 			Album alb = albs.get(i);
-			DiscoverElement discover = new DiscoverElement(alb.getName(), LoadImageControl.loadImageIcon(alb.getOwner()
-					.getImagePath(), alb.getOwner()), alb.getOwner().getUsername(), "Album");
+			Image pic = alb.getOwner().getPicture().getScaledInstance(150, 150, BufferedImage.SCALE_DEFAULT);
+			ImageIcon pi = new ImageIcon(pic);
+			DiscoverElement discover = new DiscoverElement(alb.getName(), pi, alb.getOwner().getUsername(), "Album");
 			albums.add(discover);
 		}
 

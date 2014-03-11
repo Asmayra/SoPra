@@ -1,5 +1,7 @@
 package org.control;
 
+import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -54,7 +56,9 @@ public class SubscriptionControl {
 		for(int i=0;i<currentSubscriptions.size();i++){
 			User followed = currentSubscriptions.get(i);
 			try {
-				DiscoverElement newsub = new DiscoverElement(followed.getUsername(),new ImageIcon(followed.getPicture()),followed.getUsername(),"");
+				Image pic = followed.getPicture().getScaledInstance(150, 150, BufferedImage.SCALE_DEFAULT);
+				ImageIcon pi = new ImageIcon(pic);
+				DiscoverElement newsub = new DiscoverElement(followed.getUsername(),pi,followed.getUsername(),"");
 				subscriptionElements.add(newsub);
 			} catch (NullPointerException e) {System.err.println(e.getLocalizedMessage());}
 		}
