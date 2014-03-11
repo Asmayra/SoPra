@@ -25,10 +25,10 @@ public class SearchControl {
 	public void generateResults(String searchKeyword){	
 		ArrayList<User> userResults =(ArrayList<User>) DatabaseControl.getInstance().queryForKeyword(User.class, "username", searchKeyword);
 		ArrayList<Song> songResults =(ArrayList<Song>) DatabaseControl.getInstance().queryForKeyword(Song.class, "title", searchKeyword);
-		//ArrayList<Label> labelResults =(ArrayList<Label>) DatabaseControl.getInstance().queryForKeyword(Label.class, "name", searchKeyword);
+		ArrayList<Label> labelResults =(ArrayList<Label>) DatabaseControl.getInstance().queryForKeyword(Label.class, "name", searchKeyword);
 		int userNum=userResults.size();
 		int songNum=songResults.size();
-		//int labelNum=labelResults.size();
+		int labelNum=labelResults.size();
 		LinkedList<DiscoverElement> user = new LinkedList<DiscoverElement>();
 		LinkedList<DiscoverElement> labels = new LinkedList<DiscoverElement>();
 		LinkedList<DiscoverElement> songs = new LinkedList<DiscoverElement>();
@@ -38,12 +38,12 @@ public class SearchControl {
 					current.getImagePath(), current),current.getUsername(),"User");
 			user.add(curUser);
 		}
-//		for(int i=0;i<labelNum;i++){
-//			Label current = labelResults.get(i);
-//			DiscoverElement curUser = new DiscoverElement(current.getName(),LoadImageControl.loadImageIcon(
-//					current.getImagePath(), current),current.getUsername(),"User");
-//			user.add(curUser);
-//		}
+		for(int i=0;i<labelNum;i++){
+			Label current = labelResults.get(i);
+			DiscoverElement curLabel = new DiscoverElement(current.getName(),LoadImageControl.loadImageIcon(
+					current.getManager().getImagePath(), current.getManager()),""+current.getId(),"Label");
+			user.add(curLabel);
+		}
 		for(int i=0;i<songNum;i++){
 			Song recSong = songResults.get(i);
 			User usr = (User) DatabaseControl.getInstance().load(User.class, recSong.getInterpret());
@@ -60,24 +60,5 @@ public class SearchControl {
 		
 		MainScreen.getInstance().updateCenter(screen);
 		
-	}
-	
-	/**
-	 * generate the results to be shown
-	 * @param searchKeyword String to search for
-	 * @return List with results
-	 */
-	private List<?> databaseQueries(String searchKeyword){
-		
-		
-		//User usr = (User)DatabaseController.getInstance().load(User.class, searchKeyword);
-		ArrayList<ArrayList<String>> resultList = new ArrayList<ArrayList<String>>();
-		
-		resultList.add((ArrayList<String>) DatabaseControl.getInstance().queryForKeyword(User.class, "username", searchKeyword));
-		resultList.add((ArrayList<String>) DatabaseControl.getInstance().queryForKeyword(Song.class, "title", searchKeyword));
-		resultList.add((ArrayList<String>) DatabaseControl.getInstance().queryForKeyword(Label.class, "name", searchKeyword));
-				
-		
-		return resultList;
 	}
 }

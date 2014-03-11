@@ -54,7 +54,7 @@ public class SearchResultScreen extends JPanel{
 	}
 	
 	/**
-	 * Anordnen der Empfehlungen
+	 * Anordnen der Suchresultate
 	 */
 	public void showRecommendations(){
 		resultPane.removeAll();
