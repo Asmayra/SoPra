@@ -78,6 +78,9 @@ public class PlaylistMiniScreen extends JPanel{
 		instance = null;
 	}
 	
+	/**
+	 * Konstruktor
+	 */
 	public PlaylistMiniScreen() {
 		LoginControl logcon = LoginControl.getInstance();
 		currentUser = logcon.getCurrentUser();
@@ -97,6 +100,9 @@ public class PlaylistMiniScreen extends JPanel{
 		
 	}
 	
+	/**
+	 * Erstellt den tree nue
+	 */
 	public void createTree(){
 		
 		DefaultMutableTreeNode playlist = new DefaultMutableTreeNode("Playlisten");
@@ -122,7 +128,9 @@ public class PlaylistMiniScreen extends JPanel{
 		}
 	}
 	
-	
+	/**
+	 * Erstellt das Adminpanel
+	 */
 	public void createAdminPanel(){
 		admin.setLayout(new GridBagLayout());	
 		createAdminTree();
@@ -312,6 +320,9 @@ public class PlaylistMiniScreen extends JPanel{
 		return playlists;
 	}
 	
+	/**
+	 * Soll den MiniScreen, d.h. den Tree updaten
+	 */
 	public void updateMiniScreen(){
 		playlists.removeAll();
 		createTree();

@@ -16,6 +16,9 @@ public class WestBar extends JPanel {
 	private CoverArt coverart = new CoverArt();
 	private SongTicker songticker = SongTicker.getInstance();
 	
+	/**
+	 * Erstellt die Westbar mit ihren Einzelelementen
+	 */
 	public WestBar(){
 		this.setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
