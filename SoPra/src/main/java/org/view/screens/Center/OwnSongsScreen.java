@@ -27,7 +27,7 @@ import org.model.User;
 import org.view.TicketScreen;
 
 /**
- * 
+ * Zeigt die eigenen Lieder eines Künstlers an. Ist ein Singleton.
  * @author Michael Pfennings, Mattias Schoenke
  *
  */
@@ -66,6 +66,9 @@ public class OwnSongsScreen extends JPanel {
 	}
 	
 	
+	/**
+	 * Initialisiert die Gui
+	 */
 	private void initGui(){
 		this.setLayout(new BorderLayout());
 		this.add(initTable(),BorderLayout.NORTH);
@@ -74,6 +77,10 @@ public class OwnSongsScreen extends JPanel {
 		updateTable();
 	}
 	
+	/**
+	 * Erzeugt die Tabelle in der alle Songs angezeigt werden.
+	 * @return das JScrollPane in dem die Tabelle ist
+	 */
 	
 	private JComponent initTable(){
 		songTable = new JTable();
@@ -96,6 +103,10 @@ public class OwnSongsScreen extends JPanel {
 		
 	}
 	
+	/**
+	 * Erzeugt das ButtonPanel mit den Buttons Neu und Löschen.
+	 * @return das ButtonPanel
+	 */
 	private JComponent initButtons(){
 		JPanel buttonPanel = new JPanel(new FlowLayout());
 		
@@ -112,6 +123,10 @@ public class OwnSongsScreen extends JPanel {
 		
 	}
 	
+	/**
+	 * Erzeugt das EditPanel in dem ein Song bearbeitet werden kann
+	 * @return das editPanel
+	 */
 	private JComponent initEdit(){
 		JPanel editPanel = new JPanel(new BorderLayout());
 		
@@ -150,6 +165,11 @@ public class OwnSongsScreen extends JPanel {
 		
 	}
 	
+	
+	/**
+	 * Updatet die Tabelle
+	 * @post die Tabelle wurde geudatet
+	 */
 	public void updateTable(){
 		User currentUser = LoginControl.getInstance().getCurrentUser();
 		
@@ -177,8 +197,6 @@ public class OwnSongsScreen extends JPanel {
 			
 			model.addRow(newRow);
 		}
-		
-		
 	}
 	
 	public int getSelectedRow(){

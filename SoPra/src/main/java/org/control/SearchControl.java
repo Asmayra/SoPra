@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.model.Label;
+import org.model.Song;
 import org.model.User;
 import org.view.screens.EastBar.EastBar;
 import org.view.screens.EastBar.SearchMask;
@@ -18,8 +20,7 @@ public class SearchControl {
 	 */
 	public void generateResults(String searchKeyword){	
 		List<?> resultList = databaseQueries(searchKeyword);
-		EastBar.getInstance().resultsPanHeight(resultList.size()*14);
-		EastBar.getInstance().setResults(resultList);
+				
 	}
 	
 	/**
@@ -31,10 +32,12 @@ public class SearchControl {
 		
 		
 		//User usr = (User)DatabaseController.getInstance().load(User.class, searchKeyword);
-		List<?> resultList = new ArrayList<String>();
+		ArrayList<ArrayList<String>> resultList = new ArrayList<ArrayList<String>>();
 		
-		resultList = DatabaseControl.getInstance().queryForKeyword(User.class, "username", searchKeyword);
-		
+		resultList.add((ArrayList<String>) DatabaseControl.getInstance().queryForKeyword(User.class, "username", searchKeyword));
+		resultList.add((ArrayList<String>) DatabaseControl.getInstance().queryForKeyword(Song.class, "title", searchKeyword));
+		resultList.add((ArrayList<String>) DatabaseControl.getInstance().queryForKeyword(Label.class, "name", searchKeyword));
+				
 		
 		return resultList;
 	}

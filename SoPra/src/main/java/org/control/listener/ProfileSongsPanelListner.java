@@ -126,7 +126,9 @@ public class ProfileSongsPanelListner extends MouseAdapter {
 			destination.addSong(clicked);
 			dbc.update(destination);
 			if(destination.equals("Favorites")){
-				currentTable.getModel().setValueAt(true, row, 4);
+				LoginControl.getInstance().getCurrentUser().getFavorites().addSong(clicked);
+				DatabaseControl.getInstance().update(LoginControl.getInstance().getCurrentUser().getFavorites());
+				System.out.println("Das Lied wurde den Favoriten hinzugefügt!");
 			}
 			int destTabID = extScreen.getIndexOfTab(destination.getPlaylistId());
 			if(destTabID!=-1){
