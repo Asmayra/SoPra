@@ -77,6 +77,7 @@ public class ProfileAlbenPanel extends JScrollPane {
 			model.addRow(entry);
 		}
 		model.addTableModelListener(new AlbenTableListener());
+		table.removeColumn(table.getColumnModel().getColumn(4));
 		return table;
 	}
 }

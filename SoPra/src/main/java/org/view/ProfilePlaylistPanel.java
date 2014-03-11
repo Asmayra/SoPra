@@ -75,6 +75,7 @@ public class ProfilePlaylistPanel extends JScrollPane {
 			model.addRow(entry);
 		}
 		model.addTableModelListener(new PlaylistTableListener());
+		table.removeColumn(table.getColumnModel().getColumn(4));
 		return table;
 	}
 }
