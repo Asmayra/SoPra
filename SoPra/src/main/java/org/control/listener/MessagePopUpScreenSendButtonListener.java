@@ -7,6 +7,11 @@ import org.control.LoginControl;
 import org.control.MailboxControl;
 import org.view.MessagePopUpScreen;
 
+/**
+ * 
+ * @author Michael Pfennings, Mattias Schoenke
+ *
+ */
 public class MessagePopUpScreenSendButtonListener implements ActionListener {
 
 	public void actionPerformed(ActionEvent arg0) {

@@ -12,6 +12,12 @@ import org.view.MainScreen;
 import org.view.screens.Center.LabelScreen;
 import org.view.screens.Center.OwnSongsScreen;
 
+
+/**
+ * 
+ * @author Michael Pfennings, Mattias Schoenke
+ *
+ */
 public class LabelButtonListener implements ActionListener {
 
 	@Override

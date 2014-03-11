@@ -17,6 +17,12 @@ import org.control.listener.LabelScreenArtistDeleteButtonListener;
 import org.model.Label;
 import org.model.User;
 
+
+/**
+ * 
+ * @author Michael Pfennings, Mattias Schoenke
+ *
+ */
 public class LabelScreen extends JPanel {
 
 	

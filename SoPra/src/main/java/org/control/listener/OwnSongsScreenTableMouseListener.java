@@ -9,6 +9,12 @@ import org.model.Song;
 import org.model.User;
 import org.view.screens.Center.OwnSongsScreen;
 
+
+/**
+ * 
+ * @author Michael Pfennings, Mattias Schoenke
+ *
+ */
 public class OwnSongsScreenTableMouseListener implements MouseListener {
 
 	@Override

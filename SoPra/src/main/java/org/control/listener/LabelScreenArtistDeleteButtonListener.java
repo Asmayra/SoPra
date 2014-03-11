@@ -8,7 +8,11 @@ import org.control.DatabaseControl;
 import org.model.Label;
 import org.model.User;
 import org.view.screens.Center.LabelScreen;
-
+/**
+ * 
+ * @author Michael Pfennings, Mattias Schoenke
+ *
+ */
 public class LabelScreenArtistDeleteButtonListener implements ActionListener {
 
 	private LabelScreen currentLabelScreen;

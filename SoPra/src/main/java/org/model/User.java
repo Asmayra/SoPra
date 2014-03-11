@@ -23,7 +23,7 @@ import org.control.LoadImageControl;
 /**
  * User Entity
  * 
- * @author Philipp,Michael Pfennings, Mattias Schoenke, Sebastian Roth
+ * @author Philipp, Michael Pfennings, Mattias Schoenke, Sebastian Roth
  * @inv username must be individual and not null
  */
 @Entity

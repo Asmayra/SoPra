@@ -6,6 +6,12 @@ import java.awt.event.ActionListener;
 import org.view.LoginScreen;
 import org.view.MainScreen;
 
+
+/**
+ * 
+ * @author Michael Pfennings, Mattias Schoenke
+ *
+ */
 public class LogOutButtonListener implements ActionListener  {
 
 	

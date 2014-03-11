@@ -6,6 +6,12 @@ import java.awt.event.ActionListener;
 import org.view.MainScreen;
 import org.view.screens.Center.AdminLabelScreen;
 
+
+/**
+ * 
+ * @author Michael Pfennings, Mattias Schoenke
+ *
+ */
 public class CreateLabelButtonListener implements ActionListener {
 
 	@Override
