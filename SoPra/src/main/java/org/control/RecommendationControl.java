@@ -29,7 +29,15 @@ public class RecommendationControl {
 			recControl = new RecommendationControl();
 		}
 		return recControl;
-	};
+	}
+	
+	/**
+	 * zerstört den SingleTon
+	 */
+	public static void destroy()
+	{
+		recControl = null;
+	}
 
 	private RecommendationControl() {
 		user = LoginControl.getInstance().getCurrentUser();
