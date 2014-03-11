@@ -98,7 +98,7 @@ public class TicketScreen extends JFrame {
 		JLabel categoryLabel = new JLabel("Kategorie:  ");
 		headerPanel.add(categoryLabel);
 		
-		String[] categories = {"","Account erweitern", "Beschwerde", "Genreanfrage", "Sonstiges"};
+		String[] categories = {"","Account erweitern", "Beschwerde", "Genreanfrage", "Label erstellen", "Künstler hinzufügen", "Sonstiges"};
 		categoryBox = new JComboBox(categories);
 		categoryBox.setSelectedIndex(0);
 		headerPanel.add(categoryBox);
