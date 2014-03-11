@@ -15,7 +15,7 @@ import org.view.screens.Center.Mailbox;
 
 /**
  * Stellt Methoden zur Verwaltung der Mailbox und erstellen neuer Nachrichten bereit
- * @author Michael Pfennings, Mattias Schoenke
+ * @author Michael Pfennings, Mattias Schoenke, Sebastian Roth
  *
  */
 public class MailboxControl {
@@ -69,8 +69,12 @@ public class MailboxControl {
 		int i = 0;
 		for(String s : recipients)
 		{
-			if( ( recv[i] = (User) DatabaseControl.getInstance().load(User.class, s) ) == null ) 
+			if( ( recv[i] = (User) DatabaseControl.getInstance().load(User.class, s) ) == null ) {
 				return false;
+			} else if (( recv[i] = (User) DatabaseControl.getInstance().load(User.class, s) ).isIgnoring(sender)){
+				return false;
+			}
+				
 			i++;
 		}
 		
