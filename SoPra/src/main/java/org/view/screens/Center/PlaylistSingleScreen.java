@@ -15,7 +15,11 @@ import org.control.listener.SongTableListener;
 import org.model.Playlist;
 import org.model.Song;
 
-
+/**
+ * Anzeige einer Playlist
+ * @author Max Küper, Tim Michels
+ *
+ */
 public class PlaylistSingleScreen extends JPanel{
 	private static Playlist playlist;
 	private String[] columns = new String[] { "Interpret", "Titel", "Album", "Länge", "Favor", "SongIDs"};
@@ -24,7 +28,10 @@ public class PlaylistSingleScreen extends JPanel{
 	private JScrollPane scroll;
 	
 	
-	
+	/**
+	 * Konstruktor
+	 * @param playlist Anzuzeigende Playlist
+	 */
 	public PlaylistSingleScreen(Playlist playlist){
 		this.playlist=playlist;
 		model = new DefaultTableModel(columns,0){
@@ -52,6 +59,9 @@ public class PlaylistSingleScreen extends JPanel{
 
 	}
 	
+	/**
+	 * Fügt die Playlistsongs dem Tablemodel hinzu
+	 */
 	private void addSongsToTable(){
 		LinkedList<Song> songs = (LinkedList<Song>) playlist.getSongs();
 		Playlist favorites = LoginControl.getInstance().getCurrentUser().getFavorites();
@@ -91,7 +101,11 @@ public class PlaylistSingleScreen extends JPanel{
 	public int getPlaylistID(){
 		return playlist.getPlaylistId();
 	}
-	
+
+	/**
+	 * Enfernt einen Song aus dem Table
+	 * @param row Reihe des Songs
+	 */
 	public void removeSong(int row){
 		model.removeRow(row);
 	}
@@ -100,6 +114,11 @@ public class PlaylistSingleScreen extends JPanel{
 		return playlist;
 	}
 	
+	/**
+	 * Gibt ID des Songs in Reihe row zurück
+	 * @param row
+	 * @return
+	 */
 	public int getSongIDfromRow(int row){
 		return (int) model.getValueAt(row, 5);
 	}
