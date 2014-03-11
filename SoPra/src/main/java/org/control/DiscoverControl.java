@@ -30,56 +30,55 @@ public class DiscoverControl {
 
 		try {
 			Album recAlbum = RecommendationControl.getInstance().recommendAlbum();
-			System.out.println("Album");
 			DiscoverElement discover1mini = new DiscoverElement(recAlbum.getName(), LoadImageControl.loadImageIcon(
 					recAlbum.getOwner().getImagePath(), recAlbum.getOwner()), recAlbum.getOwner().getUsername(), "Album");
 			miniScreen.setDiscoverOne(discover1mini);
 		} catch (Exception e) {
-			e.printStackTrace();
 		}
 		try {
 			User recUser = RecommendationControl.getInstance().recommendArtist();
-			System.out.println("Artist");
 			DiscoverElement discover2mini = new DiscoverElement(recUser.getUsername(), LoadImageControl.loadImageIcon(
 					recUser.getImagePath(), recUser), recUser.getUsername(), "User");
-			miniScreen.setDiscoverOne(discover2mini);
+			miniScreen.setDiscoverTwo(discover2mini);
 		} catch (Exception e) {
-			e.printStackTrace();
 		}
 		try {
 			Song recSong = RecommendationControl.getInstance().recommendSong();
 			if (recSong.getAlbum() == null) {
 				User usr = (User) DatabaseControl.getInstance().load(User.class, recSong.getInterpret());
-				System.out.println("Song");
 				DiscoverElement discover3mini = new DiscoverElement(recSong.getTitle(), LoadImageControl.loadImageIcon(
 						usr.getImagePath(), usr), usr.getUsername(), "Song");
-				miniScreen.setDiscoverOne(discover3mini);
+				miniScreen.setDiscoverThree(discover3mini);
 			} else {
 				User usr = (User) DatabaseControl.getInstance().load(User.class, recSong.getInterpret());
 				DiscoverElement discover3mini = new DiscoverElement(recSong.getTitle(), LoadImageControl.loadImageIcon(
 						recSong.getAlbum().getOwner().getImagePath(), usr), usr.getUsername(), "Song");
-				miniScreen.setDiscoverOne(discover3mini);
+				miniScreen.setDiscoverThree(discover3mini);
 			}
 			
 		} catch (Exception e) {
-			e.printStackTrace();
 		}
 
-		List<User> arts = (RecommendationControl.getInstance().allRecommendedArtists());
+		List<User> arts = RecommendationControl.getInstance().allRecommendedArtists();
 		for (int i = 0; i < arts.size(); i++) {
 			User art = arts.get(i);
 			DiscoverElement discover = new DiscoverElement(art.getUsername(), LoadImageControl.loadImageIcon(art.getImagePath(),
 					art), art.getUsername(), "User");
 			artists.add(discover);
 		}
-		for (int i = 0; i < 126; i++) {
-			DiscoverElement discover = new DiscoverElement("Lied " + (i + 1), LoadImageControl.loadImageIcon("",
-					currUser), "url " + i, "Song");
+		List<Song> sons = RecommendationControl.getInstance().allRecomendedSongs();
+		for (int i = 0; i < sons.size(); i++) {
+			Song son = sons.get(i);
+			User artist = (User) DatabaseControl.getInstance().load(User.class, son.getInterpret());
+			DiscoverElement discover = new DiscoverElement(son.getTitle(), LoadImageControl.loadImageIcon(artist.getImagePath(),
+					artist), artist.getUsername(), "Song");
 			songs.add(discover);
 		}
-		for (int i = 0; i < 15; i++) {
-			DiscoverElement discover = new DiscoverElement("Album " + (i + 1), LoadImageControl.loadImageIcon("",
-					currUser), "url " + i, "Album");
+		List<Album> albs = RecommendationControl.getInstance().allRecomendedAlben();
+		for (int i = 0; i < albs.size(); i++) {
+			Album alb = albs.get(i);
+			DiscoverElement discover = new DiscoverElement(alb.getName(), LoadImageControl.loadImageIcon(alb.getOwner().getImagePath(),
+					alb.getOwner()),alb.getOwner().getUsername(), "Album");
 			albums.add(discover);
 		}
 
