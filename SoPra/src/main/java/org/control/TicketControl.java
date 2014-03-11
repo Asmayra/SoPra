@@ -44,7 +44,7 @@ public class TicketControl {
 	
 	public boolean createTicket(String category, User currentUser, String ticketText){
 		Ticket newTicket = new Ticket();
-		if (category == null || category == ""){
+		if (category == null || category == "" || currentUser == null){
 			return false;
 		}
 		newTicket.setCategory(category);
