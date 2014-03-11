@@ -1,9 +1,11 @@
 package org.control;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.LinkedList;
+import java.util.Locale;
 
 import org.model.Message;
 import org.model.User;
@@ -76,7 +78,7 @@ public class MailboxControl {
 //		newMsg.setRecipient(recv);
 		newMsg.setSubject(subject);
 		newMsg.setContent(content);
-		newMsg.setDate(new Date().toString());
+		newMsg.setDate( new SimpleDateFormat( "DD.MM.YYYY", Locale.GERMAN).format( new Date() ) );
 		
 		for(User u : recv)
 		{

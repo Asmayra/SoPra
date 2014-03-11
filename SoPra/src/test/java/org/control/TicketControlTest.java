@@ -8,9 +8,16 @@ import org.junit.Test;
 import org.model.Ticket;
 import org.model.User;
 
+/**
+ * Test für TicketControl
+ * @author Mattias Schoenke, Michal Pfennings
+ *
+ */
 public class TicketControlTest {
 
-	
+	/**
+	 * Testet ob createTicket Funktion der TicketControl richtig funktioniert
+	 */
 	@Test
 	public void createTicketTest()
 	{
