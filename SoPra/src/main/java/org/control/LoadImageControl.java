@@ -44,7 +44,7 @@ public class LoadImageControl {
 	public static BufferedImage loadBufferedImage(String imagePath, User user){
 		BufferedImage image = new BufferedImage(50, 50, BufferedImage.TYPE_INT_RGB);
 		try {
-			if(imagePath == null || imagePath == "" || imagePath.equals("placeholder.jpg")){
+			if(imagePath == null || imagePath.equals("")|| imagePath.equals("placeholder.jpg")){
 				image = ImageIO.read(ClassLoader.getSystemClassLoader().getResource("placeholder.jpg"));
 			} else{
 				String filepath = PathControl.getInstance().getRoot() + File.separator
