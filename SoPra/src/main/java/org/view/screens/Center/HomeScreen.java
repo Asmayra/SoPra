@@ -20,7 +20,11 @@ import org.control.listener.CreatePostButtonListener;
 import org.model.Post;
 import org.model.User;
 import org.view.MainScreen;
-
+/**
+ * Homescreen eines Users bzw eines Künstlers
+ * @author Philipp
+ *
+ */
 public class HomeScreen extends JPanel{
 	
 	private static HomeScreen instance = null;
@@ -41,7 +45,9 @@ public class HomeScreen extends JPanel{
 		instance = null;
 	}
 	
-	
+	/**
+	 * Sets up the Homescreen and displays all relevant posts
+	 */
 	public HomeScreen(){
 		this.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		this.setLayout(new BorderLayout());
