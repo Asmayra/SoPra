@@ -1,6 +1,8 @@
 package org.view.screens.EastBar;
 
 import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -32,7 +34,7 @@ public class DiscoverMiniScreen extends JPanel {
 	}
 	
 	private DiscoverMiniScreen() {
-		this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+		this.setLayout(new GridBagLayout());
 		
 	}
 
@@ -52,15 +54,19 @@ public class DiscoverMiniScreen extends JPanel {
 	}
 	
 	private void updateDiscover(){
+		GridBagConstraints c = new GridBagConstraints();
 		this.removeAll();
 		if(this.discoverOnePan != null){
-			this.add(this.discoverOnePan);
+			c.gridy=0;
+			this.add(this.discoverOnePan,c);
 		}
 		if(this.discoverTwoPan != null){
-			this.add(this.discoverTwoPan);
+			c.gridy=1;
+			this.add(this.discoverTwoPan,c);
 		}
 		if(this.discoverThreePan != null){
-			this.add(this.discoverThreePan);
+			c.gridy=2;
+			this.add(this.discoverThreePan,c);
 		}
 		
 		this.validate();
