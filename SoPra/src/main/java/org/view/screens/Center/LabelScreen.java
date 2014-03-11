@@ -21,7 +21,7 @@ public class LabelScreen extends JPanel {
 
 	
 	
-	private JButton applyButton, deleteArtistButton, deleteManagerButton;
+	private JButton applyButton, deleteArtistButton;
 	private Label currentLabel;
 	private DefaultTableModel artistModel, managerModel;
 	private JTable artistTable, managerTable;
