@@ -10,6 +10,7 @@ import javax.swing.table.DefaultTableModel;
 
 import org.control.LoginControl;
 import org.control.listener.PlaylistSingleScreenListener;
+import org.control.listener.SongTableListener;
 import org.model.Playlist;
 import org.model.Song;
 
@@ -39,6 +40,7 @@ public class PlaylistSingleScreen extends JPanel{
 			}
 		};	
 		addSongsToTable();
+		model.addTableModelListener(new SongTableListener());
 		table= new JTable(model);
 		table.setShowGrid(false);
 		table.addMouseListener(new PlaylistSingleScreenListener());

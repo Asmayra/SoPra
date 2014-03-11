@@ -13,7 +13,11 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-
+/**
+ * Setzt das Layout eines Posts auf
+ * @author Philipp
+ *
+ */
 public class CreatePostButtonListener implements ActionListener  {
 	
 	public void actionPerformed(ActionEvent arg0) {

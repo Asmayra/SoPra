@@ -45,7 +45,7 @@ public class MusicPlayer extends JPanel{
 	}
 	
 	
-	/*
+	/**
 	 * Creates Interface for MusicPlayer in Southbar
 	 */
 	public MusicPlayer(){
@@ -79,7 +79,6 @@ public class MusicPlayer extends JPanel{
 		gbc.gridx=6;
 		add(Volume_Label,gbc);
 
-		
 		this.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		//this.setMinimumSize(new Dimension(860,600));
 /*=============================================================================================*/
@@ -129,6 +128,7 @@ public class MusicPlayer extends JPanel{
 	public static void setCurrentSong(File song){
 		selected_file = song;
 	}
+	
 	/**
 	 * Returns the selected File
 	 * @return selected File
@@ -136,5 +136,4 @@ public class MusicPlayer extends JPanel{
 	public static File getCurrentSong(){
 		return selected_file;
 	}
-
 }

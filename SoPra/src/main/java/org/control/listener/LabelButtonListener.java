@@ -14,7 +14,7 @@ import org.view.screens.Center.OwnSongsScreen;
 
 
 /**
- * 
+ *Öffnet das LabelMenü 
  * @author Michael Pfennings, Mattias Schoenke
  *
  */

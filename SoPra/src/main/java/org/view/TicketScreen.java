@@ -130,7 +130,7 @@ public class TicketScreen extends JFrame {
 	private JComponent initButtons(){
 		
 		JPanel buttonPanel = new JPanel();
-		buttonPanel.setLayout(new GridLayout(2,2));
+		buttonPanel.setLayout(new GridLayout(1,2));
 		
 		sendButton = new JButton("Senden");
 		sendButton.addActionListener(new TicketScreenSendButtonListener());

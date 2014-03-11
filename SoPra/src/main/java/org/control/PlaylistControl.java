@@ -15,7 +15,6 @@ import org.model.Album;
 import org.model.Playlist;
 import org.model.Song;
 import org.model.User;
-import org.testpackage.PlaylistTest;
 import org.view.MainScreen;
 import org.view.screens.Center.PlaylistExtendedScreen;
 import org.view.screens.Center.PlaylistSingleScreen;
