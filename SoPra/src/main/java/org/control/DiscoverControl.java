@@ -65,6 +65,7 @@ public class DiscoverControl {
 		List<User> arts = RecommendationControl.getInstance().allRecommendedArtists();
 		for (int i = 0; i < arts.size(); i++) {
 			User art = arts.get(i);
+			System.out.println("arts"+i);
 			DiscoverElement discover = new DiscoverElement(art.getUsername(), LoadImageControl.loadImageIcon(art.getImagePath(),
 					art), art.getUsername(), "User");
 			artists.add(discover);
@@ -73,12 +74,12 @@ public class DiscoverControl {
 		for (int i = 0; i < sons.size(); i++) {
 			Song son = sons.get(i);
 			User artist = (User) DatabaseControl.getInstance().load(User.class, son.getInterpret());
-			DiscoverElement discover = new DiscoverElement(son.getTitle(), LoadImageControl.loadImageIcon(artist.getUsername(),
+			DiscoverElement discover = new DiscoverElement(son.getTitle(), LoadImageControl.loadImageIcon(artist.getImagePath(),
 					artist), artist.getUsername(), "Song");
 			songs.add(discover);
 		}
 		List<Album> albs = RecommendationControl.getInstance().allRecomendedAlben();
-		for (int i = 0; i < 15; i++) {
+		for (int i = 0; i < albs.size(); i++) {
 			Album alb = albs.get(i);
 			DiscoverElement discover = new DiscoverElement(alb.getName(), LoadImageControl.loadImageIcon(alb.getOwner().getImagePath(),
 					alb.getOwner()),alb.getOwner().getUsername(), "Album");
