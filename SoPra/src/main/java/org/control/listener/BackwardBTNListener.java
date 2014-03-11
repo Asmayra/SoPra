@@ -9,7 +9,11 @@ import org.view.screens.Southbar.MusicPlayer;
 
 import javazoom.jlgui.basicplayer.BasicPlayer;
 import javazoom.jlgui.basicplayer.BasicPlayerException;
-
+/**
+ * Klasse, um das nächste Lied abzuspielen
+ * @author Philipp,Ioann 
+ *
+ */
 public class BackwardBTNListener implements ActionListener {
 
 	

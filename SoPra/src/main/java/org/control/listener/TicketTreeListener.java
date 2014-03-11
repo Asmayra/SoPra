@@ -13,7 +13,11 @@ import org.control.TicketControl;
 import org.model.Playlist;
 import org.model.Ticket;
 import org.view.screens.WestBar.PlaylistMiniScreen;
-
+/**
+ * Listener, um alle Aktionen im Ticketmenü zu koordinieren
+ * @author Tim, Max
+ *
+ */
 public class TicketTreeListener extends MouseAdapter{
 
 	private Playlist playlistEdit=null;

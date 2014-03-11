@@ -10,7 +10,11 @@ import org.control.PlaylistControl;
 import org.model.Playlist;
 import org.view.MainScreen;
 import org.view.screens.Center.AdminGenreScreen;
-
+/**
+ * Regelt das öffnen der Favoriten
+ * @author Tim,Max
+ *
+ */
 public class FavoritButtonListener implements ActionListener {
 
 	@Override

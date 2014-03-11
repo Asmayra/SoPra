@@ -9,7 +9,7 @@ import org.view.screens.Center.AdminHomeScreen;
 import org.view.screens.Center.HomeScreen;
 
 /**
- * 
+ * Schickt den USer zurück auf seinen Homecreen
  * @author Michael Pfennings, Mattias Schoenke
  *
  */

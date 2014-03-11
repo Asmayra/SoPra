@@ -7,7 +7,11 @@ import javax.swing.JTabbedPane;
 
 import org.control.PlaylistControl;
 import org.view.screens.Center.PlaylistExtendedScreen;
-
+/**
+ * Schlatet die tabs weiter
+ * @author Tim, Max
+ *
+ */
 public class PlaylistTabsListener extends MouseAdapter{
 
 	PlaylistExtendedScreen extScreen;
