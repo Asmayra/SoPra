@@ -52,7 +52,7 @@ public class UploadControl {
 		
 		copy(srcPath, dstPath, dstName);
 		
-		newSong.setPath(dst.getName());
+		newSong.setPath(dstName);
 		newSong.setPlaytime();
 		
 		DatabaseControl.getInstance().save(newSong);
