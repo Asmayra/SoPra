@@ -52,7 +52,7 @@ public class UploadControl {
 		
 		copy(srcPath, dstPath, dstName);
 		
-		newSong.setPath(dst.getAbsolutePath());
+		newSong.setPath(dst.getName());
 		newSong.setPlaytime();
 		
 		DatabaseControl.getInstance().save(newSong);
@@ -109,10 +109,13 @@ public class UploadControl {
 		File src = new File(from);
 		
 		File dst = new File(to);
+		
+		
 		dst.mkdirs();
 		
 		if(dst.isDirectory())
 			dst = new File(dst, toName);
+		
 		
 		dst.setWritable(true);
 		dst.createNewFile();

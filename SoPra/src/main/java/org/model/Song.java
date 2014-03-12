@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -19,6 +20,7 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.persistence.CascadeType;
 
+import org.control.PathControl;
 import org.tritonus.share.sampled.file.TAudioFileFormat;
 
 /**
@@ -109,7 +111,7 @@ public class Song implements Comparable {
 	public void setPlaytime() {
 		AudioFileFormat fileFormat;
 		try {
-			fileFormat = AudioSystem.getAudioFileFormat(new File(location));
+			fileFormat = AudioSystem.getAudioFileFormat(new File(PathControl.getInstance().getRoot() + File.separator + "Musik" + File.separator + location));
 			Map<?, ?> properties = ((TAudioFileFormat) fileFormat).properties();
 			String key = "duration";
 			Long microseconds = (Long) properties.get(key);
@@ -142,7 +144,7 @@ public class Song implements Comparable {
 	}
 
 	public String getPath() {
-		return location;
+		return PathControl.getInstance().getRoot() + File.separator + "Musik" + File.separator + location;
 	}
 
 	public void setPath(String path) {
